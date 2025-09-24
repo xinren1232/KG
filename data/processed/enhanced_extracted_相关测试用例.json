@@ -1,0 +1,42 @@
+{
+  "entities": [
+    {
+      "key": "Component:摄像头",
+      "type": "Component",
+      "name": "摄像头",
+      "properties": {}
+    },
+    {
+      "key": "Component:电池",
+      "type": "Component",
+      "name": "电池",
+      "properties": {}
+    },
+    {
+      "key": "Component:显示屏",
+      "type": "Component",
+      "name": "显示屏",
+      "properties": {}
+    },
+    {
+      "key": "Component:触摸屏",
+      "type": "Component",
+      "name": "触摸屏",
+      "properties": {}
+    },
+    {
+      "key": "Component:扬声器",
+      "type": "Component",
+      "name": "扬声器",
+      "properties": {}
+    }
+  ],
+  "relations": [],
+  "metadata": {
+    "source_file": "data\\import\\相关测试用例.xlsx",
+    "file_type": "Excel",
+    "entity_count": 5,
+    "relation_count": 0,
+    "extracted_at": "2025-09-24T09:41:01.379107"
+  }
+}
