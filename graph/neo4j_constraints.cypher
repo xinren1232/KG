@@ -2,11 +2,14 @@
 // Idempotent: all statements use IF NOT EXISTS and can be re-run safely
 
 // ---------- Uniqueness constraints (keys) ----------
-// Core business entities
+// Core business entities - based on ontology v0.2
+CREATE CONSTRAINT factory_key IF NOT EXISTS FOR (n:Factory) REQUIRE n.key IS UNIQUE;
+CREATE CONSTRAINT project_key IF NOT EXISTS FOR (n:Project) REQUIRE n.key IS UNIQUE;
+CREATE CONSTRAINT material_key IF NOT EXISTS FOR (n:Material) REQUIRE n.key IS UNIQUE;
+CREATE CONSTRAINT anomaly_key IF NOT EXISTS FOR (n:Anomaly) REQUIRE n.key IS UNIQUE;
 CREATE CONSTRAINT product_key IF NOT EXISTS FOR (n:Product) REQUIRE n.key IS UNIQUE;
 CREATE CONSTRAINT build_key IF NOT EXISTS FOR (n:Build) REQUIRE n.key IS UNIQUE;
 CREATE CONSTRAINT component_key IF NOT EXISTS FOR (n:Component) REQUIRE n.key IS UNIQUE;
-CREATE CONSTRAINT anomaly_key IF NOT EXISTS FOR (n:Anomaly) REQUIRE n.key IS UNIQUE;
 
 // Test entities
 CREATE CONSTRAINT testcase_key IF NOT EXISTS FOR (n:TestCase) REQUIRE n.key IS UNIQUE;
@@ -28,6 +31,13 @@ CREATE CONSTRAINT countermeasure_name_exists IF NOT EXISTS FOR (n:Countermeasure
 CREATE INDEX symptom_name IF NOT EXISTS FOR (n:Symptom) ON (n.name);
 CREATE INDEX rootcause_name IF NOT EXISTS FOR (n:RootCause) ON (n.name);
 CREATE INDEX countermeasure_name IF NOT EXISTS FOR (n:Countermeasure) ON (n.name);
+
+// Business entity indexes for performance
+CREATE INDEX factory_name IF NOT EXISTS FOR (n:Factory) ON (n.name);
+CREATE INDEX project_name IF NOT EXISTS FOR (n:Project) ON (n.name);
+CREATE INDEX material_code IF NOT EXISTS FOR (n:Material) ON (n.code);
+CREATE INDEX anomaly_date IF NOT EXISTS FOR (n:Anomaly) ON (n.date);
+CREATE INDEX anomaly_severity IF NOT EXISTS FOR (n:Anomaly) ON (n.severity);
 
 // Key-based lookups (for entities without unique constraints)
 CREATE INDEX entity_key IF NOT EXISTS FOR (n:Entity) ON (n.key);

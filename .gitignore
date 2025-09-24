@@ -256,6 +256,10 @@ uploads/
 
 # Neo4j
 neo4j/
+neo4j_data/
+
+# Environment and secrets
+.env
 
 # Backup files
 *.bak

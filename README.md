@@ -26,42 +26,53 @@
 
 - Python 3.8+
 - Node.js 16+
-- npm 或 yarn
+- Docker & Docker Compose
+- Neo4j 5.23+
 
-### 安装步骤
+### 一键启动（推荐）
 
-1. **克隆仓库**
 ```bash
+# 1. 克隆仓库
 git clone https://github.com/xinren1232/KG.git
 cd KG
+
+# 2. 配置环境变量
+cp .env.example .env
+# 编辑 .env 文件，设置 NEO4J_PASS 等配置
+
+# 3. 一键启动所有服务
+python quick_start.py
 ```
 
-2. **安装Python依赖**
+### 手动启动
+
+1. **启动基础服务**
 ```bash
-pip install fastapi uvicorn pydantic pandas openpyxl python-docx PyPDF2 spacy networkx
+# 启动 Neo4j 和 API 服务
+docker compose up -d
+
+# 初始化 Neo4j 约束
+docker exec kg_neo4j cypher-shell -u neo4j -p password123 -f /import/neo4j_constraints.cypher
 ```
 
-3. **安装前端依赖**
+2. **导入数据**
+```bash
+# 导入来料异常数据到知识图谱
+python api/etl/etl_from_excel.py
+```
+
+3. **启动前端**
 ```bash
 cd apps/web
 npm install
-```
-
-4. **启动后端服务**
-```bash
-cd ../../
-python api/simple_api.py
-```
-
-5. **启动前端应用**
-```bash
-cd apps/web
 npm run dev
 ```
 
-6. **访问应用**
-- 前端应用: http://localhost:5175
-- API文档: http://127.0.0.1:8000/docs
+### 访问应用
+
+- **前端应用**: http://localhost:5175
+- **API文档**: http://localhost:8000/docs
+- **Neo4j浏览器**: http://localhost:7474 (neo4j/password123)
 
 ## 📖 使用指南
 
@@ -155,15 +166,20 @@ KG/
 ## 🧪 测试
 
 ```bash
-# 运行系统状态检查
+# 系统状态检查
 python system_status_check.py
 
-# 前端开发服务器
-cd apps/web
-npm run dev
+# 测试API接口
+curl -X POST http://localhost:8000/kg/query/cause_path \
+  -H "Content-Type: application/json" \
+  -d '{"symptom":"裂纹"}'
 
-# API服务测试
-python api/simple_api.py
+curl -X POST http://localhost:8000/kg/query/anomalies \
+  -H "Content-Type: application/json" \
+  -d '{"factory":"泰衡诺工厂"}'
+
+# 查看知识图谱统计
+curl http://localhost:8000/kg/stats
 ```
 
 ## 📊 性能指标
