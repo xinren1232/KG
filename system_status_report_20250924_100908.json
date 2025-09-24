@@ -1,0 +1,92 @@
+{
+  "check_time": "2025-09-24T10:08:56.481160",
+  "services": {
+    "知识图谱核心API": {
+      "status": "运行中",
+      "url": "http://localhost:8000",
+      "response_time": 2.07495,
+      "last_check": "2025-09-24T10:08:58.559287"
+    },
+    "前端Web应用": {
+      "status": "运行中",
+      "url": "http://localhost:5174",
+      "response_time": 0.004803,
+      "last_check": "2025-09-24T10:08:58.566289"
+    }
+  },
+  "features": {
+    "文档上传": {
+      "status": "异常",
+      "last_test": "2025-09-24T10:09:00.611644"
+    },
+    "知识抽取": {
+      "status": "异常",
+      "last_test": "2025-09-24T10:09:02.645207"
+    },
+    "图谱构建": {
+      "status": "异常",
+      "last_test": "2025-09-24T10:09:04.692672"
+    },
+    "图谱查询": {
+      "status": "异常",
+      "last_test": "2025-09-24T10:09:06.734940"
+    },
+    "词典管理": {
+      "status": "异常",
+      "last_test": "2025-09-24T10:09:08.788585"
+    }
+  },
+  "data_files": {
+    "本体约束": {
+      "status": "存在",
+      "path": "graph\\ontology_v0.2_constraints.cypher",
+      "size": 9421,
+      "modified": "2025-09-24T09:37:07.474983"
+    },
+    "数据抽取器": {
+      "status": "存在",
+      "path": "services\\nlp\\material_anomaly_extractor.py",
+      "size": 22976,
+      "modified": "2025-09-24T09:38:33.603947"
+    },
+    "增强抽取器": {
+      "status": "存在",
+      "path": "services\\nlp\\enhanced_document_extractor.py",
+      "size": 20654,
+      "modified": "2025-09-24T09:40:52.706588"
+    },
+    "推理引擎": {
+      "status": "存在",
+      "path": "services\\reasoning\\knowledge_graph_engine.py",
+      "size": 15531,
+      "modified": "2025-09-24T05:33:04.672552"
+    },
+    "Dify工具": {
+      "status": "存在",
+      "path": "services\\dify\\kg_tools.py",
+      "size": 16788,
+      "modified": "2025-09-24T09:47:26.232936"
+    },
+    "治理系统": {
+      "status": "存在",
+      "path": "services\\governance\\data_governance_system.py",
+      "size": 28351,
+      "modified": "2025-09-24T09:51:23.096046"
+    },
+    "前端应用": {
+      "status": "缺失",
+      "path": "apps\\web\\src\\views\\AnomalyGuide.vue"
+    },
+    "API服务": {
+      "status": "缺失",
+      "path": "api\\quality_kg_api.py"
+    }
+  },
+  "overall_status": "需要关注",
+  "health_metrics": {
+    "services": "2/2",
+    "features": "0/5",
+    "files": "6/8",
+    "health_rate": "53.3%"
+  }
+}

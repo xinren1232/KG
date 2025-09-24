@@ -1,0 +1,100 @@
+{
+  "SP001": {
+    "id": "SP001",
+    "name": "XX精密制造有限公司",
+    "contact_info": {
+      "电话": "0755-12345678",
+      "邮箱": "contact@xx-precision.com",
+      "地址": "深圳市南山区"
+    },
+    "business_scope": [
+      "结构件",
+      "精密加工",
+      "模具制造"
+    ],
+    "quality_rating": "A",
+    "certification": [
+      "ISO9001",
+      "ISO14001",
+      "IATF16949"
+    ],
+    "risk_level": "低",
+    "components_supplied": [
+      "CP001",
+      "CP003"
+    ],
+    "performance_metrics": {
+      "准时交付率": 0.95,
+      "质量合格率": 0.98,
+      "成本竞争力": 0.85
+    },
+    "created_at": "2025-09-24T09:51:32.276123",
+    "updated_at": "2025-09-24T09:51:32.276123",
+    "status": "活跃"
+  },
+  "SP002": {
+    "id": "SP002",
+    "name": "YY光学有限公司",
+    "contact_info": {
+      "电话": "0512-87654321",
+      "邮箱": "info@yy-optics.com",
+      "地址": "苏州市工业园区"
+    },
+    "business_scope": [
+      "光学器件",
+      "镜头组装",
+      "光学测试"
+    ],
+    "quality_rating": "A+",
+    "certification": [
+      "ISO9001",
+      "ISO14001",
+      "RoHS"
+    ],
+    "risk_level": "低",
+    "components_supplied": [
+      "CP001"
+    ],
+    "performance_metrics": {
+      "准时交付率": 0.98,
+      "质量合格率": 0.99,
+      "成本竞争力": 0.8
+    },
+    "created_at": "2025-09-24T09:51:32.276123",
+    "updated_at": "2025-09-24T09:51:32.276123",
+    "status": "活跃"
+  },
+  "SP003": {
+    "id": "SP003",
+    "name": "ZZ电子有限公司",
+    "contact_info": {
+      "电话": "021-11223344",
+      "邮箱": "sales@zz-electronics.com",
+      "地址": "上海市浦东新区"
+    },
+    "business_scope": [
+      "电子元器件",
+      "PCB制造",
+      "SMT贴装"
+    ],
+    "quality_rating": "B+",
+    "certification": [
+      "ISO9001",
+      "UL认证"
+    ],
+    "risk_level": "中",
+    "components_supplied": [
+      "CP002",
+      "CP004",
+      "CP005"
+    ],
+    "performance_metrics": {
+      "准时交付率": 0.9,
+      "质量合格率": 0.95,
+      "成本竞争力": 0.9
+    },
+    "created_at": "2025-09-24T09:51:32.276123",
+    "updated_at": "2025-09-24T09:51:32.276123",
+    "status": "活跃"
+  }
+}

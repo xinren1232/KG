@@ -1,0 +1,32 @@
+{
+  "file_info": {
+    "columns": [
+      "AnomalyID",
+      "Title",
+      "Severity",
+      "Product",
+      "Build",
+      "Component",
+      "Symptom"
+    ],
+    "shape": [
+      2,
+      7
+    ],
+    "dtypes": {
+      "AnomalyID": "object",
+      "Title": "object",
+      "Severity": "object",
+      "Product": "object",
+      "Build": "object",
+      "Component": "object",
+      "Symptom": "object"
+    }
+  },
+  "entity_mapping": {
+    "AnomalyID": "AnomalyID"
+  },
+  "extraction_rules": {
+    "AnomalyID": {
+      "entity_type": "AnomalyID",
+      "required": 

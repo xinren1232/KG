@@ -1,0 +1,38 @@
+{
+  "anomaly_labels": {
+    "entity_type": "anomaly_labels",
+    "total_count": 5,
+    "complete_count": 5,
+    "duplicate_count": 0,
+    "invalid_count": 0,
+    "completeness_rate": 1.0,
+    "accuracy_rate": 1.0,
+    "consistency_rate": 1.0,
+    "quality_level": "优秀",
+    "last_check": "2025-09-24T09:51:32.279123"
+  },
+  "components": {
+    "entity_type": "components",
+    "total_count": 5,
+    "complete_count": 5,
+    "duplicate_count": 0,
+    "invalid_count": 0,
+    "completeness_rate": 1.0,
+    "accuracy_rate": 1.0,
+    "consistency_rate": 1.0,
+    "quality_level": "优秀",
+    "last_check": "2025-09-24T09:51:32.279123"
+  },
+  "suppliers": {
+    "entity_type": "suppliers",
+    "total_count": 3,
+    "complete_count": 3,
+    "duplicate_count": 0,
+    "invalid_count": 0,
+    "completeness_rate": 1.0,
+    "accuracy_rate": 1.0,
+    "consistency_rate": 1.0,
+    "quality_level": "优秀",
+    "last_check": "2025-09-24T09:51:32.279123"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "check_time": "2025-09-24T09:52:35.964101",
+  "services": {
+    "质量知识图谱API": {
+      "status": "运行中",
+      "url": "http://localhost:8001",
+      "response_time": 2.063501,
+      "last_check": "2025-09-24T09:52:38.029445"
+    },
+    "Dify工具服务": {
+      "status": "运行中",
+      "url": "http://localhost:8002",
+      "response_time": 2.027604,
+      "last_check": "2025-09-24T09:52:40.057907"
+    },
+    "前端Web应用": {
+      "status": "运行中",
+      "url": "http://localhost:5174",
+      "response_time": 0.031384,
+      "last_check": "2025-09-24T09:52:40.090916"
+    }
+  },
+  "features": {
+    "异常溯源": {
+      "status": "正常",
+      "last_test": "2025-09-24T09:52:42.132553"
+    },
+    "案例复用": {
+      "status": "正常",
+      "last_test": "2025-09-24T09:52:44.166446"
+    },
+    "质量统计": {
+      "status": "正常",
+      "last_test": "2025-09-24T09:52:46.212548"
+    },
+    "流程联动": {
+      "status": "正常",
+      "last_test": "2025-09-24T09:52:48.250689"
+    },
+    "实体搜索": {
+      "status": "正常",
+      "last_test": "2025-09-24T09:52:50.292404"
+    },
+    "Dify工具集成": {
+      "status": "正常",
+      "last_test": "2025-09-24T09:52:52.374873"
+    }
+  },
+  "data_files": {
+    "本体约束": {
+      "status": "存在",
+      "path": "graph\\ontology_v0.2_constraints.cypher",
+      "size": 9421,
+      "modified": "2025-09-24T09:37:07.474983"
+    },
+    "数据抽取器": {
+      "status": "存在",
+      "path": "services\\nlp\\material_anomaly_extractor.py",
+      "size": 22976,
+      "modified": "2025-09-24T09:38:33.603947"
+    },
+    "增强抽取器": {
+      "status": "存在",
+      "path": "services\\nlp\\enhanced_document_extractor.py",
+      "size": 20654,
+      "modified": "2025-09-24T09:40:52.706588"
+    },
+    "推理引擎": {
+      "status": "存在",
+      "path": "services\\reasoning\\knowledge_graph_engine.py",
+      "size": 15531,
+      "modified": "2025-09-24T05:33:04.672552"
+    },
+    "Dify工具": {
+      "status": "存在",
+      "path": "services\\dify\\kg_tools.py",
+      "size": 16788,
+      "modified": "2025-09-24T09:47:26.232936"
+    },
+    "治理系统": {
+      "status": "存在",
+      "path": "services\\governance\\data_governance_system.py",
+      "size": 28351,
+      "modified": "2025-09-24T09:51:23.096046"
+    },
+    "前端应用": {
+      "status": "存在",
+      "path": "apps\\web\\src\\views\\AnomalyGuide.vue",
+      "size": 7571,
+      "modified": "2025-09-24T09:45:55.657304"
+    },
+    "API服务": {
+      "status": "存在",
+      "path": "api\\quality_kg_api.py",
+      "size": 20419,
+      "modified": "2025-09-24T09:43:48.054883"
+    }
+  },
+  "overall_status": "优秀",
+  "health_metrics": {
+    "services": "3/3",
+    "features": "6/6",
+    "files": "8/8",
+    "health_rate": "100.0%"
+  }
+}

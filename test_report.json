@@ -1,0 +1,19 @@
+{
+  "test_time": "2025-09-24T05:38:46.692486",
+  "test_results": {
+    "data_files": {
+      "input_excel": true,
+      "etl_output": true,
+      "cypher_scripts": true
+    },
+    "services": {
+      "api_server": true,
+      "frontend_server": true
+    },
+    "processing": {
+      "etl_pipeline": true,
+      "reasoning_engine": true
+    }
+  },
+  "recommendations": []
+}

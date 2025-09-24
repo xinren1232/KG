@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # Neo4j 图数据库
+  neo4j:
+    image: neo4j:5.15-community
+    container_name: kg_neo4j
+    ports:
+      - "7474:7474"  # HTTP
+      - "7687:7687"  # Bolt
+    environment:
+      - NEO4J_AUTH=${NEO4J_USER:-neo4j}/${NEO4J_PASS:-password123}
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+      - NEO4J_dbms_security_procedures_allowlist=apoc.*
+      - NEO4J_dbms_memory_heap_initial__size=512m
+      - NEO4J_dbms_memory_heap_max__size=2G
+      - NEO4J_dbms_memory_pagecache_size=1G
+    volumes:
+      - ./data/neo4j/data:/data
+      - ./data/neo4j/logs:/logs
+      - ./data/neo4j/import:/var/lib/neo4j/import
+      - ./services/api/neo4j_init:/import
+    networks:
+      - kg_network
+    restart: unless-stopped
+
+  # FastAPI 后端服务
+  api:
+    build:
+      context: ./services/api
+      dockerfile: Dockerfile
+    container_name: kg_api
+    ports:
+      - "8000:8000"
+    environment:
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=${NEO4J_USER:-neo4j}
+      - NEO4J_PASS=${NEO4J_PASS:-password123}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./data/raw:/app/data/raw
+      - ./data/processed:/app/data/processed
+    depends_on:
+      - neo4j
+    networks:
+      - kg_network
+    restart: unless-stopped
+
+  # ETL 数据处理服务
+  etl:
+    build:
+      context: ./services/etl
+      dockerfile: Dockerfile
+    container_name: kg_etl
+    environment:
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=${NEO4J_USER:-neo4j}
+      - NEO4J_PASS=${NEO4J_PASS:-password123}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./data/raw:/app/data/raw
+      - ./data/processed:/app/data/processed
+    depends_on:
+      - neo4j
+    networks:
+      - kg_network
+    profiles:
+      - etl  # 使用 docker compose --profile etl up 启动
+
+networks:
+  kg_network:
+    driver: bridge
+
+volumes:
+  neo4j_data:
+  neo4j_logs:

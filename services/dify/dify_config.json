@@ -1,0 +1,271 @@
+{
+  "tools": [
+    {
+      "name": "anomaly_trace",
+      "label": "异常溯源",
+      "description": "根据症状、异常编号等条件，追溯异常的完整路径：症状→异常→根因→对策→责任人，提供专业的质量分析",
+      "icon": "🎯",
+      "category": "质量分析",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "symptom": {
+            "type": "string",
+            "label": "症状描述",
+            "description": "症状描述，如：裂纹、对焦失败、充电慢、显示异常等",
+            "placeholder": "请输入症状描述，如：裂纹、对焦失败等"
+          },
+          "anomaly_id": {
+            "type": "string",
+            "label": "异常编号",
+            "description": "异常编号，如：A-20241231-37300344（可选）",
+            "placeholder": "异常编号（可选）"
+          },
+          "factory": {
+            "type": "string",
+            "label": "工厂名称",
+            "description": "工厂名称，如：泰衡诺工厂（可选）",
+            "placeholder": "工厂名称（可选）"
+          },
+          "material_code": {
+            "type": "string",
+            "label": "物料编码",
+            "description": "物料编码，如：37300344（可选）",
+            "placeholder": "物料编码（可选）"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "case_reuse",
+      "label": "案例复用",
+      "description": "根据症状和组件，查找相似的历史案例，提供解决方案复用建议，帮助快速解决质量问题",
+      "icon": "📚",
+      "category": "案例分析",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "symptom": {
+            "type": "string",
+            "label": "症状描述",
+            "description": "症状描述，如：裂纹、对焦失败、充电慢等",
+            "placeholder": "请输入症状描述"
+          },
+          "component": {
+            "type": "string",
+            "label": "组件名称",
+            "description": "组件名称，如：摄像头、电池、显示屏、触摸屏等（可选）",
+            "placeholder": "组件名称（可选）"
+          },
+          "similarity_threshold": {
+            "type": "number",
+            "label": "相似度阈值",
+            "description": "相似度阈值，范围0-1，默认0.7",
+            "default": 0.7,
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": ["symptom"]
+      }
+    },
+    {
+      "name": "quality_stats",
+      "label": "质量统计",
+      "description": "按工厂、项目、时间等维度统计质量指标，提供趋势分析和改进建议，支持质量管理决策",
+      "icon": "📊",
+      "category": "统计分析",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "factory": {
+            "type": "string",
+            "label": "工厂名称",
+            "description": "工厂名称过滤，如：泰衡诺工厂（可选）",
+            "placeholder": "工厂名称（可选）"
+          },
+          "project": {
+            "type": "string",
+            "label": "项目名称",
+            "description": "项目名称过滤，如：BG6（可选）",
+            "placeholder": "项目名称（可选）"
+          },
+          "group_by": {
+            "type": "string",
+            "label": "分组维度",
+            "description": "分组维度：factory（工厂）/project（项目）/material（物料）/supplier（供应商）",
+            "enum": ["factory", "project", "material", "supplier"],
+            "default": "factory"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "process_linkage",
+      "label": "流程联动",
+      "description": "根据异常编号，查询相关的SOP文档、测试用例、流程状态等信息，实现质量流程联动",
+      "icon": "🔗",
+      "category": "流程管理",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "anomaly_id": {
+            "type": "string",
+            "label": "异常编号",
+            "description": "异常编号，如：A-20241231-37300344",
+            "placeholder": "请输入异常编号"
+          },
+          "include_sop": {
+            "type": "boolean",
+            "label": "包含SOP文档",
+            "description": "是否包含SOP文档，默认true",
+            "default": true
+          },
+          "include_test_cases": {
+            "type": "boolean",
+            "label": "包含测试用例",
+            "description": "是否包含测试用例，默认true",
+            "default": true
+          }
+        },
+        "required": ["anomaly_id"]
+      }
+    },
+    {
+      "name": "entity_search",
+      "label": "实体搜索",
+      "description": "根据关键词搜索知识图谱中的实体，支持模糊匹配，帮助快速定位相关信息",
+      "icon": "🔍",
+      "category": "信息检索",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "label": "搜索关键词",
+            "description": "搜索关键词，如：摄像头、裂纹、BG6等",
+            "placeholder": "请输入搜索关键词"
+          },
+          "entity_type": {
+            "type": "string",
+            "label": "实体类型",
+            "description": "实体类型过滤，如：Anomaly、Material、Symptom等（可选）",
+            "enum": ["Factory", "Project", "Material", "Anomaly", "Symptom", "RootCause", "Countermeasure", "Owner", "Supplier", "Doc"],
+            "placeholder": "实体类型（可选）"
+          },
+          "limit": {
+            "type": "integer",
+            "label": "返回数量",
+            "description": "返回数量限制，默认10",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 50
+          }
+        },
+        "required": ["query"]
+      }
+    }
+  ],
+  "workflows": [
+    {
+      "name": "quality_analysis_workflow",
+      "label": "质量分析工作流",
+      "description": "综合使用多个工具进行质量问题分析的完整工作流",
+      "steps": [
+        {
+          "step": 1,
+          "name": "症状识别",
+          "tool": "entity_search",
+          "description": "根据用户描述搜索相关症状实体"
+        },
+        {
+          "step": 2,
+          "name": "异常溯源",
+          "tool": "anomaly_trace",
+          "description": "基于识别的症状进行异常溯源分析"
+        },
+        {
+          "step": 3,
+          "name": "案例复用",
+          "tool": "case_reuse",
+          "description": "查找相似案例提供解决方案参考"
+        },
+        {
+          "step": 4,
+          "name": "流程联动",
+          "tool": "process_linkage",
+          "description": "获取相关文档和流程信息"
+        }
+      ]
+    },
+    {
+      "name": "quality_monitoring_workflow",
+      "label": "质量监控工作流",
+      "description": "定期质量监控和统计分析工作流",
+      "steps": [
+        {
+          "step": 1,
+          "name": "质量统计",
+          "tool": "quality_stats",
+          "description": "获取质量统计数据和趋势"
+        },
+        {
+          "step": 2,
+          "name": "问题识别",
+          "tool": "entity_search",
+          "description": "搜索高频异常和问题"
+        },
+        {
+          "step": 3,
+          "name": "案例分析",
+          "tool": "case_reuse",
+          "description": "分析相似问题的解决方案"
+        }
+      ]
+    }
+  ],
+  "prompts": {
+    "system_prompt": "你是一个专业的质量工程师助手，专门帮助分析手机研发过程中的质量问题。你可以使用以下工具来协助用户：\n\n1. 异常溯源：追溯质量问题的根本原因\n2. 案例复用：查找相似问题的解决方案\n3. 质量统计：分析质量趋势和指标\n4. 流程联动：获取相关文档和流程信息\n5. 实体搜索：快速定位相关信息\n\n请根据用户的问题选择合适的工具，并提供专业的分析和建议。",
+    "user_prompt_templates": [
+      {
+        "name": "异常分析",
+        "template": "我遇到了一个质量问题：{symptom}。请帮我分析这个问题的原因和解决方案。",
+        "variables": ["symptom"]
+      },
+      {
+        "name": "案例查询",
+        "template": "我想查找关于{component}组件{symptom}问题的历史案例，请提供相似的解决方案。",
+        "variables": ["component", "symptom"]
+      },
+      {
+        "name": "质量报告",
+        "template": "请帮我生成{factory}工厂{project}项目的质量统计报告。",
+        "variables": ["factory", "project"]
+      },
+      {
+        "name": "流程查询",
+        "template": "异常编号{anomaly_id}的处理流程和相关文档有哪些？",
+        "variables": ["anomaly_id"]
+      }
+    ]
+  },
+  "api_config": {
+    "base_url": "http://localhost:8001",
+    "timeout": 30,
+    "retry_count": 3,
+    "headers": {
+      "Content-Type": "application/json",
+      "User-Agent": "QualityKG-Dify-Tools/1.0"
+    }
+  },
+  "metadata": {
+    "version": "0.2.0",
+    "author": "Quality KG Team",
+    "description": "质量知识图谱Dify工具集成配置",
+    "created_at": "2024-12-31",
+    "updated_at": "2024-12-31",
+    "tags": ["质量管理", "知识图谱", "异常分析", "案例复用"]
+  }
+}
