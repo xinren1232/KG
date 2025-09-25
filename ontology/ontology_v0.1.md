@@ -1,109 +1,155 @@
-# 质量知识图谱本体 v0.1 (手机研发质量)
+# 手机研发质量知识图谱本体设计 v0.1
 
-本体目标覆盖：流程查询 / 历史异常 / 案例指导 / 数据分析
+## 目标域
+手机研发质量管理，支持：
+- 流程查询：根据产品/模块查询测试用例和流程
+- 历史异常：异常记录的查询和分析
+- 案例指导：症状到根因到对策的路径分析
+- 数据分析：质量数据的统计和趋势分析
 
-## 1. 实体（节点 Labels）
-- Product（产品）
-- Build（版本/构建）
-- Component（组件/模块）
-- TestCase（测试用例）
-- TestStep（测试步骤）
-- TestResult（测试结果）
-- Anomaly（异常/缺陷）
-- Symptom（症状/现象）
-- RootCause（根因）
-- Countermeasure（对策）
-- Owner（责任人/团队）
-- Supplier（供应商）
-- Doc（文档）
+## 核心实体（节点 Labels）
 
-通用元数据属性（所有节点均可用）
-- key: string，节点唯一业务主键（形如 `Product:MyPhoneX`、`Build:1.0.3`、`Anomaly:QA-2025-0001`）
-- name: string，可显示名称
-- source: string，来源渠道（excel/pdf/doc/txt/api 等）
-- doc_id: string，文档ID或文件名
-- page: int，页码/段落/表格位置等
-- created_at: datetime
-- updated_at: datetime
-- created_by: string
-- status/title/severity 为易变字段，不能做主键
+### 产品相关
+- **Product**: 产品型号（如 MyPhoneX, iPhone15）
+- **Build**: 版本构建（如 1.0.3, 2.1.0-beta）
+- **Component**: 组件模块（如 Camera, Battery, Screen）
 
-各节点建议属性
-- Product: key, name, model, category
-- Build: key, name, version, date
-- Component: key, name, category, code
-- TestCase: key (可用 `TestCase:<编号>`), name, priority
-- TestStep: key (`TestStep:<用例编号>-<序号>`), index, description
-- TestResult: key (`TestResult:<用例编号>-<Build>`), status, metrics
-- Anomaly: key (`Anomaly:<跟踪号>`), title, severity, status
-- Symptom: name, category
-- RootCause: name, category
-- Countermeasure: name, type
-- Owner: key (`Owner:<部门/人员>`), name, org
-- Supplier: key (`Supplier:<简称>`), name
-- Doc: key (`Doc:<文件唯一ID>`), name, path
+### 测试相关
+- **TestCase**: 测试用例
+- **TestStep**: 测试步骤
+- **TestResult**: 测试结果
 
-## 2. 关系（Relationship Types）
-- HAS_BUILD (Product→Build)
-- INCLUDES (Product/Build→Component)
-- BELONGS_TO (Component/TestCase/Anomaly → Product/Build)
-- HAS_STEP (TestCase→TestStep)
-- RESULT_OF (TestResult→TestCase/TestStep/Build)
-- OBSERVED_IN (Anomaly/Symptom → TestResult/Build)
-- AFFECTS (Anomaly → Product/Component)
-- HAS_SYMPTOM (Anomaly → Symptom)
-- CAUSES (RootCause → Anomaly)
-- RESOLVED_BY (Anomaly → Countermeasure)
-- DUPLICATE_OF (Anomaly → Anomaly)
-- SUPPLIED_BY (Component → Supplier)
-- OWNED_BY (Product/Component/TestCase → Owner)
-- DOCUMENTED_IN (任意节点 → Doc)
+### 质量相关
+- **Anomaly**: 异常记录
+- **Symptom**: 症状表现
+- **RootCause**: 根本原因
+- **Countermeasure**: 对策措施
 
-关系通用元数据
-- source, doc_id, page, created_at, updated_at, created_by, confidence
+### 组织相关
+- **Owner**: 责任人/团队
+- **Supplier**: 供应商
 
-## 3. 唯一键与索引
-- 节点统一主键属性：key（唯一业务键）
-- 唯一约束：Product.key, Build.key, Component.key, Anomaly.key
-- 索引：Symptom.name, RootCause.name, Countermeasure.name
-- 文件：`graph/neo4j_constraints.cypher`（幂等，支持重复执行）
+### 文档相关
+- **Doc**: 文档资料
 
-## 4. 词表（Vocabulary）
-- data/vocab/components.csv ≥ 20 条组件标准名与别名
-- data/vocab/symptoms.csv ≥ 20 条症状标准名
-- data/vocab/causes.csv ≥ 10 条根因类型
+## 关键关系
 
-用法：
-- 抽取阶段统一映射到词表标准名（中英文混用时兜底）
-- 构图阶段按标准名生成 `key`（如 `Component:<标准名>`）
+### 产品层次关系
+- **HAS_BUILD**: Product → Build（产品包含版本）
+- **INCLUDES**: Product → Component（产品包含组件）
+- **BELONGS_TO**: Component → Product（组件属于产品）
 
-## 5. 命名策略（Key 生成）
-- Product: `Product:<机型/产品线>`
-- Build: `Build:<语义版本/构建号>`
-- Component: `Component:<组件标准名>`
-- TestCase: `TestCase:<用例编号>`
-- TestStep: `TestStep:<用例编号>-<序号>`
-- TestResult: `TestResult:<用例编号>-<Build>`
-- Anomaly: `Anomaly:<缺陷编号>`
-- Owner: `Owner:<组织或员工唯一名>`
-- Supplier: `Supplier:<供应商简称>`
-- Doc: `Doc:<文档ID>`
+### 测试关系
+- **HAS_STEP**: TestCase → TestStep（用例包含步骤）
+- **RESULT_OF**: TestResult → TestCase（结果来自用例）
 
-注意：
-- 易变字段（title/status/severity）仅做属性，不参与 key
+### 质量关系
+- **OBSERVED_IN**: Anomaly → Build（异常在版本中观察到）
+- **AFFECTS**: Anomaly → Component（异常影响组件）
+- **HAS_SYMPTOM**: Anomaly → Symptom（异常有症状）
+- **CAUSES**: RootCause → Anomaly（根因导致异常）
+- **RESOLVED_BY**: Anomaly → Countermeasure（异常被对策解决）
+- **DUPLICATE_OF**: Anomaly → Anomaly（异常重复）
 
-## 6. 构图规则建议
-- 节点入库使用 `MERGE (n:Label {key: $key}) SET n += $props`，保证幂等
-- 关系入库使用 `MERGE (a)-[r:TYPE]->(b) SET r += $props`，并存储 `confidence`
-- 统一落库元数据：source, doc_id, page, created_at, updated_at, created_by
+### 组织关系
+- **SUPPLIED_BY**: Component → Supplier（组件由供应商提供）
+- **OWNED_BY**: [Any] → Owner（任何实体可有责任人）
 
-## 7. 性能与查询
-- shortestPath / 全图查询前确保相关属性有索引/约束
-- 高频查询：
-  - 按 `key`/`name`/`type` 检索节点
-  - 产品→版本→组件层级展开
-  - 缺陷→症状/根因/对策的闭环链路
+### 文档关系
+- **DOCUMENTED_IN**: [Any] → Doc（任何实体可被文档记录）
 
-## 8. 版本化
-- 本文件为 v0.1，后续变更记录字段新增/枚举变化/关系新增
+## 唯一键设计
 
+### 主键属性：key
+所有核心实体使用统一的 `key` 属性作为唯一标识：
+- Product: `Product:MyPhoneX`
+- Build: `Build:1.0.3`
+- Component: `Component:Camera`
+- Anomaly: `QA-2025-0001`
+- TestCase: `TC-001`
+
+### 命名规则
+- 易变字段（title, status, severity）不作主键
+- key 格式：`EntityType:Identifier` 或直接使用业务ID
+- 保持key的稳定性，避免因业务变更导致图谱重构
+
+## 索引和约束
+
+### 唯一约束
+```cypher
+CREATE CONSTRAINT product_key IF NOT EXISTS FOR (n:Product) REQUIRE n.key IS UNIQUE;
+CREATE CONSTRAINT build_key IF NOT EXISTS FOR (n:Build) REQUIRE n.key IS UNIQUE;
+CREATE CONSTRAINT component_key IF NOT EXISTS FOR (n:Component) REQUIRE n.key IS UNIQUE;
+CREATE CONSTRAINT anomaly_key IF NOT EXISTS FOR (n:Anomaly) REQUIRE n.key IS UNIQUE;
+```
+
+### 索引
+```cypher
+CREATE INDEX symptom_name IF NOT EXISTS FOR (n:Symptom) ON (n.name);
+CREATE INDEX rootcause_name IF NOT EXISTS FOR (n:RootCause) ON (n.name);
+CREATE INDEX countermeasure_name IF NOT EXISTS FOR (n:Countermeasure) ON (n.name);
+```
+
+## 元数据字段
+
+所有节点和关系建议包含以下元数据：
+- `source`: 数据来源（如 "excel_import", "manual_input"）
+- `doc_id`: 源文档ID
+- `page`: 页码（如果适用）
+- `created_at`: 创建时间
+- `updated_at`: 更新时间
+- `created_by`: 创建人
+
+## 实体属性定义
+
+### Product
+- key: 唯一标识
+- name: 产品名称
+- model: 产品型号
+- category: 产品类别
+
+### Build
+- key: 唯一标识
+- name: 构建名称
+- version: 构建版本号
+- date: 发布日期
+
+### Component
+- key: 唯一标识
+- name: 组件名称
+- category: 组件类别
+- code: 组件编码
+
+### Anomaly
+- key: 唯一标识（如 QA-2025-0001）
+- title: 异常标题
+- severity: 严重程度（S1/S2/S3/S4）
+- status: 状态（Open/InProgress/Resolved/Closed）
+
+### TestCase
+- key: 唯一标识（如 TC-001）
+- name: 用例名称
+- priority: 优先级
+
+## 枚举字典
+
+### 严重程度
+- S1: 致命（Critical）
+- S2: 严重（Major）
+- S3: 一般（Minor）
+- S4: 轻微（Trivial）
+
+### 异常状态
+- Open: 开放
+- InProgress: 处理中
+- Resolved: 已解决
+- Closed: 已关闭
+
+### 组件类别
+- Hardware: 硬件
+- Software: 软件
+- Firmware: 固件
+- Mechanical: 机械
+
+## 版本历史
+- v0.1: 初始版本，定义核心实体和关系

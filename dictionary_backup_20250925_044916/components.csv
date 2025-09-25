@@ -1,0 +1,53 @@
+term,canonical_name,aliases,category,description
+摄像头,摄像头,相机;Camera;镜头;拍照模块,Hardware,用于拍照和录像的硬件组件
+屏幕,屏幕,显示屏;Display;LCD;OLED;面板,Hardware,显示图像和界面的硬件组件
+电池,电池,电源;Power;续航;Battery;锂电池,Hardware,提供电力的硬件组件
+处理器,处理器,CPU;芯片;Processor;SoC;主控,Hardware,负责数据处理和计算的核心组件
+内存,内存,RAM;存储器;Memory;运行内存,Hardware,临时存储数据和程序的组件
+闪存,闪存,存储;Storage;Flash;ROM;内置存储,Hardware,永久存储数据的组件
+扬声器,扬声器,喇叭;Speaker;音响;外放,Hardware,播放声音的硬件组件
+麦克风,麦克风,话筒;Microphone;Mic;录音,Hardware,录制声音的硬件组件
+传感器,传感器,Sensor;感应器;检测器,Hardware,检测环境参数的硬件组件
+陀螺仪,陀螺仪,重力感应;Gyroscope;方向传感器,Hardware,检测设备方向和运动的传感器
+加速度计,加速度计,加速传感器;Accelerometer;运动传感器,Hardware,检测设备加速度的传感器
+指纹识别,指纹识别,指纹传感器;Fingerprint;生物识别,Hardware,用于指纹识别的安全组件
+面部识别,面部识别,人脸识别;Face ID;面容识别,Hardware,用于面部识别的安全组件
+充电接口,充电接口,USB接口;Type-C;Lightning;充电口,Hardware,用于充电和数据传输的接口
+耳机接口,耳机接口,3.5mm接口;音频接口;耳机孔,Hardware,连接耳机的音频接口
+SIM卡槽,SIM卡槽,卡槽;SIM Tray;卡托,Hardware,插入SIM卡的硬件槽位
+天线,天线,Antenna;信号接收;无线模块,Hardware,接收和发送无线信号的组件
+WiFi模块,WiFi模块,无线网络;WLAN;WiFi芯片,Hardware,提供WiFi连接的硬件模块
+蓝牙模块,蓝牙模块,Bluetooth;BT;无线连接,Hardware,提供蓝牙连接的硬件模块
+GPS模块,GPS模块,定位;导航;位置服务,Hardware,提供位置定位的硬件模块
+NFC模块,NFC模块,近场通信;Near Field Communication,Hardware,提供近距离无线通信的模块
+振动器,振动器,震动马达;Vibrator;触觉反馈,Hardware,提供触觉反馈的硬件组件
+LED指示灯,LED指示灯,指示灯;状态灯;通知灯,Hardware,显示设备状态的指示灯
+摄像头模组,摄像头模组,相机模组;Camera Module;拍照模块,Hardware,完整的摄像头组件包括镜头和传感器
+闪光灯,闪光灯,补光灯;Flash;LED闪光灯,Hardware,为拍照提供补光的组件
+距离传感器,距离传感器,接近传感器;Proximity Sensor,Hardware,检测物体接近距离的传感器
+光线传感器,光线传感器,环境光传感器;Light Sensor;亮度传感器,Hardware,检测环境光线强度的传感器
+温度传感器,温度传感器,热敏传感器;Temperature Sensor,Hardware,检测设备温度的传感器
+湿度传感器,湿度传感器,Humidity Sensor;湿敏传感器,Hardware,检测环境湿度的传感器
+气压传感器,气压传感器,Barometer;大气压传感器,Hardware,检测大气压力的传感器
+磁力计,磁力计,电子罗盘;Magnetometer;磁场传感器,Hardware,检测磁场方向的传感器
+心率传感器,心率传感器,Heart Rate Sensor;脉搏传感器,Hardware,检测心率的生物传感器
+红外传感器,红外传感器,IR Sensor;红外线传感器,Hardware,检测红外线的传感器
+主板,主板,PCB;电路板;Motherboard;主控板,Hardware,连接各个组件的主要电路板
+散热器,散热器,散热片;Heat Sink;散热模块,Hardware,帮助散热的硬件组件
+导热片,导热片,散热贴;Thermal Pad;导热材料,Hardware,传导热量的材料组件
+屏蔽罩,屏蔽罩,EMI屏蔽;电磁屏蔽;Shield,Hardware,防止电磁干扰的金属罩
+连接器,连接器,接插件;Connector;插头,Hardware,连接不同组件的接口
+电容,电容,Capacitor;电容器;滤波电容,Hardware,存储电能的电子元件
+电阻,电阻,Resistor;电阻器;限流电阻,Hardware,限制电流的电子元件
+电感,电感,Inductor;电感器;线圈,Hardware,存储磁能的电子元件
+晶振,晶振,Crystal;石英晶体;时钟源,Hardware,提供时钟信号的组件
+保险丝,保险丝,Fuse;熔断器;过流保护,Hardware,过流保护的安全组件
+开关,开关,Switch;按键;Button,Hardware,控制电路通断的组件
+外壳,外壳,机身;壳体;Housing;保护壳,Hardware,保护内部组件的外部结构
+后盖,后盖,背板;Back Cover;电池盖,Hardware,设备背面的保护盖
+前面板,前面板,Front Panel;面板;显示面板,Hardware,设备正面的面板组件
+边框,边框,Frame;中框;金属边框,Hardware,设备周围的结构框架
+按键,按键,Button;物理按键;实体键,Hardware,用户操作的物理按键
+音量键,音量键,Volume Button;音量按键;调节键,Hardware,调节音量的物理按键
+电源键,电源键,Power Button;开关键;电源按键,Hardware,控制设备开关的按键
+Home键,Home键,主页键;返回键;Home Button,Hardware,返回主页的物理按键

@@ -257,10 +257,40 @@ uploads/
 # Neo4j
 neo4j/
 neo4j_data/
+neo4j_logs/
+neo4j_import/
 
 # Environment and secrets
 .env
+.env.local
+.env.production
+.env.staging
 
 # Backup files
 *.bak
 *.backup
+*.old
+
+# ETL处理结果
+etl_reports/
+etl_logs/
+processed/
+failed/
+
+# 测试文件
+test_*.txt
+test_*.csv
+test_*.xlsx
+test_*.pdf
+
+# 机密信息
+secrets/
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+
+# 数据库备份
+*.sql
+*.dump

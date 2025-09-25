@@ -1,0 +1,329 @@
+# ETL字段映射配置文件
+# 定义Excel列名到实体/属性/关系的声明式映射
+
+# 实体映射配置
+entities:
+  # 产品实体
+  Product:
+    id_field: "产品"
+    name_field: "产品"
+    properties:
+      category: "产品类别"
+      model: "产品型号"
+      description: "产品描述"
+      status: "产品状态"
+  
+  # 版本实体
+  Build:
+    id_field: "版本"
+    name_field: "版本"
+    properties:
+      product_id: "产品"
+      release_date: "发布日期"
+      build_number: "构建号"
+      status: "版本状态"
+  
+  # 组件实体
+  Component:
+    id_field: "组件"
+    name_field: "组件"
+    properties:
+      type: "组件类型"
+      category: "组件分类"
+      supplier: "供应商"
+      part_number: "零件号"
+      specification: "规格"
+  
+  # 异常实体
+  Anomaly:
+    id_field: "异常ID"
+    name_field: "异常描述"
+    properties:
+      severity: "严重程度"
+      priority: "优先级"
+      status: "异常状态"
+      occurrence_date: "发生日期"
+      detection_date: "检测日期"
+      reporter: "报告人"
+      description: "详细描述"
+  
+  # 症状实体
+  Symptom:
+    id_field: "症状"
+    name_field: "症状"
+    properties:
+      category: "症状分类"
+      severity: "严重程度"
+      frequency: "发生频率"
+      description: "症状描述"
+      detection_method: "检测方法"
+  
+  # 根因实体
+  RootCause:
+    id_field: "根因"
+    name_field: "根因"
+    properties:
+      category: "根因分类"
+      priority: "优先级"
+      analysis_method: "分析方法"
+      confidence: "置信度"
+      description: "根因描述"
+  
+  # 对策实体
+  Countermeasure:
+    id_field: "对策"
+    name_field: "对策"
+    properties:
+      type: "对策类型"
+      status: "实施状态"
+      effectiveness: "有效性"
+      cost: "成本"
+      timeline: "时间线"
+      responsible: "负责人"
+      description: "对策描述"
+  
+  # 负责人实体
+  Owner:
+    id_field: "负责人"
+    name_field: "负责人"
+    properties:
+      department: "部门"
+      role: "角色"
+      email: "邮箱"
+      phone: "电话"
+  
+  # 供应商实体
+  Supplier:
+    id_field: "供应商"
+    name_field: "供应商"
+    properties:
+      type: "供应商类型"
+      status: "合作状态"
+      contact: "联系人"
+      address: "地址"
+      rating: "评级"
+  
+  # 测试用例实体
+  TestCase:
+    id_field: "测试用例ID"
+    name_field: "测试用例名称"
+    properties:
+      type: "测试类型"
+      priority: "优先级"
+      category: "测试分类"
+      description: "测试描述"
+      precondition: "前置条件"
+      steps: "测试步骤"
+      expected_result: "期望结果"
+
+# 关系映射配置
+relationships:
+  # 产品-版本关系
+  HAS_BUILD:
+    from: "Product"
+    to: "Build"
+    condition: "产品 == 产品"
+    properties:
+      created_date: "创建日期"
+  
+  # 产品-组件关系
+  INCLUDES:
+    from: "Product"
+    to: "Component"
+    condition: "产品 == 产品"
+    properties:
+      quantity: "数量"
+      position: "位置"
+  
+  # 版本-组件关系
+  BELONGS_TO:
+    from: "Component"
+    to: "Build"
+    condition: "版本 == 版本"
+    properties:
+      integration_date: "集成日期"
+  
+  # 异常-组件关系
+  OBSERVED_IN:
+    from: "Anomaly"
+    to: "Component"
+    condition: "组件 == 组件"
+    properties:
+      occurrence_count: "发生次数"
+      first_observed: "首次观察"
+  
+  # 异常-症状关系
+  HAS_SYMPTOM:
+    from: "Anomaly"
+    to: "Symptom"
+    condition: "症状 == 症状"
+    properties:
+      manifestation: "表现形式"
+      frequency: "频率"
+  
+  # 症状-根因关系
+  CAUSES:
+    from: "RootCause"
+    to: "Symptom"
+    condition: "症状 == 症状"
+    properties:
+      confidence: "置信度"
+      analysis_date: "分析日期"
+  
+  # 根因-对策关系
+  RESOLVED_BY:
+    from: "RootCause"
+    to: "Countermeasure"
+    condition: "对策 == 对策"
+    properties:
+      effectiveness: "有效性"
+      implementation_date: "实施日期"
+  
+  # 异常-负责人关系
+  OWNED_BY:
+    from: "Anomaly"
+    to: "Owner"
+    condition: "负责人 == 负责人"
+    properties:
+      assigned_date: "分配日期"
+      role: "角色"
+  
+  # 组件-供应商关系
+  SUPPLIED_BY:
+    from: "Component"
+    to: "Supplier"
+    condition: "供应商 == 供应商"
+    properties:
+      contract_date: "合同日期"
+      quality_rating: "质量评级"
+
+# 数据验证配置
+validation:
+  # 必需列
+  required_columns:
+    - "产品"
+    - "版本"
+    - "组件"
+    - "症状"
+  
+  # 数据类型验证
+  data_types:
+    "产品": "string"
+    "版本": "string"
+    "组件": "string"
+    "症状": "string"
+    "异常描述": "string"
+    "严重程度": "string"
+    "发生日期": "date"
+    "负责人": "string"
+    "供应商": "string"
+  
+  # 值域验证
+  value_constraints:
+    "严重程度":
+      - "高"
+      - "中"
+      - "低"
+      - "紧急"
+    "异常状态":
+      - "新建"
+      - "分析中"
+      - "已解决"
+      - "已关闭"
+      - "重新打开"
+    "优先级":
+      - "P1"
+      - "P2"
+      - "P3"
+      - "P4"
+  
+  # 格式验证
+  format_patterns:
+    "邮箱": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    "电话": "^\\d{3}-\\d{4}-\\d{4}$|^\\d{11}$"
+    "异常ID": "^ANO-\\d{6}$"
+    "测试用例ID": "^TC-\\d{6}$"
+
+# 数据清洗配置
+data_cleaning:
+  # 空值处理
+  null_handling:
+    "产品": "skip_row"  # 跳过行
+    "组件": "skip_row"
+    "症状": "default_value"  # 使用默认值
+    "描述": "empty_string"  # 空字符串
+  
+  # 默认值
+  default_values:
+    "症状": "未知症状"
+    "严重程度": "中"
+    "状态": "新建"
+  
+  # 数据转换
+  transformations:
+    "发生日期":
+      type: "date"
+      format: "%Y-%m-%d"
+      fallback: "today"
+    "严重程度":
+      type: "mapping"
+      mapping:
+        "高": "High"
+        "中": "Medium"
+        "低": "Low"
+        "紧急": "Critical"
+
+# 幂等性配置
+idempotency:
+  # 唯一键定义
+  unique_keys:
+    "Product": ["name"]
+    "Component": ["name", "supplier"]
+    "Anomaly": ["id", "occurrence_date"]
+    "Symptom": ["name", "category"]
+  
+  # 合并策略
+  merge_strategy:
+    "Product": "update_properties"  # 更新属性
+    "Component": "update_properties"
+    "Anomaly": "skip_duplicate"  # 跳过重复
+    "Symptom": "merge_properties"  # 合并属性
+
+# 输出配置
+output:
+  # 报告格式
+  report_format: "json"
+  
+  # 输出目录
+  output_directory: "etl_reports"
+  
+  # 文件命名
+  file_naming:
+    stats: "etl_stats_{timestamp}.json"
+    errors: "etl_errors_{timestamp}.json"
+    result: "etl_result_{timestamp}.json"
+  
+  # 保留历史
+  retention:
+    days: 30
+    max_files: 100
+
+# 性能配置
+performance:
+  # 批处理大小
+  batch_size: 1000
+  
+  # 内存限制
+  memory_limit: "1GB"
+  
+  # 并行处理
+  parallel_processing: false
+  max_workers: 4
+
+# 日志配置
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "etl_processing.log"
+  max_size: "10MB"
+  backup_count: 5

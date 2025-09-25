@@ -1,0 +1,24 @@
+# 清洁的Excel映射配置 - 只保留原始列名，避免重复
+sheet: 0
+
+# 映射配置：仅用于标准化字段名，不会创建重复字段
+columns:
+  anomaly_key: 问题编号
+  title: 不良现象
+  date: 发生日期
+  severity: 严重度
+  factory: 工厂
+  product: 机型
+  component: 部件
+  root_cause: 原因分析
+  countermeasure: 改善对策
+  supplier: 供应商
+  status: 状态
+
+# 数据处理选项
+options:
+  auto_detect_encoding: true
+  preserve_original_columns: true  # 保留原始列名
+  skip_empty_rows: true
+  trim_whitespace: true
+  avoid_duplicate_fields: true     # 避免重复字段

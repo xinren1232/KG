@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "data": {
+    "raw_data": [
+      {
+        "anomaly_key": "ISSUE-001",
+        "title": "屏幕显示异常",
+        "date": "2024-01-15",
+        "severity": "高",
+        "factory": "深圳工厂",
+        "product": "iPhone 15",
+        "component": "显示屏",
+        "symptom": "屏幕显示异常",
+        "root_cause": "显示驱动IC故障",
+        "countermeasure": "更换驱动IC",
+        "supplier": "供应商A",
+        "status": "已解决",
+        "row_number": 2
+      },
+      {
+        "anomaly_key": "ISSUE-002",
+        "title": "按键失灵",
+        "date": "2024-01-16",
+        "severity": "中",
+        "factory": "东莞工厂",
+        "product": "iPhone 15 Pro",
+        "component": "按键模组",
+        "symptom": "按键失灵",
+        "root_cause": "按键弹片老化",
+        "countermeasure": "更换按键模组",
+        "supplier": "供应商B",
+        "status": "处理中",
+        "row_number": 3
+      }
+    ],
+    "entities": [],
+    "relations": [],
+    "metadata": {
+      "total_records": 2,
+      "entity_count": 0,
+      "relation_count": 0
+    }
+  }
+}

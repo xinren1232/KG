@@ -1,0 +1,92 @@
+{
+  "check_time": "2025-09-25T04:08:14.316808",
+  "services": {
+    "知识图谱核心API": {
+      "status": "运行中",
+      "url": "http://localhost:8000",
+      "response_time": 2.039623,
+      "last_check": "2025-09-25T04:08:16.358549"
+    },
+    "前端Web应用": {
+      "status": "离线",
+      "url": "http://localhost:5174",
+      "error": "HTTPConnectionPool(host='localhost', port=5174): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000019BC5266690>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))",
+      "last_check": "2025-09-25T04:08:20.455347"
+    }
+  },
+  "features": {
+    "文档上传": {
+      "status": "正常",
+      "last_test": "2025-09-25T04:08:22.503380"
+    },
+    "知识抽取": {
+      "status": "正常",
+      "last_test": "2025-09-25T04:08:24.555118"
+    },
+    "图谱构建": {
+      "status": "正常",
+      "last_test": "2025-09-25T04:08:26.593956"
+    },
+    "图谱查询": {
+      "status": "异常",
+      "last_test": "2025-09-25T04:08:28.640426"
+    },
+    "词典管理": {
+      "status": "正常",
+      "last_test": "2025-09-25T04:08:30.686278"
+    }
+  },
+  "data_files": {
+    "本体约束": {
+      "status": "存在",
+      "path": "graph\\ontology_v0.2_constraints.cypher",
+      "size": 9421,
+      "modified": "2025-09-24T09:37:07.474983"
+    },
+    "数据抽取器": {
+      "status": "存在",
+      "path": "services\\nlp\\material_anomaly_extractor.py",
+      "size": 22976,
+      "modified": "2025-09-24T09:38:33.603947"
+    },
+    "增强抽取器": {
+      "status": "存在",
+      "path": "services\\nlp\\enhanced_document_extractor.py",
+      "size": 20654,
+      "modified": "2025-09-24T09:40:52.706588"
+    },
+    "推理引擎": {
+      "status": "存在",
+      "path": "services\\reasoning\\knowledge_graph_engine.py",
+      "size": 15531,
+      "modified": "2025-09-24T05:33:04.672552"
+    },
+    "Dify工具": {
+      "status": "存在",
+      "path": "services\\dify\\kg_tools.py",
+      "size": 16788,
+      "modified": "2025-09-24T09:47:26.232936"
+    },
+    "治理系统": {
+      "status": "存在",
+      "path": "services\\governance\\data_governance_system.py",
+      "size": 28351,
+      "modified": "2025-09-24T09:51:23.096046"
+    },
+    "前端应用": {
+      "status": "缺失",
+      "path": "apps\\web\\src\\views\\AnomalyGuide.vue"
+    },
+    "API服务": {
+      "status": "缺失",
+      "path": "api\\quality_kg_api.py"
+    }
+  },
+  "overall_status": "一般",
+  "health_metrics": {
+    "services": "1/2",
+    "features": "4/5",
+    "files": "6/8",
+    "health_rate": "73.3%"
+  }
+}

@@ -31,6 +31,8 @@
               <el-icon><Setting /></el-icon>
               数据治理
             </el-menu-item>
+
+
           </el-menu>
         </div>
       </el-header>
@@ -94,11 +96,16 @@ export default {
 .nav-menu {
   background-color: transparent;
   border: none;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .nav-menu .el-menu-item {
   color: white;
   border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  min-width: auto;
 }
 
 .nav-menu .el-menu-item:hover,
@@ -122,5 +129,36 @@ export default {
   text-align: center;
   color: #909399;
   line-height: 60px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .nav-menu {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav-menu .el-menu-item {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .nav-menu .el-menu-item {
+    padding: 0 15px;
+    font-size: 14px;
+  }
 }
 </style>

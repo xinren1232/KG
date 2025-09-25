@@ -1,0 +1,8 @@
+{
+  "id": "755e721a-ea06-4a9a-b7fb-7e01f0e1e6ba",
+  "name": "test_upload.txt",
+  "status": "failed",
+  "created": 1758744178,
+  "updated": 1758744180,
+  "error": "IR解析器异常: No module named 'api.parsers'"
+}

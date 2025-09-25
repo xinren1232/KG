@@ -1,0 +1,97 @@
+{
+  "raw_data": [
+    {
+      "_row_number": 1,
+      "block_id": "b_1",
+      "block_type": "paragraph",
+      "page_number": 1,
+      "content_type": "paragraph",
+      "content": "这是一个测试文档，用于验证文档解析功能。",
+      "style": null,
+      "word_count": 1,
+      "char_count": 20,
+      "paragraph_number": 1
+    },
+    {
+      "_row_number": 2,
+      "block_id": "b_2",
+      "block_type": "paragraph",
+      "page_number": 1,
+      "content_type": "paragraph",
+      "content": "产品信息：\n- 产品名称：智能手机\n- 型号：XYZ-2024\n- 制造商：ABC公司",
+      "style": null,
+      "word_count": 7,
+      "char_count": 43,
+      "paragraph_number": 2
+    },
+    {
+      "_row_number": 3,
+      "block_id": "b_3",
+      "block_type": "paragraph",
+      "page_number": 1,
+      "content_type": "paragraph",
+      "content": "异常描述：\n摄像头对焦失败，屏幕出现闪烁现象。用户反馈充电速度变慢，设备发热严重。",
+      "style": null,
+      "word_count": 2,
+      "char_count": 41,
+      "paragraph_number": 3
+    },
+    {
+      "_row_number": 4,
+      "block_id": "b_4",
+      "block_type": "paragraph",
+      "page_number": 1,
+      "content_type": "paragraph",
+      "content": "组件信息：\n- 摄像头模组：型号CAM-001\n- 显示屏：OLED屏幕\n- 电池：锂电池3000mAh\n- 处理器：八核芯片",
+      "style": null,
+      "word_count": 9,
+      "char_count": 63,
+      "paragraph_number": 4
+    },
+    {
+      "_row_number": 5,
+      "block_id": "b_5",
+      "block_type": "paragraph",
+      "page_number": 1,
+      "content_type": "paragraph",
+      "content": "症状分析：\n1. 对焦失败可能由于镜头污染或驱动IC异常\n2. 屏幕闪烁可能是显示驱动问题\n3. 充电慢可能是充电器功率不足\n4. 发热可能是处理器负载过高",
+      "style": null,
+      "word_count": 9,
+      "char_count": 78,
+      "paragraph_number": 5
+    },
+    {
+      "_row_number": 6,
+      "block_id": "b_6",
+      "block_type": "paragraph",
+      "page_number": 1,
+      "content_type": "paragraph",
+      "content": "解决方案：\n- 清洁镜头表面\n- 更换显示驱动IC\n- 升级充电器\n- 优化软件性能",
+      "style": null,
+      "word_count": 9,
+      "char_count": 42,
+      "paragraph_number": 6
+    }
+  ],
+  "entities": [],
+  "relations": [],
+  "metadata": {
+    "total_blocks": 6,
+    "total_pages": 1,
+    "file_type": "txt",
+    "paragraphs": 6,
+    "tables": 0,
+    "figures": 0,
+    "pages": 1,
+    "total_chars": 297,
+    "total_words": 37,
+    "page_stats": {
+      "page_1": {
+        "blocks": 6,
+        "paragraphs": 6,
+        "tables": 0,
+        "figures": 0
+      }
+    }
+  }
+}

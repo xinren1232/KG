@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件上传测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .result {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 文件上传测试</h1>
+    <p>测试API端点: <code>http://127.0.0.1:8000/kg/upload</code></p>
+
+    <div class="upload-area">
+        <h3>选择文件上传</h3>
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.pdf,.docx,.doc,.csv,.txt">
+        <br><br>
+        <button onclick="uploadFile()">上传文件</button>
+        <button onclick="testWithDummyFile()">测试虚拟文件</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        const API_BASE = 'http://127.0.0.1:8000';
+
+        function showResult(success, data) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = `result ${success ? 'success' : 'error'}`;
+            resultDiv.innerHTML = `
+                <h4>${success ? '✅ 成功' : '❌ 失败'}</h4>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        }
+
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                showResult(false, { error: '请选择一个文件' });
+                return;
+            }
+
+            console.log('开始上传文件:', file.name);
+
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                console.log('发送请求到:', `${API_BASE}/kg/upload`);
+
+                const response = await fetch(`${API_BASE}/kg/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                console.log('响应状态:', response.status);
+
+                const data = await response.json();
+                console.log('响应数据:', data);
+
+                showResult(response.ok && data.success, data);
+
+            } catch (error) {
+                console.error('上传错误:', error);
+                showResult(false, { error: error.message });
+            }
+        }
+
+        async function testWithDummyFile() {
+            console.log('测试虚拟文件上传');
+
+            try {
+                // 创建一个虚拟文件
+                const content = 'Hello World Test Content\n这是一个测试文件';
+                const blob = new Blob([content], { type: 'text/plain' });
+                const file = new File([blob], 'test.txt', { type: 'text/plain' });
+
+                const formData = new FormData();
+                formData.append('file', file);
+
+                console.log('发送虚拟文件到:', `${API_BASE}/kg/upload`);
+
+                const response = await fetch(`${API_BASE}/kg/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                console.log('响应状态:', response.status);
+
+                const data = await response.json();
+                console.log('响应数据:', data);
+
+                showResult(response.ok && data.success, data);
+
+            } catch (error) {
+                console.error('测试错误:', error);
+                showResult(false, { error: error.message });
+            }
+        }
+
+        // 测试API连接
+        async function testConnection() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                console.log('API连接测试:', data);
+            } catch (error) {
+                console.error('API连接失败:', error);
+            }
+        }
+
+        // 页面加载时测试连接
+        window.onload = function() {
+            testConnection();
+        };
+    </script>
+</body>
+</html>

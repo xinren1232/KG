@@ -64,25 +64,18 @@
         <el-tag type="info">共 {{ filteredEntries.length }} 条</el-tag>
       </div>
 
-      <el-table 
-        :data="paginatedEntries" 
-        stripe 
+      <el-table
+        :data="paginatedEntries"
+        stripe
         style="width: 100%"
         v-loading="loading"
       >
-        <el-table-column prop="term" label="词条" min-width="150" />
-        <el-table-column prop="category" label="类别" width="100">
-          <template #default="{ row }">
-            <el-tag :type="getCategoryColor(row.category)" size="small">
-              {{ row.category }}
-            </el-tag>
-          </template>
-        </el-table-column>
+        <el-table-column prop="name" label="术语" min-width="150" />
         <el-table-column label="别名" min-width="200">
           <template #default="{ row }">
             <div class="aliases">
-              <el-tag 
-                v-for="alias in row.aliases" 
+              <el-tag
+                v-for="alias in row.aliases"
                 :key="alias"
                 size="small"
                 class="alias-tag"
@@ -92,22 +85,29 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="definition" label="定义" min-width="250" show-overflow-tooltip />
-        <el-table-column label="元数据" width="150">
+        <el-table-column prop="category" label="类别" width="120">
           <template #default="{ row }">
-            <div class="metadata">
-              <el-tag 
-                v-for="(value, key) in row.metadata" 
-                :key="key"
+            <el-tag :type="getCategoryColor(row.category)" size="small">
+              {{ row.category }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="多标签" min-width="200">
+          <template #default="{ row }">
+            <div class="tags">
+              <el-tag
+                v-for="tag in row.tags"
+                :key="tag"
                 size="small"
-                type="info"
-                class="metadata-tag"
+                type="success"
+                class="tag-item"
               >
-                {{ key }}: {{ value }}
+                {{ tag }}
               </el-tag>
             </div>
           </template>
         </el-table-column>
+        <el-table-column prop="description" label="备注" min-width="250" show-overflow-tooltip />
         <el-table-column label="操作" width="150">
           <template #default="{ row }">
             <el-button size="small" @click="editEntry(row)">
@@ -283,10 +283,62 @@ export default {
         const response = await fetch('http://127.0.0.1:8000/kg/dictionary')
         const result = await response.json()
         
-        if (result.success) {
-          dictionaryEntries.value = result.entries
+        if (result.ok && result.data) {
+          // 转换API数据格式为前端期望的格式
+          const entries = []
+
+          // 添加组件词典
+          if (result.data.components) {
+            result.data.components.forEach(comp => {
+              entries.push({
+                id: `comp_${comp.name}`,
+                name: comp.name || comp.canonical_name,
+                type: '组件',
+                category: comp.category || '未分类',
+                aliases: comp.aliases || [],
+                tags: comp.tags || [],
+                description: comp.description || '',
+                standardName: comp.canonical_name || comp.name
+              })
+            })
+          }
+
+          // 添加症状词典
+          if (result.data.symptoms) {
+            result.data.symptoms.forEach(symptom => {
+              entries.push({
+                id: `symptom_${symptom.name}`,
+                name: symptom.name || symptom.canonical_name,
+                type: '症状',
+                category: symptom.category || '未分类',
+                aliases: symptom.aliases || [],
+                tags: symptom.tags || [],
+                description: symptom.description || '',
+                standardName: symptom.canonical_name || symptom.name,
+                severity: symptom.severity
+              })
+            })
+          }
+
+          // 添加工具流程词典
+          if (result.data.tools_processes) {
+            result.data.tools_processes.forEach(tool => {
+              entries.push({
+                id: `tool_${tool.name}`,
+                name: tool.name || tool.canonical_name,
+                type: '工具流程',
+                category: tool.category || '未分类',
+                aliases: tool.aliases || [],
+                tags: tool.tags || [],
+                description: tool.description || '',
+                standardName: tool.canonical_name || tool.name
+              })
+            })
+          }
+
+          dictionaryEntries.value = entries
         } else {
-          ElMessage.error('加载词典失败')
+          ElMessage.error('加载词典失败: ' + (result.error?.message || '未知错误'))
         }
       } catch (error) {
         ElMessage.error('加载词典失败')
@@ -500,8 +552,20 @@ export default {
   gap: 5px;
 }
 
-.alias-tag, .metadata-tag {
+.alias-tag, .metadata-tag, .tag-item {
   margin: 2px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag-item {
+  background-color: #f0f9ff;
+  border-color: #0ea5e9;
+  color: #0369a1;
 }
 
 .pagination {

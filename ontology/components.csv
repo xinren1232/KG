@@ -1,0 +1,26 @@
+key,name,category,aliases,description
+Component:Camera,摄像头,Hardware,"相机,Camera,镜头",用于拍照和录像的硬件组件
+Component:Battery,电池,Hardware,"Battery,电源",为设备提供电力的组件
+Component:Screen,屏幕,Hardware,"显示屏,Display,LCD,OLED",显示图像和信息的组件
+Component:Processor,处理器,Hardware,"CPU,芯片,Chip",执行计算任务的核心组件
+Component:Memory,内存,Hardware,"RAM,存储器",临时存储数据的组件
+Component:Storage,存储,Hardware,"闪存,Flash,ROM",永久存储数据的组件
+Component:Speaker,扬声器,Hardware,"喇叭,Speaker",播放音频的组件
+Component:Microphone,麦克风,Hardware,"话筒,Mic",录制音频的组件
+Component:Sensor,传感器,Hardware,"Sensor,感应器",检测环境变化的组件
+Component:Antenna,天线,Hardware,"Antenna,信号接收器",接收和发送无线信号的组件
+Component:Charging,充电,Hardware,"充电器,Charger",为电池充电的组件
+Component:Button,按键,Hardware,"按钮,Key",用户交互的物理按键
+Component:Connector,连接器,Hardware,"接口,Port,USB",连接外部设备的接口
+Component:Frame,外框,Mechanical,"边框,Frame,机身",设备的外部结构
+Component:Cover,后盖,Mechanical,"外壳,Back Cover",保护内部组件的外壳
+Component:Lens,镜头,Hardware,"透镜,Lens",摄像头的光学组件
+Component:Flash,闪光灯,Hardware,"补光灯,LED Flash",拍照时的补光设备
+Component:Vibrator,震动器,Hardware,"马达,Motor",提供触觉反馈的组件
+Component:Gyroscope,陀螺仪,Hardware,"重力感应器,Gyro",检测设备方向的传感器
+Component:Accelerometer,加速度计,Hardware,"加速度传感器,G-Sensor",检测设备运动的传感器
+Component:Proximity,距离传感器,Hardware,"接近传感器,Proximity Sensor",检测物体接近的传感器
+Component:Ambient,环境光传感器,Hardware,"光线传感器,Light Sensor",检测环境光线的传感器
+Component:Fingerprint,指纹识别,Hardware,"指纹传感器,Touch ID",生物识别组件
+Component:FaceID,面部识别,Software,"人脸识别,Face Recognition",面部识别软件系统
+Component:OS,操作系统,Software,"系统,Android,iOS",设备的核心软件系统

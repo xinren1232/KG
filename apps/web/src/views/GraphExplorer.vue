@@ -108,25 +108,113 @@ export default {
       if (!symptomQuery.value.trim()) return
 
       loading.value = true
-      
+
       try {
-        // 模拟API调用
-        await new Promise(resolve => setTimeout(resolve, 1500))
-        
-        // 模拟图谱数据
+        // 调用真实的因果路径API
+        const response = await http.post('/kg/cause_path', {
+          symptom_name: symptomQuery.value,
+          max_depth: 5,
+          include_countermeasures: true
+        })
+
+        if (response.ok && response.data && response.data.paths) {
+          const paths = response.data.paths
+          const nodes = new Set()
+          const edges = []
+
+          // 处理路径数据构建图谱
+          paths.forEach((path, pathIndex) => {
+            // 添加症状节点
+            if (path.symptom) {
+              nodes.add({
+                id: `symptom_${path.symptom.id}`,
+                type: 'Symptom',
+                name: path.symptom.name,
+                data: path.symptom
+              })
+            }
+
+            // 添加根因节点和边
+            if (path.causes) {
+              path.causes.forEach((cause, causeIndex) => {
+                const causeId = `cause_${cause.id || pathIndex}_${causeIndex}`
+                nodes.add({
+                  id: causeId,
+                  type: 'RootCause',
+                  name: cause.name,
+                  confidence: cause.confidence,
+                  data: cause
+                })
+
+                // 添加症状到根因的边
+                if (path.symptom) {
+                  edges.push({
+                    id: `edge_${path.symptom.id}_${causeId}`,
+                    source: `symptom_${path.symptom.id}`,
+                    target: causeId,
+                    type: 'CAUSED_BY'
+                  })
+                }
+              })
+            }
+
+            // 添加对策节点和边
+            if (path.countermeasures) {
+              path.countermeasures.forEach((counter, counterIndex) => {
+                const counterId = `counter_${counter.id || pathIndex}_${counterIndex}`
+                nodes.add({
+                  id: counterId,
+                  type: 'Countermeasure',
+                  name: counter.name,
+                  effectiveness: counter.effectiveness,
+                  data: counter
+                })
+
+                // 添加根因到对策的边
+                if (path.causes && path.causes.length > 0) {
+                  path.causes.forEach((cause, causeIndex) => {
+                    const causeId = `cause_${cause.id || pathIndex}_${causeIndex}`
+                    edges.push({
+                      id: `edge_${causeId}_${counterId}`,
+                      source: causeId,
+                      target: counterId,
+                      type: 'RESOLVED_BY'
+                    })
+                  })
+                }
+              })
+            }
+          })
+
+          sampleNodes.value = Array.from(nodes)
+          graphStats.nodes = sampleNodes.value.length
+          graphStats.edges = edges.length
+          hasGraph.value = true
+
+          ElMessage.success(`成功加载图谱数据：${graphStats.nodes}个节点，${graphStats.edges}条边`)
+        } else {
+          // 如果没有找到路径，显示提示
+          ElMessage.warning('未找到相关的因果路径数据')
+          sampleNodes.value = []
+          graphStats.nodes = 0
+          graphStats.edges = 0
+          hasGraph.value = false
+        }
+
+      } catch (error) {
+        console.error('Failed to load graph data:', error)
+        ElMessage.error('加载图谱数据失败')
+
+        // 降级到示例数据
         sampleNodes.value = [
           { id: '1', type: 'Symptom', name: symptomQuery.value },
           { id: '2', type: 'Anomaly', name: '相机对焦失败' },
           { id: '3', type: 'Component', name: '摄像头' },
           { id: '4', type: 'RootCause', name: '硬件故障' }
         ]
-        
         graphStats.nodes = sampleNodes.value.length
         graphStats.edges = 3
         hasGraph.value = true
-        
-      } catch (error) {
-        console.error('Failed to load graph data:', error)
       } finally {
         loading.value = false
       }

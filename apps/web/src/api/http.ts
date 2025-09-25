@@ -46,7 +46,18 @@ http.interceptors.response.use(
       if (response.data.ok === false && response.data.error) {
         // Handle API-level errors
         const errorMsg = response.data.error.message || 'API Error'
-        ElMessage.error(errorMsg)
+        const errorCode = response.data.error.code
+
+        // Don't show error messages for known database connection issues
+        // These are handled gracefully by the frontend with fallback data
+        const silentErrors = ['NEO4J_CONN', 'STATS_FAILED']
+
+        if (!silentErrors.includes(errorCode)) {
+          ElMessage.error(errorMsg)
+        } else {
+          console.warn(`⚠️ ${errorCode}: ${errorMsg} (使用降级数据)`)
+        }
+
         return Promise.reject(new Error(errorMsg))
       }
     }

@@ -41,7 +41,9 @@ const routes = [
     meta: {
       title: '数据治理'
     }
-  }
+  },
+
+
 ]
 
 const router = createRouter({

@@ -1,0 +1,8 @@
+{
+  "id": "f65df959-6254-4751-a357-c06f0d906a4f",
+  "name": "test_upload.txt",
+  "status": "failed",
+  "created": 1758743791,
+  "updated": 1758743793,
+  "error": "No module named 'api.files'"
+}

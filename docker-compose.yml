@@ -13,9 +13,20 @@ services:
       - NEO4J_server_memory_heap_initial__size=1g
       - NEO4J_server_memory_heap_max__size=2g
       - NEO4J_server_memory_pagecache_size=1g
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+      - NEO4J_dbms_security_procedures_allowlist=apoc.*
     volumes:
       - neo4j_data:/data
+      - neo4j_logs:/logs
+      - neo4j_import:/var/lib/neo4j/import
       - ./graph:/import
+    healthcheck:
+      test: ["CMD", "cypher-shell", "-u", "${NEO4J_USER:-neo4j}", "-p", "${NEO4J_PASS:-password123}", "RETURN 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
     networks:
       - kg_network
     restart: unless-stopped
@@ -31,8 +42,35 @@ services:
     volumes:
       - "./api:/app"
       - "./data:/data"
+      - "./ontology:/app/ontology"
     depends_on:
-      - neo4j
+      neo4j:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - kg_network
+    restart: unless-stopped
+
+  # 前端Web服务 (生产环境)
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile.prod
+    container_name: kg_web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./nginx/ssl:/etc/nginx/ssl:ro"
+    depends_on:
+      api:
+        condition: service_healthy
     networks:
       - kg_network
     restart: unless-stopped
@@ -43,3 +81,5 @@ networks:
 
 volumes:
   neo4j_data:
+  neo4j_logs:
+  neo4j_import:

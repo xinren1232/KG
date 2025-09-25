@@ -1,0 +1,1812 @@
+{
+  "version": "1.0",
+  "updated_at": "2025-09-25T02:42:56.293476",
+  "total_entries": 119,
+  "entries": [
+    {
+      "term": "摄像头",
+      "aliases": [
+        "相机"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:35:39.530767",
+      "version": 1
+    },
+    {
+      "term": "屏幕",
+      "aliases": [
+        "显示屏"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:35:39.530767",
+      "version": 1
+    },
+    {
+      "term": "电池",
+      "aliases": [
+        "Battery"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:35:39.530767",
+      "version": 1
+    },
+    {
+      "term": "主板",
+      "aliases": [
+        "MB"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:35:39.530767",
+      "version": 1
+    },
+    {
+      "term": "天线",
+      "aliases": [
+        "射频天线"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:35:39.530767",
+      "version": 1
+    },
+    {
+      "term": "尾插",
+      "aliases": [
+        "充电接口"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:35:39.530767",
+      "version": 1
+    },
+    {
+      "term": "听筒",
+      "aliases": [
+        "Receiver"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:35:39.530767",
+      "version": 1
+    },
+    {
+      "term": "麦克风",
+      "aliases": [
+        "Mic"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:35:39.530767",
+      "version": 1
+    },
+    {
+      "term": "震动马达",
+      "aliases": [
+        "振子"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:35:39.530767",
+      "version": 1
+    },
+    {
+      "term": "电源键",
+      "aliases": [
+        "Power Key"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:35:39.530767",
+      "version": 1
+    },
+    {
+      "term": "音量键",
+      "aliases": [
+        "Volume Key"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:35:39.530767",
+      "version": 1
+    },
+    {
+      "term": "后盖",
+      "aliases": [
+        "Back Cover"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.531766",
+      "updated_at": "2025-09-25T02:35:39.531766",
+      "version": 1
+    },
+    {
+      "term": "指纹模组",
+      "aliases": [
+        "Fingerprint"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.531766",
+      "updated_at": "2025-09-25T02:35:39.531766",
+      "version": 1
+    },
+    {
+      "term": "面容识别模组",
+      "aliases": [
+        "Face ID"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.531766",
+      "updated_at": "2025-09-25T02:35:39.531766",
+      "version": 1
+    },
+    {
+      "term": "闪光灯",
+      "aliases": [
+        "Flash"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.531766",
+      "updated_at": "2025-09-25T02:35:39.531766",
+      "version": 1
+    },
+    {
+      "term": "摄像头玻璃",
+      "aliases": [
+        "Camera Glass"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.531766",
+      "updated_at": "2025-09-25T02:35:39.531766",
+      "version": 1
+    },
+    {
+      "term": "SIM卡座",
+      "aliases": [
+        "SIM Tray"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.531766",
+      "updated_at": "2025-09-25T02:35:39.531766",
+      "version": 1
+    },
+    {
+      "term": "散热片",
+      "aliases": [
+        "Heat Sink"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.532766",
+      "updated_at": "2025-09-25T02:35:39.532766",
+      "version": 1
+    },
+    {
+      "term": "导热胶",
+      "aliases": [
+        "Thermal Pad"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.532766",
+      "updated_at": "2025-09-25T02:35:39.532766",
+      "version": 1
+    },
+    {
+      "term": "NFC天线",
+      "aliases": [
+        "NFC"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.532766",
+      "updated_at": "2025-09-25T02:35:39.532766",
+      "version": 1
+    },
+    {
+      "term": "无线充电线圈",
+      "aliases": [
+        "Wireless Charging Coil"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.532766",
+      "updated_at": "2025-09-25T02:35:39.532766",
+      "version": 1
+    },
+    {
+      "term": "传感器模组",
+      "aliases": [
+        "Sensor Module"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.532766",
+      "updated_at": "2025-09-25T02:35:39.532766",
+      "version": 1
+    },
+    {
+      "term": "死机",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.533771",
+      "updated_at": "2025-09-25T02:35:39.533771",
+      "version": 1
+    },
+    {
+      "term": "重启",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.533771",
+      "updated_at": "2025-09-25T02:35:39.533771",
+      "version": 1
+    },
+    {
+      "term": "卡顿",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.533771",
+      "updated_at": "2025-09-25T02:35:39.533771",
+      "version": 1
+    },
+    {
+      "term": "过热",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.533771",
+      "updated_at": "2025-09-25T02:35:39.533771",
+      "version": 1
+    },
+    {
+      "term": "充电慢",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "无法充电",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "信号差",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "无信号",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "拍照模糊",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "对焦失败",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "漏光",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "偏色",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "触摸不灵敏",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "触摸漂移",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "外放破音",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "听筒无声",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "WiFi连接失败",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "蓝牙连接失败",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "GPS定位不准",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "电量显示异常",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "应用闪退",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "系统更新失败",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "开机缓慢",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "待机耗电快",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "屏幕亮斑",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "屏幕黄斑",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "指纹解锁失败",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "人脸识别失败",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "通话杂音",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "通话掉线",
+      "aliases": [],
+      "category": "异常现象",
+      "tags": [
+        "症状"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.534768",
+      "updated_at": "2025-09-25T02:35:39.534768",
+      "version": 1
+    },
+    {
+      "term": "焊点虚焊",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.536274",
+      "updated_at": "2025-09-25T02:35:39.536274",
+      "version": 1
+    },
+    {
+      "term": "物料不良",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.536274",
+      "updated_at": "2025-09-25T02:35:39.536274",
+      "version": 1
+    },
+    {
+      "term": "设计缺陷",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.536274",
+      "updated_at": "2025-09-25T02:35:39.536274",
+      "version": 1
+    },
+    {
+      "term": "软件兼容性问题",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.536274",
+      "updated_at": "2025-09-25T02:35:39.536274",
+      "version": 1
+    },
+    {
+      "term": "驱动异常",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.536274",
+      "updated_at": "2025-09-25T02:35:39.536274",
+      "version": 1
+    },
+    {
+      "term": "供应商批次问题",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.536274",
+      "updated_at": "2025-09-25T02:35:39.536274",
+      "version": 1
+    },
+    {
+      "term": "老化失效",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.536274",
+      "updated_at": "2025-09-25T02:35:39.536274",
+      "version": 1
+    },
+    {
+      "term": "静电损伤(ESD)",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:35:39.537282",
+      "version": 1
+    },
+    {
+      "term": "工艺偏差",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:35:39.537282",
+      "version": 1
+    },
+    {
+      "term": "装配应力",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:35:39.537282",
+      "version": 1
+    },
+    {
+      "term": "温度湿度应力",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:35:39.537282",
+      "version": 1
+    },
+    {
+      "term": "电源纹波过大",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:35:39.537282",
+      "version": 1
+    },
+    {
+      "term": "射频干扰",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:35:39.537282",
+      "version": 1
+    },
+    {
+      "term": "结构强度不足",
+      "aliases": [],
+      "category": "根因分析",
+      "tags": [
+        "根因"
+      ],
+      "definition": "",
+      "source": "migration",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:35:39.537282",
+      "version": 1
+    },
+    {
+      "term": "AQL",
+      "aliases": [
+        "接收质量限",
+        "Acceptable Quality Level"
+      ],
+      "category": "工具",
+      "tags": [
+        "测试验证",
+        "质量体系"
+      ],
+      "definition": "抽样检验的标准，用于来料或出货检验时判定批合格与否。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "BTB连接器",
+      "aliases": [
+        "板对板连接器",
+        "Board-to-Board Connector"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件",
+        "电气连接"
+      ],
+      "definition": "连接主板与副板、显示模组等的重要元件，易出现接触不良、虚焊等故障。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "CABC",
+      "aliases": [
+        "内容自适应背光控制",
+        "Content Adaptive Backlight Control"
+      ],
+      "category": "软件相关",
+      "tags": [
+        "影像相关",
+        "功耗优化"
+      ],
+      "definition": "根据显示内容自动调节背光以节省功耗，算法不良会导致屏幕闪烁或亮度异常。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "CCD视觉对位",
+      "aliases": [
+        "相机对位",
+        "CCD Alignment"
+      ],
+      "category": "制造工艺",
+      "tags": [
+        "摄像头模组",
+        "SMT"
+      ],
+      "definition": "在贴片或模组组装中，使用工业相机进行高精度位置校准的工艺。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "CMF",
+      "aliases": [
+        "颜色、材料、表面处理",
+        "Color,Material,Finishing"
+      ],
+      "category": "结构相关",
+      "tags": [
+        "设计",
+        "外观"
+      ],
+      "definition": "决定手机外观质感的关键，涉及喷涂、阳极氧化、镀膜等工艺。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "Corner Drop",
+      "aliases": [
+        "角跌落"
+      ],
+      "category": "测试验证",
+      "tags": [
+        "可靠性",
+        "结构相关"
+      ],
+      "definition": "手机特定角落着地的跌落测试，用于评估结构最脆弱点的强度。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "CPK",
+      "aliases": [
+        "过程能力指数",
+        "Process Capability Index"
+      ],
+      "category": "工具",
+      "tags": [
+        "制造工艺",
+        "质量体系"
+      ],
+      "definition": "衡量生产过程稳定满足规格要求的能力，大于1.33表示过程能力良好。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "DQA",
+      "aliases": [
+        "设计质量保证",
+        "Design Quality Assurance"
+      ],
+      "category": "组织职责",
+      "tags": [
+        "流程相关",
+        "项目相关"
+      ],
+      "definition": "在研发阶段介入，确保产品设计满足可靠性、可制造性等质量要求的角色。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "Dome片",
+      "aliases": [
+        "按键弹片",
+        "Metal Dome"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件",
+        "人机交互"
+      ],
+      "definition": "提供按键手感的关键金属件，失效会导致按键无反应或手感差。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "Drop Test",
+      "aliases": [
+        "跌落测试"
+      ],
+      "category": "测试验证",
+      "tags": [
+        "可靠性",
+        "结构相关"
+      ],
+      "definition": "模拟手机意外跌落场景，验证整机结构强度、屏幕和电池等部件的可靠性。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "DSU",
+      "aliases": [
+        "动态软件更新",
+        "Dynamic System Updates"
+      ],
+      "category": "软件相关",
+      "tags": [
+        "项目相关",
+        "工具"
+      ],
+      "definition": "Android项目在运行时切换系统镜像的技术，用于软件调试与测试。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "ESD",
+      "aliases": [
+        "静电放电",
+        "Electro-Static Discharge"
+      ],
+      "category": "测试验证",
+      "tags": [
+        "硬件相关",
+        "可靠性"
+      ],
+      "definition": "测试手机抵御静电冲击的能力，不合格会导致芯片击穿或功能异常。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "FACA",
+      "aliases": [
+        "最终审核纠正措施",
+        "Final Audit Corrective Action"
+      ],
+      "category": "流程相关",
+      "tags": [
+        "质量体系",
+        "项目相关"
+      ],
+      "definition": "在项目量产前，针对开箱审计发现的问题进行闭环管理的流程。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "FPC",
+      "aliases": [
+        "柔性电路板",
+        "Flexible Printed Circuit"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件",
+        "电气连接"
+      ],
+      "definition": "用于连接空间受限的部件，如摄像头、显示屏，易发生弯折断裂。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "FPS",
+      "aliases": [
+        "帧率",
+        "Frames Per Second"
+      ],
+      "category": "影像相关",
+      "tags": [
+        "性能指标",
+        "软件相关"
+      ],
+      "definition": "衡量界面或游戏流畅度的关键指标，帧率过低会导致卡顿。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "Gap",
+      "aliases": [
+        "间隙",
+        "面差"
+      ],
+      "category": "结构相关",
+      "tags": [
+        "外观",
+        "装配"
+      ],
+      "definition": "指手机外壳部件之间的间隙和高度差，是衡量装配精度和美观度的重要指标。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "HALT",
+      "aliases": [
+        "高加速寿命测试",
+        "Highly Accelerated Life Test"
+      ],
+      "category": "测试验证",
+      "tags": [
+        "可靠性",
+        "研发"
+      ],
+      "definition": "通过施加高应力快速激发产品潜在缺陷的测试方法，用于设计阶段。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "Hotspot",
+      "aliases": [
+        "热点",
+        "局部过热"
+      ],
+      "category": "异常现象",
+      "tags": [
+        "硬件相关",
+        "可靠性"
+      ],
+      "definition": "手机特定区域（如SoC、充电芯片）温度过高，影响用户体验和安全。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "IQC",
+      "aliases": [
+        "来料检验",
+        "Incoming Quality Control"
+      ],
+      "category": "流程相关",
+      "tags": [
+        "制造工艺",
+        "质量体系"
+      ],
+      "definition": "对供应商送达的物料进行检验，确保投入生产的物料符合标准。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "Lens",
+      "aliases": [
+        "镜片",
+        "Camera Lens"
+      ],
+      "category": "摄像头模组",
+      "tags": [
+        "部件",
+        "影像相关"
+      ],
+      "definition": "摄像头的光学镜片，有脏污、划伤、镀膜脱落等不良现象。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "LRA",
+      "aliases": [
+        "线性谐振执行器",
+        "Linear Resonant Actuator"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件",
+        "人机交互"
+      ],
+      "definition": "提供振动反馈的马达，失效或性能不佳会导致振动弱、异响。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "MTBF",
+      "aliases": [
+        "平均无故障时间",
+        "Mean Time Between Failures"
+      ],
+      "category": "工具",
+      "tags": [
+        "可靠性",
+        "性能指标"
+      ],
+      "definition": "衡量产品可靠性的关键预测指标，通常通过可靠性试验数据计算得出。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "OIS",
+      "aliases": [
+        "光学防抖",
+        "Optical Image Stabilization"
+      ],
+      "category": "摄像头模组",
+      "tags": [
+        "功能",
+        "影像相关"
+      ],
+      "definition": "通过镜组或传感器移动补偿手抖，模块不良会导致拍照模糊或异响。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "PMP",
+      "aliases": [
+        "项目管理计划",
+        "Project Management Plan"
+      ],
+      "category": "项目相关",
+      "tags": [
+        "流程相关",
+        "组织职责"
+      ],
+      "definition": "项目开展的总体指导文件，包含范围、进度、质量、风险等管理计划。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "PVT",
+      "aliases": [
+        "生产验证测试",
+        "Production Validation Test"
+      ],
+      "category": "项目相关",
+      "tags": [
+        "测试验证",
+        "制造工艺"
+      ],
+      "definition": "在量产初期进行的测试，验证生产线能否稳定地生产出合格产品。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "SMT",
+      "aliases": [
+        "表面贴装技术",
+        "Surface Mount Technology"
+      ],
+      "category": "制造工艺",
+      "tags": [
+        "硬件相关",
+        "PCB"
+      ],
+      "definition": "将电子元器件贴装到PCB上的核心工艺，涉及锡膏印刷、贴片、回流焊。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "UV胶",
+      "aliases": [
+        "紫外线固化胶",
+        "Ultraviolet Glue"
+      ],
+      "category": "制造工艺",
+      "tags": [
+        "结构相关",
+        "粘合剂"
+      ],
+      "definition": "用于固定镜头、装饰件等，固化不良会导致脱落或溢胶。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "Vendor",
+      "aliases": [
+        "供应商",
+        "Supplier"
+      ],
+      "category": "组织职责",
+      "tags": [
+        "流程相关",
+        "项目相关"
+      ],
+      "definition": "提供手机零部件或服务的厂商，其质量能力直接影响整机质量。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "WLAN",
+      "aliases": [
+        "无线局域网",
+        "Wireless LAN"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "功能",
+        "性能指标"
+      ],
+      "definition": "手机Wi-Fi功能，常见问题有连接失败、速率慢、断流。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "暗角",
+      "aliases": [
+        "边缘暗影",
+        "Shading"
+      ],
+      "category": "异常现象",
+      "tags": [
+        "摄像头模组",
+        "影像相关"
+      ],
+      "definition": "照片四角出现亮度低于中心的现象，与镜头光学设计或组装有关。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "白点",
+      "aliases": [
+        "亮点",
+        "White Spot"
+      ],
+      "category": "异常现象",
+      "tags": [
+        "硬件相关",
+        "显示相关"
+      ],
+      "definition": "显示屏上常亮的白色像素点，属于LCD/OLED的坏点的一种。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "包材",
+      "aliases": [
+        "包装材料",
+        "Packaging Material"
+      ],
+      "category": "结构相关",
+      "tags": [
+        "物料",
+        "外观"
+      ],
+      "definition": "指手机零售包装盒、内托等，破损、污渍会影响开箱体验。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "爆音",
+      "aliases": [
+        "破音",
+        "Popping Sound"
+      ],
+      "category": "异常现象",
+      "tags": [
+        "硬件相关",
+        "声学"
+      ],
+      "definition": "扬声器在特定频率下输出失真，产生刺耳的噼啪声。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "背光",
+      "aliases": [
+        "背光模组",
+        "Backlight"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件",
+        "显示相关"
+      ],
+      "definition": "为LCD屏幕提供光源的组件，常见不良有亮度不均、漏光、mura（斑驳）。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "边框",
+      "aliases": [
+        "中框",
+        "Middle Frame"
+      ],
+      "category": "结构相关",
+      "tags": [
+        "部件",
+        "外观"
+      ],
+      "definition": "手机的骨架结构，用于固定内部元件，变形或腐蚀会影响整机强度和气密性。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "变砖",
+      "aliases": [
+        "无法开机",
+        "系统崩溃",
+        "Brick"
+      ],
+      "category": "异常现象",
+      "tags": [
+        "软件相关",
+        "硬件相关"
+      ],
+      "definition": "手机软件系统严重故障，无法正常启动或使用的状态，通常需强制刷机修复。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "波纹",
+      "aliases": [
+        "水波纹",
+        "Moire"
+      ],
+      "category": "异常现象",
+      "tags": [
+        "显示相关",
+        "影像相关"
+      ],
+      "definition": "在拍摄特定条纹图案时，因空间频率混叠产生的干扰波纹。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "残胶",
+      "aliases": [
+        "胶水残留",
+        "Glue Residual"
+      ],
+      "category": "异常现象",
+      "tags": [
+        "制造工艺",
+        "外观"
+      ],
+      "definition": "在点胶或贴合工艺后，多余的胶水残留在产品表面，影响美观和性能。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "充电口",
+      "aliases": [
+        "USB-C接口",
+        "Type-C Port"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件",
+        "电气连接"
+      ],
+      "definition": "负责充电和数据传输，常见不良有端口松动、腐蚀、连接不稳定。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "触点",
+      "aliases": [
+        "金手指",
+        "Contact Pin"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件",
+        "电气连接"
+      ],
+      "definition": "电池、屏幕等模块上与主板连接的导电触点，氧化或污染会导致接触不良。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "点胶",
+      "aliases": [
+        "打胶",
+        "Underfill"
+      ],
+      "category": "制造工艺",
+      "tags": [
+        "结构相关",
+        "工艺参数"
+      ],
+      "definition": "在芯片底部填充胶水以增强机械强度和耐热性，胶量、路径是关键参数。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "点屏",
+      "aliases": [
+        "屏幕点亮",
+        "Screen Lighting"
+      ],
+      "category": "测试验证",
+      "tags": [
+        "制造工艺",
+        "显示相关"
+      ],
+      "definition": "在组装过程中对显示屏进行通电，初步检查显示功能是否正常。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "点压",
+      "aliases": [
+        "按压测试",
+        "Press Test"
+      ],
+      "category": "测试验证",
+      "tags": [
+        "人机交互",
+        "可靠性"
+      ],
+      "definition": "对手机按键、屏幕等进行反复按压，测试其机械耐久性。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "电芯",
+      "aliases": [
+        "电池芯",
+        "Battery Cell"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "部件",
+        "安全相关"
+      ],
+      "definition": "电池的核心储能部件，其质量直接决定电池的容量、寿命和安全性。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "断触",
+      "aliases": [
+        "触摸失灵",
+        "Touch Failure"
+      ],
+      "category": "异常现象",
+      "tags": [
+        "硬件相关",
+        "人机交互"
+      ],
+      "definition": "触摸屏局部或全部失去响应，可能与TP本身、FPC连接或软件驱动有关。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "断流",
+      "aliases": [
+        "网络中断",
+        "Network Disconnection"
+      ],
+      "category": "异常现象",
+      "tags": [
+        "硬件相关",
+        "软件相关"
+      ],
+      "definition": "在使用Wi-Fi或移动数据时，网络连接意外中断又快速恢复的现象。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "钝化",
+      "aliases": [
+        "钝化层",
+        "Passivation"
+      ],
+      "category": "制造工艺",
+      "tags": [
+        "硬件相关",
+        "PCB"
+      ],
+      "definition": "在芯片或PCB表面形成保护层，防止腐蚀和短路，损伤会导致可靠性问题。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "多标签",
+      "aliases": [
+        "标签",
+        "Tag"
+      ],
+      "category": "工具",
+      "tags": [
+        "项目相关",
+        "软件相关"
+      ],
+      "definition": "用于对问题、物料或知识进行分类和标记的元数据，便于筛选和管理。",
+      "source": "import",
+      "created_at": "2025-09-25T02:35:39.537282",
+      "updated_at": "2025-09-25T02:37:38.522874",
+      "version": 2
+    },
+    {
+      "term": "TP",
+      "aliases": [
+        "Touch Panel",
+        "TP",
+        "触摸屏"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "人机交互",
+        "部件"
+      ],
+      "definition": "负责触控功能，常见故障有失灵、乱点、划线不良。",
+      "source": "merged",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:38:30.013398",
+      "version": 3
+    },
+    {
+      "term": "扬声器",
+      "aliases": [
+        "外放",
+        "扬声器",
+        "SPK",
+        "Speaker"
+      ],
+      "category": "硬件相关",
+      "tags": [
+        "声学",
+        "部件"
+      ],
+      "definition": "负责声音外放，常见不良有杂音、破音、无声。",
+      "source": "merged",
+      "created_at": "2025-09-25T02:35:39.530767",
+      "updated_at": "2025-09-25T02:38:30.013398",
+      "version": 3
+    },
+    {
+      "term": "测试术语",
+      "aliases": [
+        "测试别名1",
+        "测试别名2"
+      ],
+      "category": "测试类别",
+      "tags": [
+        "测试标签1",
+        "测试标签2"
+      ],
+      "definition": "更新后的定义",
+      "source": "test",
+      "created_at": "2025-09-25T02:42:56.279213",
+      "updated_at": "2025-09-25T02:42:56.279213",
+      "version": 2
+    },
+    {
+      "term": "批量术语1",
+      "aliases": [
+        "别名1",
+        "别名2"
+      ],
+      "category": "批量类别",
+      "tags": [
+        "标签1",
+        "标签2"
+      ],
+      "definition": "批量导入的测试术语1",
+      "source": "import",
+      "created_at": "2025-09-25T02:42:56.281467",
+      "updated_at": "2025-09-25T02:42:56.281467",
+      "version": 1
+    },
+    {
+      "term": "批量术语2",
+      "aliases": [
+        "别名3",
+        "别名4"
+      ],
+      "category": "批量类别",
+      "tags": [
+        "标签3",
+        "标签4"
+      ],
+      "definition": "批量导入的测试术语2",
+      "source": "import",
+      "created_at": "2025-09-25T02:42:56.281467",
+      "updated_at": "2025-09-25T02:42:56.281467",
+      "version": 1
+    }
+  ]
+}

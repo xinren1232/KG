@@ -1,0 +1,75 @@
+# 优化的Excel映射配置
+# 基于实际文件结构生成
+
+sheet: 0  # 第一个工作表
+
+columns:
+  anomaly_key: "问题编号"
+  title: "不良现象"
+  date: "发生日期"
+  severity: "严重度"
+  factory: "工厂"
+  product: "机型"
+  component: "部件"
+  symptom: "不良现象"
+  root_cause: "原因分析"
+  countermeasure: "改善对策"
+  supplier: "供应商"
+  status: "状态"
+
+# 数据处理选项
+options:
+  skip_empty_rows: true
+  trim_whitespace: true
+  auto_detect_encoding: true
+
+# 实体类型映射
+entity_mapping:
+  Component:
+    fields: ["component"]
+    label: "部件"
+  Symptom:
+    fields: ["symptom", "title"]
+    label: "症状"
+  RootCause:
+    fields: ["root_cause"]
+    label: "根因"
+  Countermeasure:
+    fields: ["countermeasure"]
+    label: "对策"
+  Product:
+    fields: ["product"]
+    label: "产品"
+  Factory:
+    fields: ["factory"]
+    label: "工厂"
+  Supplier:
+    fields: ["supplier"]
+    label: "供应商"
+
+# 关系映射规则
+relation_mapping:
+  - source: "symptom"
+    target: "root_cause"
+    type: "HAS_ROOTCAUSE"
+    confidence: 1.0
+  - source: "root_cause"
+    target: "countermeasure"
+    type: "RESOLVED_BY"
+    confidence: 1.0
+  - source: "symptom"
+    target: "component"
+    type: "AFFECTS"
+    confidence: 0.9
+  - source: "product"
+    target: "component"
+    type: "CONTAINS"
+    confidence: 0.8
+  - source: "factory"
+    target: "product"
+    type: "PRODUCES"
+    confidence: 0.7
+  - source: "supplier"
+    target: "component"
+    type: "SUPPLIES"
+    confidence: 0.8

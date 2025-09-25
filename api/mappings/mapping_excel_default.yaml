@@ -1,0 +1,99 @@
+# Excel文件默认映射配置
+# 根据实际Excel文件的列名调整
+
+sheet: 0  # 使用第一个sheet，也可以指定sheet名称如 "来料问题洗后版"
+
+columns:
+  # 基础字段
+  anomaly_key: "问题编号"        # 问题唯一标识
+  title: "不良现象"             # 问题标题/描述
+  date: "发生日期"              # 发生时间
+  severity: "严重度"            # 严重程度
+  
+  # 产品信息
+  factory: "工厂"               # 生产工厂
+  product: "机型"               # 产品型号
+  build: "版本"                 # 软件版本
+  
+  # 技术信息  
+  component: "部件"             # 相关部件
+  symptom: "不良现象"           # 症状描述
+  root_cause: "原因分析"        # 根本原因
+  countermeasure: "改善对策"    # 解决措施
+  
+  # 扩展字段（可选）
+  supplier: "供应商"            # 供应商
+  line: "生产线"                # 生产线
+  shift: "班次"                 # 班次
+  operator: "操作员"            # 操作员
+  inspector: "检验员"           # 检验员
+  status: "状态"                # 处理状态
+  
+# 数据处理选项
+options:
+  skip_empty_rows: true         # 跳过空行
+  trim_whitespace: true         # 去除首尾空格
+  auto_detect_encoding: true    # 自动检测编码
+  
+# 数据验证规则
+validation:
+  required_fields:              # 必填字段
+    - "symptom"
+    - "component"
+  
+  field_types:                  # 字段类型
+    date: "datetime"
+    severity: "string"
+    
+# 实体类型映射
+entity_mapping:
+  Component:
+    fields: ["component"]
+    label: "部件"
+    
+  Symptom:
+    fields: ["symptom", "title"]
+    label: "症状"
+    
+  RootCause:
+    fields: ["root_cause"]
+    label: "根因"
+    
+  Countermeasure:
+    fields: ["countermeasure"]
+    label: "对策"
+    
+  Product:
+    fields: ["product"]
+    label: "产品"
+    
+  Factory:
+    fields: ["factory"]
+    label: "工厂"
+
+# 关系映射规则
+relation_mapping:
+  - source: "symptom"
+    target: "root_cause"
+    type: "HAS_ROOTCAUSE"
+    confidence: 1.0
+    
+  - source: "root_cause"
+    target: "countermeasure"
+    type: "RESOLVED_BY"
+    confidence: 1.0
+    
+  - source: "symptom"
+    target: "component"
+    type: "AFFECTS"
+    confidence: 0.9
+    
+  - source: "product"
+    target: "component"
+    type: "CONTAINS"
+    confidence: 0.8
+    
+  - source: "factory"
+    target: "product"
+    type: "PRODUCES"
+    confidence: 0.7
