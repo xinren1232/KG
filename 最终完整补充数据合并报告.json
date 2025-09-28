@@ -1,0 +1,45 @@
+{
+  "merge_time": "2025-09-26T05:43:00.170151",
+  "total_statements": 338,
+  "source_scripts": {
+    "基础补充数据": 139,
+    "硬件模块数据": 199
+  },
+  "label_distribution": {
+    "Symptom": 58,
+    "Metric": 38,
+    "Process": 29,
+    "Material": 45,
+    "Role": 41,
+    "Tool": 48,
+    "TestCase": 28,
+    "Component": 51
+  },
+  "files_generated": [
+    "最终完整词典补充数据导入脚本.cypher"
+  ],
+  "system_enhancement": {
+    "original_data": 526,
+    "basic_supplement": 139,
+    "hardware_modules": 199,
+    "total_new_data": 338,
+    "estimated_final_total": 864,
+    "growth_rate": 64.3
+  },
+  "hardware_coverage": {
+    "显示技术": "25条 - OLED/LCD、触控、光学测试",
+    "影像技术": "25条 - 传感器、镜头、对焦、MTF测试",
+    "电源技术": "22条 - 电芯、BMS、快充、安全测试",
+    "电路技术": "23条 - PCB、芯片、SMT、信号完整性",
+    "射频技术": "34条 - 天线、射频前端、OTA测试",
+    "声学技术": "25条 - 扬声器、麦克风、音频调试",
+    "结构技术": "25条 - 中框、连接器、跌落测试",
+    "散热技术": "20条 - 均热板、导热材料、热仿真"
+  },
+  "quality_metrics": {
+    "data_standards": "严格按照词典设计规范执行",
+    "tag_compliance": "70个标签白名单完全遵循",
+    "label_architecture": "8个Label架构完整覆盖",
+    "professional_depth": "从基础术语到专业测试的深度覆盖"
+  }
+}

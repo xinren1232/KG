@@ -1,0 +1,9 @@
+{
+  "term_uniqueness": "术语名称必须唯一(忽略大小写和全角半角)",
+  "category_whitelist": "类别必须在白名单内: Symptom/Component/Process/TestCase/Material/Metric/Tool/Role",
+  "tags_whitelist": "标签必须在白名单内",
+  "aliases_format": "别名必须用分号分隔",
+  "symptom_exclusion": "Symptom类别不得包含工具/工艺/材料/测试类词根",
+  "required_fields": "term和category为必填字段",
+  "status_values": "status只能是active或deprecated"
+}

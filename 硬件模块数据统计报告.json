@@ -1,0 +1,76 @@
+{
+  "generation_time": "2025-09-26T05:29:36.402107",
+  "total_records": 95,
+  "modules": {
+    "显示屏模块": {
+      "total": 25,
+      "labels": {
+        "Component": 6,
+        "Symptom": 6,
+        "Metric": 4,
+        "Tool": 3,
+        "Process": 2,
+        "TestCase": 2,
+        "Material": 1,
+        "Role": 1
+      }
+    },
+    "摄像头模块": {
+      "total": 25,
+      "labels": {
+        "Component": 7,
+        "Symptom": 6,
+        "Metric": 4,
+        "Tool": 3,
+        "Process": 2,
+        "TestCase": 2,
+        "Role": 1
+      }
+    },
+    "电池模块": {
+      "total": 22,
+      "labels": {
+        "Material": 5,
+        "Symptom": 4,
+        "TestCase": 3,
+        "Metric": 3,
+        "Component": 2,
+        "Process": 2,
+        "Tool": 2,
+        "Role": 1
+      }
+    },
+    "主板PCBA模块": {
+      "total": 23,
+      "labels": {
+        "Component": 6,
+        "Symptom": 4,
+        "Metric": 3,
+        "Material": 2,
+        "Process": 2,
+        "TestCase": 2,
+        "Tool": 2,
+        "Role": 2
+      }
+    }
+  },
+  "total_label_distribution": {
+    "Component": 21,
+    "Symptom": 20,
+    "Metric": 14,
+    "Tool": 10,
+    "TestCase": 9,
+    "Material": 8,
+    "Process": 8,
+    "Role": 5
+  },
+  "files_generated": [
+    "硬件模块数据导入脚本.cypher"
+  ],
+  "module_coverage": {
+    "显示屏模块": "24条 - OLED/LCD面板、触控、光学测试",
+    "摄像头模块": "24条 - 传感器、镜头、对焦、影像质量",
+    "电池模块": "21条 - 电芯、保护板、充电、安全测试",
+    "主板PCBA模块": "22条 - PCB、芯片、SMT、电气测试"
+  }
+}

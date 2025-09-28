@@ -1,0 +1,27 @@
+term,aliases,category,sub_category,tags,definition,example,source,status,updated_at
+无线充电接收线圈,RX Coil,Component,充电器件,充电;硬件相关;功能,内置在手机中接收交变磁场并转化为感应电流,无线充电线圈,硬件模块扩展,active,2025-09-26
+无线充电发射板,TX Pad,Component,充电器件,充电;配件;功能,外部设备产生交变磁场为手机无线充电,无线充电底座,硬件模块扩展,active,2025-09-26
+电荷泵充电芯片,Charge Pump Charger,Component,充电芯片,充电;硬件相关;半导体,采用电容储能方式实现高效大电流充电转换效率远高于传统LDO或Buck,电荷泵IC,硬件模块扩展,active,2025-09-26
+电池电量计,Fuel Gauge,Component,电源芯片,充电;硬件相关;半导体,精确估算电池剩余电量和健康状态,电量计芯片,硬件模块扩展,active,2025-09-26
+过压保护电路,OVP,Component,保护电路,充电;硬件相关;安全相关,防止充电电压过高损坏手机内部器件,过压保护,硬件模块扩展,active,2025-09-26
+过流保护电路,OCP,Component,保护电路,充电;硬件相关;安全相关,防止充电电流或负载电流过大,过流保护,硬件模块扩展,active,2025-09-26
+USB Type-C接口控制器,Type-C Controller,Component,接口芯片,充电;硬件相关;功能,管理Type-C接口的正反插角色切换DRP/SRC/SNK和快充协议,Type-C控制芯片,硬件模块扩展,active,2025-09-26
+充电发热严重,Excessive Heating During Charging,Symptom,充电异常,充电;异常现象;热管理;安全相关,充电时手机或充电器温度异常升高,充电过热,硬件模块扩展,active,2025-09-26
+充电速度慢,Slow Charging,Symptom,充电异常,充电;异常现象;性能指标,实际充电功率远低于标称快充功率,充电慢,硬件模块扩展,active,2025-09-26
+无法快充,Fast Charging Not Working,Symptom,充电异常,充电;异常现象;功能,手机连接支持快充的充电器后仍以标准5V电压充电,快充失效,硬件模块扩展,active,2025-09-26
+充电中断,Charging Interruption,Symptom,充电异常,充电;异常现象;可靠性,充电过程中断断续续无法连续充满,充电断续,硬件模块扩展,active,2025-09-26
+无线充电效率低,Low Wireless Charging Efficiency,Symptom,充电异常,充电;异常现象;性能指标,无线充电时能量损耗大手机发热严重且充电慢,无线充电效率差,硬件模块扩展,active,2025-09-26
+充电协议握手,Handshake,Process,充电协议,充电;软件相关;硬件相关,手机与充电器通过通信如USB PD QC协商双方支持的电压和电流档位,协议握手,硬件模块扩展,active,2025-09-26
+恒流充电,Constant Current Charging,Process,充电阶段,充电;性能指标,充电电流保持恒定电池电压逐渐上升的阶段,CC充电,硬件模块扩展,active,2025-09-26
+恒压充电,Constant Voltage Charging,Process,充电阶段,充电;性能指标,电池电压达到设定值后充电电压保持恒定电流逐渐减小的阶段,CV充电,硬件模块扩展,active,2025-09-26
+涓流充电,Trickle Charging,Process,充电阶段,充电;性能指标,电池电量极低时先以小电流预充激活电池,预充电,硬件模块扩展,active,2025-09-26
+充电效率测试,Charging Efficiency Test,TestCase,充电测试,充电;测试验证;性能指标,测量输入手机的电能与充入电池的电能之比计算整体效率,充电效率验证,硬件模块扩展,active,2025-09-26
+温升测试,Temperature Rise Test,TestCase,充电测试,充电;测试验证;热管理;安全相关,在特定环境温度下进行快充监测手机和充电器关键点的温升曲线,充电温升测试,硬件模块扩展,active,2025-09-26
+兼容性测试,Compatibility Test,TestCase,充电测试,充电;测试验证;功能,使用不同品牌不同协议的充电器和线缆测试手机能否正常快充,充电兼容性验证,硬件模块扩展,active,2025-09-26
+输入电压范围,Input Voltage Range,Metric,,充电;性能指标,手机充电电路能正常工作的输入电压范围,充电电压范围,硬件模块扩展,active,2025-09-26
+充电功率,Charging Power,Metric,,充电;性能指标,充电时输入手机的总功率电压×电流单位瓦特,充电瓦数,硬件模块扩展,active,2025-09-26
+转换效率,Conversion Efficiency,Metric,,充电;性能指标,充电电路将输入电能转换为电池化学能的效率,充电转换效率,硬件模块扩展,active,2025-09-26
+直流电源,DC Power Supply,Tool,测试设备,充电;测试验证;工具,可编程精密电源用于模拟充电器精确控制输出电压和电流,程控电源,硬件模块扩展,active,2025-09-26
+功率分析仪,Power Analyzer,Tool,测试设备,充电;测试验证;工具,高精度测量充电过程中的电压电流功率能耗等参数,功率计,硬件模块扩展,active,2025-09-26
+热成像仪,Thermal Imager,Tool,测试设备,充电;测试验证;热管理;工具,观察充电时手机内部和充电器的温度分布定位热点,红外热像仪,硬件模块扩展,active,2025-09-26
+充电系统工程师,Charging System Engineer,Role,工程师,充电;设计;硬件相关,负责手机充电架构设计器件选型性能优化和安全性评估,充电系统设计师,硬件模块扩展,active,2025-09-26

@@ -1,0 +1,65 @@
+{
+  "generation_time": "2025-09-26T06:04:02.270257",
+  "total_records": 102,
+  "modules": {
+    "连接与网络模块": {
+      "total": 30,
+      "labels": {
+        "Component": 10,
+        "Symptom": 7,
+        "TestCase": 4,
+        "Metric": 4,
+        "Tool": 3,
+        "Role": 2
+      }
+    },
+    "接口与连接器模块": {
+      "total": 24,
+      "labels": {
+        "Component": 10,
+        "Metric": 4,
+        "Symptom": 4,
+        "TestCase": 4,
+        "Role": 2
+      }
+    },
+    "被动元件与电路保护模块": {
+      "total": 28,
+      "labels": {
+        "Component": 10,
+        "Symptom": 7,
+        "TestCase": 4,
+        "Metric": 4,
+        "Role": 2,
+        "Tool": 1
+      }
+    },
+    "生产与测试治具模块": {
+      "total": 20,
+      "labels": {
+        "Component": 11,
+        "Metric": 6,
+        "Role": 2,
+        "Process": 1
+      }
+    }
+  },
+  "total_label_distribution": {
+    "Component": 41,
+    "Symptom": 18,
+    "Metric": 18,
+    "TestCase": 12,
+    "Role": 8,
+    "Tool": 4,
+    "Process": 1
+  },
+  "files_generated": [
+    "第四批硬件模块数据导入脚本.cypher"
+  ],
+  "module_coverage": {
+    "连接与网络模块": "30条 - Wi-Fi、蓝牙、5G、GNSS、NFC",
+    "接口与连接器模块": "24条 - USB-C、Lightning、FPC、BTB连接器",
+    "被动元件与电路保护模块": "28条 - 电容、电感、保护器件、ESD",
+    "生产与测试治具模块": "20条 - ICT、FCT、自动化测试、治具设计"
+  }
+}

@@ -1,0 +1,25 @@
+term,aliases,category,sub_category,tags,definition,example,source,status,updated_at
+USB Type-C接口,USB-C,Component,接口器件,硬件相关;电气连接;功能,支持正反插高速数据传输视频输出和快充的多功能接口,USB-C接口,硬件模块扩展,active,2025-09-26
+闪电接口,Lightning,Component,接口器件,硬件相关;电气连接;功能,Apple公司专有的紧凑型接口用于数据传输和充电,Lightning接口,硬件模块扩展,active,2025-09-26
+3.5mm音频接口,耳机孔,Component,接口器件,硬件相关;声学;功能,模拟音频输出接口逐渐被USB-C或无线音频替代,耳机插孔,硬件模块扩展,active,2025-09-26
+高清多媒体接口,HDMI,Component,接口器件,硬件相关;功能,用于输出高清视频和音频信号,HDMI接口,硬件模块扩展,active,2025-09-26
+DisplayPort接口,DP,Component,接口器件,硬件相关;功能,另一种高清视频输出接口常见于USB-C的Alt Mode中,DP接口,硬件模块扩展,active,2025-09-26
+pogo pin连接器,弹簧针连接器,Component,连接器件,硬件相关;电气连接;测试验证,用于生产测试治具或手机配件的临时性低插拔次数的连接,弹簧针,硬件模块扩展,active,2025-09-26
+FPC连接器,柔性电路板连接器,Component,连接器件,硬件相关;电气连接;制造工艺,用于连接主板与屏幕摄像头等部件的FPC要求高精度和对位,FPC座,硬件模块扩展,active,2025-09-26
+板对板连接器,BTB Connector,Component,连接器件,硬件相关;电气连接;结构相关,连接主板与副板或其他子板是实现手机堆叠的关键元件,BTB连接器,硬件模块扩展,active,2025-09-26
+SIM卡座,SIM Card Connector,Component,连接器件,硬件相关;电气连接;功能,承载Nano-SIM卡或eSIM芯片实现与移动网络的连接,SIM卡槽,硬件模块扩展,active,2025-09-26
+麦克风硅麦,MEMS Microphone,Component,声学器件,硬件相关;声学;电气连接,通过FPC或焊点与主板连接体积小抗干扰性强,MEMS麦克风,硬件模块扩展,active,2025-09-26
+接触阻抗,Contact Resistance,Metric,,硬件相关;性能指标;电气连接,连接器触点之间的电阻值越小越好,接触电阻,硬件模块扩展,active,2025-09-26
+绝缘阻抗,Insulation Resistance,Metric,,硬件相关;性能指标;电气连接,连接器相邻触点之间或触点与外壳之间的电阻值越大越好,绝缘电阻,硬件模块扩展,active,2025-09-26
+额定电流,Rated Current,Metric,,硬件相关;性能指标;电气连接,连接器能够长期安全通过的最大电流值,额定载流量,硬件模块扩展,active,2025-09-26
+插拔力,Insertion/Extraction Force,Metric,,硬件相关;性能指标;人机交互,将公端插入母座或拔出的力影响用户体验和连接可靠性,插拔力度,硬件模块扩展,active,2025-09-26
+接口腐蚀,Interface Corrosion,Symptom,接口异常,硬件相关;异常现象;可靠性,接口金属触点因汗液潮湿等环境因素发生氧化或电化学腐蚀,接口氧化,硬件模块扩展,active,2025-09-26
+引脚弯曲/断裂,Pin Bent/Broken,Symptom,连接器异常,硬件相关;异常现象;制造工艺,连接器引脚在组装或使用中发生物理损伤,引脚损坏,硬件模块扩展,active,2025-09-26
+连接器缩PIN,Contact Retraction,Symptom,连接器异常,硬件相关;异常现象;可靠性,连接器内部的接触端子回缩导致接触不良,端子回缩,硬件模块扩展,active,2025-09-26
+接口松动,Loose Connection,Symptom,接口异常,硬件相关;异常现象;可靠性,接口公母端配合不紧轻微外力即可导致断开,连接松动,硬件模块扩展,active,2025-09-26
+连接器耐焊接热测试,Solder Heat Resistance Test,TestCase,连接器测试,硬件相关;测试验证;制造工艺,验证连接器本体和端子能否承受回流焊的高温而不变形或性能劣化,耐焊接热测试,硬件模块扩展,active,2025-09-26
+连接器保持力测试,Retention Force Test,TestCase,连接器测试,硬件相关;测试验证;可靠性,测试FPC或线缆插入连接器后抵抗外力拔出的能力,保持力测试,硬件模块扩展,active,2025-09-26
+连接器插拔寿命测试,Durability Test,TestCase,连接器测试,硬件相关;测试验证;可靠性,模拟用户多次插拔测试连接器机械寿命和电性能稳定性,插拔寿命测试,硬件模块扩展,active,2025-09-26
+盐雾测试,Salt Spray Test,TestCase,可靠性测试,硬件相关;测试验证;可靠性,评估连接器触点的耐腐蚀性能,盐雾腐蚀测试,硬件模块扩展,active,2025-09-26
+连接器选型工程师,Connector Selection Engineer,Role,工程师,硬件相关;设计;供应链,负责根据电气机械成本和供应链需求选择合适的连接器,连接器工程师,硬件模块扩展,active,2025-09-26
+信号完整性工程师,Signal Integrity Engineer,Role,工程师,硬件相关;设计;电气性能,负责高速接口如USB 3.0 MIPI的SI仿真和设计确保信号质量,SI工程师,硬件模块扩展,active,2025-09-26

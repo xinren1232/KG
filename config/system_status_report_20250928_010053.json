@@ -1,0 +1,157 @@
+{
+  "check_time": "2025-09-28T01:00:34.055343",
+  "services": {
+    "知识图谱核心API": {
+      "status": "运行中",
+      "url": "http://localhost:8000/health",
+      "response_time": 2.059,
+      "status_code": 200,
+      "last_check": "2025-09-28T01:00:36.114507"
+    },
+    "前端Web应用": {
+      "status": "运行中",
+      "url": "http://localhost:5173",
+      "response_time": 0.008,
+      "status_code": 200,
+      "last_check": "2025-09-28T01:00:36.122852"
+    },
+    "Neo4j数据库": {
+      "status": "运行中",
+      "url": "http://localhost:7474",
+      "response_time": 2.058,
+      "status_code": 200,
+      "last_check": "2025-09-28T01:00:38.182139"
+    }
+  },
+  "features": {},
+  "data_files": {
+    "API主服务": {
+      "status": "存在",
+      "path": "services\\api\\main.py",
+      "size": 2249,
+      "modified": "2025-09-27T17:51:02.275308"
+    },
+    "Neo4j客户端": {
+      "status": "存在",
+      "path": "services\\api\\database\\neo4j_client.py",
+      "size": 8408,
+      "modified": "2025-09-27T22:26:00.645066"
+    },
+    "图谱路由": {
+      "status": "存在",
+      "path": "services\\api\\routers\\kg_router.py",
+      "size": 15707,
+      "modified": "2025-09-27T23:31:30.272333"
+    },
+    "前端主页": {
+      "status": "存在",
+      "path": "apps\\web\\src\\views\\GraphVisualization.vue",
+      "size": 14071,
+      "modified": "2025-09-28T00:48:47.502235"
+    },
+    "词典管理": {
+      "status": "存在",
+      "path": "apps\\web\\src\\views\\DictionaryManagement.vue",
+      "size": 20425,
+      "modified": "2025-09-27T19:36:21.548034"
+    },
+    "API配置": {
+      "status": "存在",
+      "path": "apps\\web\\src\\api\\index.js",
+      "size": 6134,
+      "modified": "2025-09-28T00:54:51.473679"
+    },
+    "词典数据": {
+      "status": "存在",
+      "path": "api\\data\\dictionary.json",
+      "size": 483154,
+      "modified": "2025-09-26T13:45:25.877447"
+    },
+    "系统配置": {
+      "status": "存在",
+      "path": "config\\graph_visualization_data.json",
+      "size": 6175,
+      "modified": "2025-09-26T15:59:22.686956"
+    }
+  },
+  "databases": {
+    "Neo4j": {
+      "status": "连接正常",
+      "node_count": 526,
+      "relationship_count": 13,
+      "url": "bolt://localhost:7687"
+    }
+  },
+  "configurations": {},
+  "api_endpoints": {
+    "健康检查": {
+      "status": "正常",
+      "data_size": 65,
+      "response_time": 0.001566
+    },
+    "图谱数据": {
+      "status": "正常",
+      "data_size": 5024,
+      "response_time": 2.071628
+    },
+    "词典管理": {
+      "status": "正常",
+      "data_size": 1299,
+      "response_time": 2.052125
+    },
+    "系统状态": {
+      "status": "正常",
+      "data_size": 433,
+      "response_time": 2.038431
+    },
+    "系统规则": {
+      "status": "正常",
+      "data_size": 404,
+      "response_time": 2.035472
+    }
+  },
+  "frontend_pages": {
+    "图谱可视化": {
+      "status": "运行中",
+      "url": "http://localhost:5173/#/graph-viz",
+      "response_time": 0.006,
+      "status_code": 200,
+      "last_check": "2025-09-28T01:00:53.497552"
+    },
+    "词典管理": {
+      "status": "运行中",
+      "url": "http://localhost:5173/#/dictionary",
+      "response_time": 0.005,
+      "status_code": 200,
+      "last_check": "2025-09-28T01:00:53.503753"
+    },
+    "系统管理": {
+      "status": "运行中",
+      "url": "http://localhost:5173/#/system",
+      "response_time": 0.004,
+      "status_code": 200,
+      "last_check": "2025-09-28T01:00:53.507753"
+    },
+    "数据治理": {
+      "status": "运行中",
+      "url": "http://localhost:5173/#/governance",
+      "response_time": 0.022,
+      "status_code": 200,
+      "last_check": "2025-09-28T01:00:53.530088"
+    }
+  },
+  "overall_status": "优秀",
+  "health_metrics": {
+    "services": "3/3",
+    "api_endpoints": "5/5",
+    "data_files": "8/8",
+    "databases": "1/1",
+    "frontend_pages": "4/4",
+    "overall_health": "100.0%",
+    "total_checks": 21,
+    "total_healthy": 21
+  },
+  "recommendations": [
+    "⚡ 优化性能: 以下API响应较慢 图谱数据, 词典管理, 系统状态, 系统规则"
+  ]
+}

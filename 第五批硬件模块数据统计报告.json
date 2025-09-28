@@ -1,0 +1,55 @@
+{
+  "generation_time": "2025-09-26T09:11:44.500247",
+  "total_records": 114,
+  "modules": {
+    "材料科学基础模块": {
+      "total": 31,
+      "labels": {
+        "Metric": 31
+      }
+    },
+    "先进制造工艺模块": {
+      "total": 25,
+      "labels": {
+        "Process": 25
+      }
+    },
+    "失效分析与可靠性工程模块": {
+      "total": 29,
+      "labels": {
+        "Process": 7,
+        "Tool": 7,
+        "TestCase": 7,
+        "Metric": 4,
+        "Symptom": 2,
+        "Role": 2
+      }
+    },
+    "标准与法规模块": {
+      "total": 29,
+      "labels": {
+        "Process": 13,
+        "TestCase": 8,
+        "Metric": 7,
+        "Role": 1
+      }
+    }
+  },
+  "total_label_distribution": {
+    "Process": 45,
+    "Metric": 42,
+    "TestCase": 15,
+    "Tool": 7,
+    "Role": 3,
+    "Symptom": 2
+  },
+  "files_generated": [
+    "第五批硬件模块数据导入脚本.cypher"
+  ],
+  "module_coverage": {
+    "材料科学基础模块": "31条 - 材料力学、热学、电学性能指标",
+    "先进制造工艺模块": "25条 - 微弧氧化、ALD、MEMS、3D打印",
+    "失效分析与可靠性工程模块": "29条 - 失效分析、可靠性测试、统计模型",
+    "标准与法规模块": "29条 - 3C、CE、FCC、RoHS、EMC测试"
+  }
+}

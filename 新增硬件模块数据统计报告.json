@@ -1,0 +1,74 @@
+{
+  "generation_time": "2025-09-26T05:41:00.271723",
+  "total_records": 104,
+  "modules": {
+    "射频与天线模块": {
+      "total": 34,
+      "labels": {
+        "Component": 12,
+        "Symptom": 8,
+        "Metric": 5,
+        "Tool": 3,
+        "Process": 2,
+        "TestCase": 2,
+        "Role": 2
+      }
+    },
+    "声学模块": {
+      "total": 25,
+      "labels": {
+        "Component": 6,
+        "Symptom": 6,
+        "Tool": 4,
+        "Metric": 4,
+        "Material": 2,
+        "Process": 1,
+        "TestCase": 1,
+        "Role": 1
+      }
+    },
+    "结构件与连接器模块": {
+      "total": 25,
+      "labels": {
+        "Component": 9,
+        "TestCase": 5,
+        "Symptom": 4,
+        "Process": 3,
+        "Material": 2,
+        "Role": 2
+      }
+    },
+    "散热系统模块": {
+      "total": 20,
+      "labels": {
+        "Material": 5,
+        "Component": 3,
+        "Symptom": 3,
+        "Tool": 3,
+        "Metric": 2,
+        "TestCase": 2,
+        "Process": 1,
+        "Role": 1
+      }
+    }
+  },
+  "total_label_distribution": {
+    "Component": 30,
+    "Symptom": 21,
+    "Metric": 11,
+    "Tool": 10,
+    "TestCase": 10,
+    "Material": 9,
+    "Process": 7,
+    "Role": 6
+  },
+  "files_generated": [
+    "新增硬件模块数据导入脚本.cypher"
+  ],
+  "module_coverage": {
+    "射频与天线模块": "34条 - 天线、射频前端、OTA测试",
+    "声学模块": "25条 - 扬声器、麦克风、音频调试",
+    "结构件与连接器模块": "25条 - 中框、连接器、结构测试",
+    "散热系统模块": "20条 - 均热板、导热材料、热仿真"
+  }
+}

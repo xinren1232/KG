@@ -1,0 +1,288 @@
+{
+  "stats": {
+    "totalNodes": 1124,
+    "totalRelations": 7581,
+    "totalCategories": 8,
+    "totalTags": 79
+  },
+  "categories": [
+    {
+      "name": "Symptom",
+      "count": 259
+    },
+    {
+      "name": "Metric",
+      "count": 190
+    },
+    {
+      "name": "Component",
+      "count": 181
+    },
+    {
+      "name": "Process",
+      "count": 170
+    },
+    {
+      "name": "TestCase",
+      "count": 104
+    },
+    {
+      "name": "Tool",
+      "count": 102
+    },
+    {
+      "name": "Role",
+      "count": 63
+    },
+    {
+      "name": "Material",
+      "count": 55
+    }
+  ],
+  "tags": [
+    {
+      "name": "硬件相关",
+      "count": 315
+    },
+    {
+      "name": "可靠性",
+      "count": 311
+    },
+    {
+      "name": "制造工艺",
+      "count": 211
+    },
+    {
+      "name": "测试验证",
+      "count": 206
+    },
+    {
+      "name": "物料",
+      "count": 135
+    },
+    {
+      "name": "结构相关",
+      "count": 128
+    },
+    {
+      "name": "性能指标",
+      "count": 100
+    },
+    {
+      "name": "外观",
+      "count": 81
+    },
+    {
+      "name": "异常现象",
+      "count": 79
+    },
+    {
+      "name": "质量体系",
+      "count": 78
+    },
+    {
+      "name": "通信相关",
+      "count": 73
+    },
+    {
+      "name": "设计",
+      "count": 70
+    },
+    {
+      "name": "SMT",
+      "count": 66
+    },
+    {
+      "name": "射频相关",
+      "count": 59
+    },
+    {
+      "name": "工艺参数",
+      "count": 59
+    },
+    {
+      "name": "工具",
+      "count": 52
+    },
+    {
+      "name": "显示相关",
+      "count": 50
+    },
+    {
+      "name": "组织职责",
+      "count": 50
+    },
+    {
+      "name": "安全相关",
+      "count": 48
+    },
+    {
+      "name": "部件",
+      "count": 47
+    }
+  ],
+  "sampleNodes": [
+    {
+      "id": "dict_0",
+      "name": "彩信失败",
+      "category": "Symptom",
+      "description": "**定义**: 彩信发送/接收失败。 **判定口径**: 成功率 <95%。 **常见场景**: 网络不稳定。 **排查路径**: 检查APN配置→运营商支持。 **对策**: 优化配置兼容性。"
+    },
+    {
+      "id": "dict_1",
+      "name": "翘脚",
+      "category": "Symptom",
+      "description": "元器件引脚未与焊盘接触而翘起，导致开路。"
+    },
+    {
+      "id": "dict_2",
+      "name": "无法快充",
+      "category": "Symptom",
+      "description": "手机连接支持快充的充电器后仍以标准5V电压充电"
+    },
+    {
+      "id": "dict_3",
+      "name": "UL认证",
+      "category": "Process",
+      "description": "美国产品安全性能认证"
+    },
+    {
+      "id": "dict_4",
+      "name": "性能降频",
+      "category": "Symptom",
+      "description": "因温度过高系统主动降低芯片频率以控制发热导致卡顿"
+    },
+    {
+      "id": "dict_5",
+      "name": "助焊剂残留",
+      "category": "Symptom",
+      "description": "焊接后残留的助焊剂，若具腐蚀性或影响绝缘，需清洗或使用免清洗型。"
+    },
+    {
+      "id": "dict_6",
+      "name": "可靠性分配",
+      "category": "Process",
+      "description": "将系统可靠性指标合理分配到各分系统和元器件"
+    },
+    {
+      "id": "dict_7",
+      "name": "NCVM不导电真空镀",
+      "category": "Process",
+      "description": "一种PVD工艺镀膜层不连续不影响内部天线信号传输同时实现金属质感"
+    },
+    {
+      "id": "dict_8",
+      "name": "防呆",
+      "category": "Process",
+      "description": "设计一种装置或方法，防止操作员出现错误，是提升直通率的关键。"
+    },
+    {
+      "id": "dict_9",
+      "name": "乱码",
+      "category": "Symptom",
+      "description": "屏幕显示的文字或符号变成无法识别的代码，可能与软件或内存有关。"
+    }
+  ],
+  "sampleRelations": [
+    {
+      "source": "dict_0",
+      "target": "target_功能",
+      "type": "HAS_TAG"
+    },
+    {
+      "source": "dict_0",
+      "target": "target_通信相关",
+      "type": "HAS_TAG"
+    },
+    {
+      "source": "dict_0",
+      "target": "target_Symptom",
+      "type": "IN_CATEGORY"
+    },
+    {
+      "source": "dict_0",
+      "target": "target_MMS Fail",
+      "type": "HAS_ALIAS"
+    },
+    {
+      "source": "dict_0",
+      "target": "target_MMS失败",
+      "type": "HAS_ALIAS"
+    },
+    {
+      "source": "dict_1",
+      "target": "target_制造工艺",
+      "type": "HAS_TAG"
+    },
+    {
+      "source": "dict_1",
+      "target": "target_SMT",
+      "type": "HAS_TAG"
+    },
+    {
+      "source": "dict_1",
+      "target": "target_Symptom",
+      "type": "IN_CATEGORY"
+    },
+    {
+      "source": "dict_1",
+      "target": "target_Lifted Lead",
+      "type": "HAS_ALIAS"
+    },
+    {
+      "source": "dict_1",
+      "target": "target_引脚翘起",
+      "type": "HAS_ALIAS"
+    },
+    {
+      "source": "dict_1",
+      "target": "target_SMT",
+      "type": "IN_MODULE"
+    },
+    {
+      "source": "dict_2",
+      "target": "target_异常现象",
+      "type": "HAS_TAG"
+    },
+    {
+      "source": "dict_2",
+      "target": "target_充电",
+      "type": "HAS_TAG"
+    },
+    {
+      "source": "dict_2",
+      "target": "target_功能",
+      "type": "HAS_TAG"
+    },
+    {
+      "source": "dict_2",
+      "target": "target_Symptom",
+      "type": "IN_CATEGORY"
+    },
+    {
+      "source": "dict_2",
+      "target": "target_Fast Charging Not Working",
+      "type": "HAS_ALIAS"
+    },
+    {
+      "source": "dict_2",
+      "target": "target_充电",
+      "type": "IN_MODULE"
+    },
+    {
+      "source": "dict_3",
+      "target": "target_质量体系",
+      "type": "HAS_TAG"
+    },
+    {
+      "source": "dict_3",
+      "target": "target_法规",
+      "type": "HAS_TAG"
+    },
+    {
+      "source": "dict_3",
+      "target": "target_安全相关",
+      "type": "HAS_TAG"
+    }
+  ]
+}

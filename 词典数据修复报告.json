@@ -1,0 +1,21 @@
+{
+  "fix_time": "2025-09-26T13:37:16.387021",
+  "original_count": 1124,
+  "fixed_count": 1124,
+  "error_count": 0,
+  "original_stats": {
+    "avg_aliases": 4.879893238434164,
+    "avg_tags": 7.338078291814947,
+    "empty_terms": 0
+  },
+  "fixed_stats": {
+    "avg_aliases": 1.3416370106761566,
+    "avg_tags": 2.6823843416370106,
+    "empty_terms": 0
+  },
+  "improvements": {
+    "aliases_cleaned": 3.5382562277580076,
+    "tags_cleaned": 4.655693950177936,
+    "empty_terms_removed": 0
+  }
+}

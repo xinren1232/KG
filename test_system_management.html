@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统管理测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+        }
+        .test-title {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .test-button {
+            background: #409EFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .test-button:hover {
+            background: #66b1ff;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border-left: 4px solid #409EFF;
+        }
+        .success {
+            border-left-color: #67c23a;
+            background: #f0f9ff;
+        }
+        .error {
+            border-left-color: #f56c6c;
+            background: #fef0f0;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .status.online {
+            background: #67c23a;
+            color: white;
+        }
+        .status.offline {
+            background: #f56c6c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 系统管理功能测试</h1>
+        <p>测试系统管理页面的各项功能是否正常工作</p>
+
+        <!-- 服务状态检查 -->
+        <div class="test-section">
+            <div class="test-title">📊 服务状态检查</div>
+            <button class="test-button" onclick="checkServices()">检查所有服务</button>
+            <div id="service-status"></div>
+        </div>
+
+        <!-- API端点测试 -->
+        <div class="test-section">
+            <div class="test-title">🔌 API端点测试</div>
+            <button class="test-button" onclick="testAPI('/health', 'health-result')">健康检查</button>
+            <button class="test-button" onclick="testAPI('/api/system/versions', 'versions-result')">版本管理</button>
+            <button class="test-button" onclick="testAPI('/api/system/rules', 'rules-result')">规则管理</button>
+            <button class="test-button" onclick="testAPI('/api/system/prompts', 'prompts-result')">Prompt管理</button>
+            <div id="health-result" class="result" style="display:none;"></div>
+            <div id="versions-result" class="result" style="display:none;"></div>
+            <div id="rules-result" class="result" style="display:none;"></div>
+            <div id="prompts-result" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- 前端页面测试 -->
+        <div class="test-section">
+            <div class="test-title">🎨 前端页面测试</div>
+            <button class="test-button" onclick="openSystemManagement()">打开系统管理页面</button>
+            <button class="test-button" onclick="testFrontendAPI()">测试前端API调用</button>
+            <div id="frontend-result" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- 功能验证 -->
+        <div class="test-section">
+            <div class="test-title">✅ 功能验证</div>
+            <button class="test-button" onclick="validateFeatures()">验证所有功能</button>
+            <div id="validation-result" class="result" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        const FRONTEND_BASE = 'http://localhost:5173';
+
+        async function checkServices() {
+            const statusDiv = document.getElementById('service-status');
+            statusDiv.innerHTML = '<p>正在检查服务状态...</p>';
+
+            const services = [
+                { name: 'API服务', url: `${API_BASE}/health`, port: 8000 },
+                { name: '前端服务', url: `${FRONTEND_BASE}`, port: 5173 },
+                { name: 'Neo4j服务', url: 'http://localhost:7474', port: 7474 }
+            ];
+
+            let html = '<h4>服务状态:</h4>';
+            
+            for (const service of services) {
+                try {
+                    const response = await fetch(service.url, { 
+                        method: 'GET',
+                        mode: 'cors'
+                    });
+                    const status = response.ok ? 'online' : 'offline';
+                    html += `<p>${service.name} (端口 ${service.port}): <span class="status ${status}">${status.toUpperCase()}</span></p>`;
+                } catch (error) {
+                    html += `<p>${service.name} (端口 ${service.port}): <span class="status offline">OFFLINE</span> - ${error.message}</p>`;
+                }
+            }
+            
+            statusDiv.innerHTML = html;
+        }
+
+        async function testAPI(endpoint, resultId) {
+            const resultDiv = document.getElementById(resultId);
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p>正在测试 API...</p>';
+
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h4>✅ ${endpoint} - 成功</h4>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `<h4>❌ ${endpoint} - 失败</h4><p>${data.detail || '未知错误'}</p>`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<h4>❌ ${endpoint} - 错误</h4><p>${error.message}</p>`;
+            }
+        }
+
+        function openSystemManagement() {
+            window.open(`${FRONTEND_BASE}/#/system-management`, '_blank');
+        }
+
+        async function testFrontendAPI() {
+            const resultDiv = document.getElementById('frontend-result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p>正在测试前端API调用...</p>';
+
+            try {
+                // 测试前端是否能正常加载
+                const response = await fetch(`${FRONTEND_BASE}`);
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h4>✅ 前端服务正常</h4>
+                        <p>前端页面可以正常访问</p>
+                        <p><a href="${FRONTEND_BASE}/#/system-management" target="_blank">点击访问系统管理页面</a></p>
+                    `;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `<h4>❌ 前端服务异常</h4><p>状态码: ${response.status}</p>`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<h4>❌ 前端服务连接失败</h4><p>${error.message}</p>`;
+            }
+        }
+
+        async function validateFeatures() {
+            const resultDiv = document.getElementById('validation-result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p>正在验证功能...</p>';
+
+            const features = [
+                { name: '版本管理', endpoint: '/api/system/versions' },
+                { name: '规则管理', endpoint: '/api/system/rules' },
+                { name: 'Prompt管理', endpoint: '/api/system/prompts' },
+                { name: '健康检查', endpoint: '/health' }
+            ];
+
+            let html = '<h4>功能验证结果:</h4>';
+            let allPassed = true;
+
+            for (const feature of features) {
+                try {
+                    const response = await fetch(`${API_BASE}${feature.endpoint}`);
+                    const data = await response.json();
+                    
+                    if (response.ok && data.success !== false) {
+                        html += `<p>✅ ${feature.name}: 正常</p>`;
+                    } else {
+                        html += `<p>❌ ${feature.name}: 异常</p>`;
+                        allPassed = false;
+                    }
+                } catch (error) {
+                    html += `<p>❌ ${feature.name}: 连接失败</p>`;
+                    allPassed = false;
+                }
+            }
+
+            if (allPassed) {
+                html += '<p><strong>🎉 所有功能验证通过！系统管理页面可以正常使用。</strong></p>';
+                resultDiv.className = 'result success';
+            } else {
+                html += '<p><strong>⚠️ 部分功能存在问题，请检查服务状态。</strong></p>';
+                resultDiv.className = 'result error';
+            }
+
+            resultDiv.innerHTML = html;
+        }
+
+        // 页面加载时自动检查服务状态
+        window.onload = function() {
+            checkServices();
+        };
+    </script>
+</body>
+</html>

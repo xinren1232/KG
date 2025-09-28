@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端修复验证</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #303133;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .status-card {
+            background: #f0f9ff;
+            border: 1px solid #409EFF;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .success {
+            background: #f0f9ff;
+            border-color: #67C23A;
+            color: #67C23A;
+        }
+        .warning {
+            background: #fdf6ec;
+            border-color: #E6A23C;
+            color: #E6A23C;
+        }
+        .error {
+            background: #fef0f0;
+            border-color: #F56C6C;
+            color: #F56C6C;
+        }
+        .check-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .check-icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .btn {
+            background: #409EFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #337ecc;
+        }
+        .btn-success {
+            background: #67C23A;
+        }
+        .btn-success:hover {
+            background: #529b2e;
+        }
+        .code {
+            background: #f4f4f5;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            border-left: 4px solid #409EFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 前端错误修复验证</h1>
+        
+        <div class="status-card success">
+            <h3>✅ 修复完成的问题</h3>
+            <div class="check-item">
+                <span class="check-icon">✅</span>
+                <span>移除了不存在的 Lightbulb 图标引用</span>
+            </div>
+            <div class="check-item">
+                <span class="check-icon">✅</span>
+                <span>将 DataBoard 图标替换为 DataAnalysis</span>
+            </div>
+            <div class="check-item">
+                <span class="check-icon">✅</span>
+                <span>修复了 Element Plus 图标导入问题</span>
+            </div>
+            <div class="check-item">
+                <span class="check-icon">✅</span>
+                <span>确认了 @element-plus/icons-vue 依赖已安装</span>
+            </div>
+        </div>
+
+        <div class="status-card warning">
+            <h3>⚠️ 需要执行的步骤</h3>
+            <p>为了完全解决问题，请按以下步骤操作：</p>
+            
+            <h4>1. 重启前端开发服务器</h4>
+            <div class="code">
+                cd apps/web<br>
+                npm run dev
+            </div>
+            
+            <h4>2. 清除浏览器缓存</h4>
+            <p>按 Ctrl+Shift+R (Windows) 或 Cmd+Shift+R (Mac) 强制刷新页面</p>
+            
+            <h4>3. 检查控制台错误</h4>
+            <p>按 F12 打开开发者工具，查看是否还有错误信息</p>
+        </div>
+
+        <div class="status-card">
+            <h3>🌐 访问链接</h3>
+            <p>修复完成后，您可以访问以下页面：</p>
+            <a href="http://localhost:5173" class="btn" target="_blank">主页</a>
+            <a href="http://localhost:5173/governance" class="btn" target="_blank">数据治理页面</a>
+            <a href="http://localhost:5173/graph-viz" class="btn" target="_blank">图谱可视化</a>
+            <a href="http://localhost:8000/docs" class="btn btn-success" target="_blank">API文档</a>
+        </div>
+
+        <div class="status-card">
+            <h3>🔍 问题排查</h3>
+            <p>如果仍然遇到问题，请检查：</p>
+            <ul>
+                <li>Node.js 版本是否为 16+ </li>
+                <li>npm 依赖是否完整安装</li>
+                <li>API 服务是否正常运行</li>
+                <li>Neo4j 数据库是否连接正常</li>
+            </ul>
+        </div>
+
+        <div class="status-card success">
+            <h3>🎯 数据治理页面功能</h3>
+            <p>修复后的数据治理页面包含以下功能：</p>
+            <ul>
+                <li><strong>数据概览</strong>: 1,124条硬件质量术语统计</li>
+                <li><strong>质量指标</strong>: 6个核心质量指标监控</li>
+                <li><strong>分类分布</strong>: 8个标准分类的可视化图表</li>
+                <li><strong>问题追踪</strong>: 自动识别的数据质量问题</li>
+                <li><strong>治理规则</strong>: 4个治理规则的状态监控</li>
+                <li><strong>优化建议</strong>: 基于数据分析的改进建议</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <p style="color: #909399;">
+                如果问题仍然存在，请检查浏览器控制台的具体错误信息
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 检查服务状态
+        function checkServices() {
+            // 检查前端服务
+            fetch('http://localhost:5173')
+                .then(response => {
+                    if (response.ok) {
+                        console.log('✅ 前端服务正常');
+                    }
+                })
+                .catch(error => {
+                    console.log('❌ 前端服务未启动');
+                });
+
+            // 检查API服务
+            fetch('http://localhost:8000/health')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('✅ API服务正常:', data);
+                })
+                .catch(error => {
+                    console.log('❌ API服务未启动');
+                });
+        }
+
+        // 页面加载时检查服务
+        window.onload = function() {
+            checkServices();
+        };
+    </script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from database.neo4j_client import Neo4jClient
-from main import get_neo4j_client
+from dependencies import get_neo4j_client
 
 router = APIRouter()
 

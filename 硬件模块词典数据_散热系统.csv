@@ -1,0 +1,21 @@
+term,aliases,category,sub_category,tags,definition,example,source,status,updated_at
+均热板,Vapor Chamber,Component,散热器件,热管理;硬件相关;可靠性,利用内部工质相变蒸发-冷凝进行高效二维热传导散热效率高于热管,手机均热板,硬件模块扩展,active,2025-09-26
+热管,Heat Pipe,Component,散热器件,热管理;硬件相关;可靠性,利用内部工质相变进行高效一维热传导的封闭管状器件,散热热管,硬件模块扩展,active,2025-09-26
+导热硅脂,Thermal Grease;Thermal Paste,Material,导热材料,热管理;物料;可靠性,填充芯片与散热器之间的微间隙降低接触热阻,导热膏,硬件模块扩展,active,2025-09-26
+导热石墨片,Graphite Sheet,Material,导热材料,热管理;物料;可靠性,具有高面内导热系数用于将热点热量迅速横向扩散,石墨散热片,硬件模块扩展,active,2025-09-26
+导热凝胶,Thermal Gel,Material,导热材料,热管理;物料;可靠性,具有一定流动性的膏状导热材料适用于不规则或易碎器件,导热凝胶垫,硬件模块扩展,active,2025-09-26
+导热相变材料,PCM,Material,导热材料,热管理;物料;可靠性,在特定温度如45-60°C发生固-液相变更好地填充间隙,相变导热材料,硬件模块扩展,active,2025-09-26
+金属屏蔽罩,Shield Can,Component,散热器件,热管理;硬件相关;EMC,在屏蔽电磁干扰的同时也作为散热片将芯片热量传导出去,EMI屏蔽罩,硬件模块扩展,active,2025-09-26
+散热铜箔,Thermal Copper Foil,Material,导热材料,热管理;物料;PCB,贴在PCB背面或特定区域辅助局部散热,PCB散热铜箔,硬件模块扩展,active,2025-09-26
+热点,Hot Spot,Symptom,散热异常,热管理;异常现象;可靠性,手机表面或内部特定区域温度异常偏高,局部过热点,硬件模块扩展,active,2025-09-26
+表面温度超标,Surface Temperature Exceedance,Symptom,散热异常,热管理;异常现象;可靠性;用户体验,手机外壳温度超过安全法规或人体舒适度限值,外壳温度过高,硬件模块扩展,active,2025-09-26
+性能降频,Thermal Throttling,Symptom,散热异常,热管理;异常现象;软件相关;性能指标,因温度过高系统主动降低芯片频率以控制发热导致卡顿,热降频现象,硬件模块扩展,active,2025-09-26
+结温,Junction Temperature,Metric,,热管理;性能指标;可靠性,芯片半导体结的最高工作温度是热设计的核心限制参数,芯片结温,硬件模块扩展,active,2025-09-26
+热阻,Thermal Resistance,Metric,,热管理;性能指标;可靠性,热量在传递路径上遇到的阻力如结到壳热阻壳到环境热阻,散热热阻,硬件模块扩展,active,2025-09-26
+热仿真分析,Thermal Simulation,Process,散热设计,热管理;设计;工具,通过CFD软件如FloTHERM Icepak模拟手机在不同工况下的温度场和气流场,散热仿真分析,硬件模块扩展,active,2025-09-26
+红外热像仪,Thermal Imager;IR Camera,Tool,测试设备,热管理;测试验证;工具,非接触式测量手机表面温度分布直观定位热点,红外热成像仪,硬件模块扩展,active,2025-09-26
+热电偶,Thermocouple,Tool,测试设备,热管理;测试验证;工具,接触式温度传感器用于精确测量芯片封装表面等特定点的温度,温度传感器,硬件模块扩展,active,2025-09-26
+热测试基台,Thermal Test Chamber,Tool,测试设备,热管理;测试验证;工具,可控制环境温度用于测试手机在高温下的散热性能,热测试箱,硬件模块扩展,active,2025-09-26
+稳态温度测试,Steady-state Temperature Test,TestCase,散热测试,热管理;测试验证;可靠性,让手机长时间运行高负载任务直至温度达到稳定记录最终温度,稳态热测试,硬件模块扩展,active,2025-09-26
+瞬态温度测试,Transient Temperature Test,TestCase,散热测试,热管理;测试验证;可靠性,测试手机在突然加载高负载任务时温度随时间上升的曲线,瞬态热测试,硬件模块扩展,active,2025-09-26
+散热工程师,Thermal Engineer,Role,工程师,热管理;设计;组织职责,负责手机散热方案的选型设计仿真验证和测试优化,热设计工程师,硬件模块扩展,active,2025-09-26

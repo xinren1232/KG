@@ -1,0 +1,11 @@
+term,aliases,category,sub_category,tags,definition,example,source,status,updated_at
+示波器,Oscilloscope;OSC,Tool,检测,工具;测试验证;电气性能,用于观察电信号波形的电子测试仪器,测试电源纹波时使用,标准化词典,active,2025-09-26
+万用表,Multimeter;DMM,Tool,检测,工具;测试验证;电气性能,测量电压电流电阻等电气参数的仪表,检测电路通断时使用,标准化词典,active,2025-09-26
+锡膏,Solder Paste,Material,胶,物料;SMT;制造工艺,用于SMT贴装的焊接材料,印刷到PCB焊盘上,标准化词典,active,2025-09-26
+DQA工程师,Design Quality Assurance,Role,质量,组织职责;质量体系;设计,负责设计质量保证的工程师,评审设计方案时参与,标准化词典,active,2025-09-26
+良率,Yield Rate,Metric,,性能指标;质量体系;制造工艺,生产过程中合格品数量占总数量的比例,月度良率统计分析,标准化词典,active,2025-09-26
+对焦失败,Focus Failure,Symptom,功能,摄像头模组;影像相关;硬件相关,摄像头无法正确对焦的异常现象,拍照时画面模糊,标准化词典,active,2025-09-26
+屏幕亮度,Screen Brightness,Metric,,显示相关;性能指标;硬件相关,显示屏发光强度的量化指标,室外可视性测试,标准化词典,active,2025-09-26
+天线增益,Antenna Gain,Metric,,射频相关;通信相关;性能指标,天线在特定方向上的辐射能力,信号覆盖范围测试,标准化词典,active,2025-09-26
+SMT贴装,Surface Mount Technology,Process,SMT,制造工艺;SMT;装配,表面贴装技术的生产工艺,电子元器件贴装到PCB,标准化词典,active,2025-09-26
+功能测试,Function Test,TestCase,功能,测试验证;功能;质量体系,验证产品功能是否符合规格要求,开机关机测试,标准化词典,active,2025-09-26

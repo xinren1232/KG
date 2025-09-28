@@ -1,0 +1,18 @@
+{
+  "total_terms": 1192,
+  "categories": {
+    "components": 399,
+    "symptoms": 274,
+    "causes": 0,
+    "countermeasures": 519
+  },
+  "last_updated": "2025-09-26T09:29:21.714338",
+  "last_expansion": {
+    "date": "2025-09-26T09:29:21.714338",
+    "added_count": 0,
+    "source": "hardware_module_expansion_654_terms",
+    "modules_covered": 20,
+    "tech_domains": 18
+  },
+  "unified_directory": "data\\unified_dictionary"
+}

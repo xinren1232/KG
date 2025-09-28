@@ -250,13 +250,14 @@ export default {
       loading.value = true
       
       try {
-        const response = await kgApi.getGraphData(nodeLimit.value, true)
+        const response = await kgApi.getGraphVisualizationData(true)
+        const data = response.data || response
         graphData.value = {
-          nodes: response.nodes || [],
-          edges: response.edges || []
+          nodes: data.nodes || [],
+          edges: data.relations || data.edges || []
         }
         updateGraph()
-        ElMessage.success(`加载了 ${response.nodes?.length || 0} 个节点和 ${response.edges?.length || 0} 个关系`)
+        ElMessage.success(`加载了 ${data.nodes?.length || 0} 个节点和 ${data.relations?.length || data.edges?.length || 0} 个关系`)
       } catch (error) {
         ElMessage.error('加载图谱数据失败: ' + error.message)
       } finally {

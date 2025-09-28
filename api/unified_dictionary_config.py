@@ -16,12 +16,12 @@ class SimplifiedDictionaryManager:
     
     def __init__(self):
         # 固定使用ontology/dictionaries作为数据源
-        # 检测当前是否在api目录中
+        # 使用统一词典目录
         current_dir = Path.cwd()
         if current_dir.name == "api":
-            self.dictionary_dir = Path("../ontology/dictionaries")
+            self.dictionary_dir = Path("../data/unified_dictionary")
         else:
-            self.dictionary_dir = Path("ontology/dictionaries")
+            self.dictionary_dir = Path("data/unified_dictionary")
         
         # 缓存
         self._cache = {}
@@ -45,24 +45,26 @@ class SimplifiedDictionaryManager:
             "tools_processes": []  # 兼容性字段
         }
         
-        # 加载各类词典
+        # 加载各类词典 - 使用统一词典文件
         mappings = {
-            "components": "components.csv",
-            "symptoms": "symptoms.csv", 
-            "causes": "causes.csv",
-            "countermeasures": "countermeasures.csv"
+            "components": ("components.csv", self.dictionary_dir),
+            "symptoms": ("symptoms.csv", self.dictionary_dir),
+            "causes": ("causes.csv", self.dictionary_dir),
+            "countermeasures": ("countermeasures.csv", self.dictionary_dir)
         }
         
         total_loaded = 0
-        for category, filename in mappings.items():
-            file_path = self.dictionary_dir / filename
+        for category, (filename, base_dir) in mappings.items():
+            file_path = base_dir / filename
             if file_path.exists():
                 count = self._load_csv_file(file_path, dictionary_data[category])
                 total_loaded += count
                 logger.info(f"加载 {category}: {count} 条记录")
+            else:
+                logger.warning(f"文件不存在: {file_path}")
         
-        # 对策词典也映射到tools_processes（兼容性）
-        dictionary_data["tools_processes"] = dictionary_data["countermeasures"].copy()
+        # 移除重复映射，tools_processes应该为空或者有独立数据
+        # dictionary_data["tools_processes"] = dictionary_data["countermeasures"].copy()
         
         # 更新缓存
         self._cache = dictionary_data
@@ -78,8 +80,8 @@ class SimplifiedDictionaryManager:
                 reader = csv.DictReader(f)
                 count = 0
                 for row in reader:
-                    # 适配新的字段格式：术语,别名,类别,多标签,备注
-                    term = row.get("术语", row.get("term", ""))
+                    # 适配多种字段格式
+                    term = row.get("术语", row.get("term", row.get("name", "")))
                     aliases_str = row.get("别名", row.get("aliases", ""))
                     category = row.get("类别", row.get("category", "未分类"))
                     tags_str = row.get("多标签", row.get("tags", ""))

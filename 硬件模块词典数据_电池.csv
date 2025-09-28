@@ -1,0 +1,23 @@
+term,aliases,category,sub_category,tags,definition,example,source,status,updated_at
+电芯,Battery Cell,Component,电池,硬件相关;安全相关,电池的核心储能部件如锂聚合物电芯,锂电池电芯,硬件模块扩展,active,2025-09-26
+保护板,BMS;Protection Circuit Module,Component,电路板,硬件相关;安全相关;电气性能,管理电池的充放电防止过充过放过流短路的保护电路,电池管理系统,硬件模块扩展,active,2025-09-26
+电池封装膜,Pouch Film,Material,薄膜,物料;硬件相关;安全相关,软包电池的外层铝塑复合膜提供封装和绝缘,软包电池外壳,硬件模块扩展,active,2025-09-26
+负极材料,Anode Material,Material,电极材料,物料;电池;硬件相关,如石墨锂离子在充电时嵌入其中的负极材料,石墨负极,硬件模块扩展,active,2025-09-26
+正极材料,Cathode Material,Material,电极材料,物料;电池;硬件相关,如钴酸锂磷酸铁锂锂离子在放电时嵌入其中的正极材料,钴酸锂正极,硬件模块扩展,active,2025-09-26
+电解液,Electrolyte,Material,化学材料,物料;电池;安全相关,提供锂离子在正负极之间迁移的通道的液体,锂电池电解液,硬件模块扩展,active,2025-09-26
+隔膜,Separator,Material,薄膜,物料;电池;安全相关,隔离正负极防止短路同时允许离子通过的薄膜,电池隔膜材料,硬件模块扩展,active,2025-09-26
+鼓包,Swelling,Symptom,电池异常,硬件相关;安全相关;异常现象,电池内部产气导致外壳膨胀是严重安全隐患,电池鼓胀现象,硬件模块扩展,active,2025-09-26
+循环寿命短,Short Cycle Life,Symptom,性能衰减,硬件相关;可靠性;异常现象,电池容量随充放电循环次数增加而过快衰减,电池寿命不足,硬件模块扩展,active,2025-09-26
+内阻增大,Increased Internal Resistance,Symptom,性能衰减,硬件相关;性能指标;异常现象,导致电池输出电压下降充电发热严重的现象,电池内阻升高,硬件模块扩展,active,2025-09-26
+无法充电,Failure to Charge,Symptom,充电异常,硬件相关;异常现象,电池无法正常充电的故障,充电失效,硬件模块扩展,active,2025-09-26
+快充协议,Quick Charge Protocol,Process,充电协议,硬件相关;充电;软件相关,如QC PD用于协商提高充电功率的通信协议,快速充电标准,硬件模块扩展,active,2025-09-26
+化成,Formation,Process,电池工艺,制造工艺;电池,电池激活后的首次充放电使其形成稳定的SEI膜的工艺,电池化成工艺,硬件模块扩展,active,2025-09-26
+老化测试,Aging Test,TestCase,可靠性测试,可靠性;电池;测试验证,模拟电池长期使用后的性能衰减的测试,电池老化试验,硬件模块扩展,active,2025-09-26
+针刺测试,Nail Penetration Test,TestCase,安全测试,安全相关;电池;测试验证,模拟电池内部短路检验其安全性能的测试,电池针刺试验,硬件模块扩展,active,2025-09-26
+热滥用测试,Thermal Abuse Test,TestCase,安全测试,安全相关;电池;测试验证,将电池置于高温环境中检验其热稳定性的测试,电池热冲击试验,硬件模块扩展,active,2025-09-26
+额定容量,Rated Capacity,Metric,,硬件相关;性能指标;电池,电池在特定条件下放出的电量单位mAh,电池容量规格,硬件模块扩展,active,2025-09-26
+能量密度,Energy Density,Metric,,硬件相关;性能指标;电池,单位体积或重量储存的能量单位Wh/kg或Wh/L,电池能量密度,硬件模块扩展,active,2025-09-26
+循环次数,Cycle Life,Metric,,硬件相关;性能指标;可靠性,容量衰减到规定值（如80%）时所经历的完整充放电循环次数,电池循环寿命,硬件模块扩展,active,2025-09-26
+电池测试系统,Battery Test System,Tool,测试设备,测试验证;电池;硬件相关,可编程充放电设备用于测试电池性能,电池充放电测试仪,硬件模块扩展,active,2025-09-26
+绝热量热仪,Accelerating Rate Calorimeter,Tool,安全测试设备,测试验证;安全相关;电池,测量电池在绝热条件下发生热失控时的放热特性的仪器,电池热失控测试,硬件模块扩展,active,2025-09-26
+电池安全工程师,Battery Safety Engineer,Role,安全工程师,安全相关;硬件相关;可靠性,负责电池安全设计风险评估和失效分析的工程师,电池安全专家,硬件模块扩展,active,2025-09-26

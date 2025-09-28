@@ -1,0 +1,73 @@
+{
+  "generation_time": "2025-09-26T05:50:22.860531",
+  "total_records": 100,
+  "modules": {
+    "传感器模块": {
+      "total": 29,
+      "labels": {
+        "Component": 11,
+        "Symptom": 4,
+        "Metric": 4,
+        "TestCase": 3,
+        "Tool": 3,
+        "Process": 2,
+        "Role": 2
+      }
+    },
+    "充电与电源管理模块": {
+      "total": 26,
+      "labels": {
+        "Component": 7,
+        "Symptom": 5,
+        "Process": 4,
+        "TestCase": 3,
+        "Metric": 3,
+        "Tool": 3,
+        "Role": 1
+      }
+    },
+    "马达与触觉反馈模块": {
+      "total": 21,
+      "labels": {
+        "Component": 5,
+        "Symptom": 4,
+        "TestCase": 3,
+        "Metric": 3,
+        "Process": 2,
+        "Tool": 2,
+        "Role": 2
+      }
+    },
+    "外壳涂层与外观模块": {
+      "total": 24,
+      "labels": {
+        "Symptom": 6,
+        "Material": 4,
+        "Process": 3,
+        "TestCase": 3,
+        "Metric": 3,
+        "Tool": 3,
+        "Role": 2
+      }
+    }
+  },
+  "total_label_distribution": {
+    "Component": 23,
+    "Symptom": 19,
+    "Metric": 13,
+    "TestCase": 12,
+    "Process": 11,
+    "Tool": 11,
+    "Role": 7,
+    "Material": 4
+  },
+  "files_generated": [
+    "第三批硬件模块数据导入脚本.cypher"
+  ],
+  "module_coverage": {
+    "传感器模块": "29条 - 加速度计、陀螺仪、传感器融合",
+    "充电与电源管理模块": "26条 - 无线充电、快充协议、电源管理",
+    "马达与触觉反馈模块": "21条 - 线性马达、触觉反馈、振动测试",
+    "外壳涂层与外观模块": "24条 - 表面处理、CMF设计、外观测试"
+  }
+}

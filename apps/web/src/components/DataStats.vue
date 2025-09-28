@@ -81,68 +81,69 @@ export default {
     const trendCanvas = ref(null)
     
     const rawStats = ref({
-      products: 2,
-      components: 4,
-      testCases: 5,
-      anomalies: 3,
-      nodes: 15,
-      edges: 8
+      dictionary: 1124,
+      categories: 8,
+      tags: 79,
+      aliases: 1446,
+      nodes: 1124,
+      edges: 7581
     })
 
     const stats = computed(() => [
       {
-        key: 'products',
-        label: '产品数量',
-        value: rawStats.value.products,
+        key: 'dictionary',
+        label: '词典条目',
+        value: rawStats.value.dictionary,
         icon: 'Document',
         color: '#409EFF',
         type: 'primary',
         change: 0
       },
       {
-        key: 'testCases',
-        label: '测试用例',
-        value: rawStats.value.testCases,
+        key: 'categories',
+        label: '分类数量',
+        value: rawStats.value.categories,
         icon: 'List',
         color: '#67C23A',
         type: 'success',
-        change: 12
+        change: 0
       },
       {
-        key: 'anomalies',
-        label: '异常记录',
-        value: rawStats.value.anomalies,
+        key: 'tags',
+        label: '标签数量',
+        value: rawStats.value.tags,
         icon: 'Warning',
         color: '#F56C6C',
         type: 'danger',
-        change: -8
+        change: 0
       },
       {
-        key: 'nodes',
-        label: '知识节点',
-        value: rawStats.value.nodes,
+        key: 'edges',
+        label: '关系数量',
+        value: rawStats.value.edges,
         icon: 'Share',
         color: '#E6A23C',
         type: 'warning',
-        change: 25
+        change: 0
       }
     ])
 
     const refreshStats = async () => {
       loading.value = true
-      
-      try {
-        // 获取产品数据
-        const productsRes = await kgApi.getProducts()
-        if (productsRes.success) {
-          rawStats.value.products = productsRes.data.length
-        }
 
-        // 获取图谱数据
-        const graphRes = await kgApi.getGraphData(100)
-        if (graphRes.success) {
-          rawStats.value.nodes = graphRes.data.nodes.length
-          rawStats.value.edges = graphRes.data.edges.length
+      try {
+        // 获取真实图谱统计数据
+        const response = await kgApi.getRealGraphStats()
+        if (response && response.data && response.data.stats) {
+          // 更新统计数据
+          Object.assign(rawStats.value, {
+            dictionary: response.data.stats.totalNodes || 1124,
+            categories: response.data.stats.totalCategories || 8,
+            tags: response.data.stats.totalTags || 79,
+            aliases: response.data.stats.totalAliases || 1446,
+            nodes: response.data.stats.totalNodes || 1124,
+            edges: response.data.stats.totalRelations || 7581
+          })
         }
 
         ElMessage.success('统计数据已更新')

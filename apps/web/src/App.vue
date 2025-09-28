@@ -19,19 +19,18 @@
               <el-icon><Document /></el-icon>
               文档解析
             </el-menu-item>
-            <el-menu-item index="/graph">
+            <el-menu-item index="/graph-viz">
               <el-icon><Share /></el-icon>
-              知识图谱
+              图谱可视化
             </el-menu-item>
             <el-menu-item index="/dictionary">
               <el-icon><Collection /></el-icon>
               词典管理
             </el-menu-item>
-            <el-menu-item index="/governance">
+            <el-menu-item index="/system-management">
               <el-icon><Setting /></el-icon>
-              数据治理
+              系统管理
             </el-menu-item>
-
 
           </el-menu>
         </div>

@@ -1,0 +1,20 @@
+source_category,label,sub_attr,sub_value,add_tags
+异常现象,Symptom,category,功能/显示/声学,硬件相关;显示相关
+部件,Component,component_type,电池/屏幕/相机/主板,结构相关
+制造工艺,Process,process_type,SMT/注塑/点胶/回流,制造工艺
+流程相关,Process,process_type,IQC/OBA/抽检/8D,质量体系
+测试验证,TestCase,test_type,可靠性/功能/射频/影像,测试验证
+物料,Material,material_type,胶/泡棉/油墨/涂料,物料
+CMF,Material,material_type,涂装/阳极/镀膜,CMF
+性能指标,Metric,,,
+工具,Tool,tool_type,检测/维修/治具,工具
+组织职责,Role,function,DQA/IQC/工艺,组织职责
+硬件相关,TAG,,,硬件相关
+结构相关,TAG,,,结构相关
+软件相关,TAG,,,软件相关
+项目相关,TAG,,,项目相关
+影像相关,TAG,,,影像相关
+显示相关,TAG,,,显示相关
+质量体系,Process,process_type,IQC/AQL/8D,质量体系
+摄像头模组,Component,component_type,Camera Module,摄像头模组
+设计,TAG,,,设计

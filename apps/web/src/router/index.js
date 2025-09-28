@@ -27,6 +27,14 @@ const routes = [
     }
   },
   {
+    path: '/graph-viz',
+    name: 'GraphVisualization',
+    component: () => import('../views/GraphVisualization.vue'),
+    meta: {
+      title: '图谱可视化'
+    }
+  },
+  {
     path: '/dictionary',
     name: 'DictionaryManagement',
     component: () => import('../views/DictionaryManagement.vue'),
@@ -35,13 +43,22 @@ const routes = [
     }
   },
   {
-    path: '/governance',
-    name: 'DataGovernance',
-    component: () => import('../views/DataGovernance.vue'),
+    path: '/system-management',
+    name: 'SystemManagement',
+    component: () => import('../views/SystemManagement.vue'),
     meta: {
-      title: '数据治理'
+      title: '系统管理'
     }
   },
+  {
+    path: '/test',
+    name: 'TestPage',
+    component: () => import('../views/TestPage.vue'),
+    meta: {
+      title: '功能测试'
+    }
+  },
+
 
 
 ]

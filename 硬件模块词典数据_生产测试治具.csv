@@ -1,0 +1,21 @@
+term,aliases,category,sub_category,tags,definition,example,source,status,updated_at
+在线测试治具,ICT Fixture,Component,测试治具,制造工艺;测试验证;工具,用于ICT测试通过密集的探针接触PCB测试点进行短路/开路和元件值测试,ICT测试治具,硬件模块扩展,active,2025-09-26
+功能测试治具,FCT Fixture,Component,测试治具,制造工艺;测试验证;工具,模拟整机使用环境为手机供电提供信号输入并检测输出,FCT测试治具,硬件模块扩展,active,2025-09-26
+电池模拟器,Battery Emulator,Component,测试设备,制造工艺;测试验证;工具;充电,在FCT中替代真实电池可精确控制电压和电流并模拟电池特性,电池仿真器,硬件模块扩展,active,2025-09-26
+自动化测试设备,Automated Test Equipment,Component,测试设备,制造工艺;测试验证;工具;自动化,集成机械手相机传感器和测试模块实现生产线自动上下料和测试,ATE设备,硬件模块扩展,active,2025-09-26
+视觉对位系统,Vision Alignment System,Component,自动化设备,制造工艺;测试验证;工具;自动化,使用工业相机精确定位产品或元件位置引导自动化设备操作,视觉定位系统,硬件模块扩展,active,2025-09-26
+针床,Bed of Nails,Component,测试治具,制造工艺;测试验证;工具,ICT治具的核心部分上面布满了用于接触PCB测试点的弹簧探针,测试针床,硬件模块扩展,active,2025-09-26
+射频测试治具,RF Test Fixture,Component,测试治具,制造工艺;测试验证;工具;射频相关,用于校准和测试手机的射频性能通常带有射频连接器和屏蔽腔,RF测试治具,硬件模块扩展,active,2025-09-26
+声学测试密封腔,Acoustic Test Chamber,Component,测试治具,制造工艺;测试验证;工具;声学,在生产线端提供一个标准的声学环境测试麦克风和受话器的性能,声学测试腔,硬件模块扩展,active,2025-09-26
+屏幕点亮治具,Display Lighting Fixture,Component,测试治具,制造工艺;测试验证;工具;显示相关,快速连接并点亮屏幕检查显示功能和无坏点,显示测试治具,硬件模块扩展,active,2025-09-26
+激光打标治具,Laser Marking Fixture,Component,生产治具,制造工艺;工具,精确定位手机确保序列号等信息打在规定位置,激光标记治具,硬件模块扩展,active,2025-09-26
+治具探针,Test Probe,Component,治具配件,制造工艺;测试验证;工具,治具上直接接触测试点的精密零件要求耐磨导电性好,测试探针,硬件模块扩展,active,2025-09-26
+气动压合,Pneumatic Pressing,Process,治具工艺,制造工艺;测试验证;自动化,使用气缸控制治具的合模力和行程确保接触稳定且不损伤产品,气动压紧,硬件模块扩展,active,2025-09-26
+测试覆盖率,Test Coverage,Metric,,制造工艺;测试验证;质量体系,测试用例对产品功能或硬件节点的覆盖程度,测试覆盖度,硬件模块扩展,active,2025-09-26
+直通率,First Pass Yield,Metric,,制造工艺;测试验证;质量体系,产品一次性通过某道测试工序的比率,一次通过率,硬件模块扩展,active,2025-09-26
+误判率,False Call Rate,Metric,,制造工艺;测试验证;质量体系,治具或测试程序将合格品判为不合格的比例,误报率,硬件模块扩展,active,2025-09-26
+漏判率,Escape Rate,Metric,,制造工艺;测试验证;质量体系,治具或测试程序将不合格品判为合格的比例,漏检率,硬件模块扩展,active,2025-09-26
+测试周期时间,Test Cycle Time,Metric,,制造工艺;测试验证;效率,完成一次完整测试所需的时间影响生产线节拍,测试时间,硬件模块扩展,active,2025-09-26
+治具维护周期,Fixture Maintenance Cycle,Metric,,制造工艺;测试验证;维护,治具需要定期清洁校准或更换磨损件的频率,维护周期,硬件模块扩展,active,2025-09-26
+治具设计工程师,Fixture Design Engineer,Role,工程师,制造工艺;设计;组织职责,负责根据产品设计和测试需求设计测试治具的机械结构和电路,治具工程师,硬件模块扩展,active,2025-09-26
+测试工程师,Test Engineer,Role,工程师,制造工艺;测试验证;组织职责,负责制定测试方案开发测试程序优化测试流程和数据分析,测试开发工程师,硬件模块扩展,active,2025-09-26

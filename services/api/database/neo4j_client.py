@@ -133,24 +133,64 @@ class Neo4jClient:
     def get_graph_data(self, limit: int = 100) -> Dict[str, Any]:
         """获取图谱可视化数据"""
         # 获取节点
-        nodes_query = """
-        MATCH (n)
-        WHERE n:Product OR n:Component OR n:Anomaly OR n:TestCase
-        RETURN id(n) as id, labels(n)[0] as label, 
-               coalesce(n.name, n.title, n.id) as name,
-               properties(n) as properties
-        LIMIT $limit
-        """
-        nodes = self.execute_query(nodes_query, {"limit": limit})
-        
+        if limit and limit > 0:
+            nodes_query = """
+            MATCH (n)
+            WHERE n:Product OR n:Component OR n:Anomaly OR n:TestCase OR n:Symptom OR n:Tool OR n:Process OR n:Metric
+            RETURN id(n) as id, labels(n)[0] as label,
+                   coalesce(n.name, n.title, n.id, 'Node_' + toString(id(n))) as name,
+                   properties(n) as properties
+            LIMIT $limit
+            """
+            nodes = self.execute_query(nodes_query, {"limit": limit})
+        else:
+            # 无限制查询所有节点
+            nodes_query = """
+            MATCH (n)
+            WHERE n:Product OR n:Component OR n:Anomaly OR n:TestCase OR n:Symptom OR n:Tool OR n:Process OR n:Metric
+            RETURN id(n) as id, labels(n)[0] as label,
+                   coalesce(n.name, n.title, n.id, 'Node_' + toString(id(n))) as name,
+                   properties(n) as properties
+            """
+            nodes = self.execute_query(nodes_query)
+
         # 获取关系
         edges_query = """
         MATCH (n)-[r]->(m)
-        WHERE (n:Product OR n:Component OR n:Anomaly OR n:TestCase) 
-          AND (m:Product OR m:Component OR m:Anomaly OR m:TestCase)
+        WHERE (n:Product OR n:Component OR n:Anomaly OR n:TestCase OR n:Symptom OR n:Tool OR n:Process OR n:Metric)
+          AND (m:Product OR m:Component OR m:Anomaly OR m:TestCase OR m:Symptom OR m:Tool OR m:Process OR m:Metric)
         RETURN id(n) as source, id(m) as target, type(r) as relationship
         LIMIT $limit
         """
         edges = self.execute_query(edges_query, {"limit": limit})
-        
+
         return {"nodes": nodes, "edges": edges}
+
+    def get_global_stats(self) -> Dict[str, Any]:
+        """获取全局统计数据"""
+        # 获取总节点数和分类统计
+        nodes_stats = self.execute_query("""
+            MATCH (n)
+            WHERE n:Product OR n:Component OR n:Anomaly OR n:TestCase OR n:Symptom OR n:Tool OR n:Process OR n:Metric
+            RETURN labels(n)[0] as label, count(n) as count
+        """)
+
+        # 获取总关系数
+        relations_stats = self.execute_query("""
+            MATCH ()-[r]->()
+            WHERE (startNode(r):Product OR startNode(r):Component OR startNode(r):Anomaly OR startNode(r):TestCase OR startNode(r):Symptom OR startNode(r):Tool OR startNode(r):Process OR startNode(r):Metric)
+              AND (endNode(r):Product OR endNode(r):Component OR endNode(r):Anomaly OR endNode(r):TestCase OR endNode(r):Symptom OR endNode(r):Tool OR endNode(r):Process OR endNode(r):Metric)
+            RETURN count(r) as total_relations
+        """)
+
+        total_nodes = sum(stat['count'] for stat in nodes_stats)
+        total_relations = relations_stats[0]['total_relations'] if relations_stats else 0
+        total_categories = len(nodes_stats)
+
+        return {
+            'total_nodes': total_nodes,
+            'total_relations': total_relations,
+            'total_categories': total_categories,
+            'total_tags': 0,  # 可以后续添加标签统计
+            'categories': {stat['label']: stat['count'] for stat in nodes_stats}
+        }

@@ -1,0 +1,31 @@
+term,aliases,category,sub_category,tags,definition,example,source,status,updated_at
+Wi-Fi 6E芯片,802.11ax芯片,Component,通信芯片,通信相关;硬件相关;功能,支持6GHz频段的Wi-Fi芯片提供更宽的信道和更低的干扰,Wi-Fi 6E无线芯片,硬件模块扩展,active,2025-09-26
+蓝牙5.3芯片,BT 5.3,Component,通信芯片,通信相关;硬件相关;功能,支持LE Audio具有更低的功耗和更好的多设备连接能力,蓝牙5.3无线芯片,硬件模块扩展,active,2025-09-26
+5G调制解调器,5G Modem,Component,通信芯片,通信相关;硬件相关;半导体,负责5G NR信号的编码解码支持Sub-6GHz和毫米波频段,5G基带芯片,硬件模块扩展,active,2025-09-26
+GNSS接收芯片,全球导航卫星系统芯片,Component,定位芯片,通信相关;硬件相关;功能,支持GPS GLONASS Galileo BDS等多个卫星系统的定位信号接收,卫星定位芯片,硬件模块扩展,active,2025-09-26
+NFC控制器,近场通信控制器,Component,通信芯片,通信相关;硬件相关;功能,实现手机支付门禁模拟标签读写等近距离通信功能,NFC芯片,硬件模块扩展,active,2025-09-26
+eSIM,嵌入式SIM卡,Component,通信模块,通信相关;硬件相关;功能,直接焊在主板上的SIM芯片可通过软件切换运营商节省空间,嵌入式SIM,硬件模块扩展,active,2025-09-26
+天线调谐开关,Antenna Tuning Switch,Component,射频器件,通信相关;硬件相关;射频相关,根据频率动态切换天线匹配网络优化天线效率,天线调谐器,硬件模块扩展,active,2025-09-26
+分集天线,Diversity Antenna,Component,天线系统,通信相关;硬件相关;射频相关,接收主天线之外的另一套接收天线通过选择或合并技术改善信号质量,分集接收天线,硬件模块扩展,active,2025-09-26
+MIMO天线系统,多输入多输出天线系统,Component,天线系统,通信相关;硬件相关;射频相关,使用多个天线同时收发数据提升信道容量和链路可靠性,MIMO天线,硬件模块扩展,active,2025-09-26
+射频滤波器,RF Filter,Component,射频器件,通信相关;硬件相关;射频相关,如SAW/BAW滤波器用于滤除特定频段的干扰信号,RF滤波器,硬件模块扩展,active,2025-09-26
+信号衰减,Signal Attenuation,Symptom,通信异常,通信相关;异常现象;性能指标,无线信号在传输过程中强度减弱,信号强度衰减,硬件模块扩展,active,2025-09-26
+数据丢包,Packet Loss,Symptom,通信异常,通信相关;异常现象;性能指标,网络传输过程中数据包丢失导致语音卡顿或视频缓冲,网络丢包,硬件模块扩展,active,2025-09-26
+ping值高,High Latency,Symptom,通信异常,通信相关;异常现象;性能指标,网络延迟高影响实时应用如游戏视频通话体验,网络延迟高,硬件模块扩展,active,2025-09-26
+网络切换失败,Handover Failure,Symptom,通信异常,通信相关;异常现象;性能指标,在不同基站或不同网络制式如5G/4G间切换时失败,切换失败,硬件模块扩展,active,2025-09-26
+Wi-Fi断流,Wi-Fi Disconnection,Symptom,通信异常,通信相关;异常现象;性能指标,Wi-Fi连接看似正常但数据流量间歇性中断,Wi-Fi掉线,硬件模块扩展,active,2025-09-26
+蓝牙配对不稳定,Bluetooth Pairing Instability,Symptom,通信异常,通信相关;异常现象;性能指标,蓝牙设备频繁断开连接或需要重新配对,蓝牙连接不稳定,硬件模块扩展,active,2025-09-26
+GPS定位漂移,GPS Drift,Symptom,定位异常,通信相关;异常现象;性能指标,静止时GPS定位点在一定范围内无规律移动,定位漂移,硬件模块扩展,active,2025-09-26
+协议一致性测试,Protocol Conformance Test,TestCase,通信测试,通信相关;测试验证;法规,验证设备的通信协议栈是否符合3GPP等标准组织的规定,协议符合性测试,硬件模块扩展,active,2025-09-26
+网络模拟测试,Network Emulation Test,TestCase,通信测试,通信相关;测试验证;性能指标,使用网络模拟器模拟各种真实网络条件如弱信号高速移动测试设备性能,网络仿真测试,硬件模块扩展,active,2025-09-26
+吞吐量测试,Throughput Test,TestCase,通信测试,通信相关;测试验证;性能指标,测量设备在特定网络条件下的最大上行/下行数据传输速率,数据吞吐量测试,硬件模块扩展,active,2025-09-26
+OTA性能测试,Over-the-Air Performance Test,TestCase,射频测试,通信相关;测试验证;射频相关,在微波暗室中测试天线系统的总辐射功率和总全向灵敏度,空中接口测试,硬件模块扩展,active,2025-09-26
+载波聚合,Carrier Aggregation,Metric,,通信相关;性能指标;功能,同时使用多个载波频段进行数据传输提升峰值速率,CA载波聚合,硬件模块扩展,active,2025-09-26
+调制阶数,Modulation Order,Metric,,通信相关;性能指标;射频相关,如256QAM表示每个符号携带的比特数阶数越高速率越快抗干扰越差,调制方式,硬件模块扩展,active,2025-09-26
+误码率,Bit Error Rate,Metric,,通信相关;性能指标;射频相关,接收端错误比特数与总传输比特数之比,BER误码率,硬件模块扩展,active,2025-09-26
+接收灵敏度,Receiver Sensitivity,Metric,,通信相关;性能指标;射频相关,接收机在满足特定误码率条件下所能识别的最小信号功率,接收机灵敏度,硬件模块扩展,active,2025-09-26
+网络模拟器,Network Emulator,Tool,测试设备,通信相关;测试验证;工具,如Keysight/罗德与施瓦茨的设备可模拟完整的蜂窝网络或Wi-Fi接入点,网络仿真器,硬件模块扩展,active,2025-09-26
+协议分析仪,Protocol Analyzer,Tool,测试设备,通信相关;测试验证;工具,捕获和分析空中接口的信令消息用于深度调试,协议分析器,硬件模块扩展,active,2025-09-26
+频谱分析仪,Spectrum Analyzer,Tool,测试设备,通信相关;测试验证;射频相关;工具,测量射频信号的频谱分布用于分析信号质量和干扰,频谱仪,硬件模块扩展,active,2025-09-26
+射频测试工程师,RF Test Engineer,Role,工程师,通信相关;测试验证;组织职责,负责无线通信产品的射频性能测试验证和故障分析,RF工程师,硬件模块扩展,active,2025-09-26
+协议栈工程师,Protocol Stack Engineer,Role,工程师,通信相关;软件相关;组织职责,负责蜂窝或Wi-Fi/蓝牙协议栈的开发集成和优化,协议开发工程师,硬件模块扩展,active,2025-09-26

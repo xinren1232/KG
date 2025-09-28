@@ -1,0 +1,2284 @@
+// ========================================
+// 步骤1: 清理现有数据
+// ========================================
+MATCH (n:Dictionary) DETACH DELETE n;
+
+// ========================================
+// 步骤2: 创建约束和索引
+// ========================================
+CREATE CONSTRAINT dictionary_term_unique IF NOT EXISTS FOR (d:Dictionary) REQUIRE d.term IS UNIQUE;
+CREATE INDEX dictionary_category_index IF NOT EXISTS FOR (d:Dictionary) ON (d.category);
+CREATE INDEX dictionary_tags_index IF NOT EXISTS FOR (d:Dictionary) ON (d.tags);
+
+// ========================================
+// 步骤3: 导入批次 1/57
+// 第 1-20 条数据
+// ========================================
+WITH [
+  {term: 'BTB连接器', category: 'Component', description: '连接主板与副板、显示模组等的重要元件，易出现接触不良、虚焊等故障。', aliases: ['Board-to-Board Connector', '板对板连接器'], tags: ['电气连接', '硬件相关', '结构相关', '部件']},
+  {term: 'CMF', category: 'Component', description: '决定手机外观质感的关键，涉及喷涂、阳极氧化、镀膜等工艺。', aliases: ['Finishing', 'Color', '材料', '颜色', '表面处理', 'Color Material Finishing', 'Material'], tags: ['设计', '外观']},
+  {term: 'Dome片', category: 'Component', description: '提供按键手感的关键金属件，失效会导致按键无反应或手感差。', aliases: ['Metal Dome', '按键弹片'], tags: ['人机交互', '部件']},
+  {term: 'FPC', category: 'Component', description: '用于连接空间受限的部件，如摄像头、显示屏，易发生弯折断裂。', aliases: ['Flexible Printed Circuit', '柔性电路板'], tags: ['电气连接', '硬件相关', '结构相关', '部件']},
+  {term: 'FPS', category: 'Component', description: '衡量界面或游戏流畅度的关键指标，帧率过低会导致卡顿。', aliases: ['Frames Per Second', '帧率'], tags: ['性能指标', '软件相关']},
+  {term: 'Gap', category: 'Component', description: '指手机外壳部件之间的间隙和高度差，是衡量装配精度和美观度的重要指标。', aliases: ['面差', '间隙'], tags: ['装配', '外观']},
+  {term: 'Lens', category: 'Component', description: '摄像头的光学镜片，有脏污、划伤、镀膜脱落等不良现象。', aliases: ['Camera Lens', '镜片'], tags: ['影像相关', '部件']},
+  {term: 'LRA', category: 'Component', description: '提供振动反馈的马达，失效或性能不佳会导致振动弱、异响。', aliases: ['Linear Resonant Actuator', '线性谐振执行器'], tags: ['人机交互', '部件']},
+  {term: 'OIS', category: 'Component', description: '通过镜组或传感器移动补偿手抖，模块不良会导致拍照模糊或异响。', aliases: ['Optical Image Stabilization', '光学防抖'], tags: ['功能', '影像相关']},
+  {term: 'SPK', category: 'Component', description: '负责声音外放，常见不良有杂音、破音、无声。', aliases: ['Speaker', '扬声器'], tags: ['声学', '部件']},
+  {term: 'TP', category: 'Component', description: '负责触控功能，常见故障有失灵、乱点、划线不良。', aliases: ['触摸屏', 'Touch Panel'], tags: ['人机交互', '部件']},
+  {term: 'WLAN', category: 'Component', description: '手机Wi-Fi功能，常见问题有连接失败、速率慢、断流。', aliases: ['Wireless LAN', '无线局域网'], tags: ['功能', '性能指标']},
+  {term: '包材', category: 'Component', description: '指手机零售包装盒、内托等，破损、污渍会影响开箱体验。', aliases: ['Packaging Material', '包装材料'], tags: ['外观', '物料']},
+  {term: '背光', category: 'Component', description: '为LCD屏幕提供光源的组件，常见不良有亮度不均、漏光、mura（斑驳）。', aliases: ['Backlight', '背光模组'], tags: ['显示相关', '部件']},
+  {term: '边框', category: 'Component', description: '手机的骨架结构，用于固定内部元件，变形或腐蚀会影响整机强度和气密性。', aliases: ['中框', 'Middle Frame'], tags: ['外观', '部件']},
+  {term: '充电口', category: 'Component', description: '负责充电和数据传输，常见不良有端口松动、腐蚀、连接不稳定。', aliases: ['Type-C Port', 'USB-C接口'], tags: ['电气连接', '部件']},
+  {term: '触点', category: 'Component', description: '电池、屏幕等模块上与主板连接的导电触点，氧化或污染会导致接触不良。', aliases: ['金手指', 'Contact Pin'], tags: ['电气连接', '部件']},
+  {term: '电芯', category: 'Component', description: '电池的核心储能部件，其质量直接决定电池的容量、寿命和安全性。', aliases: ['Battery Cell', '电池芯'], tags: ['硬件相关', '安全相关', '部件']},
+  {term: '飞线', category: 'Component', description: '在PCB上用于临时或永久修复电路连接的导线，影响可靠性和美观。', aliases: ['跳线', 'Jumper Wire'], tags: ['PCB', '部件']},
+  {term: '盖板', category: 'Component', description: '保护屏幕和装饰的前盖玻璃，要求高硬度、抗冲击和良好的光学性能。', aliases: ['Cover Glass', '玻璃盖板'], tags: ['外观', '部件']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 1 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤4: 导入批次 2/57
+// 第 21-40 条数据
+// ========================================
+WITH [
+  {term: '高光', category: 'Component', description: '通过高精度加工得到的镜面般的光泽效果，易出现划伤、橘皮等不良。', aliases: ['镜面效果', 'High-Gloss'], tags: ['CMF', '外观']},
+  {term: '隔磁片', category: 'Component', description: '贴在器件上防止磁场干扰的薄片，粘贴不良或破损会影响无线充电或传感器性能。', aliases: ['磁性屏蔽片', 'Magnetic Shielding Sheet'], tags: ['EMC', '部件']},
+  {term: '公差', category: 'Component', description: '允许的尺寸变动范围，合理的公差设计是保证装配性和功能的关键。', aliases: ['Tolerance', '尺寸公差'], tags: ['设计', '工艺参数']},
+  {term: '公母座', category: 'Component', description: '配对的连接器，如USB公座和母座，存在插拔力不良、寿命不足等风险。', aliases: ['Connector Pair', '插头与插座'], tags: ['电气连接', '部件']},
+  {term: '功耗', category: 'Metric', description: '手机工作时的电能消耗，是衡量续航能力的关键，异常功耗需重点分析。', aliases: ['功率消耗', 'Power Consumption'], tags: ['软件相关', '硬件相关']},
+  {term: '光感', category: 'Component', description: '用于自动调节屏幕亮度，被遮挡或失效会导致屏幕亮度调节失常。', aliases: ['Ambient Light Sensor', '环境光传感器'], tags: ['传感器', '部件']},
+  {term: '滚轴', category: 'Component', description: '折叠屏手机的关键部件，负责屏幕弯折，对疲劳寿命和顺滑度要求极高。', aliases: ['Hinge', '铰链'], tags: ['可靠性', '部件']},
+  {term: '过孔', category: 'Component', description: 'PCB上用于连接不同层电路的孔，孔铜不良会导致开路或可靠性问题。', aliases: ['导通孔', 'Via'], tags: ['工艺参数', 'PCB']},
+  {term: '焊盘', category: 'Component', description: 'PCB上用于焊接元件的金属区域，氧化或污染会导致上锡不良、虚焊。', aliases: ['焊点', 'Pad'], tags: ['PCB', 'SMT']},
+  {term: '基带', category: 'Component', description: '负责移动网络信号处理的芯片组，其软件和硬件故障会导致无服务、通话中断。', aliases: ['Baseband'], tags: ['通信相关', '部件']},
+  {term: '基板', category: 'Component', description: '承载芯片和电路的基底材料，如陶瓷基板、BT基板等。', aliases: ['Substrate', '衬底'], tags: ['PCB', '部件']},
+  {term: '极耳', category: 'Component', description: '电芯正负极引出的金属带，焊接不良或折断会导致电池无法充电或工作。', aliases: ['电池极耳', 'Battery Tab'], tags: ['安全相关', '部件']},
+  {term: '铰链', category: 'Component', description: '折叠屏手机的核心机构，要求高寿命、顺滑度和稳定性。', aliases: ['Hinge', '转轴'], tags: ['可靠性', '部件']},
+  {term: '接地点', category: 'Component', description: 'PCB上用于连接参考电位的点，设计不良会导致EMC问题或信号干扰。', aliases: ['Grounding Point', '接地位置'], tags: ['PCB', 'EMC']},
+  {term: '金线', category: 'Component', description: '芯片封装内部连接芯片焊盘和引线框架的细金属线，断裂会导致开路。', aliases: ['Bonding Wire', '键合线'], tags: ['封装', '部件']},
+  {term: '晶振', category: 'Component', description: '提供系统基准时钟信号的元件，失效会导致手机无法开机或功能紊乱。', aliases: ['Crystal Oscillator', '晶体振荡器'], tags: ['时钟', '部件']},
+  {term: '镜座', category: 'Component', description: '固定摄像头镜头的结构件，其加工精度和稳定性直接影响成像质量。', aliases: ['镜头座', 'Lens Holder'], tags: ['结构相关', '影像相关', '摄像头模组', '部件']},
+  {term: '卡托', category: 'Component', description: '承载SIM卡和内存卡的可拆卸部件，存在装配不顺、易脱落等风险。', aliases: ['SIM卡托', 'SIM Card Tray'], tags: ['外观', '部件']},
+  {term: '拉拔力', category: 'Metric', description: '将连接器插入或拔出的力，过小导致接触不良，过大会影响用户体验和寿命。', aliases: ['Insertion/Extraction Force', '插拔力'], tags: ['可靠性', '硬件相关']},
+  {term: '良率', category: 'Metric', description: '合格品数量与生产总数量的比率，是衡量制造水平的核心指标。', aliases: ['yield'], tags: ['制造工艺', '质量体系']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 2 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤5: 导入批次 3/57
+// 第 41-60 条数据
+// ========================================
+WITH [
+  {term: '马鞍', category: 'Component', description: '手机中框两侧收窄的区域，是结构强度和信号设计的重点区域。', aliases: ['中框马鞍区', 'Middle Frame Saddle'], tags: ['设计', '部件']},
+  {term: '盲孔', category: 'Component', description: '仅连接PCB外层和内层，但不穿透整个板的导通孔，用于高密度布线。', aliases: ['Blind Via', '盲埋孔'], tags: ['设计', 'PCB']},
+  {term: '门限', category: 'Metric', description: '触发某种动作或判断合格与否的临界值，如功耗门限、信号强度门限。', aliases: ['阈值', 'Threshold'], tags: ['测试验证', '软件相关']},
+  {term: '密封圈', category: 'Component', description: '用于防水设计的橡胶或硅胶圈，其压缩量和弹性决定密封效果。', aliases: ['密封胶圈', 'Sealing Ring'], tags: ['可靠性', '部件']},
+  {term: '膜厚', category: 'Metric', description: '喷涂、电镀等表面处理层的厚度，影响外观、手感和性能。', aliases: ['Coating Thickness', '涂层厚度'], tags: ['CMF', '制造工艺']},
+  {term: '摩擦', category: 'Metric', description: '材料表面抵抗刮擦和磨损的能力，通常通过摩擦测试来验证。', aliases: ['Abrasion Resistance', '耐磨性'], tags: ['可靠性', '外观']},
+  {term: '母排', category: 'Component', description: '连接电池保护板和电芯的柔性电路板，其设计和可靠性至关重要。', aliases: ['Battery FPC', '电池母排'], tags: ['电气连接', '部件']},
+  {term: '内阻', category: 'Metric', description: '电池本身所具有的电阻，内阻增大会导致输出电压下降和发热。', aliases: ['Internal Resistance', '内部电阻'], tags: ['电池', '硬件相关']},
+  {term: '粘附', category: 'Metric', description: '涂层、镀层或胶带与基材之间的结合强度，附着力不足会导致脱落。', aliases: ['Adhesion', '附着力'], tags: ['可靠性', '制造工艺']},
+  {term: '粘锡', category: 'Metric', description: '熔化的焊锡在焊盘上铺展的能力，是形成良好焊点的基础。', aliases: ['Pad Wetting', '焊盘沾锡'], tags: ['SMT', '制造工艺']},
+  {term: '扭力', category: 'Metric', description: '拧紧螺丝所需的力矩，有规定的标准值，过小或过大都有风险。', aliases: ['Torque', '扭矩'], tags: ['工具', '结构相关']},
+  {term: '排线', category: 'Component', description: '连接主板与屏幕、摄像头等部件的软性线路，弯折过度易断裂。', aliases: ['Flex Cable', '柔性排线'], tags: ['电气连接', '部件']},
+  {term: '平顺', category: 'Metric', description: '表面相对于理想平面的偏差程度，影响装配和美观。', aliases: ['平整度', 'Flatness'], tags: ['结构相关', '外观']},
+  {term: '气密', category: 'Metric', description: '产品防止气体渗透的能力，是防水防尘设计的关键指标。', aliases: ['Air Tightness', '气密性'], tags: ['可靠性', '结构相关']},
+  {term: '亲水', category: 'Metric', description: '材料表面容易被水润湿的特性，与疏水性相对。', aliases: ['Hydrophilic', '亲水性'], tags: ['CMF', '可靠性']},
+  {term: '润湿', category: 'Metric', description: '熔融焊锡在金属表面铺展并形成冶金结合的过程，是良好焊接的前提。', aliases: ['Solder Wetting', '焊锡润湿'], tags: ['SMT', '制造工艺']},
+  {term: '色牢', category: 'Metric', description: '涂层、油墨等颜色抵抗光照、摩擦、汗液等作用而保持不褪色的能力。', aliases: ['Color Fastness', '颜色牢固度'], tags: ['CMF', '可靠性']},
+  {term: '上盖', category: 'Component', description: '手机的上半部分外壳。', aliases: ['上壳体', 'Top Case'], tags: ['外观', '部件']},
+  {term: '上锡', category: 'Metric', description: '焊盘表面被焊锡覆盖的面积比例，是评估焊接质量的重要指标。', aliases: ['锡膏覆盖', 'Solder Coverage'], tags: ['SMT', '制造工艺']},
+  {term: '生耳', category: 'Component', description: '表带上用于连接表壳的突出部分，在手机上可能指类似结构。', aliases: ['表耳', 'Lug'], tags: ['外观', '部件']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 3 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤6: 导入批次 4/57
+// 第 61-80 条数据
+// ========================================
+WITH [
+  {term: '声腔', category: 'Component', description: '为扬声器提供共振空间的密封结构，其容积和设计对音质影响很大。', aliases: ['扬声器腔体', 'Speaker Chamber'], tags: ['声学', '部件']},
+  {term: '石磨', category: 'Process', description: '通过工艺模拟天然石材的纹理和质感。', aliases: ['Stone Pattern', '石材纹理'], tags: ['设计', '外观']},
+  {term: '时长', category: 'Metric', description: '某项测试持续的时间或产品某项功能的续航时间。', aliases: ['持续时间', 'Duration'], tags: ['测试验证', '可靠性']},
+  {term: '食人鱼', category: 'Component', description: '一种亮度高、视角广的LED，常用作指示灯。', aliases: ['Piranha LED', '食人鱼LED'], tags: ['显示相关', '部件']},
+  {term: '硬度', category: 'Metric', description: '材料抵抗硬物压入其表面的能力，如莫氏硬度、铅笔硬度。', aliases: ['Hardness', '材料硬度'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '有源', category: 'Component', description: '需要电源才能正常工作的器件，如芯片、晶体管等。', aliases: ['有源器件', 'Active Component'], tags: ['电气性能', '部件']},
+  {term: '原色', category: 'Process', description: '材料本身的颜色，区别于后期处理（如喷涂）的颜色。', aliases: ['Base Color', '基底颜色'], tags: ['设计', '外观']},
+  {term: '运放', category: 'Component', description: '用于信号放大的集成电路，其性能影响音频、传感器等信号质量。', aliases: ['运算放大器', 'Operational Amplifier'], tags: ['电气性能', '部件']},
+  {term: '增益', category: 'Metric', description: '天线在特定方向上的辐射强度与理想点源天线的比值，影响信号覆盖。', aliases: ['Antenna Gain', '天线增益'], tags: ['硬件相关', '通信相关']},
+  {term: '沾锡', category: 'Metric', description: '熔化的焊锡在焊盘上铺展的能力，是形成良好焊点的基础。', aliases: ['Pad Wetting', '焊盘沾锡'], tags: ['SMT', '制造工艺']},
+  {term: '张力', category: 'Metric', description: '液体表面收缩的力，影响锡膏印刷、点胶、涂布等工艺的成型。', aliases: ['表面张力', 'Surface Tension'], tags: ['制造工艺', '物料']},
+  {term: '针脚', category: 'Component', description: '元器件上用于焊接的金属引脚。', aliases: ['Component Lead', '元器件引脚'], tags: ['SMT', '部件']},
+  {term: '支架', category: 'Component', description: '用于支撑和固定其他部件的结构件。', aliases: ['支撑架', 'Bracket'], tags: ['设计', '部件']},
+  {term: '直通', category: 'Metric', description: '产品在某一工序一次性通过检验的比率，反映工序能力。', aliases: ['First Pass Yield', '直通率'], tags: ['制造工艺', '质量体系']},
+  {term: '纸箱', category: 'Component', description: '手机运输和销售的外层纸箱，要求有足够的抗压和抗跌落强度。', aliases: ['Carton', '包装外箱'], tags: ['包装', '物料']},
+  {term: '质心', category: 'Metric', description: '产品重力的合力作用点，影响握持手感和跌落姿态。', aliases: ['Center of Gravity', '重心'], tags: ['设计', '结构相关']},
+  {term: '中框', category: 'Component', description: '手机的骨架结构，用于固定内部元件，常见材质为金属或塑料。', aliases: ['手机中框', 'Middle Frame'], tags: ['外观', '部件']},
+  {term: '主摄', category: 'Component', description: '手机多个摄像头中性能最强、最常用的那个摄像头。', aliases: ['主摄像头', 'Main Camera'], tags: ['影像相关', '部件']},
+  {term: '驻波', category: 'Metric', description: '表征天线与馈线匹配程度的指标，驻波比过大意味着信号反射严重。', aliases: ['驻波比', 'Standing Wave Ratio'], tags: ['硬件相关', '通信相关']},
+  {term: '转轴', category: 'Component', description: '折叠屏手机的关键部件，负责屏幕弯折，对疲劳寿命和顺滑度要求极高。', aliases: ['Hinge', '铰链'], tags: ['可靠性', '部件']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 4 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤7: 导入批次 5/57
+// 第 81-100 条数据
+// ========================================
+WITH [
+  {term: '追频', category: 'Component', description: '无线充电系统中，根据负载变化动态调整工作频率以保持最佳效率。', aliases: ['Frequency Tracking', '频率追踪'], tags: ['性能指标', '无线充电']},
+  {term: '自拍', category: 'Component', description: '用于拍摄用户自己的摄像头，位于手机正面。', aliases: ['前置摄像头', 'Front Camera'], tags: ['影像相关', '部件']},
+  {term: '阻焊', category: 'Component', description: '覆盖在PCB铜箔上的绿色或其他颜色的绝缘保护层，防止短路和氧化。', aliases: ['阻焊层', 'Solder Mask'], tags: ['设计', 'PCB']},
+  {term: '座充', category: 'Component', description: '将手机插入底座进行充电的配件。', aliases: ['座式充电器', 'Desktop Charger'], tags: ['充电', '配件']},
+  {term: '座子', category: 'Component', description: '固定在PCB上的连接器母端。', aliases: ['连接器插座', 'Connector Socket'], tags: ['电气连接', '部件']},
+  {term: 'SAR', category: 'Metric', description: '**定义**: 人体吸收电磁能量的速率。 **判定口径**: <2.0 W/kg。 **常见场景**: 手机靠近头部。 **排查路径**: 测试实验室验证。 **对策**: 优化射频发射功率，改善天线布局。', aliases: ['Specific Absorption Rate', '比吸收率'], tags: ['安全相关', '通信相关']},
+  {term: '热容率', category: 'Metric', description: '单位体积材料升高单位温度所需热量，影响局部升温速度。', aliases: ['体积热容'], tags: ['热管理', '物料']},
+  {term: '柯伐合金', category: 'Material', description: '一种与玻璃、陶瓷膨胀系数匹配的铁镍钴合金，常用于芯片封装引脚。', aliases: ['Kovar'], tags: ['封装', '硬件相关', '物料']},
+  {term: '剪切稀化', category: 'Metric', description: '流体的表观粘度随剪切速率增加而降低的特性，如锡膏、胶水，利于印刷和点胶。', aliases: ['假塑性', 'Shear Thinning'], tags: ['点胶', '制造工艺', '物料']},
+  {term: '水接触角', category: 'Metric', description: '衡量固体表面疏水性的指标，角度越大越疏水。用于评估涂层效果。', aliases: ['Water Contact Angle'], tags: ['CMF', '测试验证', '可靠性']},
+  {term: '迁移数', category: 'Metric', description: '在电池中，某种离子所携带的电流与总电流的比值，反映离子导电效率。', aliases: ['Transference Number'], tags: ['电池', '硬件相关']},
+  {term: '离子清洁度', category: 'Metric', description: '衡量PCB表面离子污染物含量的指标，单位通常为μg NaCl/cm²，影响绝缘电阻。', aliases: ['Ionic Cleanliness'], tags: ['测试验证', 'PCB', '可靠性']},
+  {term: '塌落直径', category: 'Metric', description: '锡膏印刷后，在预热阶段因流动而扩散的直径变化，用于评估锡膏抗塌陷性能。', aliases: ['Slump Diameter'], tags: ['锡膏', 'SMT', '制造工艺']},
+  {term: '天线效率', category: 'Metric', description: '天线辐射的功率与输入到天线的功率之比衡量天线将能量转化为电磁波的能力', aliases: ['Antenna Efficiency'], tags: ['测试验证', '通信相关', '硬件相关', '性能指标', '射频相关']},
+  {term: '焊点IMC', category: 'Metric', description: '焊料与焊盘金属界面生成的金属间化合物层。适中的IMC厚度是良好焊接的标志，过厚则脆。', aliases: ['Intermetallic Compound'], tags: ['SMT', '可靠性', '硬件相关']},
+  {term: '扬氏模量', category: 'Metric', description: '材料在弹性变形范围内，应力与应变的比值，衡量材料抵抗弹性变形的能力。', aliases: ['弹性模量'], tags: ['设计', '结构相关', '物料']},
+  {term: '黑镍', category: 'Process', description: '一种黑色的镍镀层，用于装饰和消光，耐磨性和耐腐蚀性需关注。', aliases: ['Black Nickel Plating'], tags: ['可靠性', '制造工艺', '外观']},
+  {term: '断差面', category: 'Component', description: '两个相邻表面存在高度差而形成的台阶面，需控制断差大小和均匀性。', aliases: ['Step Surface'], tags: ['设计', '制造工艺', '外观']},
+  {term: '焊盘设计', category: 'Component', description: 'PCB焊盘的形状、尺寸和布局设计，直接影响元件的贴装和焊接质量。', aliases: ['Pad Design'], tags: ['设计', 'PCB', 'SMT']},
+  {term: '引脚共面性', category: 'Metric', description: '多引脚元件所有引脚底部形成的平面与理想平面的偏差，影响焊接良率。', aliases: ['Lead Coplanarity'], tags: ['SMT', '制造工艺', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 5 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤8: 导入批次 6/57
+// 第 101-120 条数据
+// ========================================
+WITH [
+  {term: '热阻', category: 'Metric', description: '热量在传递路径上遇到的阻力，衡量器件或材料的散热能力。', aliases: ['Thermal Resistance'], tags: ['性能指标', '热管理', '可靠性', '硬件相关']},
+  {term: '玻璃转化温度', category: 'Metric', description: '聚合物从玻璃态向高弹态转变的温度。PCB基材的Tg影响其耐热性。', aliases: ['Tg', 'Glass Transition Temperature'], tags: ['PCB', '可靠性', '物料']},
+  {term: '磁导率', category: 'Metric', description: '衡量材料导磁能力的物理量，用于磁芯和电磁屏蔽材料的选择。', aliases: ['磁导系数', 'Permeability'], tags: ['电气性能', 'EMC', '硬件相关', '物料']},
+  {term: '导通电阻', category: 'Metric', description: '开关器件（如MOSFET）在导通状态下，源极和漏极之间的电阻。', aliases: ['On-Resistance'], tags: ['电气性能', '硬件相关']},
+  {term: '声压级', category: 'Metric', description: '衡量声音强弱的物理量，单位分贝，是扬声器、麦克风的重要指标。', aliases: ['SPL', 'Sound Pressure Level'], tags: ['测试验证', '声学', '硬件相关']},
+  {term: '绝缘阻抗', category: 'Metric', description: '连接器相邻触点之间或触点与外壳之间的电阻值越大越好', aliases: ['Insulation Resistance', 'IR'], tags: ['电气连接', '性能指标', '可靠性', '硬件相关', '电气性能']},
+  {term: '功耗曲线', category: 'Metric', description: '手机在不同工作模式下的功耗随时间变化的曲线。', aliases: ['Power Consumption Profile'], tags: ['测试验证', '软件相关', '硬件相关']},
+  {term: '哑光', category: 'Component', description: '低光泽度的表面效果，不易留下指纹。', aliases: ['Matt Finish'], tags: ['设计', '外观']},
+  {term: '火花纹', category: 'Process', description: '通过电火花加工在模具上形成的纹理，可转移至塑胶件表面。', aliases: ['EDM Texture'], tags: ['设计', '制造工艺', '外观']},
+  {term: '导通孔孔铜', category: 'Metric', description: '导通孔内壁铜层的厚度，影响电流承载能力和连接可靠性。', aliases: ['Via Copper Thickness'], tags: ['PCB', '可靠性', '制造工艺']},
+  {term: '胶体流动性', category: 'Metric', description: '胶水在受力下的流动能力，影响点胶成型和填充效果。', aliases: ['Adhesive Flowability'], tags: ['点胶', '制造工艺', '物料']},
+  {term: '磁饱和', category: 'Metric', description: '磁性材料的磁化强度不随外磁场增强而显著增加的状态。', aliases: ['Magnetic Saturation'], tags: ['电气性能', '硬件相关']},
+  {term: '镀层孔隙率', category: 'Metric', description: '单位面积镀层中针孔的数量，影响其防护性能。', aliases: ['Plating Porosity'], tags: ['CMF', '制造工艺', '可靠性']},
+  {term: '热插拔次数', category: 'Metric', description: '连接器可承受的带电插拔次数，是衡量其寿命的重要指标。', aliases: ['Hot-plugging Cycles'], tags: ['测试验证', '可靠性', '硬件相关']},
+  {term: '信号完整性', category: 'Metric', description: '信号在传输路径上的质量，涉及波形失真、时序、噪声等。', aliases: ['Signal Integrity', 'SI'], tags: ['设计', 'PCB', '硬件相关', '电气性能']},
+  {term: '水汽敏感等级', category: 'Metric', description: '根据IC封装对潮湿的敏感程度进行的分级，决定拆包后的使用时限和烘烤条件。', aliases: ['MSL', 'Moisture Sensitivity Level'], tags: ['SMT', '硬件相关', '物料']},
+  {term: '塑封体', category: 'Material', description: '用于封装芯片的环氧树脂塑料材料。', aliases: ['Mold Compound'], tags: ['半导体', '封装', '物料']},
+  {term: '翘曲度', category: 'Metric', description: '平面部件相对于理想平面的弯曲或扭曲程度量化值。', aliases: ['Warpage'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '胶体固化率', category: 'Metric', description: '胶水在特定条件下固化的速度。', aliases: ['Adhesive Cure Rate'], tags: ['点胶', '制造工艺', '物料']},
+  {term: '射频阻抗', category: 'Metric', description: '射频传输线的特征阻抗，通常设计为50欧姆以实现阻抗匹配。', aliases: ['RF Impedance'], tags: ['射频相关', 'PCB', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 6 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤9: 导入批次 7/57
+// 第 121-140 条数据
+// ========================================
+WITH [
+  {term: '胶体Tg点', category: 'Metric', description: '胶粘剂的玻璃化转变温度，影响其在不同温度下的力学性能。', aliases: ['Adhesive Glass Transition Temperature'], tags: ['点胶', '可靠性', '物料']},
+  {term: '邦定强度', category: 'Metric', description: '芯片与基板之间键合（如金线、胶水）的机械强度。', aliases: ['Bonding Strength'], tags: ['半导体', '可靠性', '制造工艺']},
+  {term: '模温均匀性', category: 'Metric', description: '模具不同区域温度的差异程度，影响产品收缩和尺寸一致性。', aliases: ['Mold Temperature Uniformity'], tags: ['注塑', '制造工艺']},
+  {term: '胶体触变性', category: 'Metric', description: '胶体在剪切力作用下粘度减小，静置后粘度恢复的特性，利于成型。', aliases: ['Adhesive Thixotropy'], tags: ['点胶', '制造工艺', '物料']},
+  {term: '引脚可焊性', category: 'Metric', description: '元件引脚表面被熔融焊料润湿形成良好焊点的能力。', aliases: ['Lead Solderability'], tags: ['SMT', '硬件相关', '物料']},
+  {term: '功率密度', category: 'Metric', description: '单位体积或单位面积上消耗的功率，是热设计的关键输入。', aliases: ['Power Density'], tags: ['设计', '热管理', '硬件相关']},
+  {term: '胶体储存期', category: 'Metric', description: '胶水在特定储存条件下保持其使用性能的时间。', aliases: ['Adhesive Shelf Life'], tags: ['点胶', '制造工艺', '物料']},
+  {term: 'LDS天线', category: 'Component', description: '利用激光在特定塑料上活化出电路图案，然后化学镀金属形成天线。集成度高，适合复杂三维结构。', aliases: ['激光直接成型天线'], tags: ['设计', '制造工艺', '通信相关']},
+  {term: '热界面材料', category: 'Material', description: '填充在发热器件与散热器之间，降低接触热阻的材料，如导热硅脂、相变材料、导热垫片。', aliases: ['TIM'], tags: ['热管理', '可靠性', '物料']},
+  {term: '差分信号', category: 'Component', description: '用一对幅度相等、相位相反的信号来传输信息，抗共模噪声能力强，用于高速接口。', aliases: ['差动信号'], tags: ['设计', '通信相关', '电气性能']},
+  {term: '邦定Pad设计', category: 'Component', description: '芯片上用于键合的铝焊盘或铜焊盘的尺寸、形状和布局设计。', aliases: ['焊盘设计'], tags: ['设计', '封装', '半导体']},
+  {term: '模内装饰薄膜', category: 'Material', description: '用于IML工艺的已印刷好图案的薄膜基材。', aliases: ['IML Film'], tags: ['CMF', '制造工艺', '物料']},
+  {term: '邦定Pad金属层', category: 'Component', description: '芯片键合焊盘上方的金属层（如铝），其厚度和成分影响键合性能。', aliases: ['焊盘金属化'], tags: ['设计', '封装', '半导体']},
+  {term: '氮化铝陶瓷', category: 'Material', description: '高导热陶瓷材料用于功率器件封装和散热基板', aliases: ['AlN陶瓷'], tags: ['热管理', '硬件相关', '物料']},
+  {term: '色饱和度', category: 'Metric', description: '衡量色彩鲜艳程度的指标饱和度越高颜色越纯', aliases: ['色彩饱和度'], tags: ['影像相关', '显示相关', '性能指标']},
+  {term: '聚酰亚胺薄膜', category: 'Material', description: '耐高温高绝缘的柔性基材广泛用于柔性电路板', aliases: ['PI膜'], tags: ['可靠性', 'FPC', '物料']},
+  {term: '导热凝胶', category: 'Material', description: '膏状热界面材料适用于不规则间隙的散热填充可自动流平', aliases: ['Thermal Gel', '导热泥'], tags: ['热管理', '可靠性', '物料']},
+  {term: '液晶聚合物', category: 'Material', description: '具有低介电常数和损耗的高分子材料适用于高频柔性电路', aliases: ['LCP'], tags: ['FPC', '高频应用', '物料']},
+  {term: '铍铜合金', category: 'Material', description: '高强度高弹性的铜合金常用于制造连接器弹片和屏蔽罩', aliases: ['铍铜'], tags: ['物料', '硬件相关', '弹片']},
+  {term: '相位噪声', category: 'Metric', description: '振荡器输出信号相位的随机起伏影响通信系统的信噪比', aliases: ['相位抖动'], tags: ['性能指标', '射频相关', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 7 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤10: 导入批次 8/57
+// 第 141-160 条数据
+// ========================================
+WITH [
+  {term: '聚氨酯密封胶', category: 'Material', description: '具有良好弹性和粘接性的密封材料用于防水和结构粘接', aliases: ['PU胶'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '腐蚀电位', category: 'Metric', description: '金属在腐蚀介质中不发生外电流时的电极电位反映其热力学腐蚀倾向', aliases: ['自腐蚀电位'], tags: ['CMF', '可靠性', '物料']},
+  {term: '聚对苯二甲酸丁二醇酯', category: 'Material', description: '耐热电绝缘性好的工程塑料用于连接器和结构件', aliases: ['PBT'], tags: ['注塑', '结构相关', '物料']},
+  {term: '激光直接成型材料', category: 'Material', description: '含有特殊添加剂的塑料经激光活化后可化学镀金属形成电路', aliases: ['LDS材料'], tags: ['硬件相关', '通信相关', '物料']},
+  {term: '低温共烧陶瓷', category: 'Material', description: '可将导体电阻电容等集成于一体的多层陶瓷基板技术', aliases: ['LTCC'], tags: ['射频相关', '硬件相关', '物料']},
+  {term: '信纳比', category: 'Metric', description: '信号+噪声+失真的总功率与噪声+失真的功率之比，衡量音频系统的动态性能。', aliases: ['SINAD'], tags: ['测试验证', '声学', '硬件相关']},
+  {term: '聚醚醚酮', category: 'Material', description: '耐高温耐化学腐蚀机械强度高的特种工程塑料', aliases: ['PEEK'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '氰酸酯树脂', category: 'Material', description: '具有低介电损耗的高性能树脂用于高频电路板', aliases: ['氰酸酯'], tags: ['PCB', '高频应用', '物料']},
+  {term: '聚四氟乙烯', category: 'Material', description: '介电性能极佳耐化学性强的塑料用于高频电路和绝缘', aliases: ['PTFE'], tags: ['硬件相关', '高频应用', '物料']},
+  {term: '总谐波失真', category: 'Metric', description: '谐波总功率与基波功率的比值衡量音频设备非线性失真', aliases: ['THD'], tags: ['人机交互', '测试验证', '声学', '硬件相关', '性能指标']},
+  {term: '玻璃纤维布', category: 'Material', description: '用作PCB基板的增强材料提供机械强度和尺寸稳定性', aliases: ['玻纤布'], tags: ['PCB', '制造工艺', '物料']},
+  {term: '磁性流体', category: 'Material', description: '含有纳米磁性颗粒的液体用于扬声器音圈散热和阻尼', aliases: ['磁液'], tags: ['声学', '硬件相关', '物料']},
+  {term: '误差向量幅度', category: 'Metric', description: '衡量数字调制信号质量的关键参数表示实际信号点与理想点的偏差', aliases: ['EVM'], tags: ['测试验证', '通信相关', '硬件相关']},
+  {term: '氧化铟锡', category: 'Material', description: '透明导电薄膜材料用于触摸屏传感器和显示电极', aliases: ['ITO'], tags: ['显示相关', '硬件相关', '物料']},
+  {term: '导电布', category: 'Material', description: '纤维织物表面金属化制成的柔性电磁屏蔽材料', aliases: ['导电织物'], tags: ['EMC', '硬件相关', '物料']},
+  {term: '接收灵敏度', category: 'Metric', description: '接收机在满足特定误码率条件下能识别的最小输入信号功率', aliases: ['灵敏度', 'Receiver Sensitivity'], tags: ['测试验证', '通信相关', '硬件相关', '性能指标', '射频相关']},
+  {term: '环氧模塑料', category: 'Material', description: '用于封装芯片的环氧树脂基复合材料提供保护和散热', aliases: ['EMC'], tags: ['半导体', '封装', '物料']},
+  {term: '硅凝胶', category: 'Material', description: '柔软透明的硅基凝胶用于芯片的软保护和应力缓冲', aliases: ['硅胶'], tags: ['物料', '封装', '可靠性']},
+  {term: '发射功率', category: 'Metric', description: '发射机天线连接处输出的射频功率需符合法规限值', aliases: ['输出功率'], tags: ['测试验证', '通信相关', '硬件相关']},
+  {term: '铝碳化硅', category: 'Material', description: '高导热低膨胀的金属基复合材料用于功率器件散热底座', aliases: ['AlSiC'], tags: ['热管理', '硬件相关', '物料']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 8 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤11: 导入批次 9/57
+// 第 161-180 条数据
+// ========================================
+WITH [
+  {term: '导热相变材料', category: 'Material', description: '在特定温度发生相变（固-液）能有效填充界面间隙的导热材料', aliases: ['PCM'], tags: ['热管理', '可靠性', '物料']},
+  {term: '互调失真', category: 'Metric', description: '由系统非线性导致两个输入频率产生新频率分量造成的干扰', aliases: ['IMD'], tags: ['测试验证', '硬件相关', '射频相关']},
+  {term: '聚萘二甲酸乙二醇酯', category: 'Material', description: '性能介于PET和PI之间的柔性基材耐热性优于PET', aliases: ['PEN'], tags: ['可靠性', 'FPC', '物料']},
+  {term: '电磁屏蔽泡棉', category: 'Material', description: '具有弹性的导电海绵材料用于缝隙的电磁屏蔽', aliases: ['导电泡棉'], tags: ['EMC', '硬件相关', '物料']},
+  {term: '相位裕量', category: 'Metric', description: '反馈系统稳定性的度量相位裕量越大系统越稳定', aliases: ['相位裕度'], tags: ['设计', '硬件相关', '电气性能']},
+  {term: '聚苯硫醚', category: 'Material', description: '耐高温耐化学腐蚀尺寸稳定的工程塑料', aliases: ['PPS'], tags: ['注塑', '结构相关', '物料']},
+  {term: '热塑性聚氨酯', category: 'Material', description: '具有良好弹性耐磨性和抗撕裂性的塑料用于保护套等', aliases: ['TPU'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '增益平坦度', category: 'Metric', description: '放大器在工作频带内增益的波动程度', aliases: ['增益平坦性'], tags: ['测试验证', '硬件相关', '射频相关']},
+  {term: '微波复合介质基板', category: 'Material', description: '具有低损耗稳定介电常数的高频电路板专用材料', aliases: ['高频板材'], tags: ['射频相关', 'PCB', '物料']},
+  {term: '陶瓷基板', category: 'Material', description: '氧化铝氮化铝等陶瓷制成的电路基板绝缘性好导热率高', aliases: ['陶瓷电路板'], tags: ['热管理', '硬件相关', '物料']},
+  {term: '群延迟', category: 'Metric', description: '信号不同频率成分通过系统时的时间延迟差异', aliases: ['群时延'], tags: ['测试验证', '硬件相关', '射频相关']},
+  {term: '磁性形状记忆合金', category: 'Material', description: '在外磁场作用下可产生大应变的新型智能材料', aliases: ['MSMA'], tags: ['传感器', '硬件相关', '物料']},
+  {term: 'OLED面板', category: 'Component', description: '像素自发光对比度高色彩鲜艳可柔性的显示面板', aliases: ['有机发光二极管显示屏'], tags: ['显示相关', '硬件相关']},
+  {term: 'LCD面板', category: 'Component', description: '需要背光模组成本较低技术成熟的液晶显示面板', aliases: ['液晶显示屏'], tags: ['显示相关', '硬件相关']},
+  {term: '盖板玻璃', category: 'Component', description: '保护屏幕免受冲击和刮伤的防护玻璃', aliases: ['Cover Glass', '防护玻璃'], tags: ['显示相关', '结构相关', '外观']},
+  {term: '偏光片', category: 'Component', description: '将自然光转换为偏振光是LCD显示不可或缺的组件', aliases: ['Polarizer'], tags: ['显示相关', '物料']},
+  {term: '光学胶', category: 'Material', description: '用于全贴合粘接盖板与触摸屏或显示屏减少反光提升透光率', aliases: ['OCA'], tags: ['制造工艺', '显示相关', '物料']},
+  {term: '背光模组', category: 'Component', description: '为LCD提供均匀明亮的面光源的模组', aliases: ['Backlight Unit', 'BLU'], tags: ['显示相关', '硬件相关']},
+  {term: '显示驱动芯片', category: 'Component', description: '接收主机信号驱动显示屏像素点显示图像的芯片', aliases: ['Display Driver IC', 'DDI'], tags: ['半导体', '显示相关', '硬件相关']},
+  {term: '触控报点率', category: 'Metric', description: '每秒触摸屏上报坐标的次数影响触控跟手性', aliases: ['Touch Report Rate'], tags: ['性能指标', '人机交互', '显示相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 9 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤12: 导入批次 10/57
+// 第 181-200 条数据
+// ========================================
+WITH [
+  {term: '屏幕响应时间', category: 'Metric', description: '像素从一种颜色切换到另一种颜色所需的时间影响动态画面拖影', aliases: ['Response Time'], tags: ['性能指标', '显示相关']},
+  {term: '对比度', category: 'Metric', description: '屏幕最亮与最暗区域的亮度比值', aliases: ['Contrast Ratio'], tags: ['性能指标', '显示相关']},
+  {term: '色域覆盖率', category: 'Metric', description: '显示屏能显示的颜色范围与标准色域（如sRGB DCI-P3）的比值', aliases: ['Color Gamut Coverage'], tags: ['影像相关', '显示相关', '性能指标']},
+  {term: '图像传感器', category: 'Component', description: '将光信号转换为电信号的核心芯片如CMOS传感器', aliases: ['Image Sensor', 'CIS'], tags: ['半导体', '影像相关', '硬件相关']},
+  {term: '镜头', category: 'Component', description: '光学镜片组负责光线汇聚', aliases: ['Lens'], tags: ['影像相关', '摄像头模组']},
+  {term: '音圈马达', category: 'Component', description: '驱动镜头移动实现对焦的致动器', aliases: ['VCM'], tags: ['影像相关', '硬件相关']},
+  {term: '光学防抖', category: 'Component', description: '通过移动镜组或传感器补偿手抖的技术', aliases: ['OIS'], tags: ['功能', '影像相关', '性能指标']},
+  {term: '红外滤光片', category: 'Component', description: '滤除红外光使成像色彩更接近人眼所见的滤光片', aliases: ['IR Cut Filter'], tags: ['影像相关', '物料']},
+  {term: '摄像头模组', category: 'Component', description: '将传感器镜头VCM等封装成一体的功能模块', aliases: ['CCM'], tags: ['影像相关', '硬件相关']},
+  {term: '信噪比', category: 'Metric', description: '图像信号与噪声的比值衡量图像纯净度', aliases: ['SNR'], tags: ['性能指标', '影像相关']},
+  {term: '灵敏度', category: 'Metric', description: '给定输入功率如1mW或电压如1V时在指定距离如10cm产生的声压级', aliases: ['Sensitivity'], tags: ['性能指标', '影像相关', '声学']},
+  {term: '动态范围', category: 'Metric', description: '传感器能同时捕捉的最亮和最暗细节的范围', aliases: ['Dynamic Range'], tags: ['性能指标', '影像相关']},
+  {term: '镜头畸变', category: 'Metric', description: '镜头引起的图像形变如桶形畸变枕形畸变', aliases: ['Lens Distortion'], tags: ['性能指标', '影像相关']},
+  {term: '保护板', category: 'Component', description: '管理电池的充放电防止过充过放过流短路的保护电路', aliases: ['BMS', 'Protection Circuit Module'], tags: ['电气性能', '安全相关', '硬件相关']},
+  {term: '电池封装膜', category: 'Material', description: '软包电池的外层铝塑复合膜提供封装和绝缘', aliases: ['Pouch Film'], tags: ['安全相关', '硬件相关', '物料']},
+  {term: '负极材料', category: 'Material', description: '如石墨锂离子在充电时嵌入其中的负极材料', aliases: ['Anode Material'], tags: ['电池', '硬件相关', '物料']},
+  {term: '正极材料', category: 'Material', description: '如钴酸锂磷酸铁锂锂离子在放电时嵌入其中的正极材料', aliases: ['Cathode Material'], tags: ['电池', '硬件相关', '物料']},
+  {term: '电解液', category: 'Material', description: '提供锂离子在正负极之间迁移的通道的液体', aliases: ['Electrolyte'], tags: ['电池', '安全相关', '物料']},
+  {term: '隔膜', category: 'Material', description: '隔离正负极防止短路同时允许离子通过的薄膜', aliases: ['Separator'], tags: ['电池', '安全相关', '物料']},
+  {term: '额定容量', category: 'Metric', description: '电池在特定条件下放出的电量单位mAh', aliases: ['Rated Capacity'], tags: ['电池', '性能指标', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 10 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤13: 导入批次 11/57
+// 第 201-220 条数据
+// ========================================
+WITH [
+  {term: '能量密度', category: 'Metric', description: '单位体积或重量储存的能量单位Wh/kg或Wh/L', aliases: ['Energy Density'], tags: ['电池', '性能指标', '硬件相关']},
+  {term: '循环次数', category: 'Metric', description: '容量衰减到规定值（如80%）时所经历的完整充放电循环次数', aliases: ['Cycle Life'], tags: ['性能指标', '可靠性', '硬件相关']},
+  {term: '印刷电路板', category: 'Component', description: '承载和连接电子元件的基板', aliases: ['PCB'], tags: ['设计', '硬件相关']},
+  {term: '主芯片', category: 'Component', description: '集成CPU GPU Modem等核心功能的芯片', aliases: ['系统级芯片', 'SoC'], tags: ['设计', '半导体', '硬件相关']},
+  {term: '内存', category: 'Component', description: '运行内存用于临时存储运行的程序和数据', aliases: ['RAM'], tags: ['半导体', '硬件相关']},
+  {term: '闪存', category: 'Component', description: '存储空间用于存放系统应用和用户数据', aliases: ['Flash', 'ROM'], tags: ['半导体', '硬件相关']},
+  {term: '射频功放', category: 'Component', description: '放大要发射的射频信号的功率放大器', aliases: ['PA'], tags: ['射频相关', '硬件相关']},
+  {term: '电源管理芯片', category: 'Component', description: '管理整机的电源分配充电和功耗的芯片', aliases: ['PMIC'], tags: ['电气性能', '硬件相关']},
+  {term: 'PCB板材', category: 'Material', description: '制造PCB的基板材料如FR-4高频板材', aliases: ['Laminate'], tags: ['PCB', '物料']},
+  {term: '阻焊油墨', category: 'Material', description: '覆盖在铜箔上起绝缘和保护作用的绿色或其他颜色的油墨', aliases: ['Solder Mask'], tags: ['PCB', '物料']},
+  {term: '电源完整性', category: 'Metric', description: '供给芯片的电源电压稳定纯净的程度', aliases: ['PI'], tags: ['设计', '硬件相关', '电气性能']},
+  {term: '电磁兼容性', category: 'Metric', description: '设备在其电磁环境中能正常工作且不对其他设备构成干扰的能力', aliases: ['EMC'], tags: ['设计', '测试验证', '硬件相关']},
+  {term: '天线辐射体', category: 'Component', description: '天线的核心部分直接负责电磁波的辐射和接收', aliases: ['Antenna Radiator'], tags: ['射频相关', '通信相关', '硬件相关']},
+  {term: '天线调谐器', category: 'Component', description: '动态调整天线阻抗匹配以应对手握环境变化带来的失配', aliases: ['Antenna Tuner'], tags: ['射频相关', '通信相关', '硬件相关']},
+  {term: '射频前端模组', category: 'Component', description: '集成PA LNA开关滤波器等功能的模块', aliases: ['RFFE'], tags: ['射频相关', '通信相关', '硬件相关']},
+  {term: '功率放大器', category: 'Component', description: '放大发射链路的射频信号功率', aliases: ['PA'], tags: ['射频相关', '通信相关', '硬件相关']},
+  {term: '低噪声放大器', category: 'Component', description: '放大接收链路的微弱信号自身引入的噪声极低', aliases: ['LNA'], tags: ['射频相关', '通信相关', '硬件相关']},
+  {term: '双工器', category: 'Component', description: '在FDD系统中允许发射和接收同时进行并隔离两者信号', aliases: ['Duplexer'], tags: ['射频相关', '通信相关', '硬件相关']},
+  {term: '开关', category: 'Component', description: '在不同天线或频段之间进行切换', aliases: ['Switch'], tags: ['射频相关', '通信相关', '硬件相关']},
+  {term: '滤波器', category: 'Component', description: '滤除带外干扰信号保留所需频带内的信号', aliases: ['Filter'], tags: ['射频相关', '通信相关', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 11 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤14: 导入批次 12/57
+// 第 221-240 条数据
+// ========================================
+WITH [
+  {term: '天线触点', category: 'Component', description: '天线辐射体与主板射频电路之间的物理连接点通常为弹片或pogo pin', aliases: ['Antenna Contact'], tags: ['电气连接', '射频相关', '硬件相关']},
+  {term: '同轴电缆', category: 'Component', description: '用于传输射频信号具有屏蔽层以防干扰', aliases: ['Coaxial Cable'], tags: ['硬件相关', '射频相关', '线缆管理']},
+  {term: '射频连接器', category: 'Component', description: '用于连接射频电缆和PCB如IPEX连接器', aliases: ['RF Connector'], tags: ['电气连接', '射频相关', '硬件相关']},
+  {term: '净空区', category: 'Component', description: '天线周围为保证辐射效率而禁止布置金属器件的区域', aliases: ['Keep-out Area'], tags: ['设计', '射频相关', '硬件相关']},
+  {term: '总全向灵敏度', category: 'Metric', description: '表征手机在整个空间各个方向上接收微弱信号能力的综合指标', aliases: ['TIS'], tags: ['性能指标', '射频相关', '通信相关']},
+  {term: '总辐射功率', category: 'Metric', description: '表征手机在整个空间各个方向上辐射功率能力的综合指标', aliases: ['TRP'], tags: ['性能指标', '射频相关', '通信相关']},
+  {term: '回波损耗', category: 'Metric', description: '表示入射功率被反射回来的比例值越大如-10dB表示匹配越好反射越小', aliases: ['Return Loss'], tags: ['性能指标', '射频相关', '通信相关']},
+  {term: '驻波比', category: 'Metric', description: '衡量阻抗匹配程度的另一个常用指标理想值为1:1', aliases: ['VSWR'], tags: ['性能指标', '射频相关', '通信相关']},
+  {term: '扬声器BOX', category: 'Component', description: '为扬声器单元提供密闭或导向的声学腔体极大影响低频响应和灵敏度', aliases: ['Speaker Box'], tags: ['结构相关', '硬件相关', '声学']},
+  {term: '受话器', category: 'Component', description: '用于通话时贴近耳朵听音要求高清晰度', aliases: ['Receiver'], tags: ['声学', '硬件相关']},
+  {term: '麦克风', category: 'Component', description: '将声音信号转换为电信号有MEMS和ECM等类型', aliases: ['Microphone'], tags: ['声学', '硬件相关']},
+  {term: '音频编解码器', category: 'Component', description: '负责模拟音频信号与数字音频信号的转换并可能集成音频效果处理', aliases: ['Audio Codec'], tags: ['半导体', '声学', '硬件相关']},
+  {term: '扬声器单元', category: 'Component', description: '将电信号转换为机械振动从而发声的核心部件包含磁路音圈振膜等', aliases: ['Speaker Driver'], tags: ['声学', '硬件相关']},
+  {term: '声学网布', category: 'Material', description: '覆盖在出声孔起到防尘防水具有一定透气性和调节声学阻尼的作用', aliases: ['Acoustic Mesh'], tags: ['声学', '外观', '物料']},
+  {term: '防水透气膜', category: 'Material', description: '允许空气通过以实现声学导通但能阻止液态水侵入', aliases: ['Waterproof Breathable Membrane'], tags: ['物料', '可靠性', '声学']},
+  {term: '音腔', category: 'Component', description: '麦克风或受话器背后的密封空间其容积对频响有重要影响', aliases: ['Acoustic Chamber'], tags: ['声学', '结构相关', '硬件相关']},
+  {term: '频率响应', category: 'Metric', description: '设备输出声压级随频率变化的曲线是衡量音质的基础指标', aliases: ['Frequency Response'], tags: ['性能指标', '人机交互', '声学']},
+  {term: '总谐波失真加噪声', category: 'Metric', description: '衡量音频系统非线性失真和本底噪声的综合指标', aliases: ['THD+N'], tags: ['性能指标', '声学']},
+  {term: '最大声压级', category: 'Metric', description: '扬声器在失真不超过限定值时可输出的最大声音强度', aliases: ['Maximum SPL'], tags: ['性能指标', '声学']},
+  {term: '金属中框', category: 'Component', description: '通常采用铝合金不锈钢等提供整机主要结构强度和散热路径', aliases: ['Metal Mid-frame'], tags: ['结构相关', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 12 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤15: 导入批次 13/57
+// 第 241-260 条数据
+// ========================================
+WITH [
+  {term: '玻璃后盖', category: 'Component', description: '提供美观质感并支持无线充电需与中框可靠粘接', aliases: ['Glass Back Cover'], tags: ['硬件相关', '结构相关', '外观']},
+  {term: '复合板材后盖', category: 'Component', description: '通过注塑喷涂镀膜等工艺实现类似玻璃的质感成本较低', aliases: ['Composite Back Cover'], tags: ['硬件相关', '结构相关', '外观']},
+  {term: '摄像头装饰件', category: 'Component', description: '保护摄像头模组并提升外观层次感常见金属或塑料镀膜', aliases: ['Camera Deco'], tags: ['结构相关', '摄像头模组', '外观']},
+  {term: 'SIM卡托', category: 'Component', description: '需保证与中框的配合精度和插拔手感具备防水功能', aliases: ['SIM Tray'], tags: ['结构相关', '硬件相关']},
+  {term: '侧键', category: 'Component', description: '包括电源键和音量键通常为金属杆状结构通过弹片或Dome片实现触发', aliases: ['Side Key'], tags: ['人机交互', '结构相关', '硬件相关']},
+  {term: 'Type-C连接器', category: 'Component', description: '负责充电数据传输和音频输出插拔寿命和防水是关键', aliases: ['USB Type-C Connector'], tags: ['电气连接', '结构相关', '硬件相关']},
+  {term: '泡棉', category: 'Material', description: '用于填充缝隙、提供缓冲和电磁屏蔽的多孔材料。', aliases: ['Foam', 'Conductive Foam', 'Gasket', '导电泡棉'], tags: ['结构相关', 'EMC', '部件', '物料']},
+  {term: '防水胶', category: 'Material', description: '用于粘接屏幕后盖与中框形成防水密封圈', aliases: ['Waterproof Adhesive'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '均热板', category: 'Component', description: '利用内部工质相变蒸发-冷凝进行高效二维热传导散热效率高于热管', aliases: ['Vapor Chamber'], tags: ['热管理', '可靠性', '硬件相关']},
+  {term: '热管', category: 'Component', description: '利用内部工质相变进行高效一维热传导的封闭管状器件', aliases: ['Heat Pipe'], tags: ['热管理', '可靠性', '硬件相关']},
+  {term: '导热硅脂', category: 'Material', description: '填充芯片与散热器之间的微间隙降低接触热阻', aliases: ['Thermal Grease', 'Thermal Paste'], tags: ['热管理', '可靠性', '物料']},
+  {term: '导热石墨片', category: 'Material', description: '具有高面内导热系数用于将热点热量迅速横向扩散', aliases: ['Graphite Sheet'], tags: ['热管理', '可靠性', '物料']},
+  {term: '金属屏蔽罩', category: 'Component', description: '在屏蔽电磁干扰的同时也作为散热片将芯片热量传导出去', aliases: ['Shield Can'], tags: ['热管理', 'EMC', '硬件相关']},
+  {term: '散热铜箔', category: 'Material', description: '贴在PCB背面或特定区域辅助局部散热', aliases: ['Thermal Copper Foil'], tags: ['热管理', 'PCB', '物料']},
+  {term: '结温', category: 'Metric', description: '芯片半导体结的最高工作温度是热设计的核心限制参数', aliases: ['Junction Temperature'], tags: ['性能指标', '热管理', '可靠性']},
+  {term: 'MEMS加速度计', category: 'Component', description: '测量手机在三个轴上的线性加速度用于计步屏幕旋转等', aliases: ['Accelerometer'], tags: ['性能指标', '传感器', '硬件相关']},
+  {term: '陀螺仪', category: 'Component', description: '测量手机围绕三个轴的旋转角速度用于导航游戏控制等', aliases: ['Gyroscope'], tags: ['性能指标', '传感器', '硬件相关']},
+  {term: '磁力计', category: 'Component', description: '测量环境磁场强度用于电子罗盘方向检测', aliases: ['Magnetometer'], tags: ['性能指标', '传感器', '硬件相关']},
+  {term: '距离传感器', category: 'Component', description: '通常由红外LED和光电二极管组成检测手机与物体的距离用于通话时熄屏', aliases: ['Proximity Sensor'], tags: ['功能', '传感器', '硬件相关']},
+  {term: '环境光传感器', category: 'Component', description: '检测环境光强度用于自动调节屏幕亮度', aliases: ['ALS'], tags: ['功能', '传感器', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 13 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤16: 导入批次 14/57
+// 第 261-280 条数据
+// ========================================
+WITH [
+  {term: '气压计', category: 'Component', description: '测量大气压强用于海拔计算天气辅助预测', aliases: ['Barometer'], tags: ['性能指标', '传感器', '硬件相关']},
+  {term: '霍尔传感器', category: 'Component', description: '检测磁场变化常用于翻盖保护套的智能唤醒功能', aliases: ['Hall Sensor'], tags: ['功能', '传感器', '硬件相关']},
+  {term: '指纹传感器', category: 'Component', description: '通过光学电容或超声波方式采集指纹信息用于身份认证', aliases: ['Fingerprint Sensor'], tags: ['功能', '安全相关', '传感器', '硬件相关']},
+  {term: '红外发射器', category: 'Component', description: '发射红外信号可遥控电视空调等家电', aliases: ['IR Blaster'], tags: ['功能', '传感器', '硬件相关']},
+  {term: '色温传感器', category: 'Component', description: '检测环境光色温辅助相机白平衡校准', aliases: ['Color Temperature Sensor'], tags: ['功能', '影像相关', '传感器']},
+  {term: '传感器中枢', category: 'Component', description: '低功耗协处理器专门用于处理各类传感器数据降低主芯片功耗', aliases: ['Sensor Hub'], tags: ['软件相关', '传感器', '硬件相关']},
+  {term: '分辨率', category: 'Metric', description: '传感器能感知到的被测量的最小变化量', aliases: ['Resolution'], tags: ['性能指标', '传感器']},
+  {term: '量程', category: 'Metric', description: '传感器能够测量的被测量的最大值与最小值之差', aliases: ['Full Scale Range'], tags: ['性能指标', '传感器']},
+  {term: '非线性度', category: 'Metric', description: '传感器实际特性曲线与拟合直线之间的最大偏差', aliases: ['Non-Linearity'], tags: ['性能指标', '传感器']},
+  {term: '重复性', category: 'Metric', description: '在同一条件下多次测量同一被测量其输出值的一致性', aliases: ['Repeatability'], tags: ['性能指标', '传感器']},
+  {term: '无线充电接收线圈', category: 'Component', description: '内置在手机中接收交变磁场并转化为感应电流', aliases: ['RX Coil'], tags: ['功能', '充电', '硬件相关']},
+  {term: '无线充电发射板', category: 'Component', description: '外部设备产生交变磁场为手机无线充电', aliases: ['TX Pad'], tags: ['功能', '充电', '配件']},
+  {term: '电荷泵充电芯片', category: 'Component', description: '采用电容储能方式实现高效大电流充电转换效率远高于传统LDO或Buck', aliases: ['Charge Pump Charger'], tags: ['半导体', '充电', '硬件相关']},
+  {term: '电池电量计', category: 'Component', description: '精确估算电池剩余电量和健康状态', aliases: ['Fuel Gauge'], tags: ['半导体', '充电', '硬件相关']},
+  {term: '过压保护电路', category: 'Component', description: '防止充电电压过高损坏手机内部器件', aliases: ['OVP'], tags: ['充电', '安全相关', '硬件相关']},
+  {term: '过流保护电路', category: 'Component', description: '防止充电电流或负载电流过大', aliases: ['OCP'], tags: ['充电', '安全相关', '硬件相关']},
+  {term: 'USB Type-C接口控制器', category: 'Component', description: '管理Type-C接口的正反插角色切换DRP/SRC/SNK和快充协议', aliases: ['Type-C Controller'], tags: ['功能', '充电', '硬件相关']},
+  {term: '输入电压范围', category: 'Metric', description: '手机充电电路能正常工作的输入电压范围', aliases: ['Input Voltage Range'], tags: ['性能指标', '充电']},
+  {term: '充电功率', category: 'Metric', description: '充电时输入手机的总功率电压×电流单位瓦特', aliases: ['Charging Power'], tags: ['性能指标', '充电']},
+  {term: '转换效率', category: 'Metric', description: '充电电路将输入电能转换为电池化学能的效率', aliases: ['Conversion Efficiency'], tags: ['性能指标', '充电']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 14 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤17: 导入批次 15/57
+// 第 281-300 条数据
+// ========================================
+WITH [
+  {term: '线性马达', category: 'Component', description: '通过电磁驱动质量块做线性运动提供振动反馈启停快手感清脆', aliases: ['LRA'], tags: ['功能', '人机交互', '硬件相关']},
+  {term: '转子马达', category: 'Component', description: '通过不平衡转子的旋转产生振动成本低但启停慢手感松散', aliases: ['Eccentric Rotating Mass Motor'], tags: ['功能', '人机交互', '硬件相关']},
+  {term: '压电陶瓷马达', category: 'Component', description: '利用压电效应使陶瓷片形变产生振动或触感响应极快可模拟丰富纹理', aliases: ['Piezo Haptic Actuator'], tags: ['功能', '人机交互', '硬件相关']},
+  {term: '马达驱动芯片', category: 'Component', description: '提供马达所需的驱动波形和功率放大', aliases: ['Haptic Driver IC'], tags: ['功能', '硬件相关', '半导体']},
+  {term: '马达固定结构', category: 'Component', description: '确保马达被牢固固定避免额外振动噪音并将振动有效传递至整机', aliases: ['Motor Mounting Structure'], tags: ['可靠性', '结构相关', '硬件相关']},
+  {term: '振动加速度', category: 'Metric', description: '衡量振动强度的物理量通常以重力加速度g的倍数表示', aliases: ['Vibration Acceleration'], tags: ['性能指标', '人机交互']},
+  {term: '阳极氧化层', category: 'Material', description: '通过电解在铝合金表面生成的坚硬耐腐蚀的氧化铝陶瓷膜可着色', aliases: ['Anodized Layer'], tags: ['CMF', '可靠性', '外观']},
+  {term: 'PVD镀膜', category: 'Material', description: '在真空环境下通过溅射或蒸发方式在表面沉积金属/化合物薄膜呈现金属光泽色彩', aliases: ['物理气相沉积镀膜'], tags: ['CMF', '可靠性', '外观']},
+  {term: 'AF防指纹涂层', category: 'Material', description: '在玻璃或镀层表面涂覆的疏油疏水涂层减少指纹和污渍附着', aliases: ['抗指纹涂层'], tags: ['CMF', '用户体验', '外观']},
+  {term: 'AG防眩光涂层', category: 'Material', description: '在玻璃表面通过化学蚀刻或涂层形成微细粗糙度减少环境光反射', aliases: ['抗反射涂层'], tags: ['CMF', '显示相关', '外观']},
+  {term: '光泽度', category: 'Metric', description: '表面反射光线的能力用光泽度单位表示', aliases: ['Gloss'], tags: ['CMF', '性能指标', '外观']},
+  {term: '粗糙度', category: 'Metric', description: '表面具有的较小间距和微小峰谷的不平度常用Ra值表示', aliases: ['Roughness'], tags: ['CMF', '性能指标', '外观']},
+  {term: '颜色坐标', category: 'Metric', description: '在Lab LCh等色彩空间中表示颜色的具体数值', aliases: ['Color Coordinate'], tags: ['CMF', '性能指标', '外观']},
+  {term: 'Wi-Fi 6E芯片', category: 'Component', description: '支持6GHz频段的Wi-Fi芯片提供更宽的信道和更低的干扰', aliases: ['802.11ax芯片'], tags: ['功能', '硬件相关', '通信相关']},
+  {term: '蓝牙5.3芯片', category: 'Component', description: '支持LE Audio具有更低的功耗和更好的多设备连接能力', aliases: ['BT 5.3'], tags: ['功能', '硬件相关', '通信相关']},
+  {term: '5G调制解调器', category: 'Component', description: '负责5G NR信号的编码解码支持Sub-6GHz和毫米波频段', aliases: ['5G Modem'], tags: ['半导体', '硬件相关', '通信相关']},
+  {term: 'GNSS接收芯片', category: 'Component', description: '支持GPS GLONASS Galileo BDS等多个卫星系统的定位信号接收', aliases: ['全球导航卫星系统芯片'], tags: ['功能', '硬件相关', '通信相关']},
+  {term: 'NFC控制器', category: 'Component', description: '实现手机支付门禁模拟标签读写等近距离通信功能', aliases: ['近场通信控制器'], tags: ['功能', '硬件相关', '通信相关']},
+  {term: 'eSIM', category: 'Component', description: '直接焊在主板上的SIM芯片可通过软件切换运营商节省空间', aliases: ['嵌入式SIM卡'], tags: ['功能', '硬件相关', '通信相关']},
+  {term: '天线调谐开关', category: 'Component', description: '根据频率动态切换天线匹配网络优化天线效率', aliases: ['Antenna Tuning Switch'], tags: ['射频相关', '通信相关', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 15 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤18: 导入批次 16/57
+// 第 301-320 条数据
+// ========================================
+WITH [
+  {term: '分集天线', category: 'Component', description: '接收主天线之外的另一套接收天线通过选择或合并技术改善信号质量', aliases: ['Diversity Antenna'], tags: ['射频相关', '通信相关', '硬件相关']},
+  {term: 'MIMO天线系统', category: 'Component', description: '使用多个天线同时收发数据提升信道容量和链路可靠性', aliases: ['多输入多输出天线系统'], tags: ['射频相关', '通信相关', '硬件相关']},
+  {term: '射频滤波器', category: 'Component', description: '如SAW/BAW滤波器用于滤除特定频段的干扰信号', aliases: ['RF Filter'], tags: ['射频相关', '通信相关', '硬件相关']},
+  {term: '载波聚合', category: 'Metric', description: '同时使用多个载波频段进行数据传输提升峰值速率', aliases: ['Carrier Aggregation'], tags: ['功能', '性能指标', '通信相关']},
+  {term: '调制阶数', category: 'Metric', description: '如256QAM表示每个符号携带的比特数阶数越高速率越快抗干扰越差', aliases: ['Modulation Order'], tags: ['性能指标', '射频相关', '通信相关']},
+  {term: '误码率', category: 'Metric', description: '在数字传输系统中，错误比特数与总传输比特数之比，衡量传输可靠性。', aliases: ['Bit Error Rate', 'BER'], tags: ['测试验证', '通信相关', '硬件相关', '性能指标', '射频相关']},
+  {term: 'USB Type-C接口', category: 'Component', description: '支持正反插高速数据传输视频输出和快充的多功能接口', aliases: ['USB-C'], tags: ['功能', '电气连接', '硬件相关']},
+  {term: '闪电接口', category: 'Component', description: 'Apple公司专有的紧凑型接口用于数据传输和充电', aliases: ['Lightning'], tags: ['功能', '电气连接', '硬件相关']},
+  {term: '3.5mm音频接口', category: 'Component', description: '模拟音频输出接口逐渐被USB-C或无线音频替代', aliases: ['耳机孔'], tags: ['功能', '声学', '硬件相关']},
+  {term: '高清多媒体接口', category: 'Component', description: '用于输出高清视频和音频信号', aliases: ['HDMI'], tags: ['功能', '硬件相关']},
+  {term: 'DisplayPort接口', category: 'Component', description: '另一种高清视频输出接口常见于USB-C的Alt Mode中', aliases: ['DP'], tags: ['功能', '硬件相关']},
+  {term: 'pogo pin连接器', category: 'Component', description: '用于生产测试治具或手机配件的临时性低插拔次数的连接', aliases: ['弹簧针连接器'], tags: ['电气连接', '测试验证', '硬件相关']},
+  {term: 'FPC连接器', category: 'Component', description: '用于连接主板与屏幕摄像头等部件的FPC要求高精度和对位', aliases: ['柔性电路板连接器'], tags: ['电气连接', '制造工艺', '硬件相关']},
+  {term: '板对板连接器', category: 'Component', description: '连接主板与副板或其他子板是实现手机堆叠的关键元件', aliases: ['BTB Connector'], tags: ['电气连接', '结构相关', '硬件相关']},
+  {term: 'SIM卡座', category: 'Component', description: '承载Nano-SIM卡或eSIM芯片实现与移动网络的连接', aliases: ['SIM Card Connector'], tags: ['功能', '电气连接', '硬件相关']},
+  {term: '麦克风硅麦', category: 'Component', description: '通过FPC或焊点与主板连接体积小抗干扰性强', aliases: ['MEMS Microphone'], tags: ['电气连接', '声学', '硬件相关']},
+  {term: '接触阻抗', category: 'Metric', description: '连接器触点之间的电阻值越小越好', aliases: ['Contact Resistance'], tags: ['电气连接', '性能指标', '硬件相关']},
+  {term: '额定电流', category: 'Metric', description: '连接器能够长期安全通过的最大电流值', aliases: ['Rated Current'], tags: ['电气连接', '性能指标', '硬件相关']},
+  {term: '插拔力', category: 'Metric', description: '将公端插入母座或拔出的力影响用户体验和连接可靠性', aliases: ['Insertion/Extraction Force'], tags: ['性能指标', '人机交互', '硬件相关']},
+  {term: '多层陶瓷电容', category: 'Component', description: '用量最大的被动元件用于滤波去耦储能等', aliases: ['MLCC'], tags: ['电气性能', 'SMT', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 16 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤19: 导入批次 17/57
+// 第 321-340 条数据
+// ========================================
+WITH [
+  {term: '钽电容', category: 'Component', description: '体积小容值大ESR低但有极性需注意防反接和浪涌', aliases: ['Tantalum Capacitor'], tags: ['电气性能', 'SMT', '硬件相关']},
+  {term: '电感', category: 'Component', description: '用于电源滤波储能和LC振荡电路', aliases: ['Inductor'], tags: ['电气性能', 'SMT', '硬件相关']},
+  {term: '磁珠', category: 'Component', description: '抑制高频噪声常用于电源和信号线', aliases: ['Ferrite Bead'], tags: ['电气性能', 'EMC', '硬件相关']},
+  {term: '晶体振荡器', category: 'Component', description: '提供系统基准时钟信号', aliases: ['Crystal Oscillator'], tags: ['电气性能', '半导体', '硬件相关']},
+  {term: '热敏电阻', category: 'Component', description: '电阻值随温度变化用于温度检测和温度补偿', aliases: ['NTC/PTC'], tags: ['电气性能', '传感器', '硬件相关']},
+  {term: '压敏电阻', category: 'Component', description: '电压敏感用于过压保护如浪涌', aliases: ['Varistor'], tags: ['电气性能', '安全相关', '硬件相关']},
+  {term: 'TVS二极管', category: 'Component', description: '响应速度极快用于防护ESD和EFT等快速瞬态过电压', aliases: ['瞬态电压抑制二极管'], tags: ['电气性能', '安全相关', '硬件相关']},
+  {term: '自恢复保险丝', category: 'Component', description: '过流时电阻急剧变大限制电流故障排除后自动恢复', aliases: ['PTC Resettable Fuse'], tags: ['电气性能', '安全相关', '硬件相关']},
+  {term: 'ESD保护器件', category: 'Component', description: '专门用于防护静电放电的器件通常并联在接口电路上', aliases: ['ESD Protection Device'], tags: ['电气性能', '硬件相关', '安全相关', 'ESD']},
+  {term: '电容的等效串联电阻', category: 'Metric', description: '电容等效电路中的串联电阻影响滤波效果和自身发热', aliases: ['ESR'], tags: ['电气性能', '性能指标', '硬件相关']},
+  {term: '电容的等效串联电感', category: 'Metric', description: '电容引脚和内部结构存在的寄生电感影响高频性能', aliases: ['ESL'], tags: ['电气性能', '性能指标', '硬件相关']},
+  {term: '额定电压', category: 'Metric', description: '元件能长期安全工作的最大直流电压或交流电压峰值', aliases: ['Rated Voltage'], tags: ['电气性能', '性能指标', '硬件相关']},
+  {term: '工作温度范围', category: 'Metric', description: '元件能正常工作的环境温度范围', aliases: ['Operating Temperature Range'], tags: ['性能指标', '可靠性', '硬件相关']},
+  {term: '在线测试治具', category: 'Component', description: '用于ICT测试通过密集的探针接触PCB测试点进行短路/开路和元件值测试', aliases: ['ICT Fixture'], tags: ['工具', '测试验证', '制造工艺']},
+  {term: '功能测试治具', category: 'Component', description: '模拟整机使用环境为手机供电提供信号输入并检测输出', aliases: ['FCT Fixture'], tags: ['工具', '测试验证', '制造工艺']},
+  {term: '电池模拟器', category: 'Component', description: '在FCT中替代真实电池可精确控制电压和电流并模拟电池特性', aliases: ['Battery Emulator'], tags: ['工具', '测试验证', '制造工艺', '充电']},
+  {term: '自动化测试设备', category: 'Component', description: '集成机械手相机传感器和测试模块实现生产线自动上下料和测试', aliases: ['Automated Test Equipment'], tags: ['工具', '测试验证', '自动化', '制造工艺']},
+  {term: '视觉对位系统', category: 'Component', description: '使用工业相机精确定位产品或元件位置引导自动化设备操作', aliases: ['Vision Alignment System'], tags: ['工具', '测试验证', '自动化', '制造工艺']},
+  {term: '针床', category: 'Component', description: 'ICT治具的核心部分上面布满了用于接触PCB测试点的弹簧探针', aliases: ['Bed of Nails Fixture', '针床测试架', 'Bed of Nails'], tags: ['工具', '测试验证', '制造工艺', 'ICT']},
+  {term: '射频测试治具', category: 'Component', description: '用于校准和测试手机的射频性能通常带有射频连接器和屏蔽腔', aliases: ['RF Test Fixture'], tags: ['工具', '测试验证', '制造工艺', '射频相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 17 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤20: 导入批次 18/57
+// 第 341-360 条数据
+// ========================================
+WITH [
+  {term: '声学测试密封腔', category: 'Component', description: '在生产线端提供一个标准的声学环境测试麦克风和受话器的性能', aliases: ['Acoustic Test Chamber'], tags: ['工具', '测试验证', '制造工艺', '声学']},
+  {term: '屏幕点亮治具', category: 'Component', description: '快速连接并点亮屏幕检查显示功能和无坏点', aliases: ['Display Lighting Fixture'], tags: ['工具', '测试验证', '制造工艺', '显示相关']},
+  {term: '激光打标治具', category: 'Component', description: '精确定位手机确保序列号等信息打在规定位置', aliases: ['Laser Marking Fixture'], tags: ['工具', '制造工艺']},
+  {term: '治具探针', category: 'Component', description: '治具上直接接触测试点的精密零件要求耐磨导电性好', aliases: ['Test Probe'], tags: ['工具', '测试验证', '制造工艺']},
+  {term: '测试覆盖率', category: 'Metric', description: '测试用例对产品功能或硬件节点的覆盖程度', aliases: ['Test Coverage'], tags: ['测试验证', '制造工艺', '质量体系']},
+  {term: '直通率', category: 'Metric', description: '产品一次性通过某道测试工序的比率', aliases: ['First Pass Yield'], tags: ['测试验证', '制造工艺', '质量体系']},
+  {term: '误判率', category: 'Metric', description: '治具或测试程序将合格品判为不合格的比例', aliases: ['False Call Rate'], tags: ['测试验证', '制造工艺', '质量体系']},
+  {term: '漏判率', category: 'Metric', description: '治具或测试程序将不合格品判为合格的比例', aliases: ['Escape Rate'], tags: ['测试验证', '制造工艺', '质量体系']},
+  {term: '测试周期时间', category: 'Metric', description: '完成一次完整测试所需的时间影响生产线节拍', aliases: ['Test Cycle Time'], tags: ['效率', '制造工艺', '测试验证']},
+  {term: '治具维护周期', category: 'Metric', description: '治具需要定期清洁校准或更换磨损件的频率', aliases: ['Fixture Maintenance Cycle'], tags: ['维护', '测试验证', '制造工艺']},
+  {term: '杨氏模量', category: 'Metric', description: '材料在弹性变形范围内应力与应变的比值表征材料抵抗弹性变形的能力', aliases: ['弹性模量'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '屈服强度', category: 'Metric', description: '材料开始产生明显塑性变形时的应力值', aliases: ['屈服点'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '抗拉强度', category: 'Metric', description: '材料在断裂前所能承受的最大应力', aliases: ['拉伸强度'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '伸长率', category: 'Metric', description: '材料断裂时的相对伸长量表征材料塑性变形能力', aliases: ['延伸率'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '冲击韧性', category: 'Metric', description: '材料在冲击载荷作用下吸收塑性变形功和断裂功的能力', aliases: ['冲击强度'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '疲劳强度', category: 'Metric', description: '材料在无限次应力循环下不发生破坏的最大应力', aliases: ['疲劳极限'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '蠕变极限', category: 'Metric', description: '材料在高温长期应力作用下抵抗蠕变变形的能力', aliases: ['蠕变强度'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '热膨胀系数', category: 'Metric', description: '温度每升高1℃材料长度或体积的相对变化量', aliases: ['CTE'], tags: ['热管理', '可靠性', '物料']},
+  {term: '热导率', category: 'Metric', description: '材料传导热量的能力单位W/(m·K)', aliases: ['导热系数'], tags: ['热管理', '可靠性', '物料']},
+  {term: '比热容', category: 'Metric', description: '单位质量材料升高单位温度所需的热量', aliases: ['比热'], tags: ['热管理', '可靠性', '物料']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 18 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤21: 导入批次 19/57
+// 第 361-380 条数据
+// ========================================
+WITH [
+  {term: '密度', category: 'Metric', description: '单位体积材料的质量', aliases: ['体积质量'], tags: ['设计', '结构相关', '物料']},
+  {term: '电阻率', category: 'Metric', description: '表征材料导电性能的物理量', aliases: ['体积电阻率'], tags: ['电气性能', '硬件相关', '物料']},
+  {term: '介电常数', category: 'Metric', description: '表征电介质材料极化能力的物理量', aliases: ['电容率'], tags: ['电气性能', '硬件相关', '物料']},
+  {term: '介质损耗', category: 'Metric', description: '电介质在交变电场中能量损耗的大小', aliases: ['介电损耗'], tags: ['电气性能', '硬件相关', '物料']},
+  {term: '耐电弧性', category: 'Metric', description: '绝缘材料抵抗电弧作用的能力', aliases: ['抗电弧性'], tags: ['电气性能', '安全相关', '物料']},
+  {term: '耐漏电起痕指数', category: 'Metric', description: '绝缘材料表面抵抗漏电痕迹的能力', aliases: ['CTI'], tags: ['电气性能', '安全相关', '物料']},
+  {term: '氧指数', category: 'Metric', description: '材料在氧气和氮气混合气体中维持燃烧所需的最低氧气浓度', aliases: ['极限氧指数'], tags: ['可靠性', '安全相关', '物料']},
+  {term: 'UL94阻燃等级', category: 'Metric', description: '塑料材料阻燃性能评价标准', aliases: ['燃烧等级'], tags: ['可靠性', '安全相关', '物料']},
+  {term: '玻璃化转变温度', category: 'Metric', description: '聚合物从玻璃态向高弹态转变的温度', aliases: ['Tg'], tags: ['物料', '制造工艺', '可靠性']},
+  {term: '熔融温度', category: 'Metric', description: '晶体材料从固态转变为液态的温度', aliases: ['熔点'], tags: ['可靠性', '制造工艺', '物料']},
+  {term: '热变形温度', category: 'Metric', description: '塑料在特定负荷下达到规定变形量的温度', aliases: ['HDT'], tags: ['物料', '制造工艺', '可靠性']},
+  {term: '维卡软化温度', category: 'Metric', description: '塑料在特定条件下达到规定压入深度的温度', aliases: ['VST'], tags: ['物料', '制造工艺', '可靠性']},
+  {term: '吸水率', category: 'Metric', description: '材料浸泡在水中吸收水分的程度', aliases: ['吸湿率'], tags: ['物料', '制造工艺', '可靠性']},
+  {term: '透湿率', category: 'Metric', description: '材料透过水蒸气的能力', aliases: ['水蒸气透过率'], tags: ['物料', '制造工艺', '可靠性']},
+  {term: '透气率', category: 'Metric', description: '材料透过氧气等气体的能力', aliases: ['气体透过率'], tags: ['物料', '制造工艺', '可靠性']},
+  {term: '耐化学药品性', category: 'Metric', description: '材料抵抗酸碱溶剂等化学药品侵蚀的能力', aliases: ['耐化学品性'], tags: ['物料', '制造工艺', '可靠性']},
+  {term: '耐候性', category: 'Metric', description: '材料抵抗阳光雨水温度等气候条件破坏的能力', aliases: ['耐老化性'], tags: ['可靠性', '外观', '物料']},
+  {term: '耐磨性', category: 'Metric', description: '材料抵抗机械磨损的能力', aliases: ['耐磨损性'], tags: ['可靠性', '外观', '物料']},
+  {term: '耐刮擦性', category: 'Metric', description: '材料表面抵抗刮擦损伤的能力', aliases: ['抗刮擦性'], tags: ['可靠性', '外观', '物料']},
+  {term: '平均无故障时间', category: 'Metric', description: '可修复产品相邻两次故障间的平均工作时间', aliases: ['MTBF'], tags: ['性能指标', '可靠性', '质量体系']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 19 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤22: 导入批次 20/57
+// 第 381-400 条数据
+// ========================================
+WITH [
+  {term: '平均修复时间', category: 'Metric', description: '故障修复所需的平均时间', aliases: ['MTTR'], tags: ['性能指标', '可靠性', '质量体系']},
+  {term: '失效率', category: 'Metric', description: '单位时间内产品发生故障的概率', aliases: ['故障率'], tags: ['性能指标', '可靠性', '质量体系']},
+  {term: '浴盆曲线', category: 'Metric', description: '产品失效率随时间变化的典型曲线形状', aliases: ['故障率曲线'], tags: ['性能指标', '可靠性', '质量体系']},
+  {term: 'IP防护等级', category: 'Metric', description: '针对电气设备防尘防水能力的国际标准等级', aliases: ['异物防护等级'], tags: ['结构相关', '可靠性', '法规']},
+  {term: 'IK防护等级', category: 'Metric', description: '针对电气设备外壳抵御外部机械冲击能力的等级', aliases: ['冲击防护等级'], tags: ['结构相关', '可靠性', '法规']},
+  {term: '比吸收率', category: 'Metric', description: '衡量人体吸收电磁辐射能量的速率有严格的法规限值', aliases: ['SAR'], tags: ['射频相关', '安全相关', '法规']},
+  {term: '听力安全', category: 'Metric', description: '对耳机等音频设备输出声压级的限制以保护听力', aliases: ['声压级限值'], tags: ['声学', '安全相关', '法规']},
+  {term: '激光安全', category: 'Metric', description: '对设备激光辐射强度的安全限制要求', aliases: ['激光辐射安全'], tags: ['安全相关', '硬件相关', '法规']},
+  {term: '生物相容性', category: 'Metric', description: '与人体接触的材料不引起过敏或刺激反应的要求', aliases: ['皮肤刺激性'], tags: ['可靠性', '安全相关', '法规']},
+  {term: '碳足迹', category: 'Metric', description: '产品全生命周期温室气体排放量的量化指标', aliases: ['碳排放量'], tags: ['环保', '供应链', '法规']},
+  {term: 'Hotspot', category: 'Symptom', description: '手机特定区域（如SoC、充电芯片）温度过高，影响用户体验和安全。', aliases: ['热点', '局部过热'], tags: ['可靠性', '硬件相关']},
+  {term: '暗角', category: 'Symptom', description: '照片四角出现亮度低于中心的现象，与镜头光学设计或组装有关。', aliases: ['Shading', '边缘暗影'], tags: ['影像相关', '摄像头模组', '异常现象']},
+  {term: '白点', category: 'Symptom', description: '显示屏上常亮的白色像素点，属于LCD/OLED的坏点的一种。', aliases: ['White Spot', '亮点'], tags: ['显示相关', '硬件相关']},
+  {term: '爆音', category: 'Symptom', description: '扬声器在特定频率下输出失真，产生刺耳的\"噼啪\"声。', aliases: ['Popping Sound', '破音'], tags: ['声学', '硬件相关']},
+  {term: '变砖', category: 'Symptom', description: '手机软件系统严重故障，无法正常启动或使用的状态，通常需强制刷机修复。', aliases: ['无法开机', '系统崩溃', 'Brick'], tags: ['软件相关', '硬件相关']},
+  {term: '波纹', category: 'Symptom', description: '在拍摄特定条纹图案时，因空间频率混叠产生的干扰波纹。', aliases: ['水波纹', 'Moire'], tags: ['影像相关', '显示相关']},
+  {term: '残胶', category: 'Symptom', description: '在点胶或贴合工艺后，多余的胶水残留在产品表面，影响美观和性能。', aliases: ['胶水残留', 'Glue Residual'], tags: ['制造工艺', '外观']},
+  {term: '断触', category: 'Symptom', description: '触摸屏局部或全部失去响应，可能与TP本身、FPC连接或软件驱动有关。', aliases: ['触摸失灵', 'Touch Failure'], tags: ['人机交互', '硬件相关']},
+  {term: '断流', category: 'Symptom', description: '在使用Wi-Fi或移动数据时，网络连接意外中断又快速恢复的现象。', aliases: ['Network Disconnection', '网络中断'], tags: ['软件相关', '硬件相关']},
+  {term: '发热', category: 'Symptom', description: '手机在充电、高负载运算或信号差时产生的明显温升，影响手感和安全。', aliases: ['过热', 'Overheat'], tags: ['可靠性', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 20 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤23: 导入批次 21/57
+// 第 401-420 条数据
+// ========================================
+WITH [
+  {term: '发烫', category: 'Symptom', description: '比发热更严重的温度异常，可能预示硬件短路或散热设计缺陷。', aliases: ['严重发热'], tags: ['安全相关', '硬件相关']},
+  {term: '反白', category: 'Symptom', description: 'LCD显示屏上出现的异常亮斑，与液晶分子排列异常有关。', aliases: ['亮点反转', 'White Spot Reverse'], tags: ['显示相关']},
+  {term: '飞漆', category: 'Symptom', description: '在喷涂过程中，油漆颗粒溅到非目标区域，造成外观不良。', aliases: ['油漆飞溅', 'Overspray'], tags: ['制造工艺', '外观']},
+  {term: '分色', category: 'Symptom', description: '同一部件或相邻部件之间存在肉眼可察觉的颜色不一致。', aliases: ['颜色差异', 'Color Difference'], tags: ['CMF', '外观']},
+  {term: '腐蚀', category: 'Symptom', description: '金属部件因接触汗液、盐雾等腐蚀性物质而发生的化学变化，影响功能和寿命。', aliases: ['腐蚀', '生锈', 'Corrosion'], tags: ['可靠性', '外观']},
+  {term: '干腐', category: 'Symptom', description: '金属在干燥环境下与气体（如氧气）发生化学反应导致的腐蚀。', aliases: ['干性腐蚀', 'Dry Corrosion'], tags: ['可靠性', '硬件相关']},
+  {term: '鼓包', category: 'Symptom', description: '电池内部产生气体导致外壳膨胀，是严重的安全隐患，需立即停用。', aliases: ['Battery Swelling', '电池鼓包', 'Swelling'], tags: ['异常现象', '安全相关', '硬件相关']},
+  {term: '刮伤', category: 'Symptom', description: '产品表面因摩擦留下的线性痕迹，影响美观，严重时影响功能。', aliases: ['Scratch', '划痕'], tags: ['可靠性', '外观']},
+  {term: '关机', category: 'Symptom', description: '非人为操作导致的手机自动断电，可能与电池、电源管理芯片或系统有关。', aliases: ['Auto Shutdown', '自动关机'], tags: ['软件相关', '硬件相关']},
+  {term: '龟裂', category: 'Symptom', description: '塑料或涂层表面出现的网状细微裂纹，通常与内应力或老化有关。', aliases: ['细微裂纹', 'Craze Cracks'], tags: ['可靠性', '结构相关']},
+  {term: '黑屏', category: 'Symptom', description: '手机有反应（如振动）但屏幕无任何显示，可能与屏幕、FPC或主板供电有关。', aliases: ['Black Screen', '屏幕不亮'], tags: ['显示相关', '硬件相关']},
+  {term: '花屏', category: 'Symptom', description: '屏幕显示乱码、条纹或色块，通常与显示接口、驱动芯片或内存有关。', aliases: ['屏幕花屏', 'Screen Corruption'], tags: ['显示相关', '硬件相关']},
+  {term: '划伤', category: 'Symptom', description: '产品表面因摩擦留下的线性痕迹，影响美观，严重时影响功能。', aliases: ['Scratch', '刮伤'], tags: ['可靠性', '外观']},
+  {term: '黄斑', category: 'Symptom', description: 'OLED屏幕局部出现的黄色斑块，可能与封装或材料老化有关。', aliases: ['Yellow Spot', '屏幕黄斑'], tags: ['显示相关']},
+  {term: '混光', category: 'Symptom', description: '不同颜色的LED灯光相互干扰，导致光色不纯，常见于指示灯设计。', aliases: ['灯光混合', 'Light Mixing'], tags: ['硬件相关', '外观']},
+  {term: '击穿', category: 'Symptom', description: '元器件因过电压导致绝缘失效而损坏，如电容击穿、ESD击穿。', aliases: ['Breakdown', '电压击穿'], tags: ['安全相关', '硬件相关']},
+  {term: '积墨', category: 'Symptom', description: '钢网开口堵塞或刮刀压力不当导致锡膏印刷后局部过量，易引起连锡。', aliases: ['Solder Paste Accumulation', '锡膏堆积'], tags: ['SMT', '制造工艺']},
+  {term: '夹料', category: 'Symptom', description: '在装配过程中，线材、FPC等软性材料被外壳或螺丝不当挤压。', aliases: ['材料被夹', 'Material Pinching'], tags: ['结构相关', '制造工艺']},
+  {term: '假电', category: 'Symptom', description: '手机显示电量充足但迅速关机，通常与电池老化、电量计校准不准有关。', aliases: ['虚电', 'False Power'], tags: ['软件相关', '硬件相关']},
+  {term: '假压', category: 'Symptom', description: '螺丝未真正拧紧或扭矩失效，导致连接松动，存在可靠性风险。', aliases: ['False Pressure', '虚压'], tags: ['结构相关', '制造工艺']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 21 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤24: 导入批次 22/57
+// 第 421-440 条数据
+// ========================================
+WITH [
+  {term: '胶印', category: 'Symptom', description: '胶水溢出或擦拭不净，在产品表面留下可见的痕迹。', aliases: ['Adhesive Mark', '胶水痕迹'], tags: ['制造工艺', '外观']},
+  {term: '焦灼', category: 'Symptom', description: '局部过热导致塑料或PCB碳化变黑，通常为严重故障的表现。', aliases: ['Burn Mark', '烧焦'], tags: ['可靠性', '硬件相关']},
+  {term: '接触不良', category: 'Symptom', description: '连接器、开关等因氧化、松动或污染导致时通时断的现象。', aliases: ['Intermittent Contact', '接触不稳定'], tags: ['电气连接', '硬件相关']},
+  {term: '结块', category: 'Symptom', description: '胶水在储存或使用前发生部分固化，形成颗粒，影响点胶效果。', aliases: ['胶水结块', 'Adhesive Lumping'], tags: ['制造工艺', '物料']},
+  {term: '卡顿', category: 'Symptom', description: '系统或应用响应缓慢，界面动画掉帧，严重影响用户体验。', aliases: ['Lag', '操作不流畅'], tags: ['性能指标', '软件相关']},
+  {term: '开胶', category: 'Symptom', description: '粘接的部件之间出现分离，如屏幕开胶、电池盖开胶。', aliases: ['脱胶', 'De-lamination'], tags: ['制造工艺', '结构相关']},
+  {term: '开裂', category: 'Symptom', description: '材料或部件出现裂缝，通常由应力过大、材料脆性或冲击导致。', aliases: ['Crack', '破裂'], tags: ['可靠性', '结构相关']},
+  {term: '开短路', category: 'Symptom', description: '电路两种基本故障模式：开路（断开）和短路（异常连接）。', aliases: ['Open/Short Circuit', '开路与短路'], tags: ['电气连接', '硬件相关']},
+  {term: '空焊', category: 'Symptom', description: '元器件引脚或焊盘没有与焊锡形成良好的冶金结合。', aliases: ['未上锡', 'Non-wetting'], tags: ['SMT', '制造工艺']},
+  {term: '孔偏', category: 'Symptom', description: 'PCB上的钻孔位置偏离设计中心，可能导致电气连接不良或短路。', aliases: ['钻孔偏移', 'Drilling Offset'], tags: ['PCB', '制造工艺']},
+  {term: '口哨声', category: 'Symptom', description: '电感、变压器等磁性元件在特定频率下振动产生的噪音。', aliases: ['啸叫', 'Whistling Noise'], tags: ['声学', '硬件相关']},
+  {term: '溃缩', category: 'Symptom', description: '材料或结构在压力下发生永久性的压缩变形，失去原有功能。', aliases: ['压溃变形', 'Crushing Deformation'], tags: ['可靠性', '结构相关']},
+  {term: '拉丝', category: 'Symptom', description: '在点胶或塑料注塑过程中，材料被拉扯成丝状残留物。', aliases: ['Stringing', '材料拉丝'], tags: ['制造工艺', '外观']},
+  {term: '乐音', category: 'Symptom', description: '电机、齿轮等运动部件发出的非预期的、不悦耳的噪音。', aliases: ['异音', 'Abnormal Sound'], tags: ['声学', '硬件相关']},
+  {term: '连锡', category: 'Symptom', description: '焊锡在相邻的两个焊点之间形成非预期的连接，导致短路。', aliases: ['锡桥', 'Solder Bridge'], tags: ['SMT', '制造工艺']},
+  {term: '亮斑', category: 'Symptom', description: '显示屏上常亮的像素点或区域，属于显示缺陷。', aliases: ['亮点', 'Bright Spot'], tags: ['显示相关']},
+  {term: '亮线', category: 'Symptom', description: '显示屏上出现的异常亮线，通常与驱动线路或屏幕本身损伤有关。', aliases: ['亮线缺陷', 'Line Defect'], tags: ['显示相关']},
+  {term: '裂纹', category: 'Symptom', description: '材料局部开裂形成的缝隙，可能由应力、疲劳或缺陷引起。', aliases: ['Crack', '裂痕'], tags: ['可靠性', '结构相关']},
+  {term: '漏光', category: 'Symptom', description: '屏幕边框处有非预期的光线射出，影响视觉效果和产品档次感。', aliases: ['Light Leakage', '光泄漏'], tags: ['显示相关', '异常现象', '硬件相关']},
+  {term: '漏液', category: 'Symptom', description: '电池电解液泄漏，具有腐蚀性且可能引发安全问题，是严重不良。', aliases: ['电池漏液', 'Liquid Leakage'], tags: ['安全相关', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 22 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤25: 导入批次 23/57
+// 第 441-460 条数据
+// ========================================
+WITH [
+  {term: '漏码', category: 'Symptom', description: '产品上应有的序列号、Logo等信息未被激光打标或打标不清。', aliases: ['Missing Laser Marking', '激光漏打'], tags: ['制造工艺', '外观']},
+  {term: '漏贴', category: 'Symptom', description: '贴片机未能将元器件贴装到PCB指定位置上。', aliases: ['Missing Component', '元件漏贴'], tags: ['SMT', '制造工艺']},
+  {term: '露白', category: 'Symptom', description: '喷涂或镀层厚度不足或不均匀，导致底层材料颜色显露出来。', aliases: ['底色显露', 'Substrate Exposure'], tags: ['CMF', '外观']},
+  {term: '露铜', category: 'Symptom', description: 'PCB表面的阻焊层破损，导致底层铜箔暴露，易氧化和短路。', aliases: ['Copper Exposure', '铜层暴露'], tags: ['PCB', '可靠性']},
+  {term: '乱码', category: 'Symptom', description: '屏幕显示的文字或符号变成无法识别的代码，可能与软件或内存有关。', aliases: ['显示乱码', 'Garbled Characters'], tags: ['显示相关', '软件相关']},
+  {term: '麻点', category: 'Symptom', description: '产品表面出现的细小凹坑，可能与注塑、喷涂或电镀工艺有关。', aliases: ['Pitting', '表面凹点'], tags: ['制造工艺', '外观']},
+  {term: '毛边', category: 'Symptom', description: '金属或塑料件加工后边缘留下的多余材料，影响装配和安全。', aliases: ['毛刺', 'Burr'], tags: ['制造工艺', '外观']},
+  {term: '毛絮', category: 'Symptom', description: '环境中或擦拭布上的纤维绒毛附着在产品表面，影响清洁度。', aliases: ['纤维粉尘', 'Lint'], tags: ['制造工艺', '外观']},
+  {term: '霉斑', category: 'Symptom', description: '在高温高湿环境下，有机物表面生长的霉菌斑点。', aliases: ['Mildew', '发霉'], tags: ['可靠性', '外观']},
+  {term: '米粒', category: 'Symptom', description: '回流焊后散布在PCB上的微小锡球，可能引起短路。', aliases: ['Solder Ball', '锡珠'], tags: ['SMT', '制造工艺']},
+  {term: '模垢', category: 'Symptom', description: '模具表面的残留物转移到产品上，导致注塑件表面缺陷。', aliases: ['模具污垢', 'Mold Contamination'], tags: ['制造工艺', '外观']},
+  {term: '模痕', category: 'Symptom', description: '注塑件在模具分型面处产生的轻微痕迹，工艺控制可减轻其明显度。', aliases: ['Parting Line', '合模线'], tags: ['结构相关', '外观']},
+  {term: '难拆', category: 'Symptom', description: '产品设计或组装导致维修时难以拆卸，影响可维修性。', aliases: ['Difficult Disassembly', '拆卸困难'], tags: ['结构相关', '维修']},
+  {term: '尿印', category: 'Symptom', description: '清洗或擦拭后留下的水渍或清洗剂痕迹，干燥后形成印迹。', aliases: ['Water Spot', '水渍痕'], tags: ['制造工艺', '外观']},
+  {term: '凝露', category: 'Symptom', description: '当环境温度骤变，手机内部较冷的表面凝结出水珠，可能导致短路。', aliases: ['Condensation', '冷凝水'], tags: ['测试验证', '可靠性']},
+  {term: '抛料', category: 'Symptom', description: '贴片机识别元件不合格或取料失败后将其丢弃，影响效率和成本。', aliases: ['Component Rejection', '元件抛料'], tags: ['SMT', '制造工艺']},
+  {term: '批锋', category: 'Symptom', description: '注塑件在模具分型面或顶针处产生的薄边多余料。', aliases: ['Flash', '毛边'], tags: ['制造工艺', '外观']},
+  {term: '偏位', category: 'Symptom', description: '元器件贴装位置偏离焊盘中心，可能引起虚焊或短路。', aliases: ['Misalignment', '位置偏移'], tags: ['SMT', '制造工艺']},
+  {term: '漂移', category: 'Symptom', description: '元器件参数（如电阻值、时钟频率）随时间或温度发生缓慢变化。', aliases: ['Parameter Drift', '参数漂移'], tags: ['可靠性', '硬件相关']},
+  {term: '气泡', category: 'Symptom', description: '在胶合、贴合或注塑过程中，内部或层间残留的空气泡。', aliases: ['气泡缺陷', 'Air Bubble'], tags: ['制造工艺', '外观']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 23 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤26: 导入批次 24/57
+// 第 461-480 条数据
+// ========================================
+WITH [
+  {term: '翘曲', category: 'Symptom', description: '平板状部件（如PCB、电池盖）发生的弯曲或扭曲变形。', aliases: ['Warpage', '变形'], tags: ['可靠性', '结构相关']},
+  {term: '翘脚', category: 'Symptom', description: '元器件引脚未与焊盘接触而翘起，导致开路。', aliases: ['Lifted Lead', '引脚翘起'], tags: ['SMT', '制造工艺']},
+  {term: '缺胶', category: 'Symptom', description: '点胶量未达到要求，导致粘接强度或密封性能不足。', aliases: ['胶量不足', 'Insufficient Adhesive'], tags: ['结构相关', '制造工艺']},
+  {term: '缺口', category: 'Symptom', description: '材料边缘因磕碰或加工不良形成的V形或U形缺损。', aliases: ['边缘缺口', 'Notch'], tags: ['结构相关', '外观']},
+  {term: '热损', category: 'Symptom', description: '元器件因过热导致的不可逆性能劣化或损坏。', aliases: ['Thermal Damage', '热损伤'], tags: ['可靠性', '硬件相关']},
+  {term: '熔损', category: 'Symptom', description: '过高的温度或过长的加热时间导致焊锡过度流失，焊点不饱满。', aliases: ['过熔', 'Solder Melting Loss'], tags: ['SMT', '制造工艺']},
+  {term: '色差', category: 'Symptom', description: '同一部件不同批次或同一手机不同部件之间存在肉眼可察觉的颜色不一致', aliases: ['颜色差异', 'Color Difference'], tags: ['CMF', '异常现象', '外观']},
+  {term: '沙眼', category: 'Symptom', description: '涂层或镀层表面出现的极其细微的孔洞，如同针尖扎过。', aliases: ['Pinhole', '针孔'], tags: ['制造工艺', '外观']},
+  {term: '闪退', category: 'Symptom', description: '应用程序在运行过程中突然关闭并返回主界面。', aliases: ['应用崩溃', 'App Crash'], tags: ['软件相关']},
+  {term: '伤盘', category: 'Symptom', description: 'PCB焊盘因过度加热、刮擦或多次焊接而脱落或损坏。', aliases: ['Pad Damage', '焊盘损伤'], tags: ['PCB', '维修']},
+  {term: '失效', category: 'Symptom', description: '产品失去规定功能的状态。', aliases: ['功能失效', 'Failure'], tags: ['可靠性']},
+  {term: '油污', category: 'Symptom', description: '产品表面沾染的油脂污渍。', aliases: ['Oil Stain', '油渍'], tags: ['制造工艺', '外观']},
+  {term: '鱼眼', category: 'Symptom', description: '涂层表面出现的类似鱼眼的圆形凹坑或凸起。', aliases: ['透镜状缺陷', 'Fish Eye'], tags: ['外观', '涂层']},
+  {term: '云纹', category: 'Symptom', description: '当两个周期性图案（如感光元件像素和景物纹理）重叠时产生的干扰条纹。', aliases: ['摩尔纹', 'Moiré Pattern'], tags: ['影像相关']},
+  {term: '脏污', category: 'Symptom', description: '产品表面附着的油污、灰尘等异物。', aliases: ['同污点'], tags: ['制造工艺', '外观']},
+  {term: '噪点', category: 'Symptom', description: '图像中出现的随机颗粒状干扰，在低光照下尤为明显。', aliases: ['图像噪点', 'Image Noise'], tags: ['影像相关']},
+  {term: '自愈', category: 'Symptom', description: '系统发生轻微故障后，能自动恢复正常功能的现象。', aliases: ['自恢复', 'Self-recovery'], tags: ['可靠性', '软件相关']},
+  {term: '醉机', category: 'Symptom', description: '系统行为异常，功能紊乱，但尚未死机或重启，通常需重启恢复。', aliases: ['系统错乱', 'System Confusion'], tags: ['软件相关']},
+  {term: '对焦失败', category: 'Symptom', description: '**定义**: 摄像头无法正确锁定焦点。 **判定口径**: AF成功率 <95%。 **常见场景**: 暗光/微距/移动拍摄。 **排查路径**: 检查固件→电机→镜头洁净度。 **对策**: 增加AF日志采集，改善模组洁净管控。', aliases: ['Focus Fail', '无法对焦'], tags: ['影像相关', '摄像头模组']},
+  {term: '死机', category: 'Symptom', description: '**定义**: 系统停止响应。 **判定口径**: 连续无响应 >30s。 **常见场景**: 高并发任务/内存不足。 **排查路径**: 抓取log→检查内存/CPU占用。 **对策**: 优化系统调度，增加watchdog。', aliases: ['系统死机', 'Hang'], tags: ['软件相关', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 24 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤27: 导入批次 25/57
+// 第 481-500 条数据
+// ========================================
+WITH [
+  {term: '电流过大', category: 'Symptom', description: '**定义**: 工作电流超过额定值。 **判定口径**: 电流 >1.5×额定。 **常见场景**: 充电、射频发射。 **排查路径**: 检查供电→替换IC。 **对策**: 增加过流保护，优化电源管理。', aliases: ['Over Current'], tags: ['电气性能', '硬件相关']},
+  {term: '短路', category: 'Symptom', description: '**定义**: 电路异常导通。 **判定口径**: 电阻 <1Ω。 **常见场景**: PCBA调试。 **排查路径**: 热像定位→逐级隔离。 **对策**: 增加保护设计，加强制程防呆。', aliases: ['Short Circuit'], tags: ['电气连接', '异常现象', '硬件相关', '电气性能']},
+  {term: '松脱', category: 'Symptom', description: '**定义**: 螺丝/卡扣失去紧固力。 **判定口径**: 力矩 <70% 标准。 **常见场景**: 跌落/运输。 **排查路径**: 检查扭矩记录。 **对策**: 增加锁附监控，改善螺丝工艺。', aliases: ['松动', 'Loose'], tags: ['可靠性', '结构相关']},
+  {term: '虚焊', category: 'Symptom', description: '**定义**: 焊点不牢固。 **判定口径**: X-Ray 显示空洞 >20%。 **常见场景**: PCBA生产。 **排查路径**: 检查焊膏→回流工艺。 **对策**: 增强锡膏管理，优化工艺窗口。', aliases: ['Cold Solder Joint', '假焊', 'Cold Solder'], tags: ['SMT', '异常现象', '制造工艺']},
+  {term: '噪音', category: 'Symptom', description: '**定义**: 通话/播放时出现异常声音。 **判定口径**: SNR <20dB。 **常见场景**: 通话/音频播放。 **排查路径**: 检查麦克风→音频IC。 **对策**: 优化声学设计，改善防尘网。', aliases: ['Noise', '杂音'], tags: ['声学', '硬件相关']},
+  {term: '亮度不均', category: 'Symptom', description: '**定义**: 屏幕不同区域亮度差异。 **判定口径**: ΔL/L >20%。 **常见场景**: 灰阶测试。 **排查路径**: 检查背光模组。 **对策**: 改善背光均匀性设计。', aliases: ['屏幕亮度不均', 'Brightness Uneven'], tags: ['影像相关', '显示相关']},
+  {term: '锌合金模垢', category: 'Symptom', description: '锌合金压铸时，合金元素在模具表面析出形成的污垢，影响铸件表面质量。', aliases: ['锌合金模具沉积物'], tags: ['制造工艺', '外观']},
+  {term: '爬行腐蚀', category: 'Symptom', description: '在含硫气氛中，银等金属表面生成导电性硫化物绒毛，并在电场下延伸生长，导致短路。', aliases: ['creep corrosion', 'Creep Corrosion'], tags: ['PCB', '可靠性', '硬件相关']},
+  {term: '爆米花效应', category: 'Symptom', description: '受潮的IC封装在回流焊高温下，内部水分急速汽化导致封装材料开裂。', aliases: ['popcorning'], tags: ['SMT', '封装', '可靠性']},
+  {term: '锡须', category: 'Symptom', description: '纯锡镀层表面自发生长的细长锡晶须，可能引起短路。高铅或合金镀层可抑制。', aliases: ['Tin Whisker', '锡晶须'], tags: ['PCB', '可靠性', '硬件相关']},
+  {term: '冷焊点', category: 'Symptom', description: '焊点温度不足，焊料未完全熔化，表面粗糙呈灰暗色，连接强度极差。', aliases: ['Cold Solder Joint'], tags: ['SMT', '可靠性', '制造工艺']},
+  {term: '银迁移', category: 'Symptom', description: '在直流电场和湿度作用下，银离子在绝缘体表面迁移析出，导致绝缘下降和短路。', aliases: ['银离子迁移', 'Silver Migration'], tags: ['PCB', '可靠性', '硬件相关']},
+  {term: '电化学迁移', category: 'Symptom', description: '详见前表电糊。', aliases: ['ECM'], tags: ['PCB', '可靠性', '硬件相关']},
+  {term: '缩水痕', category: 'Symptom', description: '塑胶件在肉厚较大区域因冷却收缩不均而产生的表面凹陷。', aliases: ['Sink Mark'], tags: ['注塑', '制造工艺', '外观']},
+  {term: '焊料球', category: 'Symptom', description: '回流焊后，在焊盘周围或器件底部形成的独立小球，是焊接不良的一种。', aliases: ['Solder Ball'], tags: ['SMT', '可靠性', '制造工艺']},
+  {term: '彩虹纹', category: 'Symptom', description: '两层透明材料因微小间隙产生光干涉形成的彩色环状条纹。', aliases: [], tags: ['显示相关', '摄像头模组', '外观']},
+  {term: '引脚浮高', category: 'Symptom', description: '元件引脚未与焊盘接触而翘起，通常发生在维修或应力冲击后。', aliases: ['Lead Lifting'], tags: ['SMT', '可靠性', '制造工艺']},
+  {term: '晶振频偏', category: 'Symptom', description: '晶体振荡器的实际输出频率偏离其标称频率超出允许范围。', aliases: ['Crystal Frequency Deviation'], tags: ['通信相关', '可靠性', '异常现象', '硬件相关']},
+  {term: '助焊剂残留', category: 'Symptom', description: '焊接后残留的助焊剂，若具腐蚀性或影响绝缘，需清洗或使用免清洗型。', aliases: ['Flux Residue'], tags: ['SMT', '可靠性', '制造工艺']},
+  {term: '焊点疲劳', category: 'Symptom', description: '焊点在温度循环或机械应力下，因热膨胀系数不匹配而产生的裂纹和失效。', aliases: ['Solder Joint Fatigue'], tags: ['SMT', '可靠性', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 25 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤28: 导入批次 26/57
+// 第 501-520 条数据
+// ========================================
+WITH [
+  {term: '模内应力', category: 'Symptom', description: '塑胶件在注塑成型过程中产生的内应力，是后续变形和开裂的根源。', aliases: ['Molded-in Stress'], tags: ['注塑', '制造工艺', '可靠性']},
+  {term: '锡瘟', category: 'Symptom', description: '纯锡在低温下（<13.2°C）由白锡（β锡）转变为灰锡（α锡）的相变，伴随体积膨胀和粉末化。', aliases: ['Tin Pest'], tags: ['可靠性', '硬件相关', '物料']},
+  {term: '板翘', category: 'Symptom', description: 'PCB本身的翘曲。', aliases: ['Board Warpage'], tags: ['PCB', '可靠性', '制造工艺']},
+  {term: '电迁移', category: 'Symptom', description: '集成电路金属互连线中，在高电流密度下金属原子沿电子流方向迁移，导致导线开路或短路。', aliases: ['EM', 'Electromigration'], tags: ['半导体', '可靠性', '硬件相关']},
+  {term: '锡珠飞溅', category: 'Symptom', description: '回流焊时，因预热不足或助焊剂沸腾导致锡膏中的锡珠飞散到焊盘外。', aliases: ['Solder Ball Splashing'], tags: ['SMT', '可靠性', '制造工艺']},
+  {term: '板边毛刺', category: 'Symptom', description: 'PCB分板后边缘产生的突出物。', aliases: ['Board Edge Burr'], tags: ['PCB', '制造工艺', '外观']},
+  {term: '触控失灵', category: 'Symptom', description: '**定义**: 触摸操作无效或延迟。 **判定口径**: 单点/多点触控测试失败。 **常见场景**: 高湿环境、屏幕贴膜。 **排查路径**: 检查TP模组→固件→驱动IC。 **对策**: 优化算法，改善屏幕贴合。', aliases: ['触摸屏无响应', 'Touch Failure', 'Touch Fail'], tags: ['人机交互', '显示相关', '异常现象']},
+  {term: '信号弱', category: 'Symptom', description: '**定义**: 手机在正常网络环境下信号强度不足。 **判定口径**: RSRP < -110dBm。 **常见场景**: 地铁、地下室。 **排查路径**: 检查天线设计→射频通道。 **对策**: 优化天线布局，增加功放。', aliases: ['Weak Signal', 'Low Signal', '信号差'], tags: ['射频相关', '用户体验', '异常现象', '通信相关']},
+  {term: '通话掉线', category: 'Symptom', description: '**定义**: 通话过程中意外中断。 **判定口径**: 掉话率 >2%。 **常见场景**: 移动场景、弱覆盖。 **排查路径**: 抓取log→检查协议栈→网络条件。 **对策**: 优化射频功率控制，改善切换策略。', aliases: ['Call Drop'], tags: ['射频相关', '用户体验', '异常现象', '通信相关']},
+  {term: '充电慢', category: 'Symptom', description: '**定义**: 充电速率低于设计值。 **判定口径**: 充电电流 < 额定值 70%。 **常见场景**: 使用非原装充电器。 **排查路径**: 检查充电IC→协议识别。 **对策**: 增加兼容性测试，优化协议栈。', aliases: ['慢充', 'Slow Charging'], tags: ['电池', '硬件相关']},
+  {term: '充不进电', category: 'Symptom', description: '**定义**: 手机接入电源无法充电。 **判定口径**: 电池电量无上升。 **常见场景**: 接口损坏、过放保护。 **排查路径**: 检查充电口→电池保护板。 **对策**: 增强接口防护，优化BMS策略。', aliases: ['无法充电', 'Not Charging'], tags: ['电池', '硬件相关']},
+  {term: '电池发热', category: 'Symptom', description: '**定义**: 电池温度异常升高。 **判定口径**: 电池温度 >50℃。 **常见场景**: 快充、边充边玩。 **排查路径**: 检查快充协议→电芯阻抗。 **对策**: 控制快充功率，提升散热。', aliases: ['Battery Heating', '充电发烫'], tags: ['电池', '安全相关']},
+  {term: '耗电异常', category: 'Symptom', description: '**定义**: 待机/使用时电量消耗过快。 **判定口径**: 待机功耗 >200mW。 **常见场景**: APP后台运行。 **排查路径**: 分析耗电曲线→定位进程。 **对策**: 优化系统调度，限制异常应用。', aliases: ['Abnormal Power Drain', '功耗异常'], tags: ['电池', '软件相关']},
+  {term: '过充', category: 'Symptom', description: '**定义**: 电池电压超过安全上限。 **判定口径**: 电压 >4.35V。 **常见场景**: 充电保护失效。 **排查路径**: 检查BMS→充电IC。 **对策**: 增加保护电路，提升电芯一致性。', aliases: ['Over Charging', '过度充电'], tags: ['电池', '安全相关']},
+  {term: '过放', category: 'Symptom', description: '**定义**: 电池电压低于安全下限。 **判定口径**: 电压 <3.0V。 **常见场景**: 长时间未充电。 **排查路径**: 检查电池保护板。 **对策**: 增加欠压保护，改善电量计校准。', aliases: ['Over Discharging', '过度放电'], tags: ['电池', '安全相关']},
+  {term: '电池膨胀', category: 'Symptom', description: '**定义**: 电芯鼓胀导致结构异常。 **判定口径**: 厚度增加 >10%。 **常见场景**: 高温、寿命末期。 **排查路径**: 检查气胀情况。 **对策**: 优化电芯材料，增加气体吸收层。', aliases: ['Cell Expansion', '电芯膨胀'], tags: ['电池', '可靠性']},
+  {term: '屏幕碎裂', category: 'Symptom', description: '**定义**: 显示屏出现裂纹/碎裂。 **判定口径**: 裂纹可见。 **常见场景**: 跌落。 **排查路径**: 检查玻璃材质/结构。 **对策**: 使用康宁大猩猩玻璃，优化保护壳设计。', aliases: ['屏幕破裂', 'Screen Crack'], tags: ['结构相关', '显示相关']},
+  {term: '屏幕进灰', category: 'Symptom', description: '**定义**: 屏幕层间进入异物。 **判定口径**: 黑屏下可见颗粒。 **常见场景**: 密封不良。 **排查路径**: 检查密封胶→结构间隙。 **对策**: 改善装配工艺，增加洁净度控制。', aliases: ['显示进灰', 'Dust Inside Screen'], tags: ['结构相关', '显示相关']},
+  {term: '色偏', category: 'Symptom', description: '**定义**: 显示色彩与标准不符。 **判定口径**: ΔE >3。 **常见场景**: 屏幕老化。 **排查路径**: 检查色彩管理→面板一致性。 **对策**: 增加出厂校色，优化算法。', aliases: ['显示偏色', 'Color Shift'], tags: ['CMF', '显示相关']},
+  {term: '残影', category: 'Symptom', description: '**定义**: 静态画面残留。 **判定口径**: 静态图像切换后残留 >30s。 **常见场景**: OLED屏。 **排查路径**: 检查驱动算法→面板寿命。 **对策**: 优化像素刷新，增加均匀老化策略。', aliases: ['Image Retention', '烧屏'], tags: ['可靠性', '显示相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 26 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤29: 导入批次 27/57
+// 第 521-540 条数据
+// ========================================
+WITH [
+  {term: '闪烁', category: 'Symptom', description: '**定义**: 屏幕亮度快速变化。 **判定口径**: PWM频率 <240Hz。 **常见场景**: 低亮度使用。 **排查路径**: 检查驱动IC→调光方案。 **对策**: 提升PWM频率，采用DC调光。', aliases: ['屏闪', 'Flicker'], tags: ['影像相关', '异常现象', '软件相关', '显示相关']},
+  {term: '模内取向效应', category: 'Symptom', description: '注塑过程中高分子链沿流动方向排列，导致产品力学性能和热膨胀系数各向异性。', aliases: ['分子取向'], tags: ['注塑', '制造工艺', '可靠性']},
+  {term: '信号地弹', category: 'Symptom', description: '多个数字输出同时切换时，因封装电感引起地电位波动，影响输入电平判断。', aliases: ['地噪声'], tags: ['设计', '硬件相关', '电气性能']},
+  {term: '模流纤维取向', category: 'Symptom', description: '增强纤维在注塑过程中沿流动方向取向，导致产品强度和热膨胀呈现方向性。', aliases: ['纤维排向'], tags: ['注塑', '制造工艺', '可靠性']},
+  {term: '邦定cratering', category: 'Symptom', description: '键合过程中过大的超声波能量或压力导致芯片下方的硅材料产生裂纹或崩缺。', aliases: ['弹坑效应'], tags: ['半导体', '封装', '可靠性']},
+  {term: '锡膏印刷偏移', category: 'Symptom', description: '锡膏印刷图形与PCB焊盘之间的位置偏差，需控制在允许范围内。', aliases: ['印刷对位偏差'], tags: ['SMT', '制造工艺']},
+  {term: '邦定Pad污染', category: 'Symptom', description: '芯片键合焊盘表面存在氧化物、有机物或离子污染，影响键合强度和可靠性。', aliases: ['焊盘污染'], tags: ['半导体', '封装', '可靠性']},
+  {term: '腐蚀疲劳', category: 'Symptom', description: '材料在腐蚀性环境和交变应力共同作用下，疲劳寿命显著降低的现象。', aliases: ['环境疲劳'], tags: ['可靠性', '结构相关', '硬件相关']},
+  {term: '模流残余应力', category: 'Symptom', description: '注塑件内部因不均匀冷却和分子取向被冻结而形成的应力，是翘曲和开裂的根源。', aliases: ['内应力'], tags: ['注塑', '制造工艺', '可靠性']},
+  {term: '蠕变', category: 'Symptom', description: '材料在恒定应力下，应变随时间缓慢增加的现象，影响长期尺寸稳定性。', aliases: ['徐变'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '锡膏热坍塌', category: 'Symptom', description: '锡膏在回流焊预热阶段，因粘度下降过度而扩散到焊盘之外，可能导致桥连。', aliases: ['热塌陷'], tags: ['SMT', '可靠性', '制造工艺']},
+  {term: '模流纤维断裂', category: 'Symptom', description: '长纤维增强塑料在注塑过程中，纤维因强剪切力而断裂，降低增强效果。', aliases: ['纤维损伤'], tags: ['注塑', '制造工艺', '可靠性']},
+  {term: '胶体化学老化', category: 'Symptom', description: '胶粘剂因与环境中化学物质（如臭氧、UV）反应而性能劣化。', aliases: ['化学降解'], tags: ['点胶', '可靠性', '物料']},
+  {term: '应力松弛', category: 'Symptom', description: '材料在保持恒定应变的情况下，其内部应力随时间逐渐减小的现象。', aliases: ['应力弛豫'], tags: ['可靠性', '结构相关', '物料']},
+  {term: '模流热残渣', category: 'Symptom', description: '塑料在料筒或喷嘴中长时间受热，发生分解产生黑点或焦化物。', aliases: ['材料降解'], tags: ['注塑', '制造工艺', '可靠性']},
+  {term: '胶体物理老化', category: 'Symptom', description: '非晶态聚合物在玻璃化转变温度以下，其体积和 enthalpy 向平衡状态缓慢松弛的过程，导致性能变化。', aliases: ['物理老化'], tags: ['点胶', '可靠性', '物料']},
+  {term: '氢致开裂', category: 'Symptom', description: '金属材料因吸收氢原子而在应力作用下发生脆性断裂的现象。', aliases: ['氢脆'], tags: ['可靠性', '结构相关', '硬件相关']},
+  {term: '视频不同步', category: 'Symptom', description: '**定义**: 视频播放时声音和画面不同步。 **判定口径**: 延迟 >200ms。 **常见场景**: 在线播放、通话。 **排查路径**: 检查解码→缓冲机制。 **对策**: 优化同步算法，减少延迟。', aliases: ['声画不同步', 'AV Sync Issue'], tags: ['影像相关', '软件相关']},
+  {term: '录像掉帧', category: 'Symptom', description: '**定义**: 录像过程中丢失帧。 **判定口径**: 丢帧率 >5%。 **常见场景**: 高分辨率录像。 **排查路径**: 检查存储写入速度→ISP负载。 **对策**: 提升存储性能，优化编码。', aliases: ['Video Frame Drop', '视频丢帧'], tags: ['性能指标', '影像相关']},
+  {term: '自拍过曝', category: 'Symptom', description: '**定义**: 前置摄像头拍照曝光过度。 **判定口径**: 过曝面积 >20%。 **常见场景**: 强光自拍。 **排查路径**: 检查AE算法→镜头参数。 **对策**: 优化HDR，增加曝光补偿。', aliases: ['Selfie Overexposure', '前摄过曝'], tags: ['影像相关', '摄像头模组']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 27 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤30: 导入批次 28/57
+// 第 541-560 条数据
+// ========================================
+WITH [
+  {term: '夜拍拖影', category: 'Symptom', description: '**定义**: 暗光下拍照出现拖影。 **判定口径**: 拖影长度 >3px。 **常见场景**: 夜景拍照。 **排查路径**: 检查快门速度→OIS。 **对策**: 优化夜景算法，提升防抖性能。', aliases: ['Night Smear', '暗光拖影'], tags: ['影像相关', '摄像头模组']},
+  {term: '电池续航不足', category: 'Metric', description: '**定义**: 单次充电使用时长不足。 **判定口径**: 使用时长低于标称值 20%。 **常见场景**: 高功耗应用。 **排查路径**: 功耗分析→检查电芯容量。 **对策**: 优化系统调度，提升电池能量密度。', aliases: ['Poor Battery Life', '续航差'], tags: ['电池', '硬件相关']},
+  {term: '电池过热', category: 'Symptom', description: '**定义**: 电池在充电或使用时过热。 **判定口径**: 电池温度 >45℃。 **常见场景**: 快充、高负载。 **排查路径**: 检查充电IC→散热设计。 **对策**: 增加温控保护，改善散热。', aliases: ['电池温度过高', 'Battery Overheat'], tags: ['安全相关', '硬件相关']},
+  {term: '无法充电', category: 'Symptom', description: '**定义**: 手机无法进入充电状态。 **判定口径**: 插入充电器无反应。 **常见场景**: 接口损坏。 **排查路径**: 检查尾插→充电IC。 **对策**: 提升接口强度，增加防尘设计。', aliases: ['Failure to Charge', '充电失败', 'Charging Fail'], tags: ['充电', '硬件相关', '异常现象']},
+  {term: '无线充不稳', category: 'Symptom', description: '**定义**: 无线充电过程中频繁中断。 **判定口径**: 中断率 >5%。 **常见场景**: 位置偏移。 **排查路径**: 检查线圈对准→EMC干扰。 **对策**: 优化线圈设计，改善异物检测。', aliases: ['无线充电中断', 'Wireless Charging Unstable'], tags: ['充电', '硬件相关']},
+  {term: '快充不生效', category: 'Symptom', description: '**定义**: 手机无法进入快充模式。 **判定口径**: 实测功率 <10W。 **常见场景**: 非匹配适配器。 **排查路径**: 检查协议→电路设计。 **对策**: 增强快充兼容性。', aliases: ['快充失败', 'Fast Charging Fail'], tags: ['充电', '硬件相关']},
+  {term: '待机掉电快', category: 'Symptom', description: '**定义**: 手机在待机时掉电快。 **判定口径**: 待机功耗 >1%/h。 **常见场景**: 应用后台异常。 **排查路径**: 检查系统进程→基带状态。 **对策**: 优化后台管控，降低常驻功耗。', aliases: ['High Standby Power', '待机耗电大'], tags: ['电池', '软件相关']},
+  {term: '电池鼓包', category: 'Symptom', description: '**定义**: 电池外形鼓起。 **判定口径**: 厚度增加 >10%。 **常见场景**: 长期充电/老化。 **排查路径**: 检查循环次数→气体析出。 **对策**: 严格寿命管控，优化材料。', aliases: ['Battery Swelling', '电池膨胀'], tags: ['安全相关', '硬件相关']},
+  {term: '电量显示异常', category: 'Symptom', description: '**定义**: 电量显示与实际不符。 **判定口径**: 偏差 >10%。 **常见场景**: 电量跳变。 **排查路径**: 检查计量芯片→软件校准。 **对策**: 增加自学习算法，优化校准机制。', aliases: ['Inaccurate Battery Indicator', '电量不准'], tags: ['电池', '软件相关']},
+  {term: '自动关机', category: 'Symptom', description: '**定义**: 手机电量充足时自动关机。 **判定口径**: 电量 >20% 突然关机。 **常见场景**: 电池老化/低温。 **排查路径**: 检查电池内阻→PMIC。 **对策**: 增加低温补偿，优化电源管理。', aliases: ['Unexpected Shutdown', '无故关机'], tags: ['电池', '硬件相关']},
+  {term: '自动重启', category: 'Symptom', description: '**定义**: 手机非人为操作重启。 **判定口径**: 重启频率 >1 次/天。 **常见场景**: 系统升级、APP异常。 **排查路径**: 分析log→排查内存/电源。 **对策**: 优化系统稳定性，修复Bug。', aliases: ['意外重启', 'Auto Reboot'], tags: ['系统稳定性', '软件相关']},
+  {term: '应用闪退', category: 'Symptom', description: '**定义**: 应用运行中意外关闭。 **判定口径**: 崩溃率 >1%。 **常见场景**: 高内存占用。 **排查路径**: 查看log→内存泄漏。 **对策**: 优化APP，完善异常捕获。', aliases: ['App Crash', 'APP崩溃'], tags: ['用户体验', '软件相关']},
+  {term: '系统升级失败', category: 'Symptom', description: '**定义**: OTA升级无法完成。 **判定口径**: 升级失败率 >1%。 **常见场景**: 网络中断、存储不足。 **排查路径**: 检查下载包→存储空间。 **对策**: 增强断点续传，提示存储清理。', aliases: ['OTA失败', 'OTA Fail'], tags: ['软件相关', '系统升级']},
+  {term: '恶意重启', category: 'Symptom', description: '**定义**: 系统不断重启。 **判定口径**: 启动失败 >3 次。 **常见场景**: 系统损坏、刷机失败。 **排查路径**: 检查启动镜像→硬件异常。 **对策**: 增加恢复模式，优化刷机校验。', aliases: ['Reboot Loop', 'Bootloop'], tags: ['系统启动', '软件相关']},
+  {term: '网络不稳定', category: 'Symptom', description: '**定义**: 移动网络频繁中断。 **判定口径**: 掉线率 >3%。 **常见场景**: 弱信号。 **排查路径**: 检查基带→天线设计。 **对策**: 优化射频匹配，改进算法。', aliases: ['信号掉线', 'Network Unstable'], tags: ['可靠性', '通信相关']},
+  {term: '无法通话', category: 'Symptom', description: '**定义**: 无法接通语音通话。 **判定口径**: 呼叫失败率 >1%。 **常见场景**: 弱信号、运营商限制。 **排查路径**: 检查基带→网络配置。 **对策**: 增强兼容性，优化协议。', aliases: ['语音通话失败', 'Call Fail'], tags: ['功能', '通信相关']},
+  {term: '视频通话卡顿', category: 'Symptom', description: '**定义**: 视频通话过程中画面卡顿。 **判定口径**: FPS <20。 **常见场景**: 网络弱。 **排查路径**: 检查带宽→视频编解码。 **对策**: 优化编解码，支持自适应码率。', aliases: ['Video Call Lag', '视频聊天卡顿'], tags: ['用户体验', '通信相关']},
+  {term: '漫游失败', category: 'Symptom', description: '**定义**: 手机无法漫游。 **判定口径**: 漫游成功率 <95%。 **常见场景**: 出国、异网。 **排查路径**: 检查SIM配置→运营商策略。 **对策**: 增强兼容性，更新漫游表。', aliases: ['Roaming Fail', '网络漫游失败'], tags: ['功能', '通信相关']},
+  {term: 'SIM不识别', category: 'Symptom', description: '**定义**: 插入SIM卡无效。 **判定口径**: 检测失败率 >1%。 **常见场景**: 卡托松动、触点脏污。 **排查路径**: 检查SIM座→检测电路。 **对策**: 提升卡座强度，优化接触可靠性。', aliases: ['SIM卡无效', 'SIM Not Detected'], tags: ['硬件相关', '通信相关']},
+  {term: '数据漫游异常', category: 'Symptom', description: '**定义**: 数据漫游无法使用。 **判定口径**: 成功率 <95%。 **常见场景**: 国外网络。 **排查路径**: 检查基带配置→运营商兼容性。 **对策**: 增强测试覆盖，优化协议实现。', aliases: ['Data Roaming Fail', '数据漫游失败'], tags: ['功能', '通信相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 28 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤31: 导入批次 29/57
+// 第 561-580 条数据
+// ========================================
+WITH [
+  {term: '短信收发失败', category: 'Symptom', description: '**定义**: 短信发送或接收失败。 **判定口径**: 失败率 >1%。 **常见场景**: 弱信号、漫游。 **排查路径**: 检查基带→中心号码。 **对策**: 增强网络兼容性，提示用户检查配置。', aliases: ['SMS失败', 'SMS Fail'], tags: ['功能', '通信相关']},
+  {term: '彩信失败', category: 'Symptom', description: '**定义**: 彩信发送/接收失败。 **判定口径**: 成功率 <95%。 **常见场景**: 网络不稳定。 **排查路径**: 检查APN配置→运营商支持。 **对策**: 优化配置兼容性。', aliases: ['MMS Fail', 'MMS失败'], tags: ['功能', '通信相关']},
+  {term: 'VoLTE异常', category: 'Symptom', description: '**定义**: VoLTE功能不可用。 **判定口径**: 呼叫成功率 <95%。 **常见场景**: 网络制式切换。 **排查路径**: 检查配置→基带协议。 **对策**: 优化协议栈，增强兼容性。', aliases: ['VoLTE不通', 'VoLTE Fail'], tags: ['功能', '通信相关']},
+  {term: '语音识别不准', category: 'Symptom', description: '**定义**: 语音识别准确率低。 **判定口径**: 准确率 <90%。 **常见场景**: 方言、噪音环境。 **排查路径**: 检查算法→语料。 **对策**: 优化模型，增加噪声鲁棒性。', aliases: ['语音识别错误', 'ASR Inaccuracy'], tags: ['人机交互', '软件相关']},
+  {term: '语音助手误触发', category: 'Symptom', description: '**定义**: 无操作时语音助手被误触发。 **判定口径**: 误触发率 >1%。 **常见场景**: 环境噪声。 **排查路径**: 检查麦克风阵列→关键词算法。 **对策**: 优化关键词模型，增加二次确认。', aliases: ['语音助手误唤醒', 'Voice Assistant False Trigger'], tags: ['人机交互', '软件相关']},
+  {term: '传感器漂移', category: 'Symptom', description: '**定义**: 传感器数值随时间偏移。 **判定口径**: 偏差 >10%。 **常见场景**: 长时间运行。 **排查路径**: 检查校准机制→温度补偿。 **对策**: 增强校准，优化补偿算法。', aliases: ['Sensor Drift', '传感器不准'], tags: ['传感器', '硬件相关']},
+  {term: '距离感应失效', category: 'Symptom', description: '**定义**: 通话时距离感应无效。 **判定口径**: 误判率 >5%。 **常见场景**: 贴膜遮挡。 **排查路径**: 检查传感器窗口→算法。 **对策**: 增加窗口透光率，优化算法。', aliases: ['Proximity Fail', '距离传感器异常'], tags: ['传感器', '硬件相关']},
+  {term: '陀螺仪异常', category: 'Symptom', description: '**定义**: 陀螺仪无法正常工作。 **判定口径**: 偏差 >5°。 **常见场景**: 游戏、导航。 **排查路径**: 检查模组→校准。 **对策**: 优化算法，提升防震设计。', aliases: ['Gyro Fail'], tags: ['传感器', '硬件相关']},
+  {term: '加速度异常', category: 'Symptom', description: '**定义**: 加速度计无法正确测量。 **判定口径**: 偏差 >10%。 **常见场景**: 翻转屏幕、计步。 **排查路径**: 检查焊点→校准。 **对策**: 增加自校准，提升可靠性。', aliases: ['加速度计失效', 'Accelerometer Fail'], tags: ['传感器', '硬件相关']},
+  {term: '磁力计不准', category: 'Symptom', description: '**定义**: 磁力计方向偏差大。 **判定口径**: 偏差 >15°。 **常见场景**: 地铁、金属环境。 **排查路径**: 检查磁屏蔽→算法。 **对策**: 优化补偿算法。', aliases: ['电子罗盘异常', 'Magnetometer Fail'], tags: ['传感器', '硬件相关']},
+  {term: '气压计失效', category: 'Symptom', description: '**定义**: 气压值不正确。 **判定口径**: 偏差 >5hPa。 **常见场景**: 高度测量。 **排查路径**: 检查传感器→校准。 **对策**: 增加温度补偿，优化算法。', aliases: ['Barometer Fail', '气压传感器异常'], tags: ['传感器', '硬件相关']},
+  {term: '水痕', category: 'Symptom', description: '产品表面因接触水后干燥不均留下的痕迹', aliases: ['水渍'], tags: ['制造工艺', '外观']},
+  {term: '点蚀', category: 'Symptom', description: '金属表面局部发生的剧烈腐蚀形成小而深的孔洞', aliases: ['孔蚀'], tags: ['CMF', '可靠性', '硬件相关']},
+  {term: '微动磨损', category: 'Symptom', description: '接触面间小幅度的相对运动导致的磨损常见于连接器', aliases: ['微振磨损'], tags: ['结构相关', '硬件相关', '可靠性']},
+  {term: '晶间腐蚀', category: 'Symptom', description: '腐蚀沿金属晶粒边界进行导致材料力学性能严重下降', aliases: ['晶界腐蚀'], tags: ['CMF', '可靠性', '硬件相关']},
+  {term: '电偶腐蚀', category: 'Symptom', description: '两种不同电位的金属在电解质中接触时电位负的金属加速腐蚀', aliases: ['伽凡尼腐蚀'], tags: ['CMF', '可靠性', '硬件相关']},
+  {term: '应力腐蚀开裂', category: 'Symptom', description: '材料在拉应力和特定腐蚀介质共同作用下发生的脆性开裂', aliases: ['SCC'], tags: ['可靠性', '结构相关', '硬件相关']},
+  {term: '缝隙腐蚀', category: 'Symptom', description: '在金属与金属或非金属间狭窄缝隙内因环境差异引发的局部腐蚀', aliases: ['crevice corrosion'], tags: ['可靠性', '结构相关', '硬件相关']},
+  {term: '疲劳断裂', category: 'Symptom', description: '材料在交变应力作用下经历一定循环次数后发生的断裂', aliases: ['疲劳失效'], tags: ['可靠性', '结构相关', '硬件相关']},
+  {term: '磨损颗粒', category: 'Symptom', description: '因摩擦产生的微小材料颗粒可能造成污染或卡死', aliases: ['磨屑'], tags: ['结构相关', '硬件相关', '可靠性']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 29 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤32: 导入批次 30/57
+// 第 581-600 条数据
+// ========================================
+WITH [
+  {term: '电化学腐蚀', category: 'Symptom', description: '在电解质溶液中因电位差形成的原电池效应导致的腐蚀', aliases: ['电解腐蚀'], tags: ['CMF', '可靠性', '硬件相关']},
+  {term: 'Mura缺陷', category: 'Symptom', description: '屏幕亮度或色度不均匀呈现云状或斑块状的缺陷', aliases: ['显示不均', '云斑'], tags: ['显示相关', '异常现象']},
+  {term: '亮线暗线', category: 'Symptom', description: '屏幕上出现的垂直或水平亮线暗线通常与驱动线路或屏幕损伤有关', aliases: ['Line Defect'], tags: ['显示相关', '异常现象']},
+  {term: '亮点暗点', category: 'Symptom', description: '像素点常亮或不亮属于显示缺陷', aliases: ['坏点'], tags: ['显示相关', '异常现象']},
+  {term: '偏芯', category: 'Symptom', description: '镜头光学中心与传感器中心不重合导致成像锐度下降暗角', aliases: ['Decentering', 'Lens Tilt'], tags: ['影像相关', '异常现象']},
+  {term: '杂质', category: 'Symptom', description: '模组内部有灰尘纤维等异物成像上有黑点', aliases: ['Particle Contamination'], tags: ['影像相关', '制造工艺', '异常现象']},
+  {term: '鬼影', category: 'Symptom', description: '强光下图像中出现光源的反射重影与镜头镀膜和结构有关', aliases: ['Ghosting'], tags: ['影像相关', '异常现象']},
+  {term: '对焦迟缓', category: 'Symptom', description: '相机对焦速度慢的问题', aliases: ['Slow Auto-Focus'], tags: ['性能指标', '影像相关', '异常现象']},
+  {term: '解析力不足', category: 'Symptom', description: '拍摄的照片细节不清边缘模糊', aliases: ['Poor Resolution'], tags: ['性能指标', '影像相关', '异常现象']},
+  {term: '循环寿命短', category: 'Symptom', description: '电池容量随充放电循环次数增加而过快衰减', aliases: ['Short Cycle Life'], tags: ['可靠性', '异常现象', '硬件相关']},
+  {term: '内阻增大', category: 'Symptom', description: '导致电池输出电压下降充电发热严重的现象', aliases: ['Increased Internal Resistance'], tags: ['性能指标', '异常现象', '硬件相关']},
+  {term: '开路', category: 'Symptom', description: '电路断开电流无法通过的故障', aliases: ['Open Circuit'], tags: ['电气性能', '异常现象', '硬件相关']},
+  {term: '元器件立碑', category: 'Symptom', description: '片式元件一端翘起脱离焊盘的贴装缺陷', aliases: ['Tombstoning'], tags: ['SMT', '异常现象', '制造工艺']},
+  {term: '数据吞吐量低', category: 'Symptom', description: '上网速度远低于理论值或预期值', aliases: ['Low Data Throughput'], tags: ['射频相关', '异常现象', '通信相关']},
+  {term: '搜网慢', category: 'Symptom', description: '手机开机或进入新区域后寻找和注册到网络的时间过长', aliases: ['Slow Network Search'], tags: ['射频相关', '异常现象', '通信相关']},
+  {term: 'SAR值超标', category: 'Symptom', description: '比吸收率超过法规限值对人体电磁辐射吸收过高', aliases: ['SAR Exceedance'], tags: ['射频相关', '异常现象', '安全相关', '法规']},
+  {term: '频率误差', category: 'Symptom', description: '发射信号的载波频率偏离标准值', aliases: ['Frequency Error'], tags: ['射频相关', '异常现象', '通信相关']},
+  {term: '调制频谱超标', category: 'Symptom', description: '发射信号的调制频谱超出规范模板', aliases: ['Modulation Spectrum Fail'], tags: ['射频相关', '异常现象', 'EMC', '通信相关']},
+  {term: '切换失败', category: 'Symptom', description: '手机在不同基站或不同制式之间切换时失败', aliases: ['Handover Failure'], tags: ['射频相关', '异常现象', '通信相关']},
+  {term: '破音', category: 'Symptom', description: '扬声器在大功率下因振幅过大或达到物理极限产生的失真声音', aliases: ['Clipping', 'Distortion'], tags: ['声学', '异常现象']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 30 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤33: 导入批次 31/57
+// 第 601-620 条数据
+// ========================================
+WITH [
+  {term: '杂音', category: 'Symptom', description: '音频信号中夹杂的非预期白噪声或本底噪声', aliases: ['Hiss', 'Noise'], tags: ['声学', '异常现象']},
+  {term: '声音小', category: 'Symptom', description: '输出音量达不到设计规格', aliases: ['Low Sound Pressure Level'], tags: ['性能指标', '声学', '异常现象']},
+  {term: '频响曲线凹陷', category: 'Symptom', description: '频率响应曲线在特定频段出现不正常的谷值导致声音发闷或单薄', aliases: ['Frequency Response Dip'], tags: ['性能指标', '声学', '异常现象']},
+  {term: '相位抵消', category: 'Symptom', description: '多个声源如双扬声器发出的声波因相位相反而相互削弱导致声音减弱或怪异', aliases: ['Phase Cancellation'], tags: ['性能指标', '声学', '异常现象']},
+  {term: '回声', category: 'Symptom', description: '通话时对方能听到自己说话的回声', aliases: ['Echo'], tags: ['声学', '异常现象', '软件相关']},
+  {term: '断差', category: 'Symptom', description: '相邻部件如屏幕与中框之间存在不应有的高度差', aliases: ['Step'], tags: ['结构相关', '异常现象', '外观']},
+  {term: '缝隙', category: 'Symptom', description: '部件之间的间隙不均匀或超出设计范围', aliases: ['Gap'], tags: ['结构相关', '异常现象', '外观']},
+  {term: '松动', category: 'Symptom', description: '部件装配不牢固受力或晃动时产生异响或位移', aliases: ['Loose', 'Rattle'], tags: ['结构相关', '异常现象', '可靠性']},
+  {term: '卡扣断裂', category: 'Symptom', description: '塑料卡扣在装配或使用中断裂导致部件松动', aliases: ['Snap-fit Breakage'], tags: ['结构相关', '异常现象', '可靠性']},
+  {term: '热点', category: 'Symptom', description: '手机表面或内部特定区域温度异常偏高', aliases: ['Hot Spot'], tags: ['热管理', '可靠性', '异常现象']},
+  {term: '表面温度超标', category: 'Symptom', description: '手机外壳温度超过安全法规或人体舒适度限值', aliases: ['Surface Temperature Exceedance'], tags: ['热管理', '用户体验', '异常现象', '可靠性']},
+  {term: '性能降频', category: 'Symptom', description: '因温度过高系统主动降低芯片频率以控制发热导致卡顿', aliases: ['Thermal Throttling'], tags: ['性能指标', '热管理', '异常现象', '软件相关']},
+  {term: '数据漂移', category: 'Symptom', description: '传感器输出数据随时间发生缓慢偏移偏离真实值', aliases: ['Data Drift'], tags: ['可靠性', '异常现象', '传感器']},
+  {term: '响应延迟', category: 'Symptom', description: '传感器检测到物理量变化到输出数据之间存在明显延迟', aliases: ['Response Lag', 'Response Delay'], tags: ['性能指标', '异常现象', '传感器', '硬件相关']},
+  {term: '精度不足', category: 'Symptom', description: '传感器测量值与真实值之间存在较大系统误差', aliases: ['Poor Accuracy'], tags: ['性能指标', '异常现象', '传感器']},
+  {term: '零点偏移', category: 'Symptom', description: '在输入为零时传感器输出不为零', aliases: ['Zero Offset'], tags: ['性能指标', '异常现象', '传感器']},
+  {term: '充电发热严重', category: 'Symptom', description: '充电时手机或充电器温度异常升高', aliases: ['Excessive Heating During Charging'], tags: ['热管理', '充电', '安全相关', '异常现象']},
+  {term: '充电速度慢', category: 'Symptom', description: '实际充电功率远低于标称快充功率', aliases: ['Slow Charging'], tags: ['充电', '性能指标', '异常现象']},
+  {term: '无法快充', category: 'Symptom', description: '手机连接支持快充的充电器后仍以标准5V电压充电', aliases: ['Fast Charging Not Working'], tags: ['功能', '异常现象', '充电']},
+  {term: '充电中断', category: 'Symptom', description: '充电过程中断断续续无法连续充满', aliases: ['Charging Interruption'], tags: ['可靠性', '充电', '异常现象']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 31 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤34: 导入批次 32/57
+// 第 621-640 条数据
+// ========================================
+WITH [
+  {term: '无线充电效率低', category: 'Symptom', description: '无线充电时能量损耗大手机发热严重且充电慢', aliases: ['Low Wireless Charging Efficiency'], tags: ['充电', '性能指标', '异常现象']},
+  {term: '振动微弱', category: 'Symptom', description: '振动强度不足用户体验差', aliases: ['Weak Vibration'], tags: ['人机交互', '异常现象', '硬件相关']},
+  {term: '振动异响', category: 'Symptom', description: '振动时伴随非预期的吱吱或哒哒声', aliases: ['Abnormal Sound During Vibration'], tags: ['声学', '异常现象', '硬件相关']},
+  {term: '余振', category: 'Symptom', description: '驱动信号停止后马达因惯性继续振动', aliases: ['After-Shock'], tags: ['性能指标', '异常现象', '硬件相关']},
+  {term: '橘皮纹', category: 'Symptom', description: '涂层表面出现类似橘皮的不平整纹理', aliases: ['Orange Peel'], tags: ['CMF', '异常现象', '外观']},
+  {term: '颗粒感', category: 'Symptom', description: '涂层表面有可见的微小颗粒', aliases: ['Graininess'], tags: ['CMF', '异常现象', '外观']},
+  {term: '缩水', category: 'Symptom', description: '塑胶件在肉厚较大区域因冷却收缩不均导致表面凹陷', aliases: ['Sink Mark'], tags: ['制造工艺', '异常现象', '外观']},
+  {term: '熔接痕', category: 'Symptom', description: '两股熔融塑料流前沿相遇时因融合不良形成的线痕强度和外观均有影响', aliases: ['Weld Line'], tags: ['结构相关', '异常现象', '制造工艺', '外观']},
+  {term: '刮花', category: 'Symptom', description: '表面因摩擦留下的线性痕迹', aliases: ['Scratch'], tags: ['可靠性', '异常现象', '外观']},
+  {term: '信号衰减', category: 'Symptom', description: '无线信号在传输过程中强度减弱', aliases: ['Signal Attenuation'], tags: ['性能指标', '异常现象', '通信相关']},
+  {term: '数据丢包', category: 'Symptom', description: '网络传输过程中数据包丢失导致语音卡顿或视频缓冲', aliases: ['Packet Loss'], tags: ['性能指标', '异常现象', '通信相关']},
+  {term: 'ping值高', category: 'Symptom', description: '网络延迟高影响实时应用如游戏视频通话体验', aliases: ['High Latency'], tags: ['性能指标', '异常现象', '通信相关']},
+  {term: '网络切换失败', category: 'Symptom', description: '在不同基站或不同网络制式如5G/4G间切换时失败', aliases: ['Handover Failure'], tags: ['性能指标', '异常现象', '通信相关']},
+  {term: 'Wi-Fi断流', category: 'Symptom', description: 'Wi-Fi连接看似正常但数据流量间歇性中断', aliases: ['Wi-Fi Disconnection'], tags: ['性能指标', '异常现象', '通信相关']},
+  {term: '蓝牙配对不稳定', category: 'Symptom', description: '蓝牙设备频繁断开连接或需要重新配对', aliases: ['Bluetooth Pairing Instability'], tags: ['性能指标', '异常现象', '通信相关']},
+  {term: 'GPS定位漂移', category: 'Symptom', description: '静止时GPS定位点在一定范围内无规律移动', aliases: ['GPS Drift'], tags: ['性能指标', '异常现象', '通信相关']},
+  {term: '接口腐蚀', category: 'Symptom', description: '接口金属触点因汗液潮湿等环境因素发生氧化或电化学腐蚀', aliases: ['Interface Corrosion'], tags: ['可靠性', '异常现象', '硬件相关']},
+  {term: '引脚弯曲/断裂', category: 'Symptom', description: '连接器引脚在组装或使用中发生物理损伤', aliases: ['Pin Bent/Broken'], tags: ['制造工艺', '异常现象', '硬件相关']},
+  {term: '连接器缩PIN', category: 'Symptom', description: '连接器内部的接触端子回缩导致接触不良', aliases: ['Contact Retraction'], tags: ['可靠性', '异常现象', '硬件相关']},
+  {term: '接口松动', category: 'Symptom', description: '接口公母端配合不紧轻微外力即可导致断开', aliases: ['Loose Connection'], tags: ['可靠性', '异常现象', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 32 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤35: 导入批次 33/57
+// 第 641-660 条数据
+// ========================================
+WITH [
+  {term: '电容容值衰减', category: 'Symptom', description: '电容特别是MLCC在直流偏压或高温下实际容值减小', aliases: ['Capacitance Derating'], tags: ['可靠性', '异常现象', '硬件相关']},
+  {term: '电容失效短路', category: 'Symptom', description: '电容介质击穿导致两极短路可能引发大电流烧毁', aliases: ['Capacitor Short Failure'], tags: ['可靠性', '异常现象', '硬件相关']},
+  {term: '电容失效开路', category: 'Symptom', description: '电容内部连接断开失去功能', aliases: ['Capacitor Open Failure'], tags: ['可靠性', '异常现象', '硬件相关']},
+  {term: '电感饱和', category: 'Symptom', description: '电流过大导致电感磁芯磁化饱和电感量急剧下降', aliases: ['Inductor Saturation'], tags: ['可靠性', '异常现象', '硬件相关']},
+  {term: '元件立碑', category: 'Symptom', description: '片式元件一端翘起另一端焊接在焊盘上', aliases: ['Tombstoning'], tags: ['SMT', '异常现象', '硬件相关']},
+  {term: '元件裂纹', category: 'Symptom', description: '特别是MLCC因板弯或热应力导致内部介质产生裂纹', aliases: ['Component Cracking'], tags: ['可靠性', '异常现象', '硬件相关']},
+  {term: '失效模式', category: 'Symptom', description: '产品失效的具体表现形式如开路短路参数漂移等', aliases: ['故障模式'], tags: ['可靠性', '异常现象', '质量体系']},
+  {term: '失效机理', category: 'Symptom', description: '导致产品失效的物理化学或其它过程', aliases: ['故障机理'], tags: ['可靠性', '异常现象', '质量体系']},
+  {term: 'AQL', category: 'Tool', description: '抽样检验的标准，用于来料或出货检验时判定批合格与否。', aliases: ['Acceptable Quality Level', '接收质量限'], tags: ['测试验证', '质量体系']},
+  {term: 'CABC', category: 'Symptom', description: '根据显示内容自动调节背光以节省功耗，算法不良会导致屏幕闪烁或亮度异常。', aliases: ['内容自适应背光控制', 'Content Adaptive Backlight Control'], tags: ['影像相关', '功耗优化']},
+  {term: 'CCD视觉对位', category: 'Process', description: '在贴片或模组组装中，使用工业相机进行高精度位置校准的工艺。', aliases: ['CCD Alignment', '相机对位'], tags: ['SMT', '摄像头模组']},
+  {term: 'Corner Drop', category: 'TestCase', description: '手机特定角落着地的跌落测试，用于评估结构最脆弱点的强度。', aliases: ['角跌落'], tags: ['结构相关', '可靠性']},
+  {term: 'CPK', category: 'Tool', description: '衡量生产过程稳定满足规格要求的能力，大于1.33表示过程能力良好。', aliases: ['Process Capability Index', '过程能力指数'], tags: ['制造工艺', '质量体系']},
+  {term: 'DQA', category: 'Role', description: '在研发阶段介入，确保产品设计满足可靠性、可制造性等质量要求的角色。', aliases: ['设计质量保证', 'Design Quality Assurance'], tags: ['流程相关', '项目相关']},
+  {term: 'Drop Test', category: 'TestCase', description: '模拟手机意外跌落场景，验证整机结构强度、屏幕和电池等部件的可靠性。', aliases: ['跌落测试'], tags: ['结构相关', '可靠性']},
+  {term: 'DSU', category: 'Process', description: 'Android项目在运行时切换系统镜像的技术，用于软件调试与测试。', aliases: ['Dynamic System Updates', '动态软件更新'], tags: ['工具', '项目相关']},
+  {term: 'ESD', category: 'TestCase', description: '测试手机抵御静电冲击的能力，不合格会导致芯片击穿或功能异常。', aliases: ['静电放电', 'Electro-Static Discharge'], tags: ['可靠性', '硬件相关']},
+  {term: 'FACA', category: 'Process', description: '在项目量产前，针对开箱审计发现的问题进行闭环管理的流程。', aliases: ['最终审核纠正措施', 'Final Audit Corrective Action'], tags: ['质量体系', '项目相关']},
+  {term: 'HALT', category: 'TestCase', description: '通过施加高应力快速激发产品潜在缺陷的测试方法，用于设计阶段。', aliases: ['Highly Accelerated Life Test', '高加速寿命测试'], tags: ['可靠性', '研发']},
+  {term: 'IQC', category: 'Process', description: '对供应商送达的物料进行检验，确保投入生产的物料符合标准。', aliases: ['来料检验', 'Incoming Quality Control'], tags: ['制造工艺', '质量体系']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 33 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤36: 导入批次 34/57
+// 第 661-680 条数据
+// ========================================
+WITH [
+  {term: 'MTBF', category: 'Tool', description: '衡量产品可靠性的关键预测指标，通常通过可靠性试验数据计算得出。', aliases: ['平均无故障时间', 'Mean Time Between Failures'], tags: ['性能指标', '可靠性']},
+  {term: 'PMP', category: 'Process', description: '项目开展的总体指导文件，包含范围、进度、质量、风险等管理计划。', aliases: ['Project Management Plan', '项目管理计划'], tags: ['流程相关', '组织职责']},
+  {term: 'PVT', category: 'Process', description: '在量产初期进行的测试，验证生产线能否稳定地生产出合格产品。', aliases: ['生产验证测试', 'Production Validation Test'], tags: ['测试验证', '制造工艺']},
+  {term: 'SMT', category: 'Process', description: '将电子元器件贴装到PCB上的核心工艺，涉及锡膏印刷、贴片、回流焊。', aliases: ['表面贴装技术', 'Surface Mount Technology'], tags: ['PCB', '硬件相关']},
+  {term: 'UV胶', category: 'Process', description: '用于固定镜头、装饰件等，固化不良会导致脱落或溢胶。', aliases: ['Ultraviolet Glue', '紫外线固化胶'], tags: ['粘合剂', '结构相关']},
+  {term: 'Vendor', category: 'Role', description: '提供手机零部件或服务的厂商，其质量能力直接影响整机质量。', aliases: ['供应商', 'Supplier'], tags: ['流程相关', '项目相关']},
+  {term: '点胶', category: 'Process', description: '在芯片底部填充胶水以增强机械强度和耐热性，胶量、路径是关键参数。', aliases: ['Underfill', '打胶'], tags: ['工艺参数', '结构相关']},
+  {term: '点屏', category: 'TestCase', description: '在组装过程中对显示屏进行通电，初步检查显示功能是否正常。', aliases: ['Screen Lighting', '屏幕点亮'], tags: ['显示相关', '制造工艺']},
+  {term: '点压', category: 'TestCase', description: '对手机按键、屏幕等进行反复按压，测试其机械耐久性。', aliases: ['Press Test', '按压测试'], tags: ['人机交互', '可靠性']},
+  {term: '钝化', category: 'Process', description: '在芯片或PCB表面形成保护层，防止腐蚀和短路，损伤会导致可靠性问题。', aliases: ['钝化层', 'Passivation'], tags: ['PCB', '硬件相关']},
+  {term: '多标签', category: 'Tool', description: '用于对问题、物料或知识进行分类和标记的元数据，便于筛选和管理。', aliases: ['标签', 'Tag'], tags: ['软件相关', '项目相关']},
+  {term: '防呆', category: 'Process', description: '设计一种装置或方法，防止操作员出现错误，是提升直通率的关键。', aliases: ['Poka-Yoke', '防错'], tags: ['工具', '质量体系']},
+  {term: '分板', category: 'Process', description: '将拼板后的PCB分割成单板，方式不当会导致板边毛刺、裂纹或应力损伤。', aliases: ['板边切割', 'Board Cutting'], tags: ['工艺参数', 'PCB']},
+  {term: '风枪', category: 'Tool', description: '用于维修时加热焊料或拆焊元件的工具，温度和控制精度是关键。', aliases: ['热风枪', 'Hot Air Gun'], tags: ['SMT', '维修']},
+  {term: '工装', category: 'Tool', description: '在生产或测试中用于定位和固定产品的装置，其精度直接影响产品一致性。', aliases: ['夹具', '治具', 'Fixture'], tags: ['测试验证', '制造工艺']},
+  {term: '固件', category: 'Symptom', description: '写入硬件设备的底层软件，如摄像头固件，版本错误或损坏会导致功能异常。', aliases: ['Firmware'], tags: ['功能', '部件']},
+  {term: '挂机', category: 'TestCase', description: '手机在休眠状态下长时间运行，用于测试待机功耗和系统稳定性。', aliases: ['待机', 'Standby'], tags: ['可靠性', '软件相关']},
+  {term: '过炉', category: 'Process', description: 'SMT关键工序，通过加热使锡膏熔化连接元件，温度曲线设置至关重要。', aliases: ['回流焊', 'Reflow Soldering'], tags: ['工艺参数', 'SMT']},
+  {term: '焊锡', category: 'Process', description: '用于焊接的合金材料，其成分、颗粒度和活性影响焊接质量。', aliases: ['锡膏', 'Solder Paste'], tags: ['SMT', '物料']},
+  {term: '合盖', category: 'TestCase', description: '针对折叠屏手机，测试在闭合状态下的机构稳定性、缝隙和压力。', aliases: ['闭合状态', 'Closed State'], tags: ['可靠性', '结构相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 34 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤37: 导入批次 35/57
+// 第 681-700 条数据
+// ========================================
+WITH [
+  {term: '烘烤', category: 'Process', description: '对受潮的PCB或元件进行烘干，去除湿气，防止回流焊时出现爆米花现象。', aliases: ['低温烘烤', 'Baking'], tags: ['工艺参数', 'PCB']},
+  {term: '红胶', category: 'Process', description: '一种用于波峰焊前暂时固定元件的胶水，点胶量和固化程度是关键。', aliases: ['Red Adhesive', '红色胶水'], tags: ['SMT', '物料']},
+  {term: '环测', category: 'TestCase', description: '将手机置于高低温、湿热、振动等模拟环境中，验证其适应能力。', aliases: ['Environmental Test', '环境测试'], tags: ['可靠性']},
+  {term: '灰阶', category: 'Component', description: '表示屏幕从黑到白的亮度层次，层次越多，显示效果越细腻。', aliases: ['Gray Scale', '灰度等级'], tags: ['性能指标', '影像相关']},
+  {term: '回流焊', category: 'Process', description: '通过加热使预涂的锡膏熔化，实现元器件与PCB焊盘连接的工艺。', aliases: ['Reflow Soldering', 'Reflow', '再流焊'], tags: ['工艺参数', 'SMT', '制造工艺']},
+  {term: '激活', category: 'Process', description: '新电池首次充电的特定流程，以稳定其化学性能，但现在多数锂电已不需要。', aliases: ['电池激活', 'Battery Activation'], tags: ['工艺参数', '硬件相关']},
+  {term: '机模', category: 'Tool', description: '无功能的手机外观模型，用于早期结构验证、外观评估和营销展示。', aliases: ['Dummy Model', '手机模型'], tags: ['结构相关', '项目相关']},
+  {term: '激光', category: 'Process', description: '使用激光能量进行精密焊接，常用于电池盖、内部结构件，热影响区小。', aliases: ['Laser Welding', '激光焊接'], tags: ['工艺参数', '结构相关']},
+  {term: '夹持', category: 'Process', description: '治具对产品的固定力，过小导致位移，过大可能导致产品变形或压伤。', aliases: ['夹具夹紧', 'Clamping'], tags: ['工艺参数', '工装']},
+  {term: '检具', category: 'Tool', description: '专门用于快速检测产品尺寸或装配效果的工装，提升检验效率和一致性。', aliases: ['检验治具', 'Checking Fixture'], tags: ['测试验证', '质量体系']},
+  {term: '胶厚', category: 'Process', description: '点胶或贴合的胶层厚度，影响粘接强度和密封性能。', aliases: ['胶水厚度', 'Adhesive Thickness'], tags: ['工艺参数', '结构相关']},
+  {term: '胶量', category: 'Process', description: '点胶机每次挤出的胶水体积，是影响粘接效果的关键参数。', aliases: ['Dispensing Volume', '点胶量'], tags: ['工艺参数']},
+  {term: '角胶', category: 'Process', description: '在结构件角落点胶以增强局部强度，常用于应对跌落应力。', aliases: ['角落补强胶', 'Corner Reinforcement'], tags: ['工艺参数', '结构相关']},
+  {term: '校屏', category: 'TestCase', description: '对显示屏的色温、Gamma、均匀性等进行软件校准，保证显示一致性。', aliases: ['Screen Calibration', '屏幕校准'], tags: ['显示相关', '制造工艺']},
+  {term: '解锁', category: 'TestCase', description: '测试指纹、人脸、图案等解锁方式的成功率和速度。', aliases: ['屏幕解锁', 'Unlock'], tags: ['人机交互', '软件相关']},
+  {term: '浸锡', category: 'Process', description: '将元件引脚浸入熔融焊锡中以实现焊接的工艺。', aliases: ['沾锡', 'Solder Dipping'], tags: ['工艺参数', 'PCB']},
+  {term: '静电袋', category: 'Tool', description: '用于包装和运输对静电敏感的元器件。', aliases: ['防静电袋', 'ESD Bag'], tags: ['ESD', '物料']},
+  {term: '静电环', category: 'Tool', description: '操作人员佩戴，将人体静电导入大地，防止损坏电子产品。', aliases: ['ESD Wrist Strap', '防静电手环'], tags: ['制造工艺', 'ESD']},
+  {term: '开口', category: 'Process', description: '钢网上用于让锡膏通过的孔，其尺寸和形状决定了锡膏的印刷量。', aliases: ['钢网开口', 'Stencil Aperture'], tags: ['工具', 'SMT']},
+  {term: '开炉', category: 'Process', description: '生产开始或换线时，启动回流焊炉并确认其状态的过程。', aliases: ['Open Reflow Oven', '打开回流焊炉'], tags: ['操作', 'SMT']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 35 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤38: 导入批次 36/57
+// 第 701-720 条数据
+// ========================================
+WITH [
+  {term: '开模', category: 'Process', description: '注塑成型中，模具打开以便取出成型产品的动作。', aliases: ['模具开启', 'Mold Opening'], tags: ['工具', '结构相关']},
+  {term: '开箱', category: 'TestCase', description: '指OBA（开箱审计），模拟客户首次打开产品包装的体验和检查。', aliases: ['拆箱', 'Unboxing'], tags: ['质量体系', '项目相关']},
+  {term: '烤机', category: 'TestCase', description: '让手机在特定条件下长时间运行，以提前暴露早期失效的元器件。', aliases: ['老化测试', 'Burn-in Test'], tags: ['可靠性', '硬件相关']},
+  {term: '磕碰', category: 'TestCase', description: '模拟产品在日常使用中受到的小范围撞击，评估外壳和内部受损情况。', aliases: ['撞击', 'Impact'], tags: ['可靠性', '外观']},
+  {term: '可制造性', category: 'Process', description: '产品设计易于高效、低成本、高质量地制造出来的特性。', aliases: ['可生产性', 'Manufacturability'], tags: ['设计', '制造工艺']},
+  {term: '客诉', category: 'Role', description: '终端用户或客户对产品质量问题的反馈，是质量改进的重要输入。', aliases: ['Customer Complaint', '客户投诉'], tags: ['质量体系', '项目相关']},
+  {term: '老化', category: 'TestCase', description: '使产品在模拟的或强化的使用条件下运行一段时间，以稳定其性能或筛选缺陷。', aliases: ['Aging', '老化测试'], tags: ['可靠性']},
+  {term: '冷屏', category: 'TestCase', description: '在低温环境下对屏幕进行点亮测试，检查其响应速度和显示效果。', aliases: ['Cold Start Screen', '冷屏点亮'], tags: ['可靠性', '显示相关']},
+  {term: '料带', category: 'Process', description: '用于SMT贴片机供料器上承载元件的塑料带。', aliases: ['载带', 'Carrier Tape'], tags: ['SMT', '物料']},
+  {term: '料号', category: 'Tool', description: '唯一标识一种物料或部件的编码，是物料管理的基础。', aliases: ['物料编号', 'Part Number'], tags: ['项目相关', '物料']},
+  {term: '美纹纸', category: 'Tool', description: '在喷涂或点胶时用于遮蔽不需要处理的区域。', aliases: ['和美胶带'], tags: ['防护', '制造工艺']},
+  {term: '模厂', category: 'Role', description: '负责设计和制造注塑模具的供应商。', aliases: ['模具厂', 'Mold Factory'], tags: ['供应链', '制造工艺']},
+  {term: '模切', category: 'Process', description: '使用模具对泡棉、胶带等材料进行精密冲切成型。', aliases: ['Die Cutting', '模具切割'], tags: ['工艺参数', '物料']},
+  {term: '模温', category: 'Process', description: '注塑过程中模具的温度，影响塑料的流动性和产品的成型质量。', aliases: ['Mold Temperature', '模具温度'], tags: ['工艺参数', '注塑']},
+  {term: '模流', category: 'Tool', description: '通过软件模拟塑料在模具内的流动、保压、冷却过程，预测潜在缺陷。', aliases: ['模流分析', 'Mold Flow Analysis'], tags: ['设计', '制造工艺']},
+  {term: '尼龙', category: 'Material', description: '用于绝缘或防松动的塑料螺丝，扭矩控制不当易滑牙或断裂。', aliases: ['Nylon Screw', '尼龙螺丝'], tags: ['结构相关', '部件']},
+  {term: '喷码', category: 'Process', description: '使用喷墨机在产品或标签上打印序列号、生产日期等信息。', aliases: ['Inkjet Marking', '喷墨打标'], tags: ['追溯性', '外观']},
+  {term: '气吹', category: 'Process', description: '使用压缩气体清除产品表面的灰尘或颗粒物。', aliases: ['Air Blowing', '吹气清洁'], tags: ['操作', '清洁']},
+  {term: '清尾', category: 'Process', description: '生产订单结束时，清理生产线上的物料和产品，确保下一订单顺利开始。', aliases: ['Line Clearance', '生产线清尾'], tags: ['流程相关', '操作']},
+  {term: '取放', category: 'Process', description: '贴片机从供料器取料并贴装到PCB上的基本动作。', aliases: ['Pick and Place', '拾取与放置'], tags: ['操作', 'SMT']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 36 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤39: 导入批次 37/57
+// 第 721-740 条数据
+// ========================================
+WITH [
+  {term: '圈胶', category: 'Process', description: '以环形轨迹点胶，常用于需要密封的圆形区域。', aliases: ['Circular Dispensing', '环形点胶'], tags: ['工艺参数', '结构相关']},
+  {term: '确认书', category: 'Process', description: '对设计变更、样品状态等进行正式确认的文件，作为量产依据。', aliases: ['工程确认书', 'Engineering Confirmation'], tags: ['质量体系', '项目相关']},
+  {term: '热压', category: 'Process', description: '通过加热和压力使塑料柱销变形，从而固定另一个部件。', aliases: ['热熔', 'Heat Staking'], tags: ['工艺参数', '结构相关']},
+  {term: '热插拔', category: 'TestCase', description: '在手机开机状态下插入或拔出外设（如U盘），测试接口的耐受性。', aliases: ['Hot Plug', '带电插拔'], tags: ['可靠性', '硬件相关']},
+  {term: '热风', category: 'Tool', description: '用于维修焊接的工具，通过喷射热空气来熔化焊锡。', aliases: ['Hot Air', '热风枪'], tags: ['SMT', '维修']},
+  {term: '人因', category: 'Component', description: '研究人、机器及环境之间相互作用的学科，旨在优化产品易用性和舒适度。', aliases: ['人因工程', 'Human Factors'], tags: ['设计', '人机交互']},
+  {term: '入网', category: 'Process', description: '在中国大陆市场销售蜂窝通信设备必须获得的官方认证。', aliases: ['进网许可', 'Network Access License'], tags: ['流程相关', '法规']},
+  {term: '三防', category: 'TestCase', description: '针对恶劣环境（湿热、霉菌、盐雾）的防护性设计和测试。', aliases: ['Three Proofing', '防潮', '防盐雾', '防霉'], tags: ['可靠性']},
+  {term: '上料', category: 'Process', description: '将料盘安装到贴片机供料器上的操作。', aliases: ['物料上料', 'Loading Material'], tags: ['操作', 'SMT']},
+  {term: '设变', category: 'Process', description: '产品开发过程中对已冻结设计的修改，需要严格的流程控制。', aliases: ['Design Change', '设计变更'], tags: ['质量体系', '项目相关']},
+  {term: '射屏', category: 'TestCase', description: '将手机屏幕内容无线投射到其他显示设备上的功能测试。', aliases: ['Screen Casting', '屏幕投射'], tags: ['功能', '软件相关']},
+  {term: '深色', category: 'Component', description: '系统界面以深色为主色调的显示模式，有助于节省OLED屏幕功耗。', aliases: ['暗色模式', 'Dark Mode'], tags: ['功能', '显示相关']},
+  {term: '油墨', category: 'Material', description: '用于丝印、移印等工艺的着色材料，要求附着力、耐磨性好。', aliases: ['Printing Ink', '印刷油墨'], tags: ['外观', '物料']},
+  {term: '预压', category: 'Process', description: '在正式紧固前施加的初始压力，使部件初步就位。', aliases: ['预压力', 'Preload'], tags: ['工艺参数', '结构相关']},
+  {term: '原材', category: 'Material', description: '用于生产产品的基本材料，如塑胶粒、金属板材、化学药水等。', aliases: ['原材料', 'Raw Material'], tags: ['物料']},
+  {term: '扎带', category: 'Material', description: '用于捆扎和固定内部线缆的塑料带。', aliases: ['Cable Tie', '束线带'], tags: ['部件', '线缆管理']},
+  {term: '真空', category: 'Process', description: '贴片机利用真空吸嘴抓取元器件的原理。', aliases: ['真空吸附', 'Vacuum Suction'], tags: ['工艺参数', 'SMT']},
+  {term: '整机', category: 'Tool', description: '指装配完整、可正常工作的手机成品。', aliases: ['完整手机', 'Complete Unit'], tags: ['测试验证', '项目相关']},
+  {term: '正压', category: 'Process', description: '施加于产品表面的压力，如气密性测试时向密封腔体内充气加压。', aliases: ['Positive Pressure', '正压力'], tags: ['工艺参数', '结构相关']},
+  {term: '制具', category: 'Tool', description: '在生产或测试中用于定位和固定产品的装置。', aliases: ['同治具'], tags: ['测试验证', '制造工艺']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 37 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤40: 导入批次 38/57
+// 第 741-760 条数据
+// ========================================
+WITH [
+  {term: '治具', category: 'Tool', description: '在生产或测试中用于定位和固定产品的装置，其精度直接影响产品一致性。', aliases: ['夹具', 'Fixture'], tags: ['测试验证', '制造工艺']},
+  {term: '钟摆', category: 'TestCase', description: '模拟手机在背包或口袋中来回摆动，测试其结构和连接的耐久性。', aliases: ['Pendulum Test', '摆动测试'], tags: ['结构相关', '可靠性']},
+  {term: '重工', category: 'Process', description: '对不合格品进行修复处理，使其符合标准要求的活动。', aliases: ['返工', 'Rework'], tags: ['流程相关', '质量体系']},
+  {term: '周波', category: 'TestCase', description: '重复性测试的次数，如按键测试XX万次。', aliases: ['周波数', 'Cycle'], tags: ['可靠性']},
+  {term: '注塑', category: 'Process', description: '将熔融塑料注入模具腔体，冷却后得到塑料制品的工艺。', aliases: ['Injection Molding', '注射成型'], tags: ['工艺参数', '结构相关']},
+  {term: '装框', category: 'Process', description: '将屏幕模组安装到中框或前壳上的工序。', aliases: ['Bezel Assembly', '安装边框'], tags: ['操作', '结构相关']},
+  {term: '资材', category: 'Role', description: '泛指生产所需的各类物料和资源。', aliases: ['物资材料', 'Materials'], tags: ['供应链', '物料']},
+  {term: '子料', category: 'Material', description: '构成一个成品或半成品所需的多种物料中的一种。', aliases: ['子物料', 'Sub-material'], tags: ['物料']},
+  {term: '走纸', category: 'Process', description: '在自动贴标机上，标签纸卷的正常输送。', aliases: ['Label Paper Feeding', '标签纸走纸'], tags: ['操作', '包装']},
+  {term: '组包', category: 'Process', description: '将手机、配件、说明书等装入包装盒的最终工序。', aliases: ['包装组装', 'Packing Assembly'], tags: ['操作', '包装']},
+  {term: '钻孔', category: 'Process', description: '在PCB上钻取导通孔、安装孔等，精度要求高。', aliases: ['PCB钻孔', 'Drilling'], tags: ['工艺参数', 'PCB']},
+  {term: '爆破测试', category: 'TestCase', description: '对电池或密封结构施加远超额定值的压力，直至其破坏，以验证最大承受极限。', aliases: ['破坏性压力测试'], tags: ['电池', '可靠性', '安全相关']},
+  {term: '金相分析', category: 'TestCase', description: '通过显微镜观察材料的微观组织结构，分析其工艺质量及失效原因。', aliases: ['显微组织分析'], tags: ['物料', '制造工艺', '可靠性']},
+  {term: '邦定胶', category: 'Process', description: '用于BGA/CSP芯片底部填充的环氧树脂胶，通过毛细作用流入，增强焊点可靠性。', aliases: ['底部填充胶', 'Underfill'], tags: ['工艺参数', 'SMT', '可靠性']},
+  {term: '白噪声测试', category: 'TestCase', description: '向扬声器或麦克风输入全频带白噪声，测试其在宽频带下的工作稳定性和可靠性。', aliases: ['White Noise Test'], tags: ['可靠性', '硬件相关', '声学']},
+  {term: '导通孔塞孔', category: 'Process', description: '用树脂或油墨填充导通孔，以便在孔上布线和焊接，对平整度要求高。', aliases: ['Via Plugging'], tags: ['工艺参数', 'PCB']},
+  {term: '模流平衡', category: 'Process', description: '注塑时熔料能同时到达并充满模具型腔的各个末端，避免滞流和欠注。', aliases: ['Flow Balance'], tags: ['设计', '工艺参数', '注塑']},
+  {term: '点胶轨迹', category: 'Process', description: '点胶机针头运动的路径规划，影响胶水覆盖的准确性和一致性。', aliases: ['Dispensing Path'], tags: ['工艺参数', '点胶', '自动化']},
+  {term: '等离子处理', category: 'Process', description: '利用等离子体活化材料表面，显著提高其润湿性和粘接附着力。', aliases: ['Plasma Treatment'], tags: ['工艺参数', '表面处理']},
+  {term: '溅射镀膜', category: 'Process', description: '在真空环境下用离子轰击靶材，使其原子溅射并沉积到工件表面形成薄膜。', aliases: ['Sputtering Coating'], tags: ['CMF', '工艺参数', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 38 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤41: 导入批次 39/57
+// 第 761-780 条数据
+// ========================================
+WITH [
+  {term: '模温机', category: 'Tool', description: '用于精确控制注塑模具温度的设备，对成型质量至关重要。', aliases: ['Mold Temperature Controller'], tags: ['注塑', '制造工艺']},
+  {term: '热仿真', category: 'Tool', description: '通过计算机软件模拟产品在工作状态下的温度分布和热流情况。', aliases: ['Thermal Simulation'], tags: ['设计', '热管理', '软件相关']},
+  {term: '填胶量', category: 'Process', description: '对芯片进行包封保护时，注入的胶水体积，需确保完全覆盖且无气泡。', aliases: ['Encapsulation Volume'], tags: ['工艺参数', '点胶', '可靠性']},
+  {term: '盐雾测试', category: 'TestCase', description: '模拟海洋大气环境，测试产品或材料耐腐蚀性能的加速试验方法。', aliases: ['Salt Spray Test', '盐雾试验'], tags: ['CMF', '测试验证', '可靠性', '硬件相关']},
+  {term: '模内注塑', category: 'Process', description: '将薄膜或织物放入模具内，注塑时塑料将其包覆成一体，实现装饰效果。', aliases: ['In-Mold Molding', 'IMM'], tags: ['工艺参数', '装饰', '结构相关']},
+  {term: '导通孔背钻', category: 'Process', description: '钻掉高速PCB板中不需要的导通孔 stub，以减少信号反射，提升信号完整性。', aliases: ['Back Drilling'], tags: ['工艺参数', 'PCB', '设计']},
+  {term: '贴装压力', category: 'Process', description: '贴片机贴装元件时，吸嘴对元件施加的压力。压力过大会损伤元件，过小则贴装不稳。', aliases: ['Placement Pressure'], tags: ['工艺参数', 'SMT']},
+  {term: '跌落姿态', category: 'TestCase', description: '手机跌落时与冲击面接触的初始角度和部位，对失效模式影响显著。', aliases: ['Drop Orientation'], tags: ['结构相关', '可靠性']},
+  {term: '三综合测试', category: 'TestCase', description: '同时施加温度、湿度和振动三种应力，更真实模拟恶劣环境的测试。', aliases: ['Combined Environmental Test'], tags: ['可靠性', '硬件相关']},
+  {term: 'JEDEC托盘', category: 'Tool', description: '标准化尺寸的塑料托盘，用于运输和贴片机供料。', aliases: ['JEDEC Tray'], tags: ['SMT', '制造工艺', '物料']},
+  {term: '模仁', category: 'Tool', description: '模具中直接形成产品型腔的可更换精密零件。', aliases: ['模具嵌件', 'Mold Insert'], tags: ['注塑', '制造工艺']},
+  {term: '底部填充', category: 'Process', description: '同邦定胶。', aliases: ['Underfill'], tags: ['工艺参数', 'SMT', '可靠性']},
+  {term: '金丝键合', category: 'Process', description: '使用细金线连接芯片焊盘和封装引脚的内互连技术。', aliases: ['Gold Wire Bonding'], tags: ['半导体', '工艺参数', '封装']},
+  {term: '电磁仿真', category: 'Tool', description: '通过计算机软件模拟电磁场的分布和相互作用，用于天线、EMC设计。', aliases: ['Electromagnetic Simulation'], tags: ['设计', '射频相关', 'EMC']},
+  {term: '导通孔阻焊', category: 'Process', description: '在导通孔上覆盖阻焊层，防止焊锡流入。', aliases: ['SMV', 'Solder Mask over Via'], tags: ['工艺参数', 'PCB']},
+  {term: '激光焊', category: 'Process', description: '利用高能量激光束作为热源进行熔焊的方法，精度高，热影响区小。', aliases: ['Laser Welding'], tags: ['工艺参数', '可靠性', '结构相关']},
+  {term: '导通孔树脂塞孔', category: 'Process', description: '使用绝缘树脂填充PCB导通孔为表面布线提供平坦化基础', aliases: ['Resin Plugged Via', '树脂填孔'], tags: ['工艺参数', 'PCB', '制造工艺']},
+  {term: '热失重', category: 'TestCase', description: '测量材料质量随温度升高而发生的变化，用于分析热稳定性、成分等。', aliases: ['TGA', 'Thermogravimetric Analysis'], tags: ['测试验证', '可靠性', '物料']},
+  {term: '模流分析', category: 'Tool', description: '通过CAE软件模拟塑料在模具中的流动、保压、冷却过程，预测缺陷。', aliases: ['Mold Flow Analysis'], tags: ['设计', '注塑', '制造工艺']},
+  {term: '真空镀膜', category: 'Process', description: '在真空环境中通过物理或化学方法在工件表面沉积薄膜的技术总称。', aliases: ['Vacuum Deposition'], tags: ['CMF', '工艺参数', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 39 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤42: 导入批次 40/57
+// 第 781-800 条数据
+// ========================================
+WITH [
+  {term: '漏测', category: 'Process', description: '**定义**: 应检项目未执行。 **判定口径**: 测试覆盖率 <100%。 **常见场景**: 产线OBA/功能测试。 **排查路径**: 审核工艺卡→检查治具。 **对策**: 加强自动化测试和流程审核。', aliases: ['测试遗漏', 'Missed Test'], tags: ['测试验证', '质量体系']},
+  {term: '频偏', category: 'Metric', description: '**定义**: 无线发射频率偏离标准值。 **判定口径**: 偏移 >±50ppm。 **常见场景**: OTA测试、极端温度。 **排查路径**: 检查晶振→校准电路。 **对策**: 增加温补电路，改善器件精度。', aliases: ['频率偏移', 'Frequency Offset'], tags: ['射频相关', '通信相关']},
+  {term: '电池容量衰减', category: 'Metric', description: '**定义**: 电池可用容量下降。 **判定口径**: 循环 500 次后容量 <80%。 **常见场景**: 长期使用。 **排查路径**: 读取电池健康数据。 **对策**: 改善材料体系，增加健康监控。', aliases: ['Battery Aging', '电池老化'], tags: ['电池', '可靠性']},
+  {term: '纳米注塑', category: 'Process', description: '在金属表面通过化学处理形成纳米级微孔，注塑时塑料渗入形成强机械互锁，实现金属与塑料的牢固结合。', aliases: ['NMT'], tags: ['工艺参数', '可靠性', '结构相关', '制造工艺']},
+  {term: '点胶高度', category: 'Process', description: '点胶针头尖端与PCB表面的距离，影响胶点形状和一致性。', aliases: ['针头离板高度'], tags: ['工艺参数', '点胶', 'SMT']},
+  {term: '声学密封性', category: 'Metric', description: '扬声器BOX或麦克风腔体的密封程度，直接影响低频响应和灵敏度。', aliases: ['声学气密性'], tags: ['声学', '硬件相关', '可靠性']},
+  {term: '钢板张力', category: 'Process', description: '张紧钢网使其保持平整的力，张力不足会导致印刷时钢网下垂，影响锡膏厚度。', aliases: ['钢网张力'], tags: ['工艺参数', 'SMT']},
+  {term: '离子污染度', category: 'Metric', description: '单位面积PCB表面可水解离子的当量浓度，常用NaCl当量表示，要求低于特定阈值（如1.56μg/cm²）。', aliases: ['离子洁净度'], tags: ['测试验证', 'PCB', '可靠性']},
+  {term: '焊点推拉力', category: 'TestCase', description: '使用推拉力测试仪测量单个焊点所能承受的机械强度，用于工艺验证和失效分析。', aliases: ['焊点强度测试'], tags: ['SMT', '可靠性', '硬件相关']},
+  {term: '模流剪切热', category: 'Process', description: '塑料熔体在高速流经狭小区域时，因内部分子摩擦产生热量，可能导致材料降解。', aliases: ['剪切生热'], tags: ['工艺参数', '注塑', '可靠性']},
+  {term: '天线频段', category: 'Metric', description: '天线能有效工作的频率范围，需覆盖目标市场的所有通信制式（如LTE Band 1, 3, 5...）。', aliases: ['工作频段'], tags: ['设计', '通信相关', '硬件相关']},
+  {term: '真空回流焊', category: 'Process', description: '在真空环境下进行回流焊，能有效消除焊点内部气泡，大幅减少空洞率，提升可靠性。', aliases: ['真空炉'], tags: ['工艺参数', 'SMT', '可靠性']},
+  {term: '胶体屈服值', category: 'Metric', description: '使胶水开始流动所需的最小剪切应力，影响点胶的起始性和抗塌陷性。', aliases: ['屈服应力'], tags: ['点胶', '制造工艺', '物料']},
+  {term: '板级可靠性', category: 'TestCase', description: '针对装配好的PCB进行的可靠性测试，如温度循环、跌落、弯曲等，评估其在实际应用中的寿命。', aliases: ['BLR'], tags: ['PCB', '可靠性', '硬件相关']},
+  {term: '激光功率密度', category: 'Process', description: '单位面积上的激光能量，决定加工效果（如切割、焊接、打标）的质量和效率。', aliases: ['能量密度'], tags: ['工艺参数', '激光加工']},
+  {term: '电化学阻抗谱', category: 'TestCase', description: '通过施加小幅交流电信号测量电池阻抗随频率的变化，用于分析电池健康状态和反应机理。', aliases: ['EIS'], tags: ['电池', '可靠性', '硬件相关']},
+  {term: '模内收缩率', category: 'Metric', description: '塑料从熔融状态冷却到固态时的体积变化率，是模具设计时确定收缩补偿系数的依据。', aliases: ['体积收缩率'], tags: ['设计', '注塑', '物料']},
+  {term: '信号眼图', category: 'Metric', description: '用于评估高速数字信号质量（如MIPI, USB）的图形化方法，眼图张开度越大，信号质量越好。', aliases: ['眼图'], tags: ['设计', '测试验证', '硬件相关']},
+  {term: '邦定线弧高度', category: 'Process', description: '键合线最高点与芯片表面的垂直距离，需精确控制以避免与盖板干涉或短路。', aliases: ['线弧拱高'], tags: ['半导体', '工艺参数', '封装']},
+  {term: '导热系数', category: 'Metric', description: '材料传导热量的能力，单位W/(m·K)，是选择散热材料的关键参数。', aliases: ['热导率'], tags: ['热管理', '可靠性', '物料']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 40 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤43: 导入批次 41/57
+// 第 801-820 条数据
+// ========================================
+WITH [
+  {term: '锡膏坍落度', category: 'Metric', description: '衡量锡膏印刷后保持原有形状、抵抗流动和变形能力的指标。', aliases: ['锡膏流变性'], tags: ['SMT', '制造工艺', '物料']},
+  {term: '模流平衡分析', category: 'Tool', description: '通过模拟优化流道系统设计，确保各型腔能同时充满，减少产品间的差异。', aliases: ['流道平衡'], tags: ['设计', '注塑', '制造工艺']},
+  {term: '射频传导骚扰', category: 'TestCase', description: '通过电源线或信号线向外发射的射频噪声，需要满足EMC法规限值。', aliases: ['射频干扰'], tags: ['可靠性', 'EMC', '硬件相关']},
+  {term: '胶体储能模量', category: 'Metric', description: '胶粘剂在交变应力下弹性变形分量对应的模量，反映其弹性行为。', aliases: ['弹性模量'], tags: ['点胶', '可靠性', '物料']},
+  {term: '高倍率扫描电镜', category: 'Tool', description: '利用聚焦电子束扫描样品表面，获得高分辨率形貌图像，用于微观结构观察和失效分析。', aliases: ['SEM'], tags: ['测试验证', '可靠性', '失效分析']},
+  {term: '模内温度传感器', category: 'Tool', description: '植入模具内部，用于实时监测型腔表面或内部某点温度的设备。', aliases: ['模温感应器'], tags: ['测试验证', '注塑', '制造工艺']},
+  {term: '信号上升时间', category: 'Metric', description: '数字信号从低电平上升到高电平规定比例所需的时间，是信号完整性的关键参数。', aliases: ['Rise Time'], tags: ['设计', '测试验证', '硬件相关']},
+  {term: '邦定第二点', category: 'Process', description: '键合线在引脚或基板焊盘上的连接点，与芯片上的第一点（球焊）相对应。', aliases: ['stitch bond'], tags: ['半导体', '工艺参数', '封装']},
+  {term: '热重分析仪', category: 'Tool', description: '测量样品质量随温度或时间变化关系的仪器，用于分析热稳定性、分解温度等。', aliases: ['TGA'], tags: ['测试验证', '可靠性', '物料']},
+  {term: '锡膏印刷性', category: 'Metric', description: '锡膏通过钢网开口转移到PCB焊盘上的能力，包括填充性、脱模性等。', aliases: ['印刷适性'], tags: ['SMT', '制造工艺', '物料']},
+  {term: '模流熔接痕强度', category: 'Metric', description: '两股熔体前沿相遇形成的熔接痕区域的力学强度，通常低于本体强度。', aliases: ['熔合线强度'], tags: ['结构相关', '注塑', '制造工艺']},
+  {term: '辐射骚扰场强', category: 'TestCase', description: '设备通过空间向外辐射的电磁噪声场强，需在暗室中测量并满足法规要求。', aliases: ['辐射发射'], tags: ['可靠性', 'EMC', '硬件相关']},
+  {term: '胶体损耗模量', category: 'Metric', description: '胶粘剂在交变应力下粘性变形分量对应的模量，反映其粘性耗能行为。', aliases: ['粘性模量'], tags: ['点胶', '可靠性', '物料']},
+  {term: 'X射线荧光光谱', category: 'Tool', description: '利用X射线激发样品元素产生特征荧光，进行成分定性定量分析，用于镀层厚度、材料成分检测。', aliases: ['XRF'], tags: ['CMF', '测试验证', '物料']},
+  {term: '模内冷却速率', category: 'Process', description: '塑胶件在模具内的冷却速度，影响结晶度、内应力和最终尺寸。', aliases: ['冷却速度'], tags: ['工艺参数', '注塑', '可靠性']},
+  {term: '阻抗匹配', category: 'Component', description: '使源端、传输线和负载端的阻抗一致，以实现最大功率传输和最小信号反射。', aliases: ['阻抗控制'], tags: ['射频相关', 'PCB', '硬件相关']},
+  {term: '邦定球剪切力', category: 'TestCase', description: '测量将金球焊点从芯片焊盘上剪切下来所需的力，评估键合界面强度。', aliases: ['球剪切强度'], tags: ['半导体', '制造工艺', '可靠性']},
+  {term: '锡膏金属粉末粒径', category: 'Metric', description: '锡膏中合金粉末的尺寸大小及分布，影响印刷分辨率、塌陷性和焊接效果。', aliases: ['锡粉粒度'], tags: ['SMT', '制造工艺', '物料']},
+  {term: '模流保压压力', category: 'Process', description: '注射完成后，为了补偿塑料收缩而继续施加的压力，对产品尺寸和缩水至关重要。', aliases: ['二次压力'], tags: ['工艺参数', '注塑']},
+  {term: '静电放电抗扰度', category: 'TestCase', description: '设备抵御静电放电干扰而不出现性能降级或损坏的能力，需满足IEC 61000-4-2等标准。', aliases: ['ESD Immunity'], tags: ['测试验证', 'EMC', '可靠性', '硬件相关', '法规']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 41 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤44: 导入批次 42/57
+// 第 821-840 条数据
+// ========================================
+WITH [
+  {term: '胶体tanδ', category: 'Metric', description: '损耗模量与储能模量的比值，表征胶粘剂在交变电场中能量损耗的大小。', aliases: ['损耗因子'], tags: ['电气性能', '点胶', '物料']},
+  {term: '聚焦离子束', category: 'Tool', description: '用聚焦的离子束对样品进行纳米级加工、切割和成像，用于芯片电路修改和截面分析。', aliases: ['FIB'], tags: ['测试验证', '可靠性', '失效分析']},
+  {term: '共模抑制比', category: 'Metric', description: '衡量差分放大器抑制共模信号（干扰）能力的指标。', aliases: ['CMRR'], tags: ['电气性能', '测试验证', '硬件相关']},
+  {term: '邦定线线径', category: 'Process', description: '键合金线的直径，常见有0.8mil, 1.0mil, 1.2mil等，影响电流承载能力和机械强度。', aliases: ['金线直径'], tags: ['半导体', '工艺参数', '封装']},
+  {term: '热循环寿命', category: 'Metric', description: '产品在规定的温度循环条件下，直到失效所能承受的循环次数。', aliases: ['温度循环寿命'], tags: ['测试验证', '可靠性', '硬件相关']},
+  {term: '锡膏触变指数', category: 'Metric', description: '锡膏在低剪切速率和高剪切速率下的粘度比值，衡量其触变性的恢复能力。', aliases: ['TI值'], tags: ['SMT', '制造工艺', '物料']},
+  {term: '模流翘曲预测', category: 'Tool', description: '通过CAE软件预测注塑件冷却后的翘曲变形趋势，指导模具和产品设计优化。', aliases: ['变形分析'], tags: ['设计', '注塑', '制造工艺']},
+  {term: '浪涌抗扰度', category: 'TestCase', description: '设备抵御电网开关瞬变或间接雷击引起的高能量瞬态过电压/过电流的能力。', aliases: ['雷击测试'], tags: ['测试验证', 'EMC', '可靠性', '硬件相关', '法规']},
+  {term: '胶体体积变化率', category: 'Metric', description: '胶水从液态到完全固化后体积变化的百分比，影响内应力和接合精度。', aliases: ['固化体积收缩'], tags: ['点胶', '制造工艺', '物料']},
+  {term: '红外热成像仪', category: 'Tool', description: '将物体表面的温度分布转换为可视化的热图，用于定位过热点和分析热分布。', aliases: ['热像仪'], tags: ['热管理', '可靠性', '测试验证']},
+  {term: '模内气体辅助', category: 'Process', description: '向熔融塑料中注入高压氮气，推动塑料填充并形成中空截面，可减少缩水、节省材料。', aliases: ['气辅注塑'], tags: ['设计', '工艺参数', '注塑']},
+  {term: '功率循环测试', category: 'TestCase', description: '通过给器件周期性通断电，使其自身发热和冷却，考核其热疲劳寿命。', aliases: ['主动温度循环'], tags: ['热管理', '可靠性', '硬件相关']},
+  {term: '锡膏印刷厚度', category: 'Metric', description: '锡膏印刷后留在PCB焊盘上的厚度，通常用螺旋测微计或3D光学扫描仪测量。', aliases: ['锡厚'], tags: ['SMT', '制造工艺', '测试验证']},
+  {term: '电快速瞬变脉冲群', category: 'TestCase', description: '模拟继电器触点抖动等产生的成群快速瞬变脉冲干扰，测试设备的抗扰度。', aliases: ['EFT/Burst'], tags: ['可靠性', 'EMC', '硬件相关']},
+  {term: '胶体玻璃化转变温度', category: 'Metric', description: '同前，胶粘剂的玻璃化转变温度。', aliases: ['Tg'], tags: ['点胶', '可靠性', '物料']},
+  {term: '超声波扫描显微镜', category: 'Tool', description: '利用超声波探测材料内部缺陷（如分层、空洞）的无损检测方法。', aliases: ['SAT'], tags: ['测试验证', '可靠性', '失效分析']},
+  {term: '模内微发泡', category: 'Process', description: '通过超临界流体在塑料内部产生微米级气泡，减轻重量、减少翘曲和缩水。', aliases: ['微孔发泡'], tags: ['工艺参数', '结构相关', '注塑']},
+  {term: '电源抑制比', category: 'Metric', description: '衡量电路（如LDO）抑制电源输入端纹波和噪声传递到输出端的能力。', aliases: ['PSRR'], tags: ['电气性能', '测试验证', '硬件相关']},
+  {term: '机械疲劳寿命', category: 'Metric', description: '材料或结构在交变应力作用下发生疲劳断裂前所能承受的应力循环次数。', aliases: ['疲劳强度'], tags: ['测试验证', '结构相关', '可靠性']},
+  {term: '模流冷却分析', category: 'Tool', description: '模拟模具冷却系统的效率，优化水路布局，缩短周期时间并减少热变形。', aliases: ['冷却系统分析'], tags: ['设计', '注塑', '制造工艺']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 42 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤45: 导入批次 43/57
+// 第 841-860 条数据
+// ========================================
+WITH [
+  {term: '电压跌落与中断', category: 'TestCase', description: '模拟电网电压短时下降或中断，测试设备功能的抗干扰性和恢复能力。', aliases: ['电压暂降'], tags: ['可靠性', 'EMC', '硬件相关']},
+  {term: '胶体热膨胀系数', category: 'Metric', description: '胶粘剂热膨胀系数，与基材匹配可减少热应力。', aliases: ['CTE'], tags: ['可靠性', '结构相关', '物料']},
+  {term: 'X射线检测', category: 'Tool', description: '自动X射线检测，用于检查BGA、QFN等隐藏焊点的焊接质量，如短路、开路、空洞。', aliases: ['AXI'], tags: ['测试验证', '制造工艺', 'SMT']},
+  {term: '模内变模温技术', category: 'Process', description: '在注塑前快速加热模具，注射后快速冷却，可消除熔接痕、提升表面光泽度。', aliases: ['快速热循环'], tags: ['CMF', '工艺参数', '注塑']},
+  {term: '时序分析', category: 'TestCase', description: '确保数字系统中相关信号满足建立时间和保持时间的要求，避免时序违规。', aliases: ['信号时序'], tags: ['测试验证', '软件相关', '硬件相关']},
+  {term: '锡膏黏度曲线', category: 'Metric', description: '锡膏粘度随剪切速率变化的曲线，全面表征其流变特性。', aliases: ['流变曲线'], tags: ['SMT', '制造工艺', '物料']},
+  {term: '谐波电流发射', category: 'TestCase', description: '设备从电网吸取的电流中除基波外的谐波成分含量，需符合规范以减小对电网污染。', aliases: ['电流谐波'], tags: ['测试验证', 'EMC', '可靠性', '硬件相关', '法规']},
+  {term: '胶体固化动力学', category: 'Metric', description: '研究胶粘剂固化反应速度与温度、时间等条件的关系。', aliases: ['固化反应速率'], tags: ['点胶', '制造工艺', '物料']},
+  {term: '声学扫描显微镜', category: 'Tool', description: '利用超声波探测材料内部缺陷（分层空洞）的无损检测设备', aliases: ['C-SAM'], tags: ['测试验证', '可靠性', '失效分析']},
+  {term: '抖动', category: 'Metric', description: '数字信号边沿相对于其理想时间位置的短期偏移，是高速信号完整性的重要参数。', aliases: ['Jitter'], tags: ['设计', '测试验证', '硬件相关']},
+  {term: '邦定线弧形状', category: 'Process', description: '键合线从芯片到引脚的弧形轨迹，需优化以实现可靠的电气连接和机械稳定性。', aliases: ['线弧轮廓'], tags: ['半导体', '工艺参数', '封装']},
+  {term: '电压波动抗扰度', category: 'TestCase', description: '设备对电网电压波动（如由大功率设备启停引起）的抗干扰能力。', aliases: ['闪烁测试'], tags: ['可靠性', 'EMC', '硬件相关']},
+  {term: '光学轮廓仪', category: 'Tool', description: '用于非接触式测量表面形貌、粗糙度、台阶高度等三维轮廓信息。', aliases: ['白光干涉仪'], tags: ['测试验证', '制造工艺', '外观']},
+  {term: '模内层压', category: 'Process', description: '将装饰性或功能性薄膜在注塑过程中与塑胶件复合。', aliases: ['模内贴膜'], tags: ['CMF', '工艺参数', '结构相关']},
+  {term: '锡膏印刷面积比', category: 'Metric', description: '钢网开口面积与孔壁侧面积的比值，经验上大于0.66有利于锡膏释放。', aliases: ['面积比'], tags: ['设计', 'SMT', '制造工艺']},
+  {term: '工频磁场抗扰度', category: 'TestCase', description: '设备对50/60Hz电源频率磁场干扰的抵抗能力。', aliases: ['磁场抗扰度'], tags: ['可靠性', 'EMC', '硬件相关']},
+  {term: '激光共聚焦显微镜', category: 'Tool', description: '利用激光扫描和针孔技术，获得样品不同深度的光学切片，实现三维成像。', aliases: ['CLSM'], tags: ['测试验证', '可靠性', '失效分析']},
+  {term: '模内传感器', category: 'Tool', description: '集成在模具内用于监测压力、温度、位移等参数的传感器总称。', aliases: ['智能模具'], tags: ['测试验证', '注塑', '制造工艺']},
+  {term: '邦定线弧长度', category: 'Process', description: '键合线从第一点到第二点的水平投影距离。', aliases: ['线弧跨度'], tags: ['半导体', '工艺参数', '封装']},
+  {term: '供应链审计', category: 'Process', description: '对供应商的质量体系生产过程及能力进行的系统性检查与评估', aliases: ['供应商审核'], tags: ['质量体系', '供应链', '组织职责']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 43 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤46: 导入批次 44/57
+// 第 861-880 条数据
+// ========================================
+WITH [
+  {term: '产品数据管理工程师', category: 'Role', description: '负责管理产品全生命周期数据（BOM图纸规格）的工程师', aliases: ['PDM工程师'], tags: ['流程相关', '组织职责', '项目相关']},
+  {term: '项目质量经理', category: 'Role', description: '负责特定项目内所有质量活动的策划控制和保证的管理人员', aliases: ['PQM'], tags: ['质量体系', '组织职责', '项目相关']},
+  {term: '环境健康安全工程师', category: 'Role', description: '负责确保工作环境符合健康安全及环保法规的专业人员', aliases: ['EHS工程师'], tags: ['流程相关', '组织职责', '法规']},
+  {term: '金相切片', category: 'Tool', description: '将样品封装研磨抛光后在显微镜下观察内部结构的制样方法', aliases: ['交叉切片'], tags: ['测试验证', '可靠性', '失效分析']},
+  {term: '客户质量工程师', category: 'Role', description: '作为与客户对接的质量窗口处理客户反馈投诉和审核', aliases: ['CQE'], tags: ['质量体系', '供应链', '组织职责']},
+  {term: '高低温循环试验箱', category: 'Tool', description: '可编程控制温度在高温和低温间循环变化的测试设备', aliases: ['温循箱'], tags: ['测试验证', '可靠性', '硬件相关']},
+  {term: '生产质量工程师', category: 'Role', description: '负责解决生产线上的质量问题提升直通率和产品质量', aliases: ['PQE'], tags: ['质量体系', '制造工艺', '组织职责']},
+  {term: '可制造性设计评审', category: 'Process', description: '在产品设计阶段评估其是否易于高效低成本制造的正式评审流程', aliases: ['DFM评审'], tags: ['设计', '制造工艺', '质量体系']},
+  {term: '阳极氧化', category: 'Process', description: '通过电解在铝材表面生成致密氧化铝膜用于着色耐腐蚀和耐磨', aliases: ['阳极化'], tags: ['CMF', '可靠性', '制造工艺']},
+  {term: '可靠性测试工程师', category: 'Role', description: '负责制定和执行产品可靠性测试方案评估产品寿命和失效模式', aliases: ['可靠性工程师'], tags: ['测试验证', '可靠性', '组织职责']},
+  {term: '来料质量检验员', category: 'Role', description: '负责对供应商来料进行检验和判定的操作人员', aliases: ['IQC检验员'], tags: ['质量体系', '制造工艺', '组织职责']},
+  {term: '模流分析软件', category: 'Tool', description: '用于模拟塑料在模具中流动保压冷却过程的CAE软件', aliases: ['Moldflow'], tags: ['设计', '注塑', '制造工艺']},
+  {term: '失效分析工程师', category: 'Role', description: '负责对失效品进行根因分析定位故障机理并提出改进措施', aliases: ['FA工程师'], tags: ['质量体系', '可靠性', '组织职责']},
+  {term: '化学镀镍金', category: 'Process', description: '在PCB焊盘上化学沉积镍层和金层的表面处理工艺', aliases: ['ENIG'], tags: ['工艺参数', 'PCB', '制造工艺']},
+  {term: '体系质量工程师', category: 'Role', description: '负责建立维护和改进公司质量管理体系（如ISO9001）', aliases: ['体系工程师'], tags: ['质量体系', '流程相关', '组织职责']},
+  {term: '离子色谱仪', category: 'Tool', description: '用于检测样品中离子型杂质（如卤素硫酸根）的种类和含量', aliases: ['IC'], tags: ['测试验证', '可靠性', '物料']},
+  {term: '射频微波暗室', category: 'Tool', description: '内部覆盖吸波材料用于天线辐射等测试的电磁屏蔽空间', aliases: ['电波暗室'], tags: ['测试验证', 'EMC', '射频相关']},
+  {term: '制程质量工程师', category: 'Role', description: '负责监控和生产过程质量确保工艺参数稳定和产品符合标准', aliases: ['IPQC工程师'], tags: ['质量体系', '制造工艺', '组织职责']},
+  {term: '振动控制器', category: 'Tool', description: '用于控制振动试验台按预设谱线进行振动的设备', aliases: ['振动控制仪'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '功耗分析仪', category: 'Tool', description: '精确测量设备电压电流功率能耗等电气参数的仪器', aliases: ['功率分析仪'], tags: ['性能指标', '测试验证', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 44 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤47: 导入批次 45/57
+// 第 881-900 条数据
+// ========================================
+WITH [
+  {term: '材料合规工程师', category: 'Role', description: '确保产品所用材料符合RoHS REACH等环保法规的专业人员', aliases: ['环保工程师'], tags: ['供应链', '组织职责', '法规']},
+  {term: 'X射线荧光光谱仪', category: 'Tool', description: '用于快速无损分析材料元素成分和镀层厚度的仪器', aliases: ['XRF'], tags: ['CMF', '测试验证', '物料']},
+  {term: '标准化工程师', category: 'Role', description: '负责制定和维护企业技术标准设计规范等', aliases: ['标准工程师'], tags: ['设计', '流程相关', '组织职责']},
+  {term: '邦定球剪切测试', category: 'TestCase', description: '测量芯片键合球与焊盘界面强度的破坏性测试方法', aliases: ['球剪切测试'], tags: ['半导体', '测试验证', '可靠性']},
+  {term: '超声波焊接', category: 'Process', description: '利用高频振动能量使塑料或金属局部熔化实现连接', aliases: ['超声焊'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '实验室认可工程师', category: 'Role', description: '负责实验室管理体系（如CNAS）的建立和维护', aliases: ['实验室工程师'], tags: ['质量体系', '测试验证', '组织职责']},
+  {term: '红外热像仪', category: 'Tool', description: '非接触式测量手机表面温度分布直观定位热点', aliases: ['热像仪', 'IR Camera', 'Thermal Imager'], tags: ['工具', '热管理', '可靠性', '测试验证']},
+  {term: '扫描电子显微镜', category: 'Tool', description: '利用电子束扫描样品表面获得高分辨率形貌图像的设备', aliases: ['SEM'], tags: ['测试验证', '可靠性', '失效分析']},
+  {term: '质量成本分析师', category: 'Role', description: '负责核算和分析预防鉴定内部和外部失败成本', aliases: ['质量成本会计'], tags: ['质量体系', '流程相关', '组织职责']},
+  {term: '恒温恒湿试验箱', category: 'Tool', description: '可精确控制温度和湿度的环境模拟设备', aliases: ['温湿箱'], tags: ['测试验证', '可靠性', '硬件相关']},
+  {term: '矢量网络分析仪', category: 'Tool', description: '测量射频元器件和电路网络参数的精密仪器', aliases: ['VNA'], tags: ['工具', '测试验证', '硬件相关', '射频相关']},
+  {term: '供应商开发工程师', category: 'Role', description: '负责寻找评估和引入新供应商并提升现有供应商能力', aliases: ['SDE'], tags: ['质量体系', '供应链', '组织职责']},
+  {term: '微弧氧化', category: 'Process', description: '在铝镁钛等金属表面通过高压放电生成陶瓷化氧化层的技术', aliases: ['等离子体电解氧化', '微弧氧化'], tags: ['CMF', '可靠性', '制造工艺']},
+  {term: '计量校准工程师', category: 'Role', description: '负责测量设备的定期校准和量值溯源管理', aliases: ['计量工程师'], tags: ['质量体系', '测试验证', '组织职责']},
+  {term: '激光测振仪', category: 'Tool', description: '利用激光多普勒效应非接触测量物体振动速度和位移的设备', aliases: ['Laser Doppler Vibrometer', 'LDV'], tags: ['工具', '测试验证', '可靠性', '结构相关']},
+  {term: '能谱仪', category: 'Tool', description: '与SEM联用对样品微区进行元素成分定性定量分析', aliases: ['EDS/EDX'], tags: ['测试验证', '可靠性', '失效分析']},
+  {term: '客户满意度经理', category: 'Role', description: '负责监控和提升客户对产品和服务的满意程度', aliases: ['CSM'], tags: ['质量体系', '组织职责', '项目相关']},
+  {term: '落球冲击测试', category: 'TestCase', description: '用规定重量的钢球从一定高度自由落体冲击样品表面', aliases: ['球冲击测试'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '等离子体清洗', category: 'Process', description: '利用等离子体活化材料表面去除有机物污染提高粘接性', aliases: ['等离子清洗'], tags: ['制造工艺', '表面处理', '可靠性']},
+  {term: '质量培训师', category: 'Role', description: '负责策划和实施公司范围内的质量意识工具和流程培训', aliases: ['质量培训专员'], tags: ['质量体系', '流程相关', '组织职责']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 45 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤48: 导入批次 46/57
+// 第 901-920 条数据
+// ========================================
+WITH [
+  {term: '三坐标测量机', category: 'Tool', description: '用于精密测量工件几何尺寸形状和位置公差的高精度设备', aliases: ['CMM'], tags: ['测试验证', '制造工艺', '结构相关']},
+  {term: '原子力显微镜', category: 'Tool', description: '通过探测针尖与样品表面的原子力获得纳米级分辨率的三维形貌', aliases: ['AFM'], tags: ['测试验证', '可靠性', '失效分析']},
+  {term: '项目质量保证', category: 'Role', description: '在项目团队内独立评估过程合规性确保项目按质量要求执行', aliases: ['PQA'], tags: ['质量体系', '组织职责', '项目相关']},
+  {term: '插拔力测试', category: 'TestCase', description: '测试连接器反复插拔过程中的插入力和拔出力以及寿命次数', aliases: ['插拔寿命测试'], tags: ['测试验证', '可靠性', '硬件相关']},
+  {term: '化学气相沉积', category: 'Process', description: '利用气态先驱物在衬底表面发生化学反应并沉积固态薄膜的技术', aliases: ['CVD'], tags: ['半导体', '制造工艺', '硬件相关']},
+  {term: '质量信息系统专员', category: 'Role', description: '负责维护和质量数据统计分析软件系统（如SPC QMS）', aliases: ['QIS专员'], tags: ['质量体系', '软件相关', '组织职责']},
+  {term: '光谱分析仪', category: 'Tool', description: '测量光信号功率随波长分布关系的仪器', aliases: ['OSA'], tags: ['测试验证', '硬件相关', '射频相关']},
+  {term: '卓越运营经理', category: 'Role', description: '推动精益生产六西格玛等持续改进方法提升运营效率和质量', aliases: ['精益经理'], tags: ['质量体系', '制造工艺', '组织职责']},
+  {term: '高温存储测试', category: 'TestCase', description: '将产品置于高温环境下长时间存储评估其材料和老化的稳定性', aliases: ['高温老化'], tags: ['测试验证', '可靠性', '硬件相关']},
+  {term: '物理气相沉积', category: 'Process', description: '通过物理方法（蒸发溅射）使材料气化并在工件表面沉积成膜', aliases: ['PVD'], tags: ['CMF', '制造工艺', '硬件相关']},
+  {term: '风险管理工程师', category: 'Role', description: '负责识别分析和管控产品开发过程中的技术和管理风险', aliases: ['风险工程师'], tags: ['质量体系', '组织职责', '项目相关']},
+  {term: '白光干涉仪', category: 'Tool', description: '用于非接触式测量表面形貌粗糙度台阶高度等三维轮廓', aliases: ['光学轮廓仪'], tags: ['测试验证', '制造工艺', '外观']},
+  {term: '二次离子质谱仪', category: 'Tool', description: '用离子束溅射样品表面对溅出二次离子进行质谱分析用于痕量元素和深度剖析', aliases: ['SIMS'], tags: ['测试验证', '可靠性', '失效分析']},
+  {term: '质量审计员', category: 'Role', description: '经培训合格负责执行内部质量管理体系审核的人员', aliases: ['内审员'], tags: ['质量体系', '流程相关', '组织职责']},
+  {term: '弯曲测试', category: 'TestCase', description: '对FPC连接线等柔性部件进行反复弯折考核其耐疲劳性', aliases: ['弯折测试'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '激光焊接', category: 'Process', description: '利用高能量密度激光束作为热源进行精密焊接的方法', aliases: ['激光焊'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '变更控制委员会', category: 'Role', description: '负责评估和批准产品设计工艺等重要变更的跨部门团队', aliases: ['CCB'], tags: ['流程相关', '组织职责', '项目相关']},
+  {term: '热阻测试仪', category: 'Tool', description: '用于测量器件结到环境或结到外壳热阻的专用设备', aliases: ['热阻测量系统'], tags: ['热管理', '可靠性', '测试验证']},
+  {term: 'X射线衍射仪', category: 'Tool', description: '用于分析材料的晶体结构物相组成结晶度等', aliases: ['XRD'], tags: ['测试验证', '可靠性', '物料']},
+  {term: '质量目标管理专员', category: 'Role', description: '负责制定跟踪和分析公司及部门级质量关键绩效指标', aliases: ['质量KPI专员'], tags: ['质量体系', '流程相关', '组织职责']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 46 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤49: 导入批次 47/57
+// 第 921-940 条数据
+// ========================================
+WITH [
+  {term: '砂尘测试', category: 'TestCase', description: '模拟沙尘环境测试产品外壳的防尘能力（IP5X）', aliases: ['防尘测试'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '选择性焊接', category: 'Process', description: '仅对PCB上特定通孔元件进行焊接避免热敏感SMD元件受热', aliases: ['选择焊'], tags: ['工艺参数', 'PCB', '制造工艺']},
+  {term: '新产品导入质量工程师', category: 'Role', description: '负责在新产品从研发转向量产阶段的质量策划和验证', aliases: ['NPI QE'], tags: ['质量体系', '组织职责', '项目相关']},
+  {term: '泄漏测试仪', category: 'Tool', description: '用于检测产品气密性的设备如压降法氦质谱检漏仪', aliases: ['检漏仪'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '俄歇电子能谱仪', category: 'Tool', description: '用于表面1-3nm层元素的定性定量和化学状态分析', aliases: ['AES'], tags: ['测试验证', '可靠性', '失效分析']},
+  {term: '质量改进小组组长', category: 'Role', description: '领导跨职能团队针对特定质量问题进行根本原因分析和改进', aliases: ['QIT Leader'], tags: ['质量体系', '制造工艺', '组织职责']},
+  {term: '机械冲击测试', category: 'TestCase', description: '模拟产品在运输或使用中受到的剧烈冲击考核结构坚固性', aliases: ['冲击测试'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '卷对卷加工', category: 'Process', description: '基材以卷筒形式连续进行多个工序（如曝光蚀刻镀铜）的生产方式', aliases: ['R2R'], tags: ['制造工艺', 'FPC', '物料']},
+  {term: '客户投诉处理专员', category: 'Role', description: '负责接收记录初步分析和跟踪客户投诉的处理进程', aliases: ['客诉专员'], tags: ['质量体系', '供应链', '组织职责']},
+  {term: '绝缘耐压测试仪', category: 'Tool', description: '施加高电压测试产品的绝缘强度是否满足安全规范', aliases: ['耐压测试仪'], tags: ['测试验证', '安全相关', '硬件相关']},
+  {term: '动态力学分析仪', category: 'Tool', description: '测量材料在不同温度频率下的动态模量和损耗因子研究粘弹行为', aliases: ['DMA'], tags: ['测试验证', '可靠性', '物料']},
+  {term: '质量成本管理经理', category: 'Role', description: '负责全面策划核算分析和优化质量成本', aliases: ['质量成本经理'], tags: ['质量体系', '流程相关', '组织职责']},
+  {term: '防水测试', category: 'TestCase', description: '将产品浸入规定深度水中一定时间测试其防水等级（IPX7/IPX8）', aliases: ['浸水测试'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '激光修调', category: 'Process', description: '使用激光精确切割调整厚膜或薄膜电阻的阻值', aliases: ['激光调阻'], tags: ['工艺参数', '制造工艺', '硬件相关']},
+  {term: '供应商质量改进工程师', category: 'Role', description: '常驻或频繁访问供应商协助其进行质量问题的根本原因分析和持续改进', aliases: ['SQI工程师'], tags: ['质量体系', '供应链', '组织职责']},
+  {term: '伽马校正', category: 'Process', description: '调整显示屏的灰阶输出特性使显示亮度与输入信号呈准确的幂函数关系', aliases: ['Gamma Calibration'], tags: ['测试验证', '制造工艺', '显示相关']},
+  {term: '色准调试', category: 'Process', description: '调整显示屏色域白平衡等参数使其色彩显示符合标准', aliases: ['Color Calibration'], tags: ['影像相关', '测试验证', '显示相关']},
+  {term: '亮度均匀性测试', category: 'TestCase', description: '测量屏幕不同区域的亮度计算均匀性的测试', aliases: ['Luminance Uniformity Test'], tags: ['性能指标', '测试验证', '显示相关']},
+  {term: '色度均匀性测试', category: 'TestCase', description: '测量屏幕不同区域的色坐标偏差的测试', aliases: ['Chromaticity Uniformity Test'], tags: ['性能指标', '测试验证', '显示相关']},
+  {term: '分光色度计', category: 'Tool', description: '精确测量屏幕亮度色度等光学参数的仪器', aliases: ['Spectrophotometer'], tags: ['影像相关', '测试验证', '显示相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 47 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤50: 导入批次 48/57
+// 第 941-960 条数据
+// ========================================
+WITH [
+  {term: '显示测试信号发生器', category: 'Tool', description: '产生各种标准测试画面（如纯色灰阶棋盘格）的设备', aliases: ['Pattern Generator'], tags: ['测试验证', '显示相关']},
+  {term: '自动光学检测设备', category: 'Tool', description: '用相机自动检测显示屏外观缺陷（Mura坏点等）的设备', aliases: ['AOI for Display'], tags: ['测试验证', '制造工艺', '显示相关']},
+  {term: '显示模块工程师', category: 'Role', description: '负责显示屏选型光学调试可靠性验证及与整机的匹配', aliases: ['Display Module Engineer'], tags: ['设计', '显示相关', '硬件相关']},
+  {term: '主动对齐', category: 'Process', description: '在通电状态下调整传感器与镜头的相对位置以达到最佳光学性能的组装工艺', aliases: ['Active Alignment'], tags: ['影像相关', '摄像头模组', '制造工艺']},
+  {term: '标定', category: 'Process', description: '对摄像头模块进行参数校正如shading correction AF calibration', aliases: ['Calibration'], tags: ['影像相关', '测试验证', '制造工艺']},
+  {term: '调制传递函数测试', category: 'TestCase', description: '评价镜头成像分辨率和对比度还原能力的核心光学测试', aliases: ['MTF Test'], tags: ['性能指标', '测试验证', '影像相关']},
+  {term: '色彩还原测试', category: 'TestCase', description: '评估摄像头在不同光源下还原被摄物颜色的准确性', aliases: ['Color Reproduction Test'], tags: ['性能指标', '测试验证', '影像相关']},
+  {term: '影像质量测试卡', category: 'Tool', description: '如ISO12233分辨率测试卡24色卡等测试图卡', aliases: ['IQ Test Chart'], tags: ['测试验证', '影像相关']},
+  {term: '积分球', category: 'Tool', description: '提供均匀稳定的面光源用于摄像头均匀性色差等测试', aliases: ['Integrating Sphere'], tags: ['测试验证', '影像相关']},
+  {term: '影像实验室', category: 'Tool', description: '配备暗室光源测试设备和软件的专门测试场地', aliases: ['Image Quality Lab'], tags: ['测试验证', '影像相关', '组织职责']},
+  {term: '影像质量工程师', category: 'Role', description: '负责制定摄像头评测标准进行主观和客观的影像质量评估与调试', aliases: ['Image Quality Engineer'], tags: ['设计', '测试验证', '影像相关']},
+  {term: '快充协议', category: 'Process', description: '如QC PD用于协商提高充电功率的通信协议', aliases: ['Quick Charge Protocol'], tags: ['充电', '软件相关', '硬件相关']},
+  {term: '化成', category: 'Process', description: '电池激活后的首次充放电使其形成稳定的SEI膜的工艺', aliases: ['Formation'], tags: ['电池', '制造工艺']},
+  {term: '老化测试', category: 'TestCase', description: '模拟电池长期使用后的性能衰减的测试', aliases: ['Aging Test'], tags: ['电池', '测试验证', '可靠性']},
+  {term: '针刺测试', category: 'TestCase', description: '模拟电池内部短路检验其安全性能的测试', aliases: ['Nail Penetration Test'], tags: ['电池', '测试验证', '安全相关']},
+  {term: '热滥用测试', category: 'TestCase', description: '将电池置于高温环境中检验其热稳定性的测试', aliases: ['Thermal Abuse Test'], tags: ['电池', '测试验证', '安全相关']},
+  {term: '电池测试系统', category: 'Tool', description: '可编程充放电设备用于测试电池性能', aliases: ['Battery Test System'], tags: ['电池', '测试验证', '硬件相关']},
+  {term: '绝热量热仪', category: 'Tool', description: '测量电池在绝热条件下发生热失控时的放热特性的仪器', aliases: ['Accelerating Rate Calorimeter'], tags: ['电池', '测试验证', '安全相关']},
+  {term: '电池安全工程师', category: 'Role', description: '负责电池安全设计风险评估和失效分析的工程师', aliases: ['Battery Safety Engineer'], tags: ['可靠性', '安全相关', '硬件相关']},
+  {term: '表面贴装技术', category: 'Process', description: '将元件贴装到PCB表面的工艺技术', aliases: ['SMT'], tags: ['SMT', '制造工艺', '硬件相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 48 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤51: 导入批次 49/57
+// 第 961-980 条数据
+// ========================================
+WITH [
+  {term: '在线测试', category: 'TestCase', description: '通过针床对组装好的PCB进行自动化电气性能测试', aliases: ['ICT'], tags: ['测试验证', '制造工艺', '硬件相关']},
+  {term: '功能测试', category: 'TestCase', description: '模拟整机工作条件测试产品各项功能是否正常', aliases: ['FCT'], tags: ['测试验证', '软件相关', '硬件相关']},
+  {term: '示波器', category: 'Tool', description: '观察电信号波形随时间变化的仪器', aliases: ['Oscilloscope'], tags: ['工具', '测试验证', '电气性能']},
+  {term: '硬件测试工程师', category: 'Role', description: '负责制定硬件测试方案执行测试并分析问题的工程师', aliases: ['Hardware Test Engineer'], tags: ['测试验证', '组织职责', '硬件相关']},
+  {term: 'PCB布局工程师', category: 'Role', description: '负责根据原理图进行PCB的元器件布局和走线设计的工程师', aliases: ['PCB Layout Engineer'], tags: ['设计', '组织职责', '硬件相关']},
+  {term: '天线阻抗匹配', category: 'Process', description: '通过调整匹配电路使天线阻抗与射频前端输出阻抗共轭匹配实现最大功率传输', aliases: ['Antenna Impedance Matching'], tags: ['设计', '测试验证', '射频相关']},
+  {term: '射频校准', category: 'Process', description: '在生产线末端对每个手机的发射功率接收增益等射频参数进行校准使其符合标准', aliases: ['RF Calibration'], tags: ['测试验证', '制造工艺', '射频相关']},
+  {term: '综测仪', category: 'Tool', description: '如Keysight安立公司的仪器可模拟基站进行全面的射频和协议一致性测试', aliases: ['Comprehensive Tester'], tags: ['工具', '射频相关', '测试验证']},
+  {term: '网络分析仪', category: 'Tool', description: '用于测量天线滤波器等无源器件的S参数如回波损耗S11插入损耗S21', aliases: ['VNA'], tags: ['工具', '射频相关', '测试验证']},
+  {term: '微波暗室', category: 'Tool', description: '内部覆盖吸波材料模拟自由空间环境用于测量天线的辐射性能方向图效率等', aliases: ['Anechoic Chamber'], tags: ['工具', '射频相关', '测试验证']},
+  {term: '传导测试', category: 'TestCase', description: '通过射频电缆直接连接手机主板和测试仪器排除天线影响测试射频电路的性能', aliases: ['Conducted Test'], tags: ['测试验证', '通信相关', '射频相关']},
+  {term: 'OTA测试', category: 'TestCase', description: '在微波暗室中通过空中接口无线测试整机的辐射功率和接收灵敏度TRP/TIS', aliases: ['Over-the-Air Test'], tags: ['测试验证', '通信相关', '射频相关']},
+  {term: '射频工程师', category: 'Role', description: '负责射频电路和天线的设计仿真调试和性能优化', aliases: ['RF Engineer'], tags: ['设计', '射频相关', '硬件相关']},
+  {term: '天线工程师', category: 'Role', description: '专注于天线的设计仿真调试以及与整机结构的协同设计', aliases: ['Antenna Engineer'], tags: ['设计', '射频相关', '硬件相关']},
+  {term: '音频调试', category: 'Process', description: '通过软件参数调整扬声器受话器麦克风的EQ增益限幅器等优化音质和响度', aliases: ['Audio Tuning'], tags: ['测试验证', '制造工艺', '声学']},
+  {term: '声学密封测试', category: 'TestCase', description: '检测扬声器BOX或麦克风声腔的密封性是否良好', aliases: ['Acoustic Seal Test'], tags: ['测试验证', '声学', '可靠性']},
+  {term: '人工嘴', category: 'Tool', description: '用于播放标准测试信号模拟人嘴说话测试麦克风性能', aliases: ['Artificial Mouth'], tags: ['工具', '测试验证', '声学']},
+  {term: '人工耳', category: 'Tool', description: '模拟人耳的声学特性用于测量受话器或扬声器在耳道入口处产生的声压', aliases: ['Artificial Ear'], tags: ['工具', '测试验证', '声学']},
+  {term: '声学分析仪', category: 'Tool', description: '如APx系列用于进行高精度的音频参数测量和分析', aliases: ['Audio Analyzer'], tags: ['工具', '测试验证', '声学']},
+  {term: '消声室', category: 'Tool', description: '房间内壁铺设吸声材料模拟自由声场环境用于精确测量声源的辐射特性', aliases: ['Anechoic Chamber'], tags: ['工具', '测试验证', '声学']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 49 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤52: 导入批次 50/57
+// 第 981-1000 条数据
+// ========================================
+WITH [
+  {term: '声学工程师', category: 'Role', description: '负责声学器件的选型声学结构设计音质主观客观评价和调试', aliases: ['Acoustic Engineer'], tags: ['设计', '声学', '硬件相关']},
+  {term: '点胶方案', category: 'Process', description: '在芯片底部或关键部件周围点胶增强机械强度和可靠性', aliases: ['Potting', 'Underfill'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '跌落测试', category: 'TestCase', description: '模拟日常跌落场景验证整机结构强度屏幕抗摔能力', aliases: ['Drop Test'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '钢球冲击测试', category: 'TestCase', description: '用特定重量的钢球从一定高度冲击盖板玻璃测试其抗冲击强度', aliases: ['Ball Drop Test'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '扭压测试', category: 'TestCase', description: '对手机进行扭曲和弯曲测试结构抗变形能力', aliases: ['Twist and Bend Test'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '按键寿命测试', category: 'TestCase', description: '模拟用户长时间使用测试侧键的按压寿命', aliases: ['Key Life Test'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '连接器插拔力测试', category: 'TestCase', description: '测试连接器的插入力和拔出力以及反复插拔后的性能变化', aliases: ['Connector Insertion/Extraction Force Test'], tags: ['测试验证', '可靠性', '结构相关']},
+  {term: '结构强度仿真', category: 'Process', description: '通过CAE软件如Abaqus模拟手机在跌落静压等工况下的应力分布', aliases: ['Structural Simulation'], tags: ['设计', '工具', '结构相关']},
+  {term: '模具工程师', category: 'Role', description: '负责结构件注塑模具的设计开发和维护', aliases: ['Mold Engineer'], tags: ['结构相关', '制造工艺', '组织职责']},
+  {term: '结构工程师', category: 'Role', description: '负责手机整机结构零部件结构设计以及强度和可靠性验证', aliases: ['Mechanical Engineer'], tags: ['设计', '结构相关', '组织职责']},
+  {term: '热仿真分析', category: 'Process', description: '通过CFD软件如FloTHERM Icepak模拟手机在不同工况下的温度场和气流场', aliases: ['Thermal Simulation'], tags: ['设计', '热管理', '工具']},
+  {term: '热电偶', category: 'Tool', description: '接触式温度传感器用于精确测量芯片封装表面等特定点的温度', aliases: ['Thermocouple'], tags: ['工具', '热管理', '测试验证']},
+  {term: '热测试基台', category: 'Tool', description: '可控制环境温度用于测试手机在高温下的散热性能', aliases: ['Thermal Test Chamber'], tags: ['工具', '热管理', '测试验证']},
+  {term: '稳态温度测试', category: 'TestCase', description: '让手机长时间运行高负载任务直至温度达到稳定记录最终温度', aliases: ['Steady-state Temperature Test'], tags: ['热管理', '测试验证', '可靠性']},
+  {term: '瞬态温度测试', category: 'TestCase', description: '测试手机在突然加载高负载任务时温度随时间上升的曲线', aliases: ['Transient Temperature Test'], tags: ['热管理', '测试验证', '可靠性']},
+  {term: '散热工程师', category: 'Role', description: '负责手机散热方案的选型设计仿真验证和测试优化', aliases: ['Thermal Engineer'], tags: ['设计', '热管理', '组织职责']},
+  {term: '传感器校准', category: 'Process', description: '在产线末端对传感器的零点灵敏度交叉轴误差等进行标定确保数据准确', aliases: ['Sensor Calibration'], tags: ['测试验证', '制造工艺', '传感器']},
+  {term: '传感器融合', category: 'Process', description: '将多个传感器如加速度计陀螺仪磁力计的数据进行算法融合得到更精确的姿态信息', aliases: ['Sensor Fusion'], tags: ['软件相关', '传感器', '算法']},
+  {term: '传感器功能测试', category: 'TestCase', description: '验证各传感器基本功能是否正常如摇动手机触发相应动作', aliases: ['Sensor Functional Test'], tags: ['功能', '测试验证', '传感器']},
+  {term: '精度验证测试', category: 'TestCase', description: '在受控条件下将传感器读数与更高精度的标准器进行比对', aliases: ['Accuracy Verification Test'], tags: ['性能指标', '测试验证', '传感器']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 50 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤53: 导入批次 51/57
+// 第 1001-1020 条数据
+// ========================================
+WITH [
+  {term: '稳定性测试', category: 'TestCase', description: '长时间运行传感器观察其输出数据的稳定性', aliases: ['Stability Test'], tags: ['测试验证', '可靠性', '传感器']},
+  {term: '转台', category: 'Tool', description: '用于精确控制手机旋转角度和速率校准和测试陀螺仪加速度计等', aliases: ['Turntable'], tags: ['工具', '测试验证', '传感器']},
+  {term: '磁屏蔽箱', category: 'Tool', description: '提供无磁或已知磁场的环境用于磁力计的校准和测试', aliases: ['Magnetic Shield Box'], tags: ['工具', '测试验证', '传感器']},
+  {term: '标准光源箱', category: 'Tool', description: '提供标准色温和照度的光源用于环境光传感器和色温传感器的测试', aliases: ['Standard Light Booth'], tags: ['工具', '测试验证', '传感器']},
+  {term: '传感器测试工程师', category: 'Role', description: '负责传感器测试方案的制定自动化测试开发和数据分析', aliases: ['Sensor Test Engineer'], tags: ['测试验证', '传感器', '组织职责']},
+  {term: '传感器算法工程师', category: 'Role', description: '负责传感器数据的滤波融合姿态解算等算法的开发和优化', aliases: ['Sensor Algorithm Engineer'], tags: ['软件相关', '传感器', '算法']},
+  {term: '充电协议握手', category: 'Process', description: '手机与充电器通过通信如USB PD QC协商双方支持的电压和电流档位', aliases: ['Handshake'], tags: ['充电', '软件相关', '硬件相关']},
+  {term: '恒流充电', category: 'Process', description: '充电电流保持恒定电池电压逐渐上升的阶段', aliases: ['Constant Current Charging'], tags: ['性能指标', '充电']},
+  {term: '恒压充电', category: 'Process', description: '电池电压达到设定值后充电电压保持恒定电流逐渐减小的阶段', aliases: ['Constant Voltage Charging'], tags: ['性能指标', '充电']},
+  {term: '涓流充电', category: 'Process', description: '电池电量极低时先以小电流预充激活电池', aliases: ['Trickle Charging'], tags: ['性能指标', '充电']},
+  {term: '充电效率测试', category: 'TestCase', description: '测量输入手机的电能与充入电池的电能之比计算整体效率', aliases: ['Charging Efficiency Test'], tags: ['性能指标', '测试验证', '充电']},
+  {term: '温升测试', category: 'TestCase', description: '在特定环境温度下进行快充监测手机和充电器关键点的温升曲线', aliases: ['Temperature Rise Test'], tags: ['热管理', '充电', '安全相关', '测试验证']},
+  {term: '兼容性测试', category: 'TestCase', description: '使用不同品牌不同协议的充电器和线缆测试手机能否正常快充', aliases: ['Compatibility Test'], tags: ['功能', '测试验证', '充电']},
+  {term: '直流电源', category: 'Tool', description: '可编程精密电源用于模拟充电器精确控制输出电压和电流', aliases: ['DC Power Supply'], tags: ['工具', '测试验证', '充电']},
+  {term: '功率分析仪', category: 'Tool', description: '高精度测量充电过程中的电压电流功率能耗等参数', aliases: ['Power Analyzer'], tags: ['工具', '测试验证', '充电']},
+  {term: '热成像仪', category: 'Tool', description: '观察充电时手机内部和充电器的温度分布定位热点', aliases: ['Thermal Imager'], tags: ['工具', '热管理', '充电', '测试验证']},
+  {term: '充电系统工程师', category: 'Role', description: '负责手机充电架构设计器件选型性能优化和安全性评估', aliases: ['Charging System Engineer'], tags: ['设计', '充电', '硬件相关']},
+  {term: '触觉反馈波形', category: 'Process', description: '驱动马达的特定电压-时间曲线决定振动的强度节奏和质感', aliases: ['Haptic Waveform'], tags: ['功能', '人机交互', '软件相关']},
+  {term: '波形编辑', category: 'Process', description: '设计和调试触觉反馈波形以匹配不同的UI交互场景', aliases: ['Waveform Editing'], tags: ['功能', '人机交互', '软件相关']},
+  {term: '振动加速度测试', category: 'TestCase', description: '使用加速度传感器测量马达在特定驱动下的振动加速度G值', aliases: ['Vibration Acceleration Test'], tags: ['性能指标', '测试验证', '人机交互']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 51 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤54: 导入批次 52/57
+// 第 1021-1040 条数据
+// ========================================
+WITH [
+  {term: '启停时间测试', category: 'TestCase', description: '测量马达从静止达到稳定振幅启动时间和从稳定振幅回到静止停止时间的快慢', aliases: ['Rise/Fall Time Test'], tags: ['性能指标', '测试验证', '人机交互']},
+  {term: '音频-触觉同步测试', category: 'TestCase', description: '验证游戏或媒体播放中声音效果与触觉反馈是否精准同步', aliases: ['Audio-Haptic Synchronization Test'], tags: ['性能指标', '测试验证', '人机交互']},
+  {term: '加速度传感器', category: 'Tool', description: '用于接触式测量振动加速度', aliases: ['Accelerometer'], tags: ['工具', '测试验证']},
+  {term: '触觉体验评估师', category: 'Role', description: '从用户角度主观评价不同场景下触觉反馈的舒适度和契合度', aliases: ['Haptic UX Evaluator'], tags: ['人机交互', '组织职责']},
+  {term: '马达工程师', category: 'Role', description: '负责马达的选型驱动电路设计结构匹配和性能调试', aliases: ['Motor Engineer'], tags: ['设计', '组织职责', '硬件相关']},
+  {term: 'NCVM不导电真空镀', category: 'Process', description: '一种PVD工艺镀膜层不连续不影响内部天线信号传输同时实现金属质感', aliases: ['非导电真空镀'], tags: ['CMF', '制造工艺', '外观']},
+  {term: 'IML模内注塑装饰', category: 'Process', description: '将印刷好的薄膜放入模具内注塑时与塑胶件结合图案耐磨且具有立体感', aliases: ['模内贴标'], tags: ['CMF', '结构相关', '制造工艺']},
+  {term: '高压成型', category: 'Process', description: '将平面薄膜通过加热加压使其在模具内成型为3D形状用于复杂曲面装饰', aliases: ['High Pressure Forming'], tags: ['结构相关', '制造工艺']},
+  {term: '耐磨测试', category: 'TestCase', description: '使用特定磨料和压力对表面进行摩擦评估其抗刮擦能力如钢丝绒磨擦', aliases: ['Abrasion Resistance Test'], tags: ['测试验证', '可靠性', '外观']},
+  {term: '附着力测试', category: 'TestCase', description: '评估涂层与基材结合强度如百格测试胶带拉拔测试', aliases: ['Adhesion Test'], tags: ['测试验证', '可靠性', '外观']},
+  {term: '耐汗液测试', category: 'TestCase', description: '模拟汗液腐蚀测试涂层耐化学腐蚀性和颜色稳定性', aliases: ['Perspiration Resistance Test'], tags: ['测试验证', '可靠性', '外观']},
+  {term: '色差仪', category: 'Tool', description: '测量样品颜色坐标的仪器', aliases: ['Colorimeter'], tags: ['CMF', '工具', '测试验证']},
+  {term: '光泽度计', category: 'Tool', description: '测量表面光泽度的仪器', aliases: ['Glossmeter'], tags: ['CMF', '工具', '测试验证']},
+  {term: '表面轮廓仪', category: 'Tool', description: '接触式或非接触式测量表面粗糙度和轮廓形状', aliases: ['Profilometer'], tags: ['CMF', '工具', '测试验证']},
+  {term: 'CMF设计师', category: 'Role', description: '负责手机的颜色材质和表面处理工艺的设计与策划', aliases: ['CMF Designer'], tags: ['CMF', '设计', '组织职责']},
+  {term: '外观质量工程师', category: 'Role', description: '负责制定外观检验标准监控和提升产品外观质量', aliases: ['Appearance Quality Engineer'], tags: ['质量体系', '组织职责', '外观']},
+  {term: '协议一致性测试', category: 'TestCase', description: '验证设备的通信协议栈是否符合3GPP等标准组织的规定', aliases: ['Protocol Conformance Test'], tags: ['测试验证', '通信相关', '法规']},
+  {term: '网络模拟测试', category: 'TestCase', description: '使用网络模拟器模拟各种真实网络条件如弱信号高速移动测试设备性能', aliases: ['Network Emulation Test'], tags: ['性能指标', '测试验证', '通信相关']},
+  {term: '吞吐量测试', category: 'TestCase', description: '测量设备在特定网络条件下的最大上行/下行数据传输速率', aliases: ['Throughput Test'], tags: ['性能指标', '测试验证', '通信相关']},
+  {term: 'OTA性能测试', category: 'TestCase', description: '在微波暗室中测试天线系统的总辐射功率和总全向灵敏度', aliases: ['Over-the-Air Performance Test'], tags: ['测试验证', '通信相关', '射频相关']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 52 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤55: 导入批次 53/57
+// 第 1041-1060 条数据
+// ========================================
+WITH [
+  {term: '网络模拟器', category: 'Tool', description: '如Keysight/罗德与施瓦茨的设备可模拟完整的蜂窝网络或Wi-Fi接入点', aliases: ['Network Emulator'], tags: ['工具', '测试验证', '通信相关']},
+  {term: '协议分析仪', category: 'Tool', description: '捕获和分析空中接口的信令消息用于深度调试', aliases: ['Protocol Analyzer'], tags: ['工具', '测试验证', '通信相关']},
+  {term: '频谱分析仪', category: 'Tool', description: '测量射频信号的频谱分布用于分析信号质量和干扰', aliases: ['Spectrum Analyzer'], tags: ['工具', '测试验证', '通信相关', '射频相关']},
+  {term: '射频测试工程师', category: 'Role', description: '负责无线通信产品的射频性能测试验证和故障分析', aliases: ['RF Test Engineer'], tags: ['测试验证', '通信相关', '组织职责']},
+  {term: '协议栈工程师', category: 'Role', description: '负责蜂窝或Wi-Fi/蓝牙协议栈的开发集成和优化', aliases: ['Protocol Stack Engineer'], tags: ['软件相关', '通信相关', '组织职责']},
+  {term: '连接器耐焊接热测试', category: 'TestCase', description: '验证连接器本体和端子能否承受回流焊的高温而不变形或性能劣化', aliases: ['Solder Heat Resistance Test'], tags: ['测试验证', '制造工艺', '硬件相关']},
+  {term: '连接器保持力测试', category: 'TestCase', description: '测试FPC或线缆插入连接器后抵抗外力拔出的能力', aliases: ['Retention Force Test'], tags: ['测试验证', '可靠性', '硬件相关']},
+  {term: '连接器插拔寿命测试', category: 'TestCase', description: '模拟用户多次插拔测试连接器机械寿命和电性能稳定性', aliases: ['Durability Test'], tags: ['测试验证', '可靠性', '硬件相关']},
+  {term: '连接器选型工程师', category: 'Role', description: '负责根据电气机械成本和供应链需求选择合适的连接器', aliases: ['Connector Selection Engineer'], tags: ['设计', '供应链', '硬件相关']},
+  {term: '信号完整性工程师', category: 'Role', description: '负责高速接口如USB 3.0 MIPI的SI仿真和设计确保信号质量', aliases: ['Signal Integrity Engineer'], tags: ['设计', '硬件相关', '电气性能']},
+  {term: '高加速寿命测试', category: 'TestCase', description: '通过施加高强度的综合应力热振动快速激发产品潜在缺陷', aliases: ['HALT'], tags: ['硬件相关', '可靠性', '质量体系', '测试验证']},
+  {term: '电容纹波电流测试', category: 'TestCase', description: '测试电容在额定纹波电流下的温升和寿命', aliases: ['Ripple Current Test'], tags: ['测试验证', '可靠性', '硬件相关']},
+  {term: 'ESD抗扰度测试', category: 'TestCase', description: '依据IEC 61000-4-2标准对设备施加不同等级的静电放电检验其抗干扰能力', aliases: ['ESD Immunity Test'], tags: ['硬件相关', '安全相关', 'ESD', '测试验证']},
+  {term: '浪涌抗扰度测试', category: 'TestCase', description: '模拟雷击或大功率设备开关引起的瞬态过压/过流', aliases: ['Surge Immunity Test'], tags: ['测试验证', '安全相关', '硬件相关']},
+  {term: 'LCR meter', category: 'Tool', description: '用于精确测量被动元件的参数L C R D Q', aliases: ['电感电容电阻测试仪'], tags: ['工具', '测试验证', '硬件相关']},
+  {term: '被动元件失效分析工程师', category: 'Role', description: '负责对失效的电容电阻电感等进行根因分析', aliases: ['Passive Component FA Engineer'], tags: ['可靠性', '组织职责', '硬件相关']},
+  {term: '电路保护设计工程师', category: 'Role', description: '负责针对过压过流浪涌ESD等设计保护电路并选型器件', aliases: ['Circuit Protection Design Engineer'], tags: ['设计', '安全相关', '硬件相关']},
+  {term: '气动压合', category: 'Process', description: '使用气缸控制治具的合模力和行程确保接触稳定且不损伤产品', aliases: ['Pneumatic Pressing'], tags: ['测试验证', '自动化', '制造工艺']},
+  {term: '治具设计工程师', category: 'Role', description: '负责根据产品设计和测试需求设计测试治具的机械结构和电路', aliases: ['Fixture Design Engineer'], tags: ['设计', '制造工艺', '组织职责']},
+  {term: '测试工程师', category: 'Role', description: '负责制定测试方案开发测试程序优化测试流程和数据分析', aliases: ['Test Engineer'], tags: ['测试验证', '制造工艺', '组织职责']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 53 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤56: 导入批次 54/57
+// 第 1061-1080 条数据
+// ========================================
+WITH [
+  {term: '原子层沉积', category: 'Process', description: '通过交替通入前驱体在基底表面逐层生长薄膜的技术', aliases: ['ALD'], tags: ['半导体', '可靠性', '制造工艺']},
+  {term: '化学机械抛光', category: 'Process', description: '通过化学腐蚀和机械研磨实现全局平坦化的工艺', aliases: ['CMP'], tags: ['半导体', '可靠性', '制造工艺']},
+  {term: '深反应离子刻蚀', category: 'Process', description: '能够实现高深宽比侧壁陡直的三维微结构加工', aliases: ['DRIE'], tags: ['半导体', 'MEMS', '制造工艺']},
+  {term: '晶圆级封装', category: 'Process', description: '在晶圆上完成芯片封装的大部分工序然后切割成单个器件', aliases: ['WLP'], tags: ['半导体', '封装', '制造工艺']},
+  {term: '系统级封装', category: 'Process', description: '将多个不同功能的芯片和无源器件集成在一个封装内', aliases: ['SiP'], tags: ['半导体', '封装', '制造工艺']},
+  {term: '扇出型封装', category: 'Process', description: '芯片I/O端口通过再布线层引到芯片外部区域实现更高集成度', aliases: ['Fan-Out'], tags: ['半导体', '封装', '制造工艺']},
+  {term: '微机电系统', category: 'Process', description: '利用微加工技术制造微型传感器执行器等器件', aliases: ['MEMS'], tags: ['制造工艺', '传感器', '硬件相关']},
+  {term: '纳米压印', category: 'Process', description: '通过机械模具复形实现纳米级图形转移的技术', aliases: ['Nanoimprint Lithography'], tags: ['半导体', '可靠性', '制造工艺']},
+  {term: '激光退火', category: 'Process', description: '利用激光瞬间高温完成半导体材料的退火处理', aliases: ['Laser Annealing'], tags: ['半导体', '可靠性', '制造工艺']},
+  {term: '选择性激光熔化', category: 'Process', description: '3D打印技术的一种通过激光完全熔化金属粉末逐层成型', aliases: ['SLM'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '电子束蒸发', category: 'Process', description: '利用电子束轰击加热蒸发材料在基底上沉积薄膜', aliases: ['E-Beam Evaporation'], tags: ['半导体', '可靠性', '制造工艺']},
+  {term: '磁控溅射', category: 'Process', description: '利用磁场约束提高等离子体密度实现高速率高质量薄膜沉积', aliases: ['Magnetron Sputtering'], tags: ['CMF', '可靠性', '制造工艺']},
+  {term: '电化学沉积', category: 'Process', description: '通过电解原理在导体表面沉积金属镀层', aliases: ['电镀'], tags: ['PCB', '可靠性', '制造工艺']},
+  {term: '化学镀', category: 'Process', description: '通过自催化化学反应在材料表面沉积金属镀层', aliases: ['无电镀'], tags: ['PCB', '可靠性', '制造工艺']},
+  {term: '热等静压', category: 'Process', description: '在高温高压惰性气体环境下对材料进行致密化处理', aliases: ['HIP'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '粉末注射成型', category: 'Process', description: '将金属或陶瓷粉末与粘结剂混合注射成型后脱脂烧结', aliases: ['PIM'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '超精密加工', category: 'Process', description: '实现纳米级加工精度和表面粗糙度的加工技术', aliases: ['超精加工'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '水导激光', category: 'Process', description: '利用细水束引导激光实现无热影响区的高精度加工', aliases: ['Water Jet Guided Laser'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '飞秒激光加工', category: 'Process', description: '利用超短脉冲激光进行高精度低热损伤的微加工', aliases: ['超快激光加工'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '冷喷涂', category: 'Process', description: '利用高速气体加速粉末颗粒通过塑性变形沉积形成涂层', aliases: ['Cold Spray'], tags: ['可靠性', '结构相关', '制造工艺']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 54 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤57: 导入批次 55/57
+// 第 1081-1100 条数据
+// ========================================
+WITH [
+  {term: '原子扩散焊接', category: 'Process', description: '在高温压力下通过原子扩散实现材料间牢固连接', aliases: ['扩散焊'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '摩擦搅拌焊', category: 'Process', description: '通过高速旋转搅拌头与工件摩擦生热实现材料连接', aliases: ['FSW'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '电子束焊接', category: 'Process', description: '利用高速电子束轰击工件产生热量实现焊接', aliases: ['EBW'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '激光熔覆', category: 'Process', description: '通过激光熔化添加材料在基体表面形成冶金结合涂层', aliases: ['Laser Cladding'], tags: ['可靠性', '结构相关', '制造工艺']},
+  {term: '失效分析', category: 'Process', description: '通过一系列技术方法确定失效模式和机理的过程', aliases: ['故障分析'], tags: ['测试验证', '可靠性', '质量体系']},
+  {term: '根因分析', category: 'Process', description: '追溯并确定导致问题发生的最深层原因', aliases: ['根本原因分析'], tags: ['测试验证', '可靠性', '质量体系']},
+  {term: '鱼骨图', category: 'Tool', description: '用于系统性分析问题所有可能原因的图表工具', aliases: ['因果图'], tags: ['工具', '可靠性', '质量体系']},
+  {term: '8D方法', category: 'Process', description: '系统化解决质量问题的八步法流程', aliases: ['8步纠正措施'], tags: ['流程相关', '可靠性', '质量体系']},
+  {term: '故障树分析', category: 'Tool', description: '通过逻辑演绎分析系统故障与底层事件关系的分析方法', aliases: ['FTA'], tags: ['工具', '可靠性', '质量体系']},
+  {term: '失效模式与影响分析', category: 'Tool', description: '系统性识别和预防潜在失效模式的分析方法', aliases: ['FMEA'], tags: ['工具', '可靠性', '质量体系']},
+  {term: '故障报告分析和纠正措施系统', category: 'Process', description: '闭环的故障数据管理和问题解决系统', aliases: ['FRACAS'], tags: ['流程相关', '可靠性', '质量体系']},
+  {term: '加速寿命测试', category: 'TestCase', description: '通过施加高应力在短时间内获得产品寿命信息', aliases: ['ALT'], tags: ['测试验证', '可靠性', '质量体系']},
+  {term: '高加速应力筛选', category: 'TestCase', description: '在生产阶段使用高应力快速剔除有缺陷产品', aliases: ['HASS'], tags: ['测试验证', '可靠性', '质量体系']},
+  {term: '环境应力筛选', category: 'TestCase', description: '通过环境应力激发和剔除早期失效产品', aliases: ['ESS'], tags: ['测试验证', '可靠性', '质量体系']},
+  {term: '可靠性增长测试', category: 'TestCase', description: '通过测试-改进-再测试循环逐步提高产品可靠性', aliases: ['RGT'], tags: ['测试验证', '可靠性', '质量体系']},
+  {term: '可靠性鉴定测试', category: 'TestCase', description: '验证产品设计是否满足可靠性要求的测试', aliases: ['RQT'], tags: ['测试验证', '可靠性', '质量体系']},
+  {term: '可靠性验收测试', category: 'TestCase', description: '对批量生产产品进行抽样可靠性验证', aliases: ['RAT'], tags: ['测试验证', '可靠性', '质量体系']},
+  {term: '威布尔分布', category: 'Tool', description: '常用于可靠性数据分析的概率分布模型', aliases: ['Weibull分布'], tags: ['工具', '可靠性', '质量体系']},
+  {term: '阿伦尼乌斯模型', category: 'Tool', description: '基于化学反应速率理论的温度加速模型', aliases: ['温度加速模型'], tags: ['工具', '可靠性', '质量体系']},
+  {term: '艾林模型', category: 'Tool', description: '考虑温度和湿度共同作用的加速模型', aliases: ['温度-湿度加速模型'], tags: ['工具', '可靠性', '质量体系']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 55 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤58: 导入批次 56/57
+// 第 1101-1120 条数据
+// ========================================
+WITH [
+  {term: '科芬-曼森关系', category: 'Tool', description: '基于疲劳损伤理论的温度循环加速模型', aliases: ['温度循环加速模型'], tags: ['工具', '可靠性', '质量体系']},
+  {term: '可靠性预计', category: 'Process', description: '基于元器件失效率数据预测系统可靠性水平', aliases: ['可靠性预测'], tags: ['设计', '可靠性', '质量体系']},
+  {term: '可靠性分配', category: 'Process', description: '将系统可靠性指标合理分配到各分系统和元器件', aliases: ['可靠性指标分配'], tags: ['设计', '可靠性', '质量体系']},
+  {term: '可靠性设计', category: 'Process', description: '在产品设计阶段就考虑和融入可靠性要求', aliases: ['DfR'], tags: ['设计', '可靠性', '质量体系']},
+  {term: '可靠性工程师', category: 'Role', description: '负责可靠性设计测试和管理的专业人员', aliases: ['可靠性专家'], tags: ['可靠性', '组织职责', '质量体系']},
+  {term: '3C认证', category: 'Process', description: '中国市场准入的强制性安全认证', aliases: ['中国强制性产品认证'], tags: ['安全相关', '质量体系', '法规']},
+  {term: 'CE标志', category: 'Process', description: '产品符合欧盟安全健康环保要求的标志', aliases: ['欧洲符合性标志'], tags: ['安全相关', '质量体系', '法规']},
+  {term: 'FCC认证', category: 'Process', description: '美国市场电磁兼容性和射频设备合规性认证', aliases: ['美国联邦通信委员会认证'], tags: ['EMC', '质量体系', '法规']},
+  {term: 'UL认证', category: 'Process', description: '美国产品安全性能认证', aliases: ['美国保险商实验室认证'], tags: ['安全相关', '质量体系', '法规']},
+  {term: 'RoHS指令', category: 'Process', description: '限制电子电气产品中使用特定有害物质的欧盟指令', aliases: ['有害物质限制指令'], tags: ['环保', '供应链', '法规']},
+  {term: 'REACH法规', category: 'Process', description: '欧盟对化学品安全管理的综合性法规', aliases: ['化学品注册评估授权和限制法规'], tags: ['环保', '供应链', '法规']},
+  {term: 'WEEE指令', category: 'Process', description: '欧盟关于电子电气设备废弃物回收利用的指令', aliases: ['废弃电子电气设备指令'], tags: ['环保', '供应链', '法规']},
+  {term: '能效标准', category: 'Process', description: '对产品能耗和效率要求的强制性标准', aliases: ['能源效率标准'], tags: ['性能指标', '法规', '环保']},
+  {term: '射频电磁场辐射抗扰度', category: 'TestCase', description: 'IEC 61000-4-3标准规定的射频电磁场辐射抗扰度测试', aliases: ['辐射抗扰度'], tags: ['测试验证', 'EMC', '法规']},
+  {term: '电快速瞬变脉冲群抗扰度', category: 'TestCase', description: 'IEC 61000-4-4标准规定的电快速瞬变脉冲群抗扰度测试', aliases: ['EFT抗扰度'], tags: ['测试验证', 'EMC', '法规']},
+  {term: '传导骚扰', category: 'TestCase', description: 'CISPR 32等标准规定的设备通过电源线或信号线向外发射的骚扰', aliases: ['传导发射'], tags: ['测试验证', 'EMC', '法规']},
+  {term: '辐射骚扰', category: 'TestCase', description: 'CISPR 32等标准规定的设备通过空间辐射的电磁骚扰', aliases: ['辐射发射'], tags: ['测试验证', 'EMC', '法规']},
+  {term: '电压波动和闪烁', category: 'TestCase', description: 'IEC 61000-3-3标准规定的设备对电网电压波动的影响', aliases: ['闪烁测试'], tags: ['测试验证', 'EMC', '法规']},
+  {term: '包装材料要求', category: 'Process', description: '对产品包装材料的可再生可回收性要求', aliases: ['包装环保要求'], tags: ['环保', '供应链', '法规']},
+  {term: '能效标签', category: 'Process', description: '标示产品能效等级的强制性标签制度', aliases: ['能源标签'], tags: ['性能指标', '法规', '环保']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 56 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 步骤59: 导入批次 57/57
+// 第 1121-1124 条数据
+// ========================================
+WITH [
+  {term: '冲突矿产', category: 'Process', description: '对来自刚果民主共和国等冲突地区矿产的使用限制', aliases: ['冲突矿物'], tags: ['环保', '供应链', '法规']},
+  {term: '数据安全', category: 'Process', description: '对用户数据保护和隐私安全的法规要求', aliases: ['信息安全'], tags: ['安全相关', '软件相关', '法规']},
+  {term: '网络安全', category: 'Process', description: '对设备网络连接和安全防护的法规要求', aliases: ['网络信息安全'], tags: ['安全相关', '软件相关', '法规']},
+  {term: '法规认证工程师', category: 'Role', description: '负责产品全球市场准入认证和法规符合性的专业人员', aliases: ['认证工程师'], tags: ['组织职责', '质量体系', '法规']}
+] AS batch
+UNWIND batch AS item
+CREATE (d:Dictionary {
+  term: item.term,
+  category: item.category,
+  description: item.description,
+  aliases: item.aliases,
+  tags: item.tags,
+  created_at: datetime(),
+  updated_at: datetime()
+});
+
+// 验证批次 57 导入结果
+MATCH (d:Dictionary) RETURN count(d) as current_total;
+
+// ========================================
+// 最终验证
+// ========================================
+MATCH (d:Dictionary) RETURN count(d) as total_nodes;
+
+MATCH (d:Dictionary) RETURN d.category, count(d) as count ORDER BY count DESC;
+
+MATCH (d:Dictionary) RETURN d.term, d.category, d.aliases LIMIT 5;

@@ -1,0 +1,28 @@
+{
+  "timestamp": "2025-09-26 16:25:08",
+  "test_results": {
+    "api_endpoint": true,
+    "frontend_integration": true
+  },
+  "features_tested": [
+    "数据治理API端点",
+    "真实数据质量指标",
+    "分类分布统计",
+    "问题识别和建议",
+    "前端页面集成"
+  ],
+  "new_features": {
+    "data_overview": "显示1124条硬件质量术语的概览",
+    "quality_metrics": "6个核心质量指标的实时监控",
+    "category_distribution": "8个标准分类的分布图表",
+    "issues_tracking": "自动识别数据质量问题",
+    "governance_rules": "4个治理规则的状态监控",
+    "recommendations": "基于数据分析的优化建议"
+  },
+  "access_urls": {
+    "api_endpoint": "http://localhost:8000/kg/governance-data",
+    "api_docs": "http://localhost:8000/docs",
+    "governance_page": "http://localhost:5173/governance",
+    "frontend_home": "http://localhost:5173"
+  }
+}

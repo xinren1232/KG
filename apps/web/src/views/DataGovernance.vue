@@ -3,41 +3,71 @@
     <el-card class="header-card">
       <div class="page-header">
         <h2>🏛️ 数据治理</h2>
-        <p>数据质量监控、标准化管理和持续优化</p>
+        <p>基于真实数据的质量监控、标准化管理和持续优化</p>
+        <div class="header-actions">
+          <el-button type="primary" @click="refreshData" :loading="loading">
+            <el-icon><Refresh /></el-icon>
+            刷新数据
+          </el-button>
+          <el-button @click="exportReport">
+            <el-icon><Download /></el-icon>
+            导出报告
+          </el-button>
+        </div>
       </div>
     </el-card>
 
     <!-- 数据质量概览 -->
-    <el-row :gutter="20">
+    <el-row :gutter="20" class="overview-cards">
       <el-col :span="6">
-        <el-card class="metric-card">
+        <el-card class="metric-card" shadow="hover">
           <div class="metric">
-            <div class="metric-value">{{ overallStats.totalEntities }}</div>
-            <div class="metric-label">总实体数</div>
+            <div class="metric-icon">
+              <el-icon color="#409EFF"><DataBoard /></el-icon>
+            </div>
+            <div class="metric-content">
+              <div class="metric-value">{{ overallStats.total_entries || 0 }}</div>
+              <div class="metric-label">硬件质量术语</div>
+            </div>
           </div>
         </el-card>
       </el-col>
       <el-col :span="6">
-        <el-card class="metric-card">
+        <el-card class="metric-card" shadow="hover">
           <div class="metric">
-            <div class="metric-value">{{ overallStats.totalRelations }}</div>
-            <div class="metric-label">总关系数</div>
+            <div class="metric-icon">
+              <el-icon color="#67C23A"><Connection /></el-icon>
+            </div>
+            <div class="metric-content">
+              <div class="metric-value">{{ overallStats.total_relations || 0 }}</div>
+              <div class="metric-label">关系连接</div>
+            </div>
           </div>
         </el-card>
       </el-col>
       <el-col :span="6">
-        <el-card class="metric-card">
+        <el-card class="metric-card" shadow="hover">
           <div class="metric">
-            <div class="metric-value">{{ overallStats.qualityScore }}%</div>
-            <div class="metric-label">数据质量分</div>
+            <div class="metric-icon">
+              <el-icon :color="getQualityColor(overallStats.quality_score)"><TrendCharts /></el-icon>
+            </div>
+            <div class="metric-content">
+              <div class="metric-value">{{ overallStats.quality_score || 0 }}%</div>
+              <div class="metric-label">数据质量分</div>
+            </div>
           </div>
         </el-card>
       </el-col>
       <el-col :span="6">
-        <el-card class="metric-card">
+        <el-card class="metric-card" shadow="hover">
           <div class="metric">
-            <div class="metric-value">{{ overallStats.lastUpdate }}</div>
-            <div class="metric-label">最后更新</div>
+            <div class="metric-icon">
+              <el-icon color="#E6A23C"><Calendar /></el-icon>
+            </div>
+            <div class="metric-content">
+              <div class="metric-value">{{ overallStats.last_update || 'N/A' }}</div>
+              <div class="metric-label">最后更新</div>
+            </div>
           </div>
         </el-card>
       </el-col>

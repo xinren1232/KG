@@ -1,0 +1,21 @@
+{
+  "update_time": "2025-09-26T13:50:20.035144",
+  "total_nodes": 1124,
+  "category_distribution": {
+    "Component": 181,
+    "Metric": 190,
+    "Process": 170,
+    "Material": 55,
+    "Symptom": 259,
+    "Tool": 102,
+    "TestCase": 104,
+    "Role": 63
+  },
+  "data_quality": {
+    "valid_terms": 1124,
+    "has_category": 1124,
+    "has_aliases": 1123,
+    "has_tags": 1124,
+    "has_description": 1124
+  }
+}

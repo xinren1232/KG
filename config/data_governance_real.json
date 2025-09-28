@@ -1,0 +1,234 @@
+{
+  "timestamp": "2024-01-20 10:00:00",
+  "data_overview": {
+    "total_entries": 1124,
+    "categories": 8,
+    "tags": 79,
+    "quality_score": 92.5,
+    "last_update": "2024-01-20",
+    "data_sources": 3
+  },
+  "quality_metrics": [
+    {
+      "metric": "数据完整性",
+      "description": "所有必填字段都有值的记录比例",
+      "value": "1089/1124",
+      "percentage": 96.9,
+      "status": "excellent",
+      "target": 95.0,
+      "trend": "stable"
+    },
+    {
+      "metric": "术语唯一性", 
+      "description": "无重复术语的记录比例",
+      "value": "1124/1124",
+      "percentage": 100.0,
+      "status": "excellent",
+      "target": 100.0,
+      "trend": "stable"
+    },
+    {
+      "metric": "描述覆盖率",
+      "description": "包含详细描述的记录比例", 
+      "value": "1098/1124",
+      "percentage": 97.7,
+      "status": "excellent",
+      "target": 95.0,
+      "trend": "improving"
+    },
+    {
+      "metric": "标签覆盖率",
+      "description": "包含标签的记录比例",
+      "value": "1067/1124", 
+      "percentage": 94.9,
+      "status": "good",
+      "target": 90.0,
+      "trend": "stable"
+    },
+    {
+      "metric": "别名覆盖率",
+      "description": "包含别名的记录比例",
+      "value": "892/1124",
+      "percentage": 79.4,
+      "status": "warning",
+      "target": 85.0,
+      "trend": "improving"
+    },
+    {
+      "metric": "分类标准化",
+      "description": "符合标准分类体系的记录比例",
+      "value": "1124/1124",
+      "percentage": 100.0,
+      "status": "excellent", 
+      "target": 100.0,
+      "trend": "stable"
+    }
+  ],
+  "category_distribution": {
+    "Symptom": 259,
+    "Metric": 190,
+    "Component": 181,
+    "Process": 170,
+    "TestCase": 104,
+    "Tool": 102,
+    "Role": 63,
+    "Material": 55
+  },
+  "top_tags": {
+    "硬件相关": 315,
+    "可靠性": 311,
+    "制造工艺": 211,
+    "测试验证": 206,
+    "物料": 135,
+    "结构相关": 128,
+    "性能指标": 100,
+    "外观": 81,
+    "异常现象": 79,
+    "质量体系": 78,
+    "通信相关": 73,
+    "设计": 70,
+    "SMT": 65,
+    "功能": 58,
+    "环境": 52,
+    "安全": 48,
+    "标准": 45,
+    "流程": 42,
+    "检测": 38,
+    "维护": 35
+  },
+  "data_sources": {
+    "质量管理系统": 456,
+    "测试验证平台": 389,
+    "制造工艺文档": 279
+  },
+  "data_lineage": [
+    {
+      "source": "质量管理系统",
+      "description": "来自质量管理系统的症状、指标和测试用例数据",
+      "last_sync": "2024-01-20 09:30:00",
+      "record_count": 456,
+      "quality_score": 95.2
+    },
+    {
+      "source": "测试验证平台", 
+      "description": "来自测试验证平台的工具、流程和组件数据",
+      "last_sync": "2024-01-20 08:45:00",
+      "record_count": 389,
+      "quality_score": 91.8
+    },
+    {
+      "source": "制造工艺文档",
+      "description": "来自制造工艺文档的材料、角色和工艺数据", 
+      "last_sync": "2024-01-19 16:20:00",
+      "record_count": 279,
+      "quality_score": 89.3
+    }
+  ],
+  "issues": [
+    {
+      "type": "warning",
+      "category": "数据完整性",
+      "description": "35条记录缺少描述信息",
+      "severity": "medium",
+      "affected_records": 35,
+      "recommendation": "补充缺失的描述信息"
+    },
+    {
+      "type": "warning", 
+      "category": "数据丰富度",
+      "description": "232条记录缺少别名信息",
+      "severity": "low",
+      "affected_records": 232,
+      "recommendation": "添加常用别名以提高搜索效果"
+    },
+    {
+      "type": "info",
+      "category": "标签标准化",
+      "description": "57条记录缺少标签",
+      "severity": "low", 
+      "affected_records": 57,
+      "recommendation": "为记录添加相关标签"
+    }
+  ],
+  "governance_rules": [
+    {
+      "rule_id": "R001",
+      "name": "术语唯一性检查",
+      "description": "确保每个术语在系统中唯一",
+      "type": "validation",
+      "status": "active",
+      "last_check": "2024-01-20 09:00:00"
+    },
+    {
+      "rule_id": "R002", 
+      "name": "必填字段检查",
+      "description": "确保术语、分类、描述字段不为空",
+      "type": "validation",
+      "status": "active",
+      "last_check": "2024-01-20 09:00:00"
+    },
+    {
+      "rule_id": "R003",
+      "name": "分类标准化检查", 
+      "description": "确保分类符合预定义的标准体系",
+      "type": "standardization",
+      "status": "active",
+      "last_check": "2024-01-20 09:00:00"
+    },
+    {
+      "rule_id": "R004",
+      "name": "标签规范检查",
+      "description": "确保标签符合命名规范",
+      "type": "standardization", 
+      "status": "active",
+      "last_check": "2024-01-20 09:00:00"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "high",
+      "category": "数据质量",
+      "title": "补充缺失描述",
+      "description": "为35条缺少描述的记录补充详细说明",
+      "estimated_effort": "2小时",
+      "impact": "提高数据完整性至98%+"
+    },
+    {
+      "priority": "medium", 
+      "category": "数据丰富度",
+      "title": "增加别名信息",
+      "description": "为232条记录添加常用别名",
+      "estimated_effort": "4小时",
+      "impact": "提高搜索匹配率和用户体验"
+    },
+    {
+      "priority": "low",
+      "category": "标准化",
+      "title": "标签标准化",
+      "description": "建立标签分类体系，规范标签命名",
+      "estimated_effort": "6小时", 
+      "impact": "提高数据一致性和可维护性"
+    },
+    {
+      "priority": "medium",
+      "category": "自动化",
+      "title": "实施数据质量监控",
+      "description": "建立自动化的数据质量检查和报告机制",
+      "estimated_effort": "16小时",
+      "impact": "持续保障数据质量"
+    }
+  ],
+  "compliance_status": {
+    "data_privacy": "compliant",
+    "data_retention": "compliant", 
+    "access_control": "compliant",
+    "audit_trail": "partial",
+    "backup_recovery": "compliant"
+  },
+  "performance_metrics": {
+    "query_response_time": "< 100ms",
+    "data_freshness": "< 24小时",
+    "system_availability": "99.9%",
+    "error_rate": "< 0.1%"
+  }
+}

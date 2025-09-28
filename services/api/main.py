@@ -1,42 +1,45 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import os
 from dotenv import load_dotenv
 
 from database.neo4j_client import Neo4jClient
-from routers import kg_router, health_router
+from dependencies import set_neo4j_client
+from routers import kg_router, health_router, system_router
 
 # 加载环境变量
 load_dotenv()
 
-# 全局Neo4j客户端
-neo4j_client = None
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # 启动时初始化Neo4j连接
-    global neo4j_client
-    neo4j_client = Neo4jClient(
+    client = Neo4jClient(
         uri=os.getenv("NEO4J_URI", "bolt://localhost:7687"),
         user=os.getenv("NEO4J_USER", "neo4j"),
         password=os.getenv("NEO4J_PASS", "password123")
     )
-    
+
     # 测试连接
     try:
-        neo4j_client.test_connection()
+        client.test_connection()
         print("✅ Neo4j connection established")
+        set_neo4j_client(client)
     except Exception as e:
         print(f"❌ Failed to connect to Neo4j: {e}")
-        raise
-    
+        print("⚠️ Starting API without Neo4j connection")
+        # 不抛出异常，允许API在没有Neo4j的情况下启动
+
     yield
-    
+
     # 关闭时清理连接
-    if neo4j_client:
-        neo4j_client.close()
-        print("🔌 Neo4j connection closed")
+    try:
+        from dependencies import neo4j_client
+        if neo4j_client:
+            neo4j_client.close()
+            print("🔌 Neo4j connection closed")
+    except:
+        pass
 
 # 创建FastAPI应用
 app = FastAPI(
@@ -58,6 +61,8 @@ app.add_middleware(
 # 注册路由
 app.include_router(health_router.router, prefix="/health", tags=["健康检查"])
 app.include_router(kg_router.router, prefix="/kg", tags=["知识图谱"])
+app.include_router(system_router.router, prefix="/system", tags=["系统管理"])
+app.include_router(system_router.router, prefix="/api/system", tags=["系统管理API"])
 
 @app.get("/")
 async def root():
@@ -68,8 +73,7 @@ async def root():
         "health": "/health"
     }
 
-# 获取Neo4j客户端的依赖注入函数
-def get_neo4j_client() -> Neo4jClient:
-    if neo4j_client is None:
-        raise HTTPException(status_code=500, detail="Neo4j client not initialized")
-    return neo4j_client
+# 启动服务器
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -1,0 +1,29 @@
+term,aliases,category,sub_category,tags,definition,example,source,status,updated_at
+多层陶瓷电容,MLCC,Component,被动元件,硬件相关;电气性能;SMT,用量最大的被动元件用于滤波去耦储能等,陶瓷电容,硬件模块扩展,active,2025-09-26
+钽电容,Tantalum Capacitor,Component,被动元件,硬件相关;电气性能;SMT,体积小容值大ESR低但有极性需注意防反接和浪涌,钽质电容,硬件模块扩展,active,2025-09-26
+电感,Inductor,Component,被动元件,硬件相关;电气性能;SMT,用于电源滤波储能和LC振荡电路,电感器,硬件模块扩展,active,2025-09-26
+磁珠,Ferrite Bead,Component,被动元件,硬件相关;电气性能;EMC,抑制高频噪声常用于电源和信号线,铁氧体磁珠,硬件模块扩展,active,2025-09-26
+晶体振荡器,Crystal Oscillator,Component,被动元件,硬件相关;电气性能;半导体,提供系统基准时钟信号,石英晶振,硬件模块扩展,active,2025-09-26
+热敏电阻,NTC/PTC,Component,被动元件,硬件相关;电气性能;传感器,电阻值随温度变化用于温度检测和温度补偿,温度传感电阻,硬件模块扩展,active,2025-09-26
+压敏电阻,Varistor,Component,保护器件,硬件相关;电气性能;安全相关,电压敏感用于过压保护如浪涌,MOV压敏电阻,硬件模块扩展,active,2025-09-26
+TVS二极管,瞬态电压抑制二极管,Component,保护器件,硬件相关;电气性能;安全相关,响应速度极快用于防护ESD和EFT等快速瞬态过电压,TVS管,硬件模块扩展,active,2025-09-26
+自恢复保险丝,PTC Resettable Fuse,Component,保护器件,硬件相关;电气性能;安全相关,过流时电阻急剧变大限制电流故障排除后自动恢复,自恢复熔断器,硬件模块扩展,active,2025-09-26
+ESD保护器件,ESD Protection Device,Component,保护器件,硬件相关;电气性能;安全相关;ESD,专门用于防护静电放电的器件通常并联在接口电路上,静电保护器,硬件模块扩展,active,2025-09-26
+电容容值衰减,Capacitance Derating,Symptom,元件异常,硬件相关;异常现象;可靠性,电容特别是MLCC在直流偏压或高温下实际容值减小,电容降额,硬件模块扩展,active,2025-09-26
+电容失效短路,Capacitor Short Failure,Symptom,元件异常,硬件相关;异常现象;可靠性,电容介质击穿导致两极短路可能引发大电流烧毁,电容短路,硬件模块扩展,active,2025-09-26
+电容失效开路,Capacitor Open Failure,Symptom,元件异常,硬件相关;异常现象;可靠性,电容内部连接断开失去功能,电容开路,硬件模块扩展,active,2025-09-26
+电感饱和,Inductor Saturation,Symptom,元件异常,硬件相关;异常现象;可靠性,电流过大导致电感磁芯磁化饱和电感量急剧下降,电感磁饱和,硬件模块扩展,active,2025-09-26
+晶振频偏,Crystal Frequency Deviation,Symptom,元件异常,硬件相关;异常现象;可靠性,晶振输出频率偏离标称值导致系统时序错误,晶振偏频,硬件模块扩展,active,2025-09-26
+元件立碑,Tombstoning,Symptom,SMT异常,硬件相关;异常现象;SMT,片式元件一端翘起另一端焊接在焊盘上,立碑效应,硬件模块扩展,active,2025-09-26
+元件裂纹,Component Cracking,Symptom,元件异常,硬件相关;异常现象;可靠性,特别是MLCC因板弯或热应力导致内部介质产生裂纹,元件开裂,硬件模块扩展,active,2025-09-26
+高加速寿命测试,HALT,TestCase,可靠性测试,硬件相关;测试验证;可靠性,通过施加高强度的综合应力热振动快速激发产品潜在缺陷,高加速应力测试,硬件模块扩展,active,2025-09-26
+电容纹波电流测试,Ripple Current Test,TestCase,元件测试,硬件相关;测试验证;可靠性,测试电容在额定纹波电流下的温升和寿命,纹波电流测试,硬件模块扩展,active,2025-09-26
+ESD抗扰度测试,ESD Immunity Test,TestCase,可靠性测试,硬件相关;测试验证;安全相关;ESD,依据IEC 61000-4-2标准对设备施加不同等级的静电放电检验其抗干扰能力,静电放电测试,硬件模块扩展,active,2025-09-26
+浪涌抗扰度测试,Surge Immunity Test,TestCase,可靠性测试,硬件相关;测试验证;安全相关,模拟雷击或大功率设备开关引起的瞬态过压/过流,浪涌冲击测试,硬件模块扩展,active,2025-09-26
+电容的等效串联电阻,ESR,Metric,,硬件相关;性能指标;电气性能,电容等效电路中的串联电阻影响滤波效果和自身发热,等效串联电阻,硬件模块扩展,active,2025-09-26
+电容的等效串联电感,ESL,Metric,,硬件相关;性能指标;电气性能,电容引脚和内部结构存在的寄生电感影响高频性能,等效串联电感,硬件模块扩展,active,2025-09-26
+额定电压,Rated Voltage,Metric,,硬件相关;性能指标;电气性能,元件能长期安全工作的最大直流电压或交流电压峰值,工作电压,硬件模块扩展,active,2025-09-26
+工作温度范围,Operating Temperature Range,Metric,,硬件相关;性能指标;可靠性,元件能正常工作的环境温度范围,温度范围,硬件模块扩展,active,2025-09-26
+LCR meter,电感电容电阻测试仪,Tool,测试设备,硬件相关;测试验证;工具,用于精确测量被动元件的参数L C R D Q,LCR测试仪,硬件模块扩展,active,2025-09-26
+被动元件失效分析工程师,Passive Component FA Engineer,Role,工程师,硬件相关;可靠性;组织职责,负责对失效的电容电阻电感等进行根因分析,被动元件FA工程师,硬件模块扩展,active,2025-09-26
+电路保护设计工程师,Circuit Protection Design Engineer,Role,工程师,硬件相关;设计;安全相关,负责针对过压过流浪涌ESD等设计保护电路并选型器件,保护电路工程师,硬件模块扩展,active,2025-09-26

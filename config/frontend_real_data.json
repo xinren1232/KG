@@ -1,0 +1,88 @@
+{
+  "stats": {
+    "totalNodes": 1124,
+    "totalRelations": 7581,
+    "totalCategories": 8,
+    "totalTags": 79,
+    "totalAliases": 1446
+  },
+  "categories": [
+    {"name": "Symptom", "count": 259},
+    {"name": "Metric", "count": 190},
+    {"name": "Component", "count": 181},
+    {"name": "Process", "count": 170},
+    {"name": "TestCase", "count": 104},
+    {"name": "Tool", "count": 102},
+    {"name": "Role", "count": 63},
+    {"name": "Material", "count": 55}
+  ],
+  "relations": [
+    {"type": "HAS_TAG", "count": 3015},
+    {"type": "IN_MODULE", "count": 1900},
+    {"type": "HAS_ALIAS", "count": 1506},
+    {"type": "IN_CATEGORY", "count": 1124},
+    {"type": "SAME_AS", "count": 36}
+  ],
+  "tags": [
+    {"name": "可靠性", "count": 45},
+    {"name": "质量控制", "count": 38},
+    {"name": "测试", "count": 35},
+    {"name": "工艺", "count": 32},
+    {"name": "SMT", "count": 28},
+    {"name": "电路", "count": 25},
+    {"name": "焊接", "count": 22},
+    {"name": "检测", "count": 20},
+    {"name": "失效", "count": 18},
+    {"name": "标准", "count": 15}
+  ],
+  "sampleNodes": [
+    {
+      "id": "dict_1",
+      "type": "Dictionary",
+      "name": "焊点空洞",
+      "category": "Symptom",
+      "description": "焊点内部形成的气泡或空隙，影响焊接质量和可靠性"
+    },
+    {
+      "id": "dict_2",
+      "type": "Dictionary",
+      "name": "AOI检测",
+      "category": "Tool",
+      "description": "自动光学检测设备，用于检测PCB表面缺陷"
+    },
+    {
+      "id": "dict_3",
+      "type": "Dictionary",
+      "name": "回流焊",
+      "category": "Process",
+      "description": "通过加热使焊膏熔化形成焊点的工艺过程"
+    },
+    {
+      "id": "dict_4",
+      "type": "Dictionary",
+      "name": "BGA",
+      "category": "Component",
+      "description": "球栅阵列封装，一种高密度集成电路封装形式"
+    }
+  ],
+  "sampleRelations": [
+    {
+      "source": "dict_1",
+      "target": "tag_reliability",
+      "type": "HAS_TAG",
+      "label": "可靠性"
+    },
+    {
+      "source": "dict_2",
+      "target": "cat_tool",
+      "type": "IN_CATEGORY",
+      "label": "Tool"
+    },
+    {
+      "source": "dict_3",
+      "target": "tag_smt",
+      "type": "HAS_TAG",
+      "label": "SMT"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "migration_time": "2025-09-26 03:16:50",
+  "total_nodes": 526,
+  "label_distribution": {
+    "Product": 0,
+    "Anomaly": 0,
+    "TestCase": 1,
+    "Component": 136,
+    "Symptom": 180,
+    "Term": 0,
+    "Process": 2,
+    "Material": 0,
+    "Metric": 1,
+    "Tool": 206,
+    "Role": 0
+  },
+  "migration_success": true,
+  "issues": [],
+  "recommendations": [
+    "数据迁移成功完成",
+    "所有Label节点正常导入",
+    "约束和索引创建完成",
+    "可以开始使用新的图谱结构"
+  ]
+}

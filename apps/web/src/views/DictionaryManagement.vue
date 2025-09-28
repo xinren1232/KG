@@ -30,10 +30,12 @@
             @change="handleCategoryChange"
           >
             <el-option label="全部" value="" />
+            <el-option label="工具" value="工具" />
+            <el-option label="症状" value="症状" />
             <el-option label="组件" value="组件" />
-            <el-option label="异常" value="异常" />
-            <el-option label="供应商" value="供应商" />
-            <el-option label="工厂" value="工厂" />
+            <el-option label="流程" value="流程" />
+            <el-option label="测试用例" value="测试用例" />
+            <el-option label="性能指标" value="性能指标" />
           </el-select>
         </el-col>
         <el-col :span="4">
@@ -147,7 +149,38 @@
         label-width="80px"
       >
         <el-form-item label="词条" prop="term">
-          <el-input v-model="currentEntry.term" placeholder="请输入词条" />
+          <el-input
+            v-model="currentEntry.term"
+            placeholder="请输入词条"
+            @blur="checkDuplicate"
+          />
+          <!-- 查重提示 -->
+          <div v-if="duplicateInfo.isDuplicate" class="duplicate-warning">
+            <el-alert
+              :title="duplicateInfo.message"
+              type="warning"
+              :closable="false"
+              show-icon
+            >
+              <template #default>
+                <div>
+                  <p>{{ duplicateInfo.message }}</p>
+                  <div v-if="duplicateInfo.suggestions.length > 0" class="suggestions">
+                    <p><strong>相似词条建议：</strong></p>
+                    <el-tag
+                      v-for="suggestion in duplicateInfo.suggestions"
+                      :key="suggestion"
+                      size="small"
+                      style="margin-right: 8px; margin-bottom: 4px; cursor: pointer;"
+                      @click="selectSuggestion(suggestion)"
+                    >
+                      {{ suggestion }}
+                    </el-tag>
+                  </div>
+                </div>
+              </template>
+            </el-alert>
+          </div>
         </el-form-item>
         
         <el-form-item label="类别" prop="category">
@@ -207,6 +240,7 @@
 import { ref, reactive, computed, onMounted, nextTick } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Search, Refresh, Plus, Download } from '@element-plus/icons-vue'
+import { kgApi } from '@/api/index.js'
 
 export default {
   name: 'DictionaryManagement',
@@ -228,6 +262,13 @@ export default {
     const isEditing = ref(false)
     const aliasInputVisible = ref(false)
     const aliasInputValue = ref('')
+
+    // 查重相关
+    const duplicateInfo = reactive({
+      isDuplicate: false,
+      message: '',
+      suggestions: []
+    })
     
     const currentEntry = reactive({
       id: '',
@@ -280,68 +321,64 @@ export default {
     const loadDictionary = async () => {
       loading.value = true
       try {
-        const response = await fetch('http://127.0.0.1:8000/kg/dictionary')
-        const result = await response.json()
-        
-        if (result.ok && result.data) {
-          // 转换API数据格式为前端期望的格式
-          const entries = []
+        // 使用新的API获取词典数据 - 获取所有数据
+        const result = await kgApi.getDictionary({ size: 10000 })
 
-          // 添加组件词典
-          if (result.data.components) {
-            result.data.components.forEach(comp => {
-              entries.push({
-                id: `comp_${comp.name}`,
-                name: comp.name || comp.canonical_name,
-                type: '组件',
-                category: comp.category || '未分类',
-                aliases: comp.aliases || [],
-                tags: comp.tags || [],
-                description: comp.description || '',
-                standardName: comp.canonical_name || comp.name
-              })
-            })
-          }
-
-          // 添加症状词典
-          if (result.data.symptoms) {
-            result.data.symptoms.forEach(symptom => {
-              entries.push({
-                id: `symptom_${symptom.name}`,
-                name: symptom.name || symptom.canonical_name,
-                type: '症状',
-                category: symptom.category || '未分类',
-                aliases: symptom.aliases || [],
-                tags: symptom.tags || [],
-                description: symptom.description || '',
-                standardName: symptom.canonical_name || symptom.name,
-                severity: symptom.severity
-              })
-            })
-          }
-
-          // 添加工具流程词典
-          if (result.data.tools_processes) {
-            result.data.tools_processes.forEach(tool => {
-              entries.push({
-                id: `tool_${tool.name}`,
-                name: tool.name || tool.canonical_name,
-                type: '工具流程',
-                category: tool.category || '未分类',
-                aliases: tool.aliases || [],
-                tags: tool.tags || [],
-                description: tool.description || '',
-                standardName: tool.canonical_name || tool.name
-              })
-            })
-          }
+        if (result.success && result.data && result.data.entries) {
+          // 转换新API数据格式为前端期望的格式
+          const entries = result.data.entries.map((item, index) => {
+            return {
+              id: `term_${index}`,
+              term: item.term || '',
+              name: item.term || '',
+              type: item.category || '未分类',
+              category: item.category || '未分类',
+              subCategory: item.sub_category || '',
+              aliases: Array.isArray(item.aliases) ? item.aliases : [],
+              tags: Array.isArray(item.tags) ? item.tags : [],
+              description: item.definition || item.description || '',
+              standardName: item.term || '',
+              source: item.source || '',
+              status: item.status || 'active'
+            }
+          })
 
           dictionaryEntries.value = entries
+          ElMessage.success(`成功加载${entries.length}条词典数据`)
         } else {
-          ElMessage.error('加载词典失败: ' + (result.error?.message || '未知错误'))
+          // 如果新API失败，尝试旧API作为备用
+          console.warn('新API失败，尝试旧API:', result)
+          const fallbackResult = await kgApi.getOldDictionary()
+
+          if (fallbackResult.ok && fallbackResult.data) {
+            // 使用旧API的数据处理逻辑
+            const entries = []
+
+            // 处理旧格式数据...
+            if (fallbackResult.data.components) {
+              fallbackResult.data.components.forEach(comp => {
+                entries.push({
+                  id: `comp_${comp.name}`,
+                  term: comp.name || comp.canonical_name,
+                  name: comp.name || comp.canonical_name,
+                  type: '组件',
+                  category: comp.category || '未分类',
+                  aliases: comp.aliases || [],
+                  tags: comp.tags || [],
+                  description: comp.description || '',
+                  standardName: comp.canonical_name || comp.name
+                })
+              })
+            }
+
+            dictionaryEntries.value = entries
+            ElMessage.warning('使用备用API加载词典数据')
+          } else {
+            ElMessage.error('加载词典失败: ' + (result.error || '未知错误'))
+          }
         }
       } catch (error) {
-        ElMessage.error('加载词典失败')
+        ElMessage.error('加载词典失败: ' + error.message)
         console.error('Load dictionary error:', error)
       } finally {
         loading.value = false
@@ -368,9 +405,10 @@ export default {
     const getCategoryColor = (category) => {
       const colors = {
         '组件': 'primary',
-        '异常': 'danger',
-        '供应商': 'success',
-        '工厂': 'warning'
+        '症状': 'danger',
+        '原因分析': 'warning',
+        '对策工具': 'success',
+        '工具流程': 'info'
       }
       return colors[category] || 'info'
     }
@@ -378,6 +416,7 @@ export default {
     const showAddDialog = () => {
       isEditing.value = false
       resetCurrentEntry()
+      resetDuplicateInfo()
       dialogVisible.value = true
     }
 
@@ -441,7 +480,77 @@ export default {
       }
     }
 
+    // 查重检查
+    const checkDuplicate = async () => {
+      if (!currentEntry.term || currentEntry.term.trim() === '') {
+        duplicateInfo.isDuplicate = false
+        return
+      }
+
+      const term = currentEntry.term.trim().toLowerCase()
+
+      // 检查完全重复
+      const exactMatch = dictionaryEntries.value.find(entry =>
+        entry.term.toLowerCase() === term &&
+        (!isEditing.value || entry.id !== currentEntry.id)
+      )
+
+      if (exactMatch) {
+        duplicateInfo.isDuplicate = true
+        duplicateInfo.message = `词条 "${currentEntry.term}" 已存在！`
+        duplicateInfo.suggestions = []
+        return
+      }
+
+      // 检查相似词条（包含关系或别名匹配）
+      const similarEntries = dictionaryEntries.value.filter(entry => {
+        if (isEditing.value && entry.id === currentEntry.id) return false
+
+        const entryTerm = entry.term.toLowerCase()
+        const entryAliases = (entry.aliases || []).map(alias => alias.toLowerCase())
+
+        // 检查包含关系
+        const isContained = entryTerm.includes(term) || term.includes(entryTerm)
+
+        // 检查别名匹配
+        const aliasMatch = entryAliases.some(alias =>
+          alias === term || alias.includes(term) || term.includes(alias)
+        )
+
+        return isContained || aliasMatch
+      })
+
+      if (similarEntries.length > 0) {
+        duplicateInfo.isDuplicate = true
+        duplicateInfo.message = `发现 ${similarEntries.length} 个相似词条，请确认是否重复`
+        duplicateInfo.suggestions = similarEntries.slice(0, 5).map(entry => entry.term)
+      } else {
+        duplicateInfo.isDuplicate = false
+        duplicateInfo.message = ''
+        duplicateInfo.suggestions = []
+      }
+    }
+
+    // 选择建议词条
+    const selectSuggestion = (suggestion) => {
+      currentEntry.term = suggestion
+      duplicateInfo.isDuplicate = false
+    }
+
+    // 重置查重信息
+    const resetDuplicateInfo = () => {
+      duplicateInfo.isDuplicate = false
+      duplicateInfo.message = ''
+      duplicateInfo.suggestions = []
+    }
+
     const saveEntry = () => {
+      // 检查是否有重复
+      if (duplicateInfo.isDuplicate && duplicateInfo.suggestions.length === 0) {
+        ElMessage.error('词条已存在，请修改后再试')
+        return
+      }
+
       // 模拟保存操作
       if (isEditing.value) {
         const index = dictionaryEntries.value.findIndex(e => e.id === currentEntry.id)
@@ -457,7 +566,8 @@ export default {
         dictionaryEntries.value.push(newEntry)
         ElMessage.success('添加成功')
       }
-      
+
+      resetDuplicateInfo()
       dialogVisible.value = false
     }
 
@@ -493,6 +603,7 @@ export default {
       formRules,
       aliasInputVisible,
       aliasInputValue,
+      duplicateInfo,
       loadDictionary,
       handleSearch,
       handleCategoryChange,
@@ -505,6 +616,8 @@ export default {
       showAliasInput,
       handleAliasInputConfirm,
       removeAlias,
+      checkDuplicate,
+      selectSuggestion,
       saveEntry,
       exportDictionary
     }
@@ -582,5 +695,29 @@ export default {
   width: 100px;
   margin-right: 8px;
   margin-bottom: 8px;
+}
+
+/* 查重提示样式 */
+.duplicate-warning {
+  margin-top: 8px;
+}
+
+.duplicate-warning .suggestions {
+  margin-top: 8px;
+}
+
+.duplicate-warning .suggestions p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.duplicate-warning .el-tag {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.duplicate-warning .el-tag:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>

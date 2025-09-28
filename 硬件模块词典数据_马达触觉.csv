@@ -1,0 +1,22 @@
+term,aliases,category,sub_category,tags,definition,example,source,status,updated_at
+线性马达,LRA,Component,马达器件,硬件相关;人机交互;功能,通过电磁驱动质量块做线性运动提供振动反馈启停快手感清脆,线性振动马达,硬件模块扩展,active,2025-09-26
+转子马达,Eccentric Rotating Mass Motor,Component,马达器件,硬件相关;人机交互;功能,通过不平衡转子的旋转产生振动成本低但启停慢手感松散,偏心转子马达,硬件模块扩展,active,2025-09-26
+压电陶瓷马达,Piezo Haptic Actuator,Component,马达器件,硬件相关;人机交互;功能,利用压电效应使陶瓷片形变产生振动或触感响应极快可模拟丰富纹理,压电触觉器,硬件模块扩展,active,2025-09-26
+马达驱动芯片,Haptic Driver IC,Component,驱动芯片,硬件相关;半导体;功能,提供马达所需的驱动波形和功率放大,触觉驱动IC,硬件模块扩展,active,2025-09-26
+马达固定结构,Motor Mounting Structure,Component,结构件,结构相关;硬件相关;可靠性,确保马达被牢固固定避免额外振动噪音并将振动有效传递至整机,马达支架,硬件模块扩展,active,2025-09-26
+振动微弱,Weak Vibration,Symptom,马达异常,硬件相关;异常现象;人机交互,振动强度不足用户体验差,振动力度小,硬件模块扩展,active,2025-09-26
+振动异响,Abnormal Sound During Vibration,Symptom,马达异常,硬件相关;异常现象;声学,振动时伴随非预期的吱吱或哒哒声,振动杂音,硬件模块扩展,active,2025-09-26
+响应延迟,Response Delay,Symptom,马达异常,硬件相关;异常现象;性能指标,触控操作与振动反馈之间存在可感知的延迟,触觉响应慢,硬件模块扩展,active,2025-09-26
+余振,After-Shock,Symptom,马达异常,硬件相关;异常现象;性能指标,驱动信号停止后马达因惯性继续振动,振动余震,硬件模块扩展,active,2025-09-26
+触觉反馈波形,Haptic Waveform,Process,触觉设计,软件相关;人机交互;功能,驱动马达的特定电压-时间曲线决定振动的强度节奏和质感,振动波形,硬件模块扩展,active,2025-09-26
+波形编辑,Waveform Editing,Process,触觉设计,软件相关;人机交互;功能,设计和调试触觉反馈波形以匹配不同的UI交互场景,触觉波形设计,硬件模块扩展,active,2025-09-26
+振动加速度测试,Vibration Acceleration Test,TestCase,马达测试,测试验证;性能指标;人机交互,使用加速度传感器测量马达在特定驱动下的振动加速度G值,振动强度测试,硬件模块扩展,active,2025-09-26
+启停时间测试,Rise/Fall Time Test,TestCase,马达测试,测试验证;性能指标;人机交互,测量马达从静止达到稳定振幅启动时间和从稳定振幅回到静止停止时间的快慢,马达响应时间测试,硬件模块扩展,active,2025-09-26
+音频-触觉同步测试,Audio-Haptic Synchronization Test,TestCase,马达测试,测试验证;性能指标;人机交互,验证游戏或媒体播放中声音效果与触觉反馈是否精准同步,音触同步测试,硬件模块扩展,active,2025-09-26
+振动加速度,Vibration Acceleration,Metric,,性能指标;人机交互,衡量振动强度的物理量通常以重力加速度g的倍数表示,振动G值,硬件模块扩展,active,2025-09-26
+频率响应,Frequency Response,Metric,,性能指标;人机交互,马达在不同驱动频率下的振动强度变化曲线,马达频响,硬件模块扩展,active,2025-09-26
+总谐波失真,THD,Metric,,性能指标;人机交互,马达振动波形中谐波失真的大小影响振动纯净度,振动失真度,硬件模块扩展,active,2025-09-26
+激光测振仪,Laser Doppler Vibrometer,Tool,测试设备,测试验证;工具,非接触式精确测量物体表面振动速度和位移的设备,激光振动仪,硬件模块扩展,active,2025-09-26
+加速度传感器,Accelerometer,Tool,测试设备,测试验证;工具,用于接触式测量振动加速度,振动传感器,硬件模块扩展,active,2025-09-26
+触觉体验评估师,Haptic UX Evaluator,Role,评估师,人机交互;组织职责,从用户角度主观评价不同场景下触觉反馈的舒适度和契合度,触觉体验师,硬件模块扩展,active,2025-09-26
+马达工程师,Motor Engineer,Role,工程师,硬件相关;设计;组织职责,负责马达的选型驱动电路设计结构匹配和性能调试,振动马达工程师,硬件模块扩展,active,2025-09-26

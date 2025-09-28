@@ -1,0 +1,3 @@
+source_term,target_term,confidence,source,note
+# 示例: "USB Type-C Connector","接触不良",0.7,"规则: 组件-症状在案例中共现/标签匹配","该组件常见该症状"
+

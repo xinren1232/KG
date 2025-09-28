@@ -1,0 +1,286 @@
+{
+  "system_info": {
+    "name": "硬件质量知识图谱系统",
+    "version": "1.2.0",
+    "description": "专业的硬件质量管理和知识图谱构建系统",
+    "last_updated": "2024-01-20 15:30:00"
+  },
+  "rules": [
+    {
+      "rule_id": "R001",
+      "name": "术语唯一性检查",
+      "type": "validation",
+      "priority": "high",
+      "description": "确保每个术语在系统中唯一，避免重复定义",
+      "logic": "function validateUniqueness(term) { return !existingTerms.includes(term.toLowerCase()); }",
+      "error_message": "术语已存在，请使用不同的名称",
+      "status": "active",
+      "last_check": "2024-01-20 14:30:00"
+    },
+    {
+      "rule_id": "R002",
+      "name": "必填字段检查",
+      "type": "validation",
+      "priority": "high",
+      "description": "确保术语、分类、描述等关键字段不为空",
+      "logic": "function validateRequired(data) { return data.term && data.category && data.description; }",
+      "error_message": "必填字段不能为空",
+      "status": "active",
+      "last_check": "2024-01-20 14:30:00"
+    },
+    {
+      "rule_id": "R003",
+      "name": "分类标准化检查",
+      "type": "standardization",
+      "priority": "medium",
+      "description": "确保分类符合预定义的标准体系",
+      "logic": "function validateCategory(category) { return allowedCategories.includes(category); }",
+      "error_message": "分类不在允许的标准列表中",
+      "status": "active",
+      "last_check": "2024-01-20 14:30:00"
+    },
+    {
+      "rule_id": "R004",
+      "name": "标签规范检查",
+      "type": "standardization",
+      "priority": "low",
+      "description": "确保标签符合命名规范和格式要求",
+      "logic": "function validateTags(tags) { return tags.every(tag => /^[a-zA-Z\\u4e00-\\u9fa5]+$/.test(tag)); }",
+      "error_message": "标签格式不符合规范",
+      "status": "active",
+      "last_check": "2024-01-20 14:30:00"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "p001",
+      "name": "系统角色定义",
+      "category": "system",
+      "description": "定义AI助手的基本角色和能力范围",
+      "template": "你是一个专业的{domain}专家，具有{experience}年的丰富经验。你的主要职责包括：{responsibilities}。请始终保持专业、准确、有帮助的态度。",
+      "variables": [
+        {"name": "domain", "description": "专业领域，如硬件质量、制造工艺等"},
+        {"name": "experience", "description": "经验年数"},
+        {"name": "responsibilities", "description": "主要职责描述"}
+      ],
+      "tags": ["系统", "角色定义"],
+      "usage_count": 25,
+      "updated_at": "2024-01-20 10:30:00"
+    },
+    {
+      "id": "p002",
+      "name": "异常分析提示",
+      "category": "user",
+      "description": "用于分析硬件质量异常的标准提示模板",
+      "template": "请分析以下硬件质量异常情况：\\n\\n异常描述：{symptom}\\n发生组件：{component}\\n发生时间：{occurrence_time}\\n\\n请从以下角度进行分析：\\n1. 可能的根本原因\\n2. 影响范围评估\\n3. 解决方案建议\\n4. 预防措施",
+      "variables": [
+        {"name": "symptom", "description": "异常症状的详细描述"},
+        {"name": "component", "description": "发生异常的组件名称"},
+        {"name": "occurrence_time", "description": "异常发生的时间"}
+      ],
+      "tags": ["分析", "异常", "质量"],
+      "usage_count": 18,
+      "updated_at": "2024-01-19 15:20:00"
+    },
+    {
+      "id": "p003",
+      "name": "知识查询助手",
+      "category": "assistant",
+      "description": "帮助用户查询和理解知识图谱中的信息",
+      "template": "基于知识图谱中的信息，我来帮您查询关于{query_topic}的相关内容。\\n\\n查询范围：{scope}\\n\\n我将为您提供：\\n- 相关概念和定义\\n- 关联关系分析\\n- 实际应用案例\\n- 相关建议",
+      "variables": [
+        {"name": "query_topic", "description": "查询的主题或关键词"},
+        {"name": "scope", "description": "查询的范围限定"}
+      ],
+      "tags": ["查询", "助手", "知识"],
+      "usage_count": 32,
+      "updated_at": "2024-01-20 09:15:00"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "s001",
+      "name": "SMT焊接异常分析",
+      "type": "anomaly_analysis",
+      "description": "针对SMT焊接过程中出现的各种异常情况进行系统化分析",
+      "trigger_conditions": {
+        "keywords": ["SMT", "焊接", "异常", "不良"],
+        "components": ["焊点", "焊盘", "元器件"],
+        "severity": "medium"
+      },
+      "workflow": {
+        "steps": [
+          {"step": 1, "action": "收集异常信息", "description": "获取异常描述、发生位置、时间等"},
+          {"step": 2, "action": "知识图谱查询", "description": "查询相关的历史案例和解决方案"},
+          {"step": 3, "action": "根因分析", "description": "基于知识库进行根本原因分析"},
+          {"step": 4, "action": "解决方案推荐", "description": "提供针对性的解决方案和预防措施"}
+        ]
+      },
+      "status": "active",
+      "usage_count": 45,
+      "updated_at": "2024-01-20 14:30:00"
+    },
+    {
+      "id": "s002",
+      "name": "元器件质量检测",
+      "type": "quality_check",
+      "description": "对进料元器件进行全面的质量检测和评估",
+      "trigger_conditions": {
+        "keywords": ["元器件", "质量", "检测", "进料"],
+        "components": ["电阻", "电容", "IC", "连接器"],
+        "severity": "high"
+      },
+      "workflow": {
+        "steps": [
+          {"step": 1, "action": "规格确认", "description": "确认元器件规格和标准要求"},
+          {"step": 2, "action": "外观检查", "description": "进行外观质量检查"},
+          {"step": 3, "action": "电性能测试", "description": "执行电性能参数测试"},
+          {"step": 4, "action": "质量评估", "description": "综合评估质量状态并给出建议"}
+        ]
+      },
+      "status": "active",
+      "usage_count": 32,
+      "updated_at": "2024-01-19 16:20:00"
+    }
+  ],
+  "versions": [
+    {
+      "id": "v1.2.0",
+      "name": "v1.2.0 - 系统管理功能",
+      "type": "feature",
+      "description": "新增系统管理页面，包含规则管理、Prompt管理、场景管理、版本管理、文档抽取逻辑、Agent设计管理等功能模块",
+      "author": "System",
+      "file_count": 15,
+      "size": "2.3MB",
+      "is_current": true,
+      "created_at": "2024-01-20 15:30:00",
+      "changes": [
+        "新增系统管理主页面",
+        "实现规则管理功能",
+        "实现Prompt管理功能",
+        "实现场景管理功能",
+        "实现版本管理功能",
+        "实现文档抽取逻辑管理",
+        "实现Agent设计管理"
+      ]
+    },
+    {
+      "id": "v1.1.0",
+      "name": "v1.1.0 - 图谱可视化优化",
+      "type": "enhancement",
+      "description": "优化图谱可视化性能，新增节点过滤和搜索功能",
+      "author": "System",
+      "file_count": 8,
+      "size": "1.8MB",
+      "is_current": false,
+      "created_at": "2024-01-18 10:20:00",
+      "changes": [
+        "优化图谱渲染性能",
+        "新增节点过滤功能",
+        "新增节点搜索功能",
+        "改进交互体验",
+        "修复已知问题"
+      ]
+    }
+  ],
+  "extraction_logics": [
+    {
+      "id": "e001",
+      "name": "Excel质量数据抽取",
+      "document_type": "excel",
+      "description": "从Excel文件中抽取硬件质量相关的实体和关系数据",
+      "rules": [
+        "识别症状描述列（通常在A-C列）",
+        "提取组件信息（查找包含'组件'、'器件'关键词的列）",
+        "解析异常分类（基于预定义分类词典）",
+        "抽取时间信息（识别日期格式）",
+        "建立实体间关系（症状-组件、组件-分类等）"
+      ],
+      "field_mapping": {
+        "term": "A",
+        "category": "B", 
+        "description": "C",
+        "tags": "D",
+        "aliases": "E"
+      },
+      "accuracy": 95,
+      "usage_count": 128,
+      "status": "active",
+      "updated_at": "2024-01-20 11:45:00"
+    },
+    {
+      "id": "e002",
+      "name": "PDF技术文档抽取",
+      "document_type": "pdf",
+      "description": "从PDF技术文档中抽取工艺流程和技术规范信息",
+      "rules": [
+        "识别章节标题（基于字体大小和格式）",
+        "提取工艺步骤（查找序号和动词）",
+        "解析参数表格（识别表格结构）",
+        "抽取技术指标（数值+单位模式）",
+        "建立流程关系（步骤间的顺序关系）"
+      ],
+      "field_mapping": {
+        "process_name": "title",
+        "steps": "content",
+        "parameters": "table",
+        "requirements": "specification"
+      },
+      "accuracy": 87,
+      "usage_count": 45,
+      "status": "active",
+      "updated_at": "2024-01-19 14:20:00"
+    }
+  ],
+  "agents": [
+    {
+      "id": "a001",
+      "name": "质量分析师",
+      "role": "硬件质量专家",
+      "description": "专门分析硬件质量问题，提供专业的解决方案和建议",
+      "system_prompt": "你是一个专业的硬件质量工程师，具有10年以上的硬件质量管理经验。你擅长分析各种硬件质量问题，能够快速定位问题根因，并提供有效的解决方案。请始终保持专业、准确、有帮助的态度。",
+      "capabilities": ["异常分析", "根因追溯", "解决方案推荐", "质量评估", "风险预警"],
+      "tools_config": {
+        "knowledge_search": {"enabled": true, "priority": "high"},
+        "anomaly_analysis": {"enabled": true, "priority": "high"},
+        "quality_metrics": {"enabled": true, "priority": "medium"},
+        "case_retrieval": {"enabled": true, "priority": "medium"}
+      },
+      "model_config": "gpt-4",
+      "temperature": 0.3,
+      "status": "active",
+      "call_count": 156,
+      "success_rate": 94,
+      "created_at": "2024-01-15 09:30:00"
+    },
+    {
+      "id": "a002", 
+      "name": "工艺优化师",
+      "role": "制造工艺专家",
+      "description": "专注于制造工艺的优化和改进，提高生产效率和质量",
+      "system_prompt": "你是一个经验丰富的制造工艺工程师，专注于硬件制造工艺的优化和改进。你能够分析工艺流程，识别瓶颈和改进点，提供切实可行的优化方案。",
+      "capabilities": ["工艺分析", "参数优化", "流程改进", "效率提升", "成本控制"],
+      "tools_config": {
+        "process_analysis": {"enabled": true, "priority": "high"},
+        "parameter_optimization": {"enabled": true, "priority": "high"},
+        "efficiency_metrics": {"enabled": true, "priority": "medium"}
+      },
+      "model_config": "gpt-4",
+      "temperature": 0.4,
+      "status": "active",
+      "call_count": 89,
+      "success_rate": 91,
+      "created_at": "2024-01-16 14:20:00"
+    }
+  ],
+  "statistics": {
+    "total_rules": 4,
+    "active_rules": 4,
+    "total_prompts": 3,
+    "total_scenarios": 2,
+    "total_versions": 2,
+    "total_extraction_logics": 2,
+    "total_agents": 2,
+    "active_agents": 2
+  }
+}

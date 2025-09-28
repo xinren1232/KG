@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端功能测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #f0f9ff;
+            border-color: #0ea5e9;
+        }
+        .error {
+            background-color: #fef2f2;
+            border-color: #ef4444;
+        }
+        button {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 知识图谱系统前端功能测试</h1>
+    
+    <div class="test-section">
+        <h2>API 连接测试</h2>
+        <button onclick="testAPI()">测试 API 连接</button>
+        <button onclick="testDictionary()">测试字典数据</button>
+        <button onclick="testLabels()">测试标签数据</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>前端页面测试</h2>
+        <button onclick="testSystemManagement()">打开系统管理页面</button>
+        <button onclick="testDictionaryPage()">打开词典管理页面</button>
+    </div>
+    
+    <div id="results"></div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        const FRONTEND_BASE = 'http://localhost:5174';
+        
+        function addResult(message, isSuccess = true) {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `test-section ${isSuccess ? 'success' : 'error'}`;
+            div.innerHTML = `<p>${new Date().toLocaleTimeString()} - ${message}</p>`;
+            results.appendChild(div);
+        }
+        
+        async function testAPI() {
+            try {
+                const response = await fetch(`${API_BASE}/`);
+                const data = await response.json();
+                addResult(`✅ API 连接成功: ${data.message}`, true);
+            } catch (error) {
+                addResult(`❌ API 连接失败: ${error.message}`, false);
+            }
+        }
+        
+        async function testDictionary() {
+            try {
+                const response = await fetch(`${API_BASE}/api/dictionary`);
+                const data = await response.json();
+                if (data.success) {
+                    addResult(`✅ 字典数据获取成功: ${data.total} 条记录`, true);
+                } else {
+                    addResult(`❌ 字典数据获取失败: ${data.message}`, false);
+                }
+            } catch (error) {
+                addResult(`❌ 字典数据请求失败: ${error.message}`, false);
+            }
+        }
+        
+        async function testLabels() {
+            try {
+                const response = await fetch(`${API_BASE}/api/dictionary/labels`);
+                const data = await response.json();
+                if (data.success) {
+                    const labelCount = data.data.labels.length;
+                    addResult(`✅ 标签数据获取成功: ${labelCount} 个标签`, true);
+                } else {
+                    addResult(`❌ 标签数据获取失败: ${data.message}`, false);
+                }
+            } catch (error) {
+                addResult(`❌ 标签数据请求失败: ${error.message}`, false);
+            }
+        }
+        
+        function testSystemManagement() {
+            const url = `${FRONTEND_BASE}/#/system-management`;
+            window.open(url, '_blank');
+            addResult(`🔗 已打开系统管理页面: ${url}`, true);
+        }
+        
+        function testDictionaryPage() {
+            const url = `${FRONTEND_BASE}/#/dictionary`;
+            window.open(url, '_blank');
+            addResult(`🔗 已打开词典管理页面: ${url}`, true);
+        }
+        
+        // 页面加载时自动测试 API 连接
+        window.onload = function() {
+            addResult('🚀 前端功能测试页面已加载', true);
+            testAPI();
+        };
+    </script>
+</body>
+</html>

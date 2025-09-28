@@ -1,0 +1,31 @@
+{
+  "integration_time": "2025-09-28T01:40:18.151425",
+  "prompt_versions": [
+    {
+      "id": "p003",
+      "name": "词典抽取专家",
+      "category": "extraction",
+      "version": "2.0",
+      "description": "简化版词典抽取prompt，适合日常使用"
+    },
+    {
+      "id": "p004",
+      "name": "词典抽取专家(详细版)",
+      "category": "extraction",
+      "version": "2.1",
+      "description": "完整版词典抽取prompt，包含详细指导"
+    }
+  ],
+  "features": [
+    "8个标准分类体系 (Symptom, Component, Tool, Process, TestCase, Metric, Material, Role)",
+    "70个多维标签体系 (domain, process, quality, lifecycle, material, function, organization, other)",
+    "分类决策树指导",
+    "快速参考表",
+    "标准示例模板",
+    "特殊处理规则",
+    "质量检查机制"
+  ],
+  "integration_status": "completed",
+  "frontend_location": "apps/web/src/components/system/PromptsManagement.vue",
+  "access_path": "http://localhost:5173/#/system -> Prompt管理"
+}

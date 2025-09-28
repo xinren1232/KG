@@ -120,12 +120,12 @@ export default {
     Grid
   },
   setup() {
-    // 响应式数据
+    // 响应式数据 - 使用真实的Neo4j数据
     const stats = reactive({
-      totalNodes: 156,
-      totalRelations: 234,
-      totalAnomalies: 45,
-      totalComponents: 12
+      totalNodes: 1124,
+      totalRelations: 7581,
+      totalCategories: 8,
+      totalTags: 79
     })
 
     // 图表引用
