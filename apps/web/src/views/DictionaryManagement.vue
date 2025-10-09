@@ -321,10 +321,30 @@ export default {
     const loadDictionary = async () => {
       loading.value = true
       try {
-        // 使用新的API获取词典数据 - 获取所有数据
-        const result = await kgApi.getDictionary({ size: 10000 })
+        console.log('开始加载词典数据...')
 
-        if (result.success && result.data && result.data.entries) {
+        // 使用新的API获取词典数据 - 获取所有数据
+        console.log('调用 kgApi.getDictionary({ page_size: 10000 })')
+        const response = await kgApi.getDictionary({ page_size: 10000 })
+
+        console.log('词典API完整响应:', response)
+        console.log('响应状态:', response?.status)
+        console.log('响应数据:', response?.data)
+
+        // 检查响应是否存在
+        if (!response) {
+          throw new Error('API响应为空')
+        }
+
+        // axios拦截器返回完整的response对象，需要访问response.data
+        const result = response.data
+
+        console.log('解析后的result:', result)
+        console.log('result.success:', result?.success)
+        console.log('result.data:', result?.data)
+        console.log('result.data.entries:', result?.data?.entries)
+
+        if (result && result.success && result.data && Array.isArray(result.data.entries)) {
           // 转换新API数据格式为前端期望的格式
           const entries = result.data.entries.map((item, index) => {
             return {
@@ -343,14 +363,18 @@ export default {
             }
           })
 
+          console.log('转换后的entries数量:', entries.length)
           dictionaryEntries.value = entries
           ElMessage.success(`成功加载${entries.length}条词典数据`)
         } else {
           // 如果新API失败，尝试旧API作为备用
-          console.warn('新API失败，尝试旧API:', result)
-          const fallbackResult = await kgApi.getOldDictionary()
+          console.warn('新API数据格式不正确，尝试旧API:', result)
+          console.log('调用 kgApi.getOldDictionary()')
+          const fallbackResponse = await kgApi.getOldDictionary()
+          console.log('旧API响应:', fallbackResponse)
+          const fallbackResult = fallbackResponse.data
 
-          if (fallbackResult.ok && fallbackResult.data) {
+          if (fallbackResult && fallbackResult.ok && fallbackResult.data) {
             // 使用旧API的数据处理逻辑
             const entries = []
 
@@ -374,12 +398,14 @@ export default {
             dictionaryEntries.value = entries
             ElMessage.warning('使用备用API加载词典数据')
           } else {
-            ElMessage.error('加载词典失败: ' + (result.error || '未知错误'))
+            console.error('旧API也失败了:', fallbackResult)
+            ElMessage.error('加载词典失败: ' + (fallbackResult?.error || result?.error || '未知错误'))
           }
         }
       } catch (error) {
-        ElMessage.error('加载词典失败: ' + error.message)
-        console.error('Load dictionary error:', error)
+        console.error('加载词典异常:', error)
+        console.error('错误详情:', error.response?.data || error.message)
+        ElMessage.error('加载词典失败: ' + (error.response?.data?.detail || error.message || '网络错误'))
       } finally {
         loading.value = false
       }

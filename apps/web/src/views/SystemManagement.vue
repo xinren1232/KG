@@ -42,44 +42,44 @@
         <el-col :span="4">
           <div class="stat-card">
             <div class="stat-icon rules">
-              <el-icon><DocumentChecked /></el-icon>
+              <el-icon><Collection /></el-icon>
             </div>
             <div class="stat-content">
-              <div class="stat-number">{{ systemStatus.totalRules }}</div>
-              <div class="stat-label">规则总数</div>
+              <div class="stat-number">{{ systemStatus.totalNodes || 0 }}</div>
+              <div class="stat-label">图谱节点</div>
             </div>
           </div>
         </el-col>
         <el-col :span="4">
           <div class="stat-card">
             <div class="stat-icon prompts">
-              <el-icon><ChatDotRound /></el-icon>
+              <el-icon><Share /></el-icon>
             </div>
             <div class="stat-content">
-              <div class="stat-number">{{ systemStatus.totalPrompts }}</div>
-              <div class="stat-label">Prompt模板</div>
+              <div class="stat-number">{{ systemStatus.totalRelations || 0 }}</div>
+              <div class="stat-label">图谱关系</div>
             </div>
           </div>
         </el-col>
         <el-col :span="4">
           <div class="stat-card">
             <div class="stat-icon scenarios">
-              <el-icon><Operation /></el-icon>
+              <el-icon><DocumentChecked /></el-icon>
             </div>
             <div class="stat-content">
-              <div class="stat-number">{{ systemStatus.totalScenarios }}</div>
-              <div class="stat-label">业务场景</div>
+              <div class="stat-number">{{ systemStatus.totalTerms || 0 }}</div>
+              <div class="stat-label">术语总数</div>
             </div>
           </div>
         </el-col>
         <el-col :span="4">
           <div class="stat-card">
             <div class="stat-icon datasources">
-              <el-icon><Coin /></el-icon>
+              <el-icon><FolderOpened /></el-icon>
             </div>
             <div class="stat-content">
-              <div class="stat-number">{{ systemStatus.totalDataSources }}</div>
-              <div class="stat-label">数据源</div>
+              <div class="stat-number">{{ systemStatus.totalCategories || 0 }}</div>
+              <div class="stat-label">分类数量</div>
             </div>
           </div>
         </el-col>
@@ -171,6 +171,24 @@
             </span>
           </template>
         </el-tab-pane>
+
+        <el-tab-pane label="词典Schema" name="dictionary-schema">
+          <template #label>
+            <span class="tab-label">
+              <el-icon><Collection /></el-icon>
+              词典Schema
+            </span>
+          </template>
+        </el-tab-pane>
+
+        <el-tab-pane label="图谱Schema" name="graph-schema">
+          <template #label>
+            <span class="tab-label">
+              <el-icon><Share /></el-icon>
+              图谱Schema
+            </span>
+          </template>
+        </el-tab-pane>
       </el-tabs>
     </div>
 
@@ -214,6 +232,16 @@
       <!-- 监控告警 -->
       <div v-show="activeTab === 'monitoring'" class="module-content">
         <MonitoringManagement ref="monitoringRef" />
+      </div>
+
+      <!-- 词典Schema -->
+      <div v-show="activeTab === 'dictionary-schema'" class="module-content">
+        <DictionarySchema ref="dictionarySchemaRef" />
+      </div>
+
+      <!-- 图谱Schema -->
+      <div v-show="activeTab === 'graph-schema'" class="module-content">
+        <GraphSchema ref="graphSchemaRef" />
       </div>
     </div>
 
@@ -274,7 +302,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, nextTick } from 'vue'
 import {
   Setting,
   Refresh,
@@ -287,7 +315,9 @@ import {
   Avatar,
   Clock,
   Coin,
-  Monitor
+  Monitor,
+  Collection,
+  Share
 } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import api from '@/api'
@@ -301,6 +331,8 @@ import ExtractionManagement from '@/components/system/ExtractionManagement.vue'
 import AgentsManagement from '@/components/system/AgentsManagement.vue'
 import DataSourceManagement from '@/components/system/DataSourceManagement.vue'
 import MonitoringManagement from '@/components/system/MonitoringManagement.vue'
+import DictionarySchema from '@/components/system/DictionarySchema.vue'
+import GraphSchema from '@/components/system/GraphSchema.vue'
 
 export default {
   name: 'SystemManagement',
@@ -317,6 +349,8 @@ export default {
     Clock,
     Coin,
     Monitor,
+    Collection,
+    Share,
     RulesManagement,
     PromptsManagement,
     ScenariosManagement,
@@ -324,7 +358,9 @@ export default {
     ExtractionManagement,
     AgentsManagement,
     DataSourceManagement,
-    MonitoringManagement
+    MonitoringManagement,
+    DictionarySchema,
+    GraphSchema
   },
   setup() {
     // 响应式数据
@@ -369,12 +405,27 @@ export default {
     const agentsRef = ref(null)
     const dataSourceRef = ref(null)
     const monitoringRef = ref(null)
+    const dictionarySchemaRef = ref(null)
+    const graphSchemaRef = ref(null)
     const versionFormRef = ref(null)
 
     // 方法
-    const handleTabChange = (tabName) => {
+    const handleTabChange = async (tabName) => {
       console.log('切换到标签页:', tabName)
-      // 可以在这里添加标签页切换的逻辑
+
+      // 当切换到词典Schema或图谱Schema标签页时，延迟渲染图表
+      // 使用 nextTick 确保 DOM 已经显示
+      await nextTick()
+
+      if (tabName === 'dictionary-schema' && dictionarySchemaRef.value?.renderCharts) {
+        setTimeout(() => {
+          dictionarySchemaRef.value.renderCharts()
+        }, 100)
+      } else if (tabName === 'graph-schema' && graphSchemaRef.value?.renderSchemaChart) {
+        setTimeout(() => {
+          graphSchemaRef.value.renderSchemaChart()
+        }, 100)
+      }
     }
 
     const refreshAllData = async () => {
@@ -406,6 +457,12 @@ export default {
         }
         if (monitoringRef.value?.refreshData) {
           promises.push(monitoringRef.value.refreshData())
+        }
+        if (dictionarySchemaRef.value?.refreshData) {
+          promises.push(dictionarySchemaRef.value.refreshData())
+        }
+        if (graphSchemaRef.value?.refreshData) {
+          promises.push(graphSchemaRef.value.refreshData())
         }
 
         await Promise.all(promises)
@@ -507,8 +564,11 @@ export default {
     const loadSystemStatus = async () => {
       try {
         const response = await api.getSystemStatus()
-        if (response.success && response.data) {
-          Object.assign(systemStatus, response.data)
+        console.log('系统状态响应:', response)
+        // axios 拦截器返回完整的 response 对象，需要访问 response.data
+        if (response.data && response.data.success && response.data.data) {
+          Object.assign(systemStatus, response.data.data)
+          console.log('系统状态已更新:', systemStatus)
         }
       } catch (error) {
         console.error('加载系统状态失败:', error)
@@ -536,6 +596,8 @@ export default {
       agentsRef,
       dataSourceRef,
       monitoringRef,
+      dictionarySchemaRef,
+      graphSchemaRef,
       versionFormRef,
       handleTabChange,
       refreshAllData,
