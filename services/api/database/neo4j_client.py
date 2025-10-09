@@ -132,14 +132,18 @@ class Neo4jClient:
     
     def get_graph_data(self, limit: int = 100) -> Dict[str, Any]:
         """获取图谱可视化数据"""
-        # 获取节点
+        # 获取节点 - 优先获取有连接的节点
         if limit and limit > 0:
             nodes_query = """
             MATCH (n)
             WHERE n:Product OR n:Component OR n:Anomaly OR n:TestCase OR n:Symptom OR n:Tool OR n:Process OR n:Metric
+            WITH n, size((n)--()) as degree
+            WHERE degree > 0
             RETURN id(n) as id, labels(n)[0] as label,
                    coalesce(n.name, n.title, n.id, 'Node_' + toString(id(n))) as name,
-                   properties(n) as properties
+                   properties(n) as properties,
+                   degree
+            ORDER BY degree DESC
             LIMIT $limit
             """
             nodes = self.execute_query(nodes_query, {"limit": limit})
@@ -148,21 +152,28 @@ class Neo4jClient:
             nodes_query = """
             MATCH (n)
             WHERE n:Product OR n:Component OR n:Anomaly OR n:TestCase OR n:Symptom OR n:Tool OR n:Process OR n:Metric
+            WITH n, size((n)--()) as degree
+            WHERE degree > 0
             RETURN id(n) as id, labels(n)[0] as label,
                    coalesce(n.name, n.title, n.id, 'Node_' + toString(id(n))) as name,
-                   properties(n) as properties
+                   properties(n) as properties,
+                   degree
+            ORDER BY degree DESC
             """
             nodes = self.execute_query(nodes_query)
 
-        # 获取关系
-        edges_query = """
-        MATCH (n)-[r]->(m)
-        WHERE (n:Product OR n:Component OR n:Anomaly OR n:TestCase OR n:Symptom OR n:Tool OR n:Process OR n:Metric)
-          AND (m:Product OR m:Component OR m:Anomaly OR m:TestCase OR m:Symptom OR m:Tool OR m:Process OR m:Metric)
-        RETURN id(n) as source, id(m) as target, type(r) as relationship
-        LIMIT $limit
-        """
-        edges = self.execute_query(edges_query, {"limit": limit})
+        # 获取这些节点之间的关系
+        if nodes:
+            node_ids = [node['id'] for node in nodes]
+            edges_query = """
+            MATCH (n)-[r]->(m)
+            WHERE id(n) IN $node_ids AND id(m) IN $node_ids
+            RETURN id(n) as source, id(m) as target, type(r) as relationship,
+                   properties(r) as properties
+            """
+            edges = self.execute_query(edges_query, {"node_ids": node_ids})
+        else:
+            edges = []
 
         return {"nodes": nodes, "edges": edges}
 

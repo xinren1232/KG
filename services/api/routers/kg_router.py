@@ -165,13 +165,49 @@ async def get_graph_data(
 
         # 转换为前端期望的格式
         nodes = []
+        node_connections = {}  # 统计每个节点的连接数
+
+        # 先统计连接数
+        for edge in graph_data['edges']:
+            source_id = str(edge['source'])
+            target_id = str(edge['target'])
+            node_connections[source_id] = node_connections.get(source_id, 0) + 1
+            node_connections[target_id] = node_connections.get(target_id, 0) + 1
+
+        # 标签映射：将Neo4j标签映射为前端期望的英文分类
+        label_mapping = {
+            'Term': 'Component',      # 术语 -> 组件
+            'Tag': 'Metric',          # 标签 -> 指标
+            'Category': 'Process',    # 分类 -> 流程
+            'Product': 'Component',   # 产品 -> 组件
+            'Component': 'Component', # 组件 -> 组件
+            'Anomaly': 'Symptom',     # 异常 -> 症状
+            'TestCase': 'TestCase',   # 测试用例 -> 测试用例
+            'Symptom': 'Symptom',     # 症状 -> 症状
+            'Tool': 'Tool',           # 工具 -> 工具
+            'Process': 'Process',     # 流程 -> 流程
+            'Metric': 'Metric',       # 指标 -> 指标
+            'Role': 'Role',           # 角色 -> 角色
+            'Material': 'Material'    # 材料 -> 材料
+        }
+
         for node in graph_data['nodes']:
+            node_id = str(node['id'])
+            connections = node_connections.get(node_id, 0)
+            # 根据连接数动态计算节点大小
+            symbol_size = min(max(15 + connections * 2, 15), 80)
+
+            # 映射标签为前端期望的分类
+            original_label = node['label']
+            mapped_category = label_mapping.get(original_label, 'Component')
+
             nodes.append({
-                'id': str(node['id']),
+                'id': node_id,
                 'name': node['name'],
-                'category': node['label'],
+                'category': mapped_category,
                 'description': node['properties'].get('description', ''),
-                'symbolSize': 30,
+                'symbolSize': symbol_size,
+                'connections': connections,
                 'properties': node['properties']
             })
 

@@ -1,0 +1,51 @@
+{
+  "/kg/dictionary": {
+    "status": "success",
+    "declared_total": 1124,
+    "actual_total": 1124,
+    "categories": 8,
+    "category_counts": {
+      "Component": 181,
+      "Metric": 190,
+      "Process": 170,
+      "Material": 55,
+      "Symptom": 259,
+      "Tool": 102,
+      "TestCase": 104,
+      "Role": 63
+    }
+  },
+  "/api/dictionary": {
+    "status": "success",
+    "declared_total": 1124,
+    "actual_total": 1124
+  },
+  "/kg/dictionary/entries": {
+    "status": "success",
+    "returned_count": 50,
+    "total_count": 1124,
+    "page": 1,
+    "page_size": 50
+  },
+  "/kg/dictionary/entries?page=1&page_size=100": {
+    "status": "success",
+    "returned_count": 100,
+    "total_count": 1124,
+    "page": 1,
+    "page_size": 100
+  },
+  "/kg/dictionary/entries?page=1&page_size=1000": {
+    "status": "success",
+    "returned_count": 1000,
+    "total_count": 1124,
+    "page": 1,
+    "page_size": 1000
+  },
+  "/kg/dictionary/entries?page=1&page_size=2000": {
+    "status": "success",
+    "returned_count": 1124,
+    "total_count": 1124,
+    "page": 1,
+    "page_size": 2000
+  }
+}

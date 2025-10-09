@@ -1,0 +1,21 @@
+{
+  "/kg/dictionary": {
+    "status": "failed",
+    "error": "0"
+  },
+  "/kg/dictionary/entries": {
+    "status": "success",
+    "count": 50
+  },
+  "/kg/real-stats": {
+    "status": "success",
+    "nodes": 522,
+    "dictionary": 0,
+    "relations": 13
+  },
+  "/kg/graph-data": {
+    "status": "success",
+    "nodes": 0,
+    "edges": 0
+  }
+}

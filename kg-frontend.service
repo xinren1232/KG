@@ -1,0 +1,20 @@
+[Unit]
+Description=Knowledge Graph Frontend Service
+After=network.target kg-api.service
+Wants=kg-api.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/knowledge-graph/apps/web
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+Environment="NODE_ENV=production"
+ExecStart=/usr/bin/npm run dev
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/kg-frontend.log
+StandardError=append:/var/log/kg-frontend-error.log
+
+[Install]
+WantedBy=multi-user.target
+

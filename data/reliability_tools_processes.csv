@@ -1,0 +1,14 @@
+term,aliases,category,tags,definition
+LIMS系统,实验室信息管理系统;Laboratory Information Management System,Tool,质量体系;测试验证;信息管理;工具,可靠性测试流程管理系统，用于测试申请、样机管理、结果录入、报告输出等全流程管理。委托部门登录系统提交测试申请单，实验室录入测试结果，系统定期推送问题点直至闭环
+PR0阶段,项目研发阶段0;Project Research Phase 0,Process,项目相关;设计;硬件相关;测试验证,新品开发第一个测试阶段，需要58台样机进行全面可靠性测试，是产品设计验证的关键节点
+PR1阶段,项目研发阶段1;Project Research Phase 1,Process,项目相关;设计;硬件相关;测试验证,新品开发第二个测试阶段，需要96台样机，在PR0基础上进行设计优化后的验证测试
+PR2阶段,项目研发阶段2;Project Research Phase 2,Process,项目相关;设计;硬件相关;测试验证,新品开发第三个测试阶段，需要40台样机，具体数量需结合PR1测试情况及项目状态调整
+PIR阶段,量产前验证阶段;Pre-Industrial Release,Process,项目相关;制造工艺;质量体系;测试验证,量产前最后验证阶段，需要51台样机，还需增加前阶段测试Fail且PIR方案未包含的测试项
+ECN测试,工程变更测试;Engineering Change Notice Test,Process,项目相关;设计;变更管理;测试验证,针对产品工程变更进行的专项测试，如更换CTP、LCD、CAM、平台、电池等关键器件的验证测试
+二供测试,第二供应商验证;Second Supplier Test,Process,供应链;质量体系;风险管理;测试验证,为降低供应风险引入第二供应商时进行的产品验证测试，确保不同供应商产品质量一致性
+转厂测试,生产转移验证;Factory Transfer Test,Process,制造工艺;质量体系;生产管理;测试验证,产品生产从一个工厂转移到另一个工厂时进行的验证测试，包括组装转厂、SMT转厂、三合一转厂等
+复制模测试,互配验证测试;Interchangeability Test,Process,设计;质量体系;兼容性;测试验证,验证不同配置或批次产品的互换性，一种互配需要4台样机，样机数量以此类推
+量产例行测试,批量生产例行检验;Mass Production Routine Test,Process,制造工艺;质量体系;生产管理;测试验证,产品进入量产阶段后的定期抽样检验，智能机1次/30K，功能机1次/100K，确保量产质量稳定性
+低温市场专项,寒带地区专项测试;Cold Climate Market Test,TestCase,可靠性;环境应力;市场适应性;特殊要求,针对俄罗斯、白俄罗斯、乌克兰、哈萨克斯坦等低温市场的专项测试，包括-15℃/-20℃环境下的各种可靠性验证
+东南亚市场专项,热带湿润地区专项;Southeast Asia Market Test,TestCase,可靠性;环境应力;市场适应性;防护性能,针对东南亚热带湿润气候的专项测试，75°雨淋为必过项，加强防水防潮性能验证
+印度市场专项,印度地区专项测试;India Market Test,TestCase,可靠性;环境应力;市场适应性;特殊要求,针对印度市场的专项测试要求，包括更严格的浪涌标准（D浪涌正压≥25V）和更长的寿命测试时间

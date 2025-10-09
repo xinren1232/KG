@@ -1,0 +1,11 @@
+术语,别名,类别,多标签,备注
+图像传感器,CMOS Sensor;Image Sensor;Sensor,摄像头模组,部件;硬件相关,将光信号转换为电信号的核心器件，常见品牌有Sony、Samsung、OmniVision
+VCM马达,音圈马达;Voice Coil Motor;对焦马达,摄像头模组,部件;硬件相关,驱动镜头移动实现自动对焦的马达，失效会导致对焦失败或异响
+ISP,图像信号处理器;Image Signal Processor,摄像头模组,部件;软件相关,负责图像优化处理，包括降噪、白平衡、色彩校正等
+红外滤光片,IR Filter;IR Cut Filter,摄像头模组,部件;硬件相关,过滤红外光线，防止红外光干扰成像质量
+镜头模组,Lens Module;镜头组,摄像头模组,部件;硬件相关,由多片镜片组成的光学系统，决定成像质量
+镜头座,Lens Holder;Lens Barrel,摄像头模组,部件;结构相关,固定镜片的结构件，精度影响光轴对准
+FPC排线,柔性电路板;Flexible PCB,摄像头模组,部件;电气连接,连接摄像头模组与主板的柔性电路，易发生断裂
+滤光片,Color Filter,摄像头模组,部件;硬件相关,用于调整色彩还原的光学滤镜
+保护玻璃,Cover Glass;Lens Cover,摄像头模组,部件;结构相关,保护镜头的透明玻璃，划伤会影响成像
+对焦驱动IC,AF Driver IC,摄像头模组,部件;硬件相关,控制VCM马达的驱动芯片

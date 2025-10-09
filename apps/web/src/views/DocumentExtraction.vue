@@ -198,7 +198,7 @@
             <!-- 根据文件类型显示不同的展示组件 -->
             <component
               :is="getDisplayComponent()"
-              :data="currentResults.raw_data"
+              :data="getDisplayData()"
               :metadata="currentResults.metadata"
               :file-info="currentFileInfo"
             />
@@ -553,6 +553,7 @@ export default {
 
             if (statusResult.success) {
               const fileStatus = statusResult.data.status
+              console.log(`状态检查: ${fileStatus}`)
 
               if (fileStatus === 'parsed') {
                 // 解析完成，获取预览数据
@@ -611,6 +612,7 @@ export default {
         const maxAttempts = 15
 
         while (attempts < maxAttempts) {
+          console.log(`轮询尝试 ${attempts + 1}/${maxAttempts}`)
           const completed = await checkStatus()
           if (completed) break
 
@@ -850,6 +852,22 @@ export default {
       }
     }
 
+    // 获取显示组件需要的数据格式
+    const getDisplayData = () => {
+      if (!currentResults.value?.raw_data) return []
+
+      // 如果raw_data中的每个元素都有data字段，提取data字段的内容
+      const rawData = currentResults.value.raw_data
+
+      if (rawData.length > 0 && rawData[0].data) {
+        // 提取每个元素的data字段
+        return rawData.map(item => item.data)
+      }
+
+      // 否则直接返回原始数据
+      return rawData
+    }
+
     // 获取文件类型
     const getFileType = (filename) => {
       if (!filename) return 'unknown'
@@ -1027,6 +1045,7 @@ export default {
       reParseDocument,
       exportAllResults,
       getDisplayComponent,
+      getDisplayData,
       getFileType,
       hasAnyParsedFiles
     }

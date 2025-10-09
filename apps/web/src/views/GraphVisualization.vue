@@ -206,16 +206,21 @@ export default {
     // 图谱实例
     let graphInstance = null
 
-    // 分类颜色映射
+    // 分类颜色映射 - 高对比度配色方案
     const categoryColors = {
-      'Symptom': '#F56C6C',
-      'Component': '#409EFF', 
-      'Tool': '#67C23A',
-      'Process': '#E6A23C',
-      'TestCase': '#909399',
-      'Metric': '#9C27B0',
-      'Role': '#FF9800',
-      'Material': '#795548'
+      'Symptom': '#E74C3C',      // 深红色 - 症状/问题
+      'Component': '#3498DB',    // 蓝色 - 组件
+      'Tool': '#2ECC71',         // 绿色 - 工具
+      'Process': '#F39C12',      // 橙色 - 流程
+      'TestCase': '#9B59B6',     // 紫色 - 测试用例
+      'Metric': '#1ABC9C',       // 青绿色 - 指标
+      'Role': '#E67E22',         // 深橙色 - 角色
+      'Material': '#34495E',     // 深灰蓝 - 材料
+      'Product': '#E91E63',      // 粉红色 - 产品
+      'Anomaly': '#C0392B',      // 暗红色 - 异常
+      'Term': '#3498DB',         // 蓝色 - 术语（映射为组件色）
+      'Tag': '#1ABC9C',          // 青色 - 标签（映射为指标色）
+      'Category': '#F39C12'      // 橙色 - 分类（映射为流程色）
     }
 
     // 获取分类颜色
@@ -246,17 +251,24 @@ export default {
         const { kgApi } = await import('../api')
         const response = await kgApi.getGraphVisualizationData(true)
 
-        if (response && response.data) {
+        console.log('图谱API完整响应:', response)
+        console.log('响应数据:', response.data)
+
+        // axios拦截器返回完整的response对象，需要访问response.data
+        const result = response.data
+
+        if (result && result.ok && result.data) {
           // 只更新从API获取的数据，保持响应式
-          graphData.stats = response.data.stats || graphData.stats
-          graphData.categories = response.data.categories || graphData.categories
-          graphData.tags = response.data.tags || graphData.tags
-          graphData.nodes = response.data.nodes || graphData.nodes
-          graphData.relations = response.data.relations || graphData.relations
-          graphData.sampleNodes = response.data.sampleNodes || graphData.sampleNodes
-          graphData.sampleRelations = response.data.sampleRelations || graphData.sampleRelations
+          graphData.stats = result.data.stats || graphData.stats
+          graphData.categories = result.data.categories || graphData.categories
+          graphData.tags = result.data.tags || graphData.tags
+          graphData.nodes = result.data.nodes || graphData.nodes
+          graphData.relations = result.data.relations || graphData.relations
+          graphData.sampleNodes = result.data.sampleNodes || graphData.sampleNodes
+          graphData.sampleRelations = result.data.sampleRelations || graphData.sampleRelations
         } else {
           // 备用：从配置文件加载数据
+          console.warn('API数据格式不正确，使用配置文件:', result)
           const configResponse = await fetch('/config/graph_visualization_data.json')
           const data = await configResponse.json()
           Object.assign(graphData, data)
@@ -277,70 +289,201 @@ export default {
       }
     }
 
+    // 计算节点大小（基于连接数）
+    const calculateNodeSize = (nodeId) => {
+      const connections = getNodeConnections(nodeId)
+      // 更明显的节点大小差异，形成视觉层次
+      return Math.min(Math.max(15 + connections * 2, 15), 60)
+    }
+
     // 初始化图谱
     const initGraph = async () => {
       if (!graphCanvas.value) return
 
       try {
         graphInstance = echarts.init(graphCanvas.value)
-        
+
+        // 准备节点数据 - 优先使用有数据的字段
+        const nodes = graphData.sampleNodes || graphData.nodes || []
+        const relations = graphData.sampleRelations || graphData.relations || graphData.links || []
+
+        console.log('图谱数据调试:', {
+          sampleNodes: graphData.sampleNodes?.length || 0,
+          nodes: graphData.nodes?.length || 0,
+          sampleRelations: graphData.sampleRelations?.length || 0,
+          relations: graphData.relations?.length || 0,
+          firstNode: nodes[0]
+        })
+
+        // 获取所有分类用于图例
+        const categories = [...new Set(nodes.map(n => n.category))].map(cat => ({
+          name: cat,
+          itemStyle: {
+            color: getCategoryColor(cat)
+          }
+        }))
+
         const option = {
           title: {
             text: '硬件质量知识图谱',
-            subtext: `${graphData.stats.totalNodes}个节点，${graphData.stats.totalRelations}条关系`,
-            left: 'center'
+            subtext: `${nodes.length}个词条，${relations.length}条关系`,
+            left: 'center',
+            textStyle: {
+              fontSize: 24,
+              fontWeight: 'bold'
+            },
+            subtextStyle: {
+              fontSize: 14,
+              color: '#666'
+            }
           },
+          legend: [{
+            data: categories.map(c => c.name),
+            orient: 'vertical',
+            left: 10,
+            top: 80,
+            textStyle: {
+              fontSize: 12
+            }
+          }],
           tooltip: {
             trigger: 'item',
+            backgroundColor: 'rgba(255, 255, 255, 0.98)',
+            borderColor: '#ddd',
+            borderWidth: 1,
+            borderRadius: 8,
+            padding: 12,
+            textStyle: {
+              color: '#333',
+              fontSize: 13
+            },
+            extraCssText: 'box-shadow: 0 4px 12px rgba(0,0,0,0.15);',
             formatter: function(params) {
               if (params.dataType === 'node') {
+                const connections = getNodeConnections(params.data.id)
+                const description = params.data.description || ''
+                const truncatedDesc = description.length > 120
+                  ? description.substring(0, 120) + '...'
+                  : description
                 return `
-                  <strong>${params.data.name}</strong><br/>
-                  分类: ${params.data.category}<br/>
-                  ${params.data.description ? params.data.description.substring(0, 100) + '...' : ''}
+                  <div style="max-width: 320px;">
+                    <div style="font-size: 16px; font-weight: bold; margin-bottom: 8px; color: #2c3e50;">
+                      ${params.data.name}
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                      <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: ${getCategoryColor(params.data.category)}; margin-right: 6px;"></span>
+                      <span style="color: #666; font-weight: 500;">${params.data.category}</span>
+                    </div>
+                    <div style="color: #666; margin-bottom: 6px;">
+                      连接数: <strong style="color: #409EFF;">${connections}</strong>
+                    </div>
+                    ${truncatedDesc ? '<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #eee; color: #555; line-height: 1.4;">' + truncatedDesc + '</div>' : ''}
+                  </div>
                 `
               } else {
-                return `${params.data.source} → ${params.data.target}<br/>关系: ${params.data.type}`
+                return `
+                  <div style="padding: 4px;">
+                    <div style="font-weight: bold; margin-bottom: 4px;">
+                      <span style="color: #2c3e50;">${params.data.source}</span>
+                      <span style="color: #999; margin: 0 6px;">→</span>
+                      <span style="color: #2c3e50;">${params.data.target}</span>
+                    </div>
+                    <div style="color: #666;">
+                      关系: <span style="color: #409EFF; font-weight: 500;">${params.data.type}</span>
+                    </div>
+                  </div>
+                `
               }
             }
           },
           series: [{
             type: 'graph',
             layout: 'force',
-            data: (graphData.nodes || graphData.sampleNodes || []).map(node => ({
+            categories: categories,
+            data: nodes.map(node => ({
               id: node.id,
               name: node.name,
-              category: node.category,
+              category: categories.findIndex(c => c.name === node.category),
               description: node.description || node.properties?.description,
-              symbolSize: node.symbolSize || 30,
+              symbolSize: calculateNodeSize(node.id),
+              // 保存原始分类名称用于颜色映射
+              originalCategory: node.category,
               itemStyle: {
-                color: getCategoryColor(node.category)
+                color: getCategoryColor(node.category),
+                borderColor: '#fff',
+                borderWidth: 3,
+                shadowBlur: 15,
+                shadowColor: 'rgba(0, 0, 0, 0.4)'
               },
               label: {
                 show: true,
-                fontSize: 12
+                fontSize: 9,
+                fontWeight: 'normal',
+                color: '#333',
+                formatter: function(params) {
+                  // 显示更多节点标签，形成丰富的视觉效果
+                  const connections = getNodeConnections(params.data.id)
+                  if (connections > 1 || params.data.symbolSize > 20) {
+                    return params.data.name.length > 8
+                      ? params.data.name.substring(0, 8) + '...'
+                      : params.data.name
+                  }
+                  return ''
+                }
+              },
+              emphasis: {
+                label: {
+                  show: true,
+                  fontSize: 14,
+                  fontWeight: 'bold'
+                },
+                itemStyle: {
+                  shadowBlur: 25,
+                  shadowColor: 'rgba(0, 0, 0, 0.6)'
+                }
               }
             })),
-            links: (graphData.relations || graphData.sampleRelations || graphData.links || []).map(rel => ({
+            links: relations.map(rel => ({
               source: rel.source,
               target: rel.target,
               type: rel.type || rel.relation,
               lineStyle: {
-                color: '#999',
-                width: 2
+                color: '#ccc',
+                width: 1,
+                curveness: 0.1,
+                opacity: 0.5
+              },
+              emphasis: {
+                lineStyle: {
+                  width: 3,
+                  opacity: 1,
+                  color: '#409EFF'
+                }
               }
             })),
             roam: true,
+            draggable: true,
             force: {
-              repulsion: 1000,
-              edgeLength: 100
+              repulsion: 300,        // 适中斥力，形成聚类
+              gravity: 0.1,          // 适中重力，保持整体结构
+              edgeLength: [30, 100], // 适中边长，形成紧密聚类
+              layoutAnimation: true,
+              friction: 0.6,         // 增加摩擦力，稳定布局
+              initLayout: 'none'     // 不使用初始布局，让力导向自然形成
             },
             emphasis: {
-              focus: 'adjacency'
+              focus: 'adjacency',
+              lineStyle: {
+                width: 3
+              }
+            },
+            lineStyle: {
+              color: 'source',
+              curveness: 0.1
             }
           }]
         }
-        
+
         graphInstance.setOption(option)
         
         // 添加点击事件
@@ -392,7 +535,8 @@ export default {
 
     // 获取节点连接数
     const getNodeConnections = (nodeId) => {
-      return graphData.sampleRelations.filter(rel => 
+      const relations = graphData.sampleRelations || graphData.relations || []
+      return relations.filter(rel =>
         rel.source === nodeId || rel.target === nodeId
       ).length
     }
@@ -481,6 +625,10 @@ export default {
 .graph-canvas {
   width: 100%;
   height: 600px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
 }
 
 .legend {

@@ -1,0 +1,917 @@
+{
+  "graph": {
+    "total_nodes": 3037,
+    "total_rels": 13546,
+    "nodes_by_label": [
+      {
+        "l": "Alias",
+        "c": 944
+      },
+      {
+        "l": "Term",
+        "c": 682
+      },
+      {
+        "l": "Symptom",
+        "c": 266
+      },
+      {
+        "l": "TestCase",
+        "c": 235
+      },
+      {
+        "l": "Metric",
+        "c": 193
+      },
+      {
+        "l": "Component",
+        "c": 181
+      },
+      {
+        "l": "Process",
+        "c": 179
+      },
+      {
+        "l": "Tag",
+        "c": 128
+      },
+      {
+        "l": "Tool",
+        "c": 103
+      },
+      {
+        "l": "Role",
+        "c": 63
+      },
+      {
+        "l": "Material",
+        "c": 55
+      },
+      {
+        "l": "Category",
+        "c": 8
+      }
+    ],
+    "rels_by_type": [
+      {
+        "t": "RELATED_TO",
+        "c": 2371
+      },
+      {
+        "t": "HAS_TAG",
+        "c": 1774
+      },
+      {
+        "t": "USES",
+        "c": 1656
+      },
+      {
+        "t": "USES_TOOL",
+        "c": 1541
+      },
+      {
+        "t": "DETECTED_BY",
+        "c": 1366
+      },
+      {
+        "t": "MEASURES",
+        "c": 1366
+      },
+      {
+        "t": "ALIAS_OF",
+        "c": 980
+      },
+      {
+        "t": "HAS_SYMPTOM",
+        "c": 764
+      },
+      {
+        "t": "BELONGS_TO",
+        "c": 682
+      },
+      {
+        "t": "SAME_AS",
+        "c": 682
+      },
+      {
+        "t": "TESTS",
+        "c": 249
+      },
+      {
+        "t": "CONSUMES",
+        "c": 115
+      }
+    ],
+    "canonical_id": {
+      "Component": {
+        "nodes": 181,
+        "with_canonical_id": 181
+      },
+      "Symptom": {
+        "nodes": 266,
+        "with_canonical_id": 266
+      },
+      "Tool": {
+        "nodes": 103,
+        "with_canonical_id": 103
+      },
+      "Process": {
+        "nodes": 179,
+        "with_canonical_id": 179
+      },
+      "TestCase": {
+        "nodes": 235,
+        "with_canonical_id": 235
+      },
+      "Material": {
+        "nodes": 55,
+        "with_canonical_id": 55
+      },
+      "Role": {
+        "nodes": 63,
+        "with_canonical_id": 63
+      },
+      "Metric": {
+        "nodes": 193,
+        "with_canonical_id": 193
+      },
+      "Anomaly": {
+        "nodes": 0,
+        "with_canonical_id": 0
+      }
+    },
+    "canonical_unique": {
+      "Component": {
+        "total_with_cid": 181,
+        "distinct_cid": 181,
+        "ok": true
+      },
+      "Symptom": {
+        "total_with_cid": 266,
+        "distinct_cid": 266,
+        "ok": true
+      },
+      "Tool": {
+        "total_with_cid": 103,
+        "distinct_cid": 103,
+        "ok": true
+      },
+      "Process": {
+        "total_with_cid": 179,
+        "distinct_cid": 179,
+        "ok": true
+      },
+      "TestCase": {
+        "total_with_cid": 235,
+        "distinct_cid": 235,
+        "ok": true
+      },
+      "Material": {
+        "total_with_cid": 55,
+        "distinct_cid": 55,
+        "ok": true
+      },
+      "Role": {
+        "total_with_cid": 63,
+        "distinct_cid": 63,
+        "ok": true
+      },
+      "Metric": {
+        "total_with_cid": 193,
+        "distinct_cid": 193,
+        "ok": true
+      },
+      "Anomaly": {
+        "total_with_cid": 0,
+        "distinct_cid": 0,
+        "ok": true
+      }
+    },
+    "confidence_buckets": {
+      "RELATED_TO": {
+        "<0.3": 0,
+        "0.3-0.5": 61,
+        "0.5-0.8": 1900,
+        ">=0.8": 410,
+        "missing": 0,
+        "inferred": 2371,
+        "total": 2371
+      },
+      "HAS_TAG": {
+        "<0.3": 0,
+        "0.3-0.5": 0,
+        "0.5-0.8": 0,
+        ">=0.8": 1774,
+        "missing": 0,
+        "inferred": 0,
+        "total": 1774
+      },
+      "USES": {
+        "<0.3": 0,
+        "0.3-0.5": 383,
+        "0.5-0.8": 1223,
+        ">=0.8": 50,
+        "missing": 0,
+        "inferred": 1647,
+        "total": 1656
+      },
+      "USES_TOOL": {
+        "<0.3": 0,
+        "0.3-0.5": 268,
+        "0.5-0.8": 1223,
+        ">=0.8": 50,
+        "missing": 0,
+        "inferred": 1532,
+        "total": 1541
+      },
+      "DETECTED_BY": {
+        "<0.3": 0,
+        "0.3-0.5": 315,
+        "0.5-0.8": 1008,
+        ">=0.8": 43,
+        "missing": 0,
+        "inferred": 1331,
+        "total": 1366
+      },
+      "MEASURES": {
+        "<0.3": 0,
+        "0.3-0.5": 315,
+        "0.5-0.8": 1008,
+        ">=0.8": 43,
+        "missing": 0,
+        "inferred": 1331,
+        "total": 1366
+      },
+      "ALIAS_OF": {
+        "<0.3": 0,
+        "0.3-0.5": 0,
+        "0.5-0.8": 0,
+        ">=0.8": 980,
+        "missing": 0,
+        "inferred": 0,
+        "total": 980
+      },
+      "HAS_SYMPTOM": {
+        "<0.3": 0,
+        "0.3-0.5": 115,
+        "0.5-0.8": 613,
+        ">=0.8": 36,
+        "missing": 0,
+        "inferred": 764,
+        "total": 764
+      },
+      "BELONGS_TO": {
+        "<0.3": 0,
+        "0.3-0.5": 0,
+        "0.5-0.8": 0,
+        ">=0.8": 682,
+        "missing": 0,
+        "inferred": 0,
+        "total": 682
+      },
+      "SAME_AS": {
+        "<0.3": 0,
+        "0.3-0.5": 0,
+        "0.5-0.8": 0,
+        ">=0.8": 682,
+        "missing": 0,
+        "inferred": 0,
+        "total": 682
+      },
+      "TESTS": {
+        "<0.3": 0,
+        "0.3-0.5": 63,
+        "0.5-0.8": 184,
+        ">=0.8": 2,
+        "missing": 0,
+        "inferred": 249,
+        "total": 249
+      },
+      "CONSUMES": {
+        "<0.3": 0,
+        "0.3-0.5": 115,
+        "0.5-0.8": 0,
+        ">=0.8": 0,
+        "missing": 0,
+        "inferred": 115,
+        "total": 115
+      }
+    },
+    "duplicates": [],
+    "legacy_types": [
+      "HAS_TAG",
+      "USES_TOOL",
+      "MEASURES",
+      "ALIAS_OF",
+      "BELONGS_TO",
+      "SAME_AS",
+      "TESTS",
+      "CONSUMES"
+    ],
+    "orphans": [
+      {
+        "l": "Process",
+        "c": 93
+      },
+      {
+        "l": "Role",
+        "c": 61
+      },
+      {
+        "l": "Tag",
+        "c": 59
+      },
+      {
+        "l": "TestCase",
+        "c": 24
+      },
+      {
+        "l": "Tool",
+        "c": 12
+      },
+      {
+        "l": "Material",
+        "c": 5
+      },
+      {
+        "l": "Metric",
+        "c": 4
+      },
+      {
+        "l": "Component",
+        "c": 2
+      }
+    ],
+    "top_degree": {
+      "Component": [
+        {
+          "name": "马达固定结构",
+          "cid": "CMP_6F5DD7BE",
+          "deg": 133
+        },
+        {
+          "name": "热管",
+          "cid": "CMP_F57CB994",
+          "deg": 94
+        },
+        {
+          "name": "均热板",
+          "cid": "CMP_270D084B",
+          "deg": 94
+        },
+        {
+          "name": "pogo pin连接器",
+          "cid": "CMP_E0E9BEFE",
+          "deg": 38
+        },
+        {
+          "name": "指纹传感器",
+          "cid": "CMP_41E8AACD",
+          "deg": 37
+        },
+        {
+          "name": "天线调谐开关",
+          "cid": "CMP_7FE87071",
+          "deg": 34
+        },
+        {
+          "name": "分集天线",
+          "cid": "CMP_32C6B3C6",
+          "deg": 34
+        },
+        {
+          "name": "MIMO天线系统",
+          "cid": "CMP_0FD2E562",
+          "deg": 34
+        },
+        {
+          "name": "磁珠",
+          "cid": "CMP_43A79498",
+          "deg": 34
+        },
+        {
+          "name": "射频滤波器",
+          "cid": "CMP_C41EED78",
+          "deg": 32
+        }
+      ],
+      "Symptom": [
+        {
+          "name": "凝露",
+          "cid": "SYM_FE61372A",
+          "deg": 77
+        },
+        {
+          "name": "重影现象",
+          "cid": "SYM_7BFD3502",
+          "deg": 29
+        },
+        {
+          "name": "爬行腐蚀",
+          "cid": "SYM_CCBBA1D8",
+          "deg": 26
+        },
+        {
+          "name": "点蚀",
+          "cid": "SYM_28E159E8",
+          "deg": 26
+        },
+        {
+          "name": "电偶腐蚀",
+          "cid": "SYM_029A0AD1",
+          "deg": 25
+        },
+        {
+          "name": "晶间腐蚀",
+          "cid": "SYM_A85CCA31",
+          "deg": 25
+        },
+        {
+          "name": "电化学腐蚀",
+          "cid": "SYM_6897499C",
+          "deg": 25
+        },
+        {
+          "name": "短路",
+          "cid": "SYM_25F6A156",
+          "deg": 25
+        },
+        {
+          "name": "晶振频偏",
+          "cid": "SYM_9E8E7242",
+          "deg": 23
+        },
+        {
+          "name": "烧屏",
+          "cid": "SYM_3F7B7E68",
+          "deg": 21
+        }
+      ],
+      "Tool": [
+        {
+          "name": "激光测振仪",
+          "cid": "TOL_ED5D717B",
+          "deg": 131
+        },
+        {
+          "name": "高低温循环试验箱",
+          "cid": "TOL_FEFE7392",
+          "deg": 128
+        },
+        {
+          "name": "恒温恒湿试验箱",
+          "cid": "TOL_2F4BFD45",
+          "deg": 128
+        },
+        {
+          "name": "振动控制器",
+          "cid": "TOL_0C7E70A7",
+          "deg": 127
+        },
+        {
+          "name": "泄漏测试仪",
+          "cid": "TOL_D9199B34",
+          "deg": 127
+        },
+        {
+          "name": "红外热像仪",
+          "cid": "TOL_A0173710",
+          "deg": 84
+        },
+        {
+          "name": "热阻测试仪",
+          "cid": "TOL_C320CD21",
+          "deg": 82
+        },
+        {
+          "name": "红外热成像仪",
+          "cid": "TOL_4EA47638",
+          "deg": 82
+        },
+        {
+          "name": "热重分析仪",
+          "cid": "TOL_CAC35F5A",
+          "deg": 79
+        },
+        {
+          "name": "离子色谱仪",
+          "cid": "TOL_E753D6C3",
+          "deg": 79
+        }
+      ],
+      "Process": [
+        {
+          "name": "根因分析",
+          "cid": "PRC_B5E9FEE3",
+          "deg": 64
+        },
+        {
+          "name": "失效分析",
+          "cid": "PRC_5B29CA3E",
+          "deg": 64
+        },
+        {
+          "name": "射频校准",
+          "cid": "PRC_54F0D856",
+          "deg": 34
+        },
+        {
+          "name": "标定",
+          "cid": "PRC_B8E2AAC0",
+          "deg": 28
+        },
+        {
+          "name": "音频调试",
+          "cid": "PRC_65BE3348",
+          "deg": 28
+        },
+        {
+          "name": "伽马校正",
+          "cid": "PRC_8A31D3A2",
+          "deg": 26
+        },
+        {
+          "name": "传感器校准",
+          "cid": "PRC_51702099",
+          "deg": 26
+        },
+        {
+          "name": "PVT",
+          "cid": "PRC_BFEDD457",
+          "deg": 21
+        },
+        {
+          "name": "气动压合",
+          "cid": "PRC_3EBCEB80",
+          "deg": 20
+        },
+        {
+          "name": "火花纹",
+          "cid": "PRC_A7329128",
+          "deg": 17
+        }
+      ],
+      "TestCase": [
+        {
+          "name": "高加速寿命测试",
+          "cid": "TST_5C331853",
+          "deg": 176
+        },
+        {
+          "name": "盐雾测试",
+          "cid": "TST_D8FDA59C",
+          "deg": 160
+        },
+        {
+          "name": "谐波电流发射",
+          "cid": "TST_CBDDF0D6",
+          "deg": 157
+        },
+        {
+          "name": "静电放电抗扰度",
+          "cid": "TST_CD23508D",
+          "deg": 157
+        },
+        {
+          "name": "浪涌抗扰度",
+          "cid": "TST_43A6CCC2",
+          "deg": 157
+        },
+        {
+          "name": "连接器保持力测试",
+          "cid": "TST_AA088E9F",
+          "deg": 142
+        },
+        {
+          "name": "高温存储测试",
+          "cid": "TST_8D5CF889",
+          "deg": 142
+        },
+        {
+          "name": "连接器插拔寿命测试",
+          "cid": "TST_B5E694BA",
+          "deg": 142
+        },
+        {
+          "name": "插拔力测试",
+          "cid": "TST_8D252D37",
+          "deg": 142
+        },
+        {
+          "name": "电容纹波电流测试",
+          "cid": "TST_36546CC3",
+          "deg": 142
+        }
+      ],
+      "Material": [
+        {
+          "name": "防水胶",
+          "cid": "MAT_A088C35B",
+          "deg": 33
+        },
+        {
+          "name": "聚醚醚酮",
+          "cid": "MAT_EBE35BC2",
+          "deg": 33
+        },
+        {
+          "name": "聚氨酯密封胶",
+          "cid": "MAT_E4E8A0DD",
+          "deg": 33
+        },
+        {
+          "name": "热塑性聚氨酯",
+          "cid": "MAT_75DBAF04",
+          "deg": 33
+        },
+        {
+          "name": "环氧模塑料",
+          "cid": "MAT_41402014",
+          "deg": 19
+        },
+        {
+          "name": "塑封体",
+          "cid": "MAT_AAAF2DAB",
+          "deg": 19
+        },
+        {
+          "name": "模内装饰薄膜",
+          "cid": "MAT_80665BCF",
+          "deg": 15
+        },
+        {
+          "name": "玻璃纤维布",
+          "cid": "MAT_6160D0EE",
+          "deg": 13
+        },
+        {
+          "name": "阳极氧化层",
+          "cid": "MAT_ED6A6479",
+          "deg": 11
+        },
+        {
+          "name": "PVD镀膜",
+          "cid": "MAT_A224F354",
+          "deg": 11
+        }
+      ],
+      "Role": [
+        {
+          "name": "Vendor",
+          "cid": "ROL_4941F849",
+          "deg": 1
+        },
+        {
+          "name": "DQA",
+          "cid": "ROL_2CBB7C40",
+          "deg": 1
+        },
+        {
+          "name": "客诉",
+          "cid": "ROL_D82DD404",
+          "deg": 0
+        },
+        {
+          "name": "资材",
+          "cid": "ROL_89AF8AF4",
+          "deg": 0
+        },
+        {
+          "name": "产品数据管理工程师",
+          "cid": "ROL_46CADFA1",
+          "deg": 0
+        },
+        {
+          "name": "项目质量经理",
+          "cid": "ROL_612AEA56",
+          "deg": 0
+        },
+        {
+          "name": "客户质量工程师",
+          "cid": "ROL_C5FEFF39",
+          "deg": 0
+        },
+        {
+          "name": "环境健康安全工程师",
+          "cid": "ROL_256ACE7C",
+          "deg": 0
+        },
+        {
+          "name": "生产质量工程师",
+          "cid": "ROL_63F07D5D",
+          "deg": 0
+        },
+        {
+          "name": "模厂",
+          "cid": "ROL_B3AA9E89",
+          "deg": 0
+        }
+      ],
+      "Metric": [
+        {
+          "name": "热插拔次数",
+          "cid": "MET_4013296D",
+          "deg": 188
+        },
+        {
+          "name": "水接触角",
+          "cid": "MET_C8F7E157",
+          "deg": 159
+        },
+        {
+          "name": "离子清洁度",
+          "cid": "MET_E545EA55",
+          "deg": 144
+        },
+        {
+          "name": "离子污染度",
+          "cid": "MET_4B1B20EE",
+          "deg": 141
+        },
+        {
+          "name": "时长",
+          "cid": "MET_2835E29B",
+          "deg": 135
+        },
+        {
+          "name": "热循环寿命",
+          "cid": "MET_9192BDDD",
+          "deg": 133
+        },
+        {
+          "name": "总谐波失真",
+          "cid": "MET_510E5005",
+          "deg": 94
+        },
+        {
+          "name": "机械疲劳寿命",
+          "cid": "MET_5B4A56FD",
+          "deg": 93
+        },
+        {
+          "name": "天线效率",
+          "cid": "MET_2E607D40",
+          "deg": 72
+        },
+        {
+          "name": "焊点IMC",
+          "cid": "MET_727997A9",
+          "deg": 70
+        }
+      ]
+    },
+    "rel_property_coverage": [
+      {
+        "t": "HAS_TAG",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 1774
+      },
+      {
+        "t": "BELONGS_TO",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 682
+      },
+      {
+        "t": "ALIAS_OF",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 980
+      },
+      {
+        "t": "SAME_AS",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 682
+      },
+      {
+        "t": "HAS_SYMPTOM",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 764
+      },
+      {
+        "t": "RELATED_TO",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 2371
+      },
+      {
+        "t": "CONSUMES",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 115
+      },
+      {
+        "t": "USES",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 1656
+      },
+      {
+        "t": "USES_TOOL",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 1541
+      },
+      {
+        "t": "TESTS",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 249
+      },
+      {
+        "t": "DETECTED_BY",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 1366
+      },
+      {
+        "t": "MEASURES",
+        "rule_id": 0,
+        "source_doc": 0,
+        "page": 0,
+        "span": 0,
+        "total": 1366
+      }
+    ]
+  },
+  "dictionary": {
+    "exists": true,
+    "total": 1275,
+    "duplicates": [],
+    "missing_definitions": 0,
+    "bad_categories": {},
+    "bad_status_count": 0
+  },
+  "mappings_rules": {
+    "mapping_rel_types": [
+      "BELONGS_TO",
+      "HAS_ALIAS",
+      "HAS_BUILD",
+      "HAS_ROOTCAUSE",
+      "HAS_SYMPTOM",
+      "HAS_TAG",
+      "IN_CATEGORY",
+      "IN_MODULE",
+      "OBSERVED_IN",
+      "OWNED_BY",
+      "RESOLVED_BY",
+      "SAME_AS",
+      "SUPPLIED_BY"
+    ],
+    "found_files": [
+      "api\\etl\\mapping.yaml",
+      "api\\mappings\\mapping_excel_comprehensive.yaml",
+      "api\\mappings\\mapping_excel_default.yaml",
+      "api\\mappings\\mapping_excel_optimized.yaml",
+      "config\\data_governance_real.json",
+      "config\\extraction_config_anomalies.json",
+      "config\\frontend_real_data.json",
+      "config\\frontend_test_data.json",
+      "config\\graph_visualization_data.json",
+      "config\\system_management_config.json",
+      "config\\system_status_report_20250924_095252.json",
+      "config\\system_status_report_20250924_100908.json",
+      "config\\system_status_report_20250925_040830.json",
+      "config\\system_status_report_20250928_010053.json"
+    ],
+    "non_target_rel_types": [
+      "BELONGS_TO",
+      "HAS_ALIAS",
+      "HAS_BUILD",
+      "HAS_ROOTCAUSE",
+      "HAS_TAG",
+      "IN_CATEGORY",
+      "IN_MODULE",
+      "OBSERVED_IN",
+      "OWNED_BY",
+      "RESOLVED_BY",
+      "SAME_AS",
+      "SUPPLIED_BY"
+    ]
+  }
+}

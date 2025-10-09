@@ -1,0 +1,9 @@
+术语,别名,类别,多标签,备注
+IPQC,过程检验;In-Process Quality Control,流程相关,质量体系;制造工艺,生产过程中的质量检验，及时发现和纠正问题
+FQC,最终检验;Final Quality Control,流程相关,质量体系;制造工艺,成品出货前的质量检验，确保产品符合规格
+OQC,出货检验;Outgoing Quality Control,流程相关,质量体系;制造工艺,产品出货时的质量检验，最后一道质量关卡
+首件检验,First Article Inspection;FAI,流程相关,质量体系;制造工艺,生产开始时对首件产品的全面检验
+巡检,Patrol Inspection,流程相关,质量体系;制造工艺,定时巡查生产线，检查过程质量
+终检,Final Inspection,流程相关,质量体系;制造工艺,产品包装前的最终检验
+抽检,Sampling Inspection,流程相关,质量体系;制造工艺,按一定比例抽取样品进行检验
+全检,100% Inspection,流程相关,质量体系;制造工艺,对所有产品进行检验，用于关键工序或高风险产品

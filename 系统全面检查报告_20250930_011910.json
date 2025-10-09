@@ -1,0 +1,79 @@
+{
+  "检查时间": "2025-09-30 01:19:00",
+  "项目结构": {
+    "root_files": [
+      ".env",
+      ".env.example",
+      ".gitignore",
+      "docker-compose.prod.yml",
+      "docker-compose.yml",
+      "Dockerfile.api",
+      "LICENSE",
+      "query",
+      "README.md",
+      "全面重启所有服务.py",
+      "完整部署优化方案.md",
+      "当前系统全面检查.py",
+      "彻底清理完成总结.md",
+      "服务状态检查.py",
+      "部署脚本.sh"
+    ],
+    "root_dirs": [
+      "api",
+      "apps",
+      "cleanup_backup_20250930_005042",
+      "config",
+      "data",
+      "docs",
+      "exports",
+      "final_cleanup_backup_20250930_005709",
+      "graph",
+      "nginx",
+      "ontology",
+      "ops",
+      "reports",
+      "scripts",
+      "services",
+      "tests",
+      "test_files",
+      "thorough_cleanup_backup_20250930_010348",
+      "tools"
+    ]
+  },
+  "API服务": {
+    "api_files": 33
+  },
+  "前端服务": {
+    "frontend_exists": true
+  },
+  "数据库服务": {
+    "neo4j_connected": true,
+    "total_nodes": 4432,
+    "total_relations": 17412
+  },
+  "配置文件": {
+    "docker-compose.yml": true,
+    "docker-compose.prod.yml": true,
+    "Dockerfile.api": true,
+    "config/frontend_real_data.json": true,
+    "config/graph_visualization_data.json": true
+  },
+  "数据完整性": {
+    "data": 105,
+    "ontology": 10,
+    "exports": 1
+  },
+  "部署就绪": {
+    "readiness_score": 7,
+    "readiness_percentage": 100.0
+  },
+  "系统设计": {
+    "架构模式": "微服务架构 (API + Frontend + Database)",
+    "前端技术": "Vue.js + Vite",
+    "后端技术": "FastAPI + Python",
+    "数据库": "Neo4j图数据库",
+    "容器化": "Docker + Docker Compose",
+    "反向代理": "Nginx",
+    "部署方式": "容器化部署"
+  }
+}

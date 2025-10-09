@@ -203,6 +203,7 @@
     ],
     "category": "Component",
     "tags": [
+      "通信相关",
       "功能",
       "性能指标"
     ],
@@ -254,8 +255,9 @@
     ],
     "category": "Component",
     "tags": [
+      "部件",
       "外观",
-      "部件"
+      "结构相关"
     ],
     "description": "手机的骨架结构，用于固定内部元件，变形或腐蚀会影响整机强度和气密性。",
     "sub_category": "",
@@ -6838,7 +6840,8 @@
     ],
     "category": "Symptom",
     "tags": [
-      "显示相关"
+      "显示相关",
+      "异常现象"
     ],
     "description": "LCD显示屏上出现的异常亮斑，与液晶分子排列异常有关。",
     "sub_category": "",
@@ -7044,7 +7047,8 @@
     ],
     "category": "Symptom",
     "tags": [
-      "显示相关"
+      "显示相关",
+      "异常现象"
     ],
     "description": "OLED屏幕局部出现的黄色斑块，可能与封装或材料老化有关。",
     "sub_category": "",
@@ -7417,7 +7421,8 @@
     ],
     "category": "Symptom",
     "tags": [
-      "显示相关"
+      "显示相关",
+      "异常现象"
     ],
     "description": "显示屏上常亮的像素点或区域，属于显示缺陷。",
     "sub_category": "",
@@ -7433,7 +7438,8 @@
     ],
     "category": "Symptom",
     "tags": [
-      "显示相关"
+      "显示相关",
+      "异常现象"
     ],
     "description": "显示屏上出现的异常亮线，通常与驱动线路或屏幕本身损伤有关。",
     "sub_category": "",
@@ -7978,7 +7984,8 @@
     ],
     "category": "Symptom",
     "tags": [
-      "软件相关"
+      "软件相关",
+      "异常现象"
     ],
     "description": "应用程序在运行过程中突然关闭并返回主界面。",
     "sub_category": "",
@@ -8011,7 +8018,8 @@
     ],
     "category": "Symptom",
     "tags": [
-      "可靠性"
+      "可靠性",
+      "异常现象"
     ],
     "description": "产品失去规定功能的状态。",
     "sub_category": "",
@@ -8061,7 +8069,8 @@
     ],
     "category": "Symptom",
     "tags": [
-      "影像相关"
+      "影像相关",
+      "异常现象"
     ],
     "description": "当两个周期性图案（如感光元件像素和景物纹理）重叠时产生的干扰条纹。",
     "sub_category": "",
@@ -8093,7 +8102,8 @@
     ],
     "category": "Symptom",
     "tags": [
-      "影像相关"
+      "影像相关",
+      "异常现象"
     ],
     "description": "图像中出现的随机颗粒状干扰，在低光照下尤为明显。",
     "sub_category": "",
@@ -8126,7 +8136,8 @@
     ],
     "category": "Symptom",
     "tags": [
-      "软件相关"
+      "软件相关",
+      "异常现象"
     ],
     "description": "系统行为异常，功能紊乱，但尚未死机或重启，通常需重启恢复。",
     "sub_category": "",
@@ -8222,21 +8233,26 @@
   {
     "term": "虚焊",
     "aliases": [
+      "Cold Solder",
       "Cold Solder Joint",
       "假焊",
-      "Cold Solder"
+      "冷焊"
     ],
     "category": "Symptom",
     "tags": [
       "SMT",
+      "制造工艺",
+      "可靠性",
       "异常现象",
-      "制造工艺"
+      "焊接质量"
     ],
     "description": "**定义**: 焊点不牢固。 **判定口径**: X-Ray 显示空洞 >20%。 **常见场景**: PCBA生产。 **排查路径**: 检查焊膏→回流工艺。 **对策**: 增强锡膏管理，优化工艺窗口。",
     "sub_category": "",
-    "source": "manual_append_detailed",
-    "status": "",
-    "original_category": "Symptom"
+    "source": "dictionary",
+    "status": "active",
+    "original_category": "Symptom",
+    "name": "虚焊",
+    "updated_at": "2025-09-28T15:00:42"
   },
   {
     "term": "噪音",
@@ -8429,7 +8445,11 @@
   },
   {
     "term": "彩虹纹",
-    "aliases": [],
+    "aliases": [
+      "Newton Ring",
+      "牛顿环",
+      "彩虹效应"
+    ],
     "category": "Symptom",
     "tags": [
       "显示相关",
@@ -11625,6 +11645,7 @@
     ],
     "category": "TestCase",
     "tags": [
+      "测试验证",
       "可靠性"
     ],
     "description": "将手机置于高低温、湿热、振动等模拟环境中，验证其适应能力。",
@@ -11779,6 +11800,7 @@
     ],
     "category": "Process",
     "tags": [
+      "制造工艺",
       "工艺参数"
     ],
     "description": "点胶机每次挤出的胶水体积，是影响粘接效果的关键参数。",
@@ -12033,6 +12055,7 @@
     ],
     "category": "TestCase",
     "tags": [
+      "测试验证",
       "可靠性"
     ],
     "description": "使产品在模拟的或强化的使用条件下运行一段时间，以稳定其性能或筛选缺陷。",
@@ -12390,6 +12413,7 @@
     ],
     "category": "TestCase",
     "tags": [
+      "测试验证",
       "可靠性"
     ],
     "description": "针对恶劣环境（湿热、霉菌、盐雾）的防护性设计和测试。",
@@ -12508,7 +12532,8 @@
     ],
     "category": "Material",
     "tags": [
-      "物料"
+      "物料",
+      "供应链"
     ],
     "description": "用于生产产品的基本材料，如塑胶粒、金属板材、化学药水等。",
     "sub_category": "",
@@ -12659,6 +12684,7 @@
     ],
     "category": "TestCase",
     "tags": [
+      "测试验证",
       "可靠性"
     ],
     "description": "重复性测试的次数，如按键测试XX万次。",
@@ -12726,7 +12752,8 @@
     ],
     "category": "Material",
     "tags": [
-      "物料"
+      "物料",
+      "供应链"
     ],
     "description": "构成一个成品或半成品所需的多种物料中的一种。",
     "sub_category": "",
@@ -16774,19 +16801,24 @@
   {
     "term": "按键寿命测试",
     "aliases": [
-      "Key Life Test"
+      "Key Life Test",
+      "按键耐久性"
     ],
     "category": "TestCase",
     "tags": [
-      "测试验证",
+      "人机交互",
       "可靠性",
-      "结构相关"
+      "测试验证",
+      "结构相关",
+      "耐久性"
     ],
     "description": "模拟用户长时间使用测试侧键的按压寿命",
     "sub_category": "",
-    "source": "hardware_module_expansion",
-    "status": "",
-    "original_category": "TestCase"
+    "source": "dictionary",
+    "status": "active",
+    "original_category": "TestCase",
+    "name": "按键寿命测试",
+    "updated_at": "2025-09-28T14:54:44"
   },
   {
     "term": "连接器插拔力测试",
@@ -19132,5 +19164,4043 @@
     "source": "hardware_module_expansion",
     "status": "",
     "original_category": "Role"
+  },
+  {
+    "term": "恒温恒湿试验",
+    "name": "恒温恒湿试验",
+    "category": "TestCase",
+    "definition": "在50℃/95%RH环境下验证产品可靠性，智能机240h，量产例行/ECN测试96h，功能机96h。样机需连接充电器充电状态测试，智能机120h中间检查。判定标准：外观无掉漆裂纹残胶，结构无变形开胶断裂TP/电池盖无脱胶，功能正常屏无重影，功耗对比待机≤2mA通话≤10%",
+    "description": "在50℃/95%RH环境下验证产品可靠性，智能机240h，量产例行/ECN测试96h，功能机96h。样机需连接充电器充电状态测试，智能机120h中间检查。判定标准：外观无掉漆裂纹残胶，结构无变形开胶断裂TP/电池盖无脱胶，功能正常屏无重影，功耗对比待机≤2mA通话≤10%",
+    "aliases": [
+      "高温高湿试验",
+      "Constant Temperature and Humidity Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "环境应力",
+      "质量体系"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "温度变化试验",
+    "name": "温度变化试验",
+    "category": "TestCase",
+    "definition": "参考GB/T 2423.4-2008标准，从25℃开始20min内升至70℃，15min内湿度从60%升至90%，保持60min后降湿降温至-20℃保持60min，再升温至25℃为1个循环，连续12个循环。验证高湿度和温度循环变化组合环境下的可靠性",
+    "description": "参考GB/T 2423.4-2008标准，从25℃开始20min内升至70℃，15min内湿度从60%升至90%，保持60min后降湿降温至-20℃保持60min，再升温至25℃为1个循环，连续12个循环。验证高湿度和温度循环变化组合环境下的可靠性",
+    "aliases": [
+      "交变湿热试验",
+      "Thermal Cycling Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "环境应力",
+      "材料特性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "温度冲击试验",
+    "name": "温度冲击试验",
+    "category": "TestCase",
+    "definition": "样机开机待机状态电量90%以上插满卡，70℃保持1h→5min内降至-40℃保持1h→5min内升至70℃为1个循环，连续24个循环。验证短时间内极端温度变化后的可靠性，无中间检查，常温恢复2h后检查",
+    "description": "样机开机待机状态电量90%以上插满卡，70℃保持1h→5min内降至-40℃保持1h→5min内升至70℃为1个循环，连续24个循环。验证短时间内极端温度变化后的可靠性，无中间检查，常温恢复2h后检查",
+    "aliases": [
+      "冷热冲击",
+      "Thermal Shock Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "环境应力",
+      "材料特性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "高温高湿老化试验",
+    "name": "高温高湿老化试验",
+    "category": "TestCase",
+    "definition": "原湿热跑机试验与CAF老化试验合并，60℃/90%RH环境，样机电量30%以上，时长120h/240h/480h依需求而定。每天定时检查老化运行状态，每24h巡检确认无屏高温重影、卡屏、花屏、工模运行中断。480h试验结果供参考",
+    "description": "原湿热跑机试验与CAF老化试验合并，60℃/90%RH环境，样机电量30%以上，时长120h/240h/480h依需求而定。每天定时检查老化运行状态，每24h巡检确认无屏高温重影、卡屏、花屏、工模运行中断。480h试验结果供参考",
+    "aliases": [
+      "CAF老化试验",
+      "湿热跑机试验",
+      "High Temperature High Humidity Aging"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "环境应力",
+      "长期稳定性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "高温存储试验",
+    "name": "高温存储试验",
+    "category": "TestCase",
+    "definition": "70℃高温阶段，智能机72h功能机48h，样机关机状态电量90%以上插满卡。验证持续高温环境下存储的可靠性，判定标准同恒温恒湿试验",
+    "description": "70℃高温阶段，智能机72h功能机48h，样机关机状态电量90%以上插满卡。验证持续高温环境下存储的可靠性，判定标准同恒温恒湿试验",
+    "aliases": [
+      "高温储存",
+      "High Temperature Storage"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "环境应力",
+      "储存条件"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "低温存储试验",
+    "name": "低温存储试验",
+    "category": "TestCase",
+    "definition": "常温→30℃保持20min→70min内1℃/min降至-40℃保持20h40min→70min内升至30℃保持30min为1个循环，智能机3个循环功能机2个循环。样机关机状态新电池电量90%以上，只能在30℃常温阶段开箱存放样机",
+    "description": "常温→30℃保持20min→70min内1℃/min降至-40℃保持20h40min→70min内升至30℃保持30min为1个循环，智能机3个循环功能机2个循环。样机关机状态新电池电量90%以上，只能在30℃常温阶段开箱存放样机",
+    "aliases": [
+      "低温储存",
+      "Low Temperature Storage"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "环境应力",
+      "储存条件"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "高温操作试验",
+    "name": "高温操作试验",
+    "category": "TestCase",
+    "definition": "开机状态电量100%，亮度音量最大，50±2℃/80%RH环境放置120min。进行通话30min、发短信10条、前后摄拍照各10张、录像1min、播放mp3/mp4、FM播放10min、运行APK5个、开启关闭蓝牙WIFI上网5min等用户操作，每个模式完成后重启1次",
+    "description": "开机状态电量100%，亮度音量最大，50±2℃/80%RH环境放置120min。进行通话30min、发短信10条、前后摄拍照各10张、录像1min、播放mp3/mp4、FM播放10min、运行APK5个、开启关闭蓝牙WIFI上网5min等用户操作，每个模式完成后重启1次",
+    "aliases": [
+      "高温使用测试",
+      "High Temperature Operation"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "环境应力",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "低温操作试验",
+    "name": "低温操作试验",
+    "category": "TestCase",
+    "definition": "开机状态电量100%设置最大，-10±2℃环境放置120min，戴胶皮手套操作。操作内容同高温操作，检查所有模式操作功能正常、LCD显示CTP触摸正常，每个模式重启后电量对比≤10%",
+    "description": "开机状态电量100%设置最大，-10±2℃环境放置120min，戴胶皮手套操作。操作内容同高温操作，检查所有模式操作功能正常、LCD显示CTP触摸正常，每个模式重启后电量对比≤10%",
+    "aliases": [
+      "低温使用测试",
+      "Low Temperature Operation"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "环境应力",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "待机48H功能检测",
+    "name": "待机48H功能检测",
+    "category": "TestCase",
+    "definition": "俄罗斯专项测试，待机状态样机电量100%（95%-100%）插满卡，-15℃环境48h。验证低温环境下电量消耗可靠性，试验中不能关机功能正常，试验前后电量差异≤50%",
+    "description": "俄罗斯专项测试，待机状态样机电量100%（95%-100%）插满卡，-15℃环境48h。验证低温环境下电量消耗可靠性，试验中不能关机功能正常，试验前后电量差异≤50%",
+    "aliases": [
+      "低温待机测试",
+      "48H Standby Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "环境应力",
+      "俄罗斯专项"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "彩盒试验",
+    "name": "彩盒试验",
+    "category": "TestCase",
+    "definition": "出货状态完整包装，随机振动（5-20Hz频率3h）→高温存储（55℃48h）→1m跌落（1角3棱6面各1次）。itel项目不做此试验。验证彩盒包装及机台在储存运输下的可靠性",
+    "description": "出货状态完整包装，随机振动（5-20Hz频率3h）→高温存储（55℃48h）→1m跌落（1角3棱6面各1次）。itel项目不做此试验。验证彩盒包装及机台在储存运输下的可靠性",
+    "aliases": [
+      "包装运输测试",
+      "Package Transport Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "包装设计",
+      "运输应力"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "空气ESD试验",
+    "name": "空气ESD试验",
+    "category": "TestCase",
+    "definition": "参考GB/T 17626.2-2018标准，20-25℃/40-45%RH环境。智能机新品±12kv量产±10kv，功能机±8kv，V系列功能机±6kv智能机±10kv。10次放电间隔1秒，样机充电状态下测试通话MP4 FM拍照，连接耳机测试通话MP4 FM",
+    "description": "参考GB/T 17626.2-2018标准，20-25℃/40-45%RH环境。智能机新品±12kv量产±10kv，功能机±8kv，V系列功能机±6kv智能机±10kv。10次放电间隔1秒，样机充电状态下测试通话MP4 FM拍照，连接耳机测试通话MP4 FM",
+    "aliases": [
+      "空气静电放电",
+      "Air Discharge ESD"
+    ],
+    "tags": [
+      "ESD",
+      "可靠性",
+      "测试验证",
+      "电气性能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "接触ESD试验",
+    "name": "接触ESD试验",
+    "category": "TestCase",
+    "definition": "同样参考GB/T 17626.2-2018标准，智能机±8kv功能机±4kv V系列智能机±6kv。样机充电状态测试待机通话MP4 FM。判定标准：功能完全正常或瞬时受影响3s内自行恢复为合格，需人工重置重开机或无法恢复为不合格",
+    "description": "同样参考GB/T 17626.2-2018标准，智能机±8kv功能机±4kv V系列智能机±6kv。样机充电状态测试待机通话MP4 FM。判定标准：功能完全正常或瞬时受影响3s内自行恢复为合格，需人工重置重开机或无法恢复为不合格",
+    "aliases": [
+      "接触静电放电",
+      "Contact Discharge ESD"
+    ],
+    "tags": [
+      "ESD",
+      "可靠性",
+      "测试验证",
+      "电气性能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "PCBA ESD试验",
+    "name": "PCBA ESD试验",
+    "category": "TestCase",
+    "definition": "25±5℃/45±15%RH环境，接触放电智能机±8kv功能机±6kv。测试点包括PCB最大面积漏铜区、USB铁壳、耳机座GND、SIM卡座壳、T卡座壳、所有屏蔽罩。每个测试点10次后在屏蔽盖位置放电线放电1次",
+    "description": "25±5℃/45±15%RH环境，接触放电智能机±8kv功能机±6kv。测试点包括PCB最大面积漏铜区、USB铁壳、耳机座GND、SIM卡座壳、T卡座壳、所有屏蔽罩。每个测试点10次后在屏蔽盖位置放电线放电1次",
+    "aliases": [
+      "主板静电测试",
+      "PCB ESD Test"
+    ],
+    "tags": [
+      "ESD",
+      "可靠性",
+      "测试验证",
+      "制造工艺"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "V浪涌电池端试验",
+    "name": "V浪涌电池端试验",
+    "category": "TestCase",
+    "definition": "浪涌发生器正负极与电池连接器对应连接，样机关机状态。功能机正压≥150V负压≤-50V，智能机可拆卸电池正压≥300V负压≤-90V，不可拆卸电池正压≥200V负压≤-60V。浪涌间隔10s测试10次，检查无漏电充电异常",
+    "description": "浪涌发生器正负极与电池连接器对应连接，样机关机状态。功能机正压≥150V负压≤-50V，智能机可拆卸电池正压≥300V负压≤-90V，不可拆卸电池正压≥200V负压≤-60V。浪涌间隔10s测试10次，检查无漏电充电异常",
+    "aliases": [
+      "电池端浪涌冲击",
+      "Battery Terminal Surge"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "电气性能",
+      "保护功能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "V浪涌充电端试验",
+    "name": "V浪涌充电端试验",
+    "category": "TestCase",
+    "definition": "开机状态电池<50%，浪涌发生器连接程控电源和数据线，快充方案需诱骗至快充状态。功能机智能机正压≥300V负压≤-90V，浪涌间隔10s测试10次，检查无漏电自动关机重启充电异常",
+    "description": "开机状态电池<50%，浪涌发生器连接程控电源和数据线，快充方案需诱骗至快充状态。功能机智能机正压≥300V负压≤-90V，浪涌间隔10s测试10次，检查无漏电自动关机重启充电异常",
+    "aliases": [
+      "充电端浪涌冲击",
+      "Charging Terminal Surge"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "电气性能",
+      "保护功能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "D浪涌DP/DM试验",
+    "name": "D浪涌DP/DM试验",
+    "category": "TestCase",
+    "definition": "开机状态，剥线数据线连接浪涌发生器，正极接DP/DM端负极接GND。其他市场正压≥20V负压≤-10V，印度市场正压≥25V负压≤-10V。检查无漏电自动关机重启充电异常无法读取U盘",
+    "description": "开机状态，剥线数据线连接浪涌发生器，正极接DP/DM端负极接GND。其他市场正压≥20V负压≤-10V，印度市场正压≥25V负压≤-10V。检查无漏电自动关机重启充电异常无法读取U盘",
+    "aliases": [
+      "数据端浪涌冲击",
+      "Data Terminal Surge"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "电气性能",
+      "保护功能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:35:33",
+    "updated_at": "2025-09-28T14:35:33"
+  },
+  {
+    "term": "24h盐雾试验",
+    "name": "24h盐雾试验",
+    "category": "TestCase",
+    "definition": "NaCl浓度5±1% pH值6.5-7.2，35±2℃，沉降量1.0-2.0ml/h。整机满电关机24h（功能机8h），常温放置1h后检查外观结构，自然风干48h后检查屏外观功能。验证金属部件表面涂层抗盐雾腐蚀能力及整机密封性",
+    "description": "NaCl浓度5±1% pH值6.5-7.2，35±2℃，沉降量1.0-2.0ml/h。整机满电关机24h（功能机8h），常温放置1h后检查外观结构，自然风干48h后检查屏外观功能。验证金属部件表面涂层抗盐雾腐蚀能力及整机密封性",
+    "aliases": [
+      "短期盐雾腐蚀",
+      "24H Salt Spray Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "防护性能",
+      "材料特性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "48h盐雾试验",
+    "name": "48h盐雾试验",
+    "category": "TestCase",
+    "definition": "验证TP OCA胶扭曲后的密封性，条件同24h盐雾但时间48h。Incell屏不做，Oncell屏才做。检查TP外观功能有无异常，其他问题不做判定",
+    "description": "验证TP OCA胶扭曲后的密封性，条件同24h盐雾但时间48h。Incell屏不做，Oncell屏才做。检查TP外观功能有无异常，其他问题不做判定",
+    "aliases": [
+      "长期盐雾腐蚀",
+      "48H Salt Spray Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "防护性能",
+      "密封性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "粉尘试验",
+    "name": "粉尘试验",
+    "category": "TestCase",
+    "definition": "关机带电池状态装满卡电量30%以上，去除可开合口塞和保护膜。2.4±0.2kg强生婴儿爽身粉中，6面从0.6m高度跌落2轮（itel功能机/PAD 0.3m，量产例行0.3m 1轮）。重点检查护镜TP无粉尘进入，光距感功能正常",
+    "description": "关机带电池状态装满卡电量30%以上，去除可开合口塞和保护膜。2.4±0.2kg强生婴儿爽身粉中，6面从0.6m高度跌落2轮（itel功能机/PAD 0.3m，量产例行0.3m 1轮）。重点检查护镜TP无粉尘进入，光距感功能正常",
+    "aliases": [
+      "防尘测试",
+      "Dust Resistance Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "防护性能",
+      "密封性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "15°/75°淋雨试验",
+    "name": "15°/75°淋雨试验",
+    "category": "TestCase",
+    "definition": "偏心距10cm，水箱距离20cm高度，水流量3-3.5mm/min，转盘1r/min，测试前电量≥90%。15°为常规项目，75°为参考项（东南亚市场必过项）。检查功能正常LCD/CAM视窗无进水主板器件弹片馈点无腐蚀发霉",
+    "description": "偏心距10cm，水箱距离20cm高度，水流量3-3.5mm/min，转盘1r/min，测试前电量≥90%。15°为常规项目，75°为参考项（东南亚市场必过项）。检查功能正常LCD/CAM视窗无进水主板器件弹片馈点无腐蚀发霉",
+    "aliases": [
+      "倾斜淋雨测试",
+      "Inclined Rain Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "防护性能",
+      "密封性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "IPX3防水试验",
+    "name": "IPX3防水试验",
+    "category": "TestCase",
+    "definition": "摆管±60°摆动60°/秒，喷嘴距离≤20cm，单嘴0.07±0.005L/min，8个喷嘴。水平竖直方向各5min，2台正面2台反面，电量90%以上。验证IPX3防水性能",
+    "description": "摆管±60°摆动60°/秒，喷嘴距离≤20cm，单嘴0.07±0.005L/min，8个喷嘴。水平竖直方向各5min，2台正面2台反面，电量90%以上。验证IPX3防水性能",
+    "aliases": [
+      "防淋水测试",
+      "IPX3 Water Resistance"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "防护性能",
+      "密封性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "IPX4防水试验",
+    "name": "IPX4防水试验",
+    "category": "TestCase",
+    "definition": "摆管±90°摆动，12个喷嘴，其余同IPX3。更高等级的防水测试，验证全方位溅水防护能力",
+    "description": "摆管±90°摆动，12个喷嘴，其余同IPX3。更高等级的防水测试，验证全方位溅水防护能力",
+    "aliases": [
+      "防溅水测试",
+      "IPX4 Water Resistance"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "防护性能",
+      "密封性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "耐手汗试验",
+    "name": "耐手汗试验",
+    "category": "TestCase",
+    "definition": "22×22cm无尘布均匀洒20ml汗液（pH 4.0±0.2），包裹样机装密封袋，50℃/95%RH环境48h。验证外壳耐腐蚀性和密封性，检查功能正常外观无腐蚀，拆机检查电子器件不能进液腐蚀",
+    "description": "22×22cm无尘布均匀洒20ml汗液（pH 4.0±0.2），包裹样机装密封袋，50℃/95%RH环境48h。验证外壳耐腐蚀性和密封性，检查功能正常外观无腐蚀，拆机检查电子器件不能进液腐蚀",
+    "aliases": [
+      "汗液腐蚀测试",
+      "Sweat Resistance Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "防护性能",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "红墨水侵入三合一试验",
+    "name": "红墨水侵入三合一试验",
+    "category": "TestCase",
+    "definition": "整机状态或三合一组件，用滴管将steel red红墨水在触摸屏与前壳缝隙或听筒孔位置涂抹两周，水平放置1h拆机检查。面壳内部不能有红墨水浸入，前摄光距感位置不能进红墨水，浸入深度不超过银浆线到film边缘1/3距离",
+    "description": "整机状态或三合一组件，用滴管将steel red红墨水在触摸屏与前壳缝隙或听筒孔位置涂抹两周，水平放置1h拆机检查。面壳内部不能有红墨水浸入，前摄光距感位置不能进红墨水，浸入深度不超过银浆线到film边缘1/3距离",
+    "aliases": [
+      "TP密封性检测",
+      "Red Ink Intrusion Test for 3-in-1"
+    ],
+    "tags": [
+      "密封性",
+      "防护性能",
+      "质量控制",
+      "设计验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "红墨水侵入后摄试验",
+    "name": "红墨水侵入后摄试验",
+    "category": "TestCase",
+    "definition": "整机状态，用棉签将steel red红墨水在后摄镜片装饰件间隙涂抹两周，水平放置1h拆机检查。红墨水不能穿过胶粘区（后主副摄护镜镜片装饰件胶粘区域）",
+    "description": "整机状态，用棉签将steel red红墨水在后摄镜片装饰件间隙涂抹两周，水平放置1h拆机检查。红墨水不能穿过胶粘区（后主副摄护镜镜片装饰件胶粘区域）",
+    "aliases": [
+      "后摄密封性检测",
+      "Red Ink Intrusion Test for Rear Camera"
+    ],
+    "tags": [
+      "密封性",
+      "防护性能",
+      "质量控制",
+      "设计验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "BGA红墨水试验",
+    "name": "BGA红墨水试验",
+    "category": "TestCase",
+    "definition": "测试样品放入容器倒入红墨水浸透芯片，真空箱60kPa保持10min，70℃高温箱保持2h烘干，用治具分离CPU/FLASH显微镜观察。不允许有虚焊脱焊掉点现象",
+    "description": "测试样品放入容器倒入红墨水浸透芯片，真空箱60kPa保持10min，70℃高温箱保持2h烘干，用治具分离CPU/FLASH显微镜观察。不允许有虚焊脱焊掉点现象",
+    "aliases": [
+      "BGA焊点检测",
+      "BGA Red Ink Test"
+    ],
+    "tags": [
+      "制造工艺",
+      "SMT",
+      "焊接质量",
+      "失效分析"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "指纹滴液打击试验",
+    "name": "指纹滴液打击试验",
+    "category": "TestCase",
+    "definition": "红墨水汗液（1:19配比pH 6.6±0.2）滴满指纹处30秒，2.5N力60次/分打击。背面指纹1000次/轮共10轮，侧面指纹5000次/轮共20轮。每轮检查功能，常温24h后检查并拆机检查腐蚀。带防护背胶不能进液，不带的主板不能进液发霉腐蚀",
+    "description": "红墨水汗液（1:19配比pH 6.6±0.2）滴满指纹处30秒，2.5N力60次/分打击。背面指纹1000次/轮共10轮，侧面指纹5000次/轮共20轮。每轮检查功能，常温24h后检查并拆机检查腐蚀。带防护背胶不能进液，不带的主板不能进液发霉腐蚀",
+    "aliases": [
+      "指纹密封性冲击",
+      "Fingerprint Liquid Impact Test"
+    ],
+    "tags": [
+      "密封性",
+      "防护性能",
+      "人机交互",
+      "可靠性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "疏水性试验",
+    "name": "疏水性试验",
+    "category": "TestCase",
+    "definition": "玻璃滴管对准喇叭听筒防尘网滴水至完全覆盖，观察1分钟疏水效果，不同位置滴3次。验证防尘网疏水效果，要求防尘网有疏水效果水不渗入，不能出现声音小杂音等不良",
+    "description": "玻璃滴管对准喇叭听筒防尘网滴水至完全覆盖，观察1分钟疏水效果，不同位置滴3次。验证防尘网疏水效果，要求防尘网有疏水效果水不渗入，不能出现声音小杂音等不良",
+    "aliases": [
+      "防水膜测试",
+      "Hydrophobic Test"
+    ],
+    "tags": [
+      "防护性能",
+      "材料特性",
+      "功能验证",
+      "质量控制"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "铁屑试验",
+    "name": "铁屑试验",
+    "category": "TestCase",
+    "definition": "装有手机（电量30%以上）和37.5g铁屑的密封袋放入3合1滚筒机（埃及市场50g铁屑+100g沙尘），正转反转各1min，7r/min速度，10min测试。听筒喇叭无杂音声弱无声，音量对比不能小5dB",
+    "description": "装有手机（电量30%以上）和37.5g铁屑的密封袋放入3合1滚筒机（埃及市场50g铁屑+100g沙尘），正转反转各1min，7r/min速度，10min测试。听筒喇叭无杂音声弱无声，音量对比不能小5dB",
+    "aliases": [
+      "防磁性颗粒测试",
+      "Iron Particle Test"
+    ],
+    "tags": [
+      "防护性能",
+      "密封性",
+      "功能验证",
+      "特殊环境"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:18",
+    "updated_at": "2025-09-28T14:54:18"
+  },
+  {
+    "term": "受控跌落试验",
+    "name": "受控跌落试验",
+    "category": "TestCase",
+    "definition": "1米高度到3cm厚花岗岩，18个方向：6面+8角+4前棱+4后棱，每方向1次。摔面时平行，摔角时对角线垂直，摔棱时45°。中间检查结构LCD拍照通话，试验后2.5cm吸盘拉拔检查粘接，四角开裂不超过中框/电池盖高度1/3",
+    "description": "1米高度到3cm厚花岗岩，18个方向：6面+8角+4前棱+4后棱，每方向1次。摔面时平行，摔角时对角线垂直，摔棱时45°。中间检查结构LCD拍照通话，试验后2.5cm吸盘拉拔检查粘接，四角开裂不超过中框/电池盖高度1/3",
+    "aliases": [
+      "定向跌落",
+      "Controlled Drop Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "设计验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "自由跌落试验",
+    "name": "自由跌落试验",
+    "category": "TestCase",
+    "definition": "开机状态电量100%插满卡，TECNO/Infinix LCD<5英寸1.2m≥5英寸1m，功能机/itel相应减0.2m。6面2轮到2cm厚花岗岩，翻盖滑盖50%开50%合。AMOLED屏新品10台最多4台破，量产4台最多1台破",
+    "description": "开机状态电量100%插满卡，TECNO/Infinix LCD<5英寸1.2m≥5英寸1m，功能机/itel相应减0.2m。6面2轮到2cm厚花岗岩，翻盖滑盖50%开50%合。AMOLED屏新品10台最多4台破，量产4台最多1台破",
+    "aliases": [
+      "随机跌落",
+      "Free Drop Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "定向跌落试验",
+    "name": "定向跌落试验",
+    "category": "TestCase",
+    "definition": "高度同自由跌落，跌落角两边面与水平面45°，正反面8角2轮，先正面角后反面角。每次跌落后检查工模功能用户模式拍照，每轮后全检通话拍照。AMOLED屏破裂标准同自由跌落",
+    "description": "高度同自由跌落，跌落角两边面与水平面45°，正反面8角2轮，先正面角后反面角。每次跌落后检查工模功能用户模式拍照，每轮后全检通话拍照。AMOLED屏破裂标准同自由跌落",
+    "aliases": [
+      "8角跌落",
+      "Oriented Drop Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "设计验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "四棱跌落试验",
+    "name": "四棱跌落试验",
+    "category": "TestCase",
+    "definition": "高度同自由跌落，2轮跌落顺序：正面-背面-左上棱-右上棱-左下棱-右下棱。功能机PR1阶段额外增加顶底面各5次。每次跌落后常用功能检查，每轮后全面功能检查，每两次跌落后清洁大理石表面",
+    "description": "高度同自由跌落，2轮跌落顺序：正面-背面-左上棱-右上棱-左下棱-右下棱。功能机PR1阶段额外增加顶底面各5次。每次跌落后常用功能检查，每轮后全面功能检查，每两次跌落后清洁大理石表面",
+    "aliases": [
+      "边棱跌落",
+      "Edge Drop Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "结构设计"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "1.5m跌落试验",
+    "name": "1.5m跌落试验",
+    "category": "TestCase",
+    "definition": "开机状态电量100%，1.5m高度（俄罗斯等低温市场-15℃放置2h后立即跌落），6面4角2轮到2cm厚花岗岩。要求PCBA部件外观结构功能正常，允许外观结构件CTP/LCD破损，电池问题常温判定低温不判定",
+    "description": "开机状态电量100%，1.5m高度（俄罗斯等低温市场-15℃放置2h后立即跌落），6面4角2轮到2cm厚花岗岩。要求PCBA部件外观结构功能正常，允许外观结构件CTP/LCD破损，电池问题常温判定低温不判定",
+    "aliases": [
+      "极限高度跌落",
+      "1.5m Drop Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "极限验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "高温跌落试验",
+    "name": "高温跌落试验",
+    "category": "TestCase",
+    "definition": "55℃环境放置2h后跌落，高度同自由跌落标准，6面2轮。每次跌落只看黑屏花屏掉电，试验后工模全检用户模式通话拍照指纹。允许表面磕痕可装卸部件散开电池脱落掉电",
+    "description": "55℃环境放置2h后跌落，高度同自由跌落标准，6面2轮。每次跌落只看黑屏花屏掉电，试验后工模全检用户模式通话拍照指纹。允许表面磕痕可装卸部件散开电池脱落掉电",
+    "aliases": [
+      "高温环境跌落",
+      "High Temperature Drop"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "环境应力"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "低温跌落试验",
+    "name": "低温跌落试验",
+    "category": "TestCase",
+    "definition": "-10℃环境（俄罗斯等低温市场-15℃）放置2h后跌落，高度同自由跌落，6面2轮。电池移动现象除俄罗斯乌克兰等低温市场外其他市场供参考。电池问题低温不判定只分析起火爆炸，屏漏光黑点白点只记录不判定",
+    "description": "-10℃环境（俄罗斯等低温市场-15℃）放置2h后跌落，高度同自由跌落，6面2轮。电池移动现象除俄罗斯乌克兰等低温市场外其他市场供参考。电池问题低温不判定只分析起火爆炸，屏漏光黑点白点只记录不判定",
+    "aliases": [
+      "低温环境跌落",
+      "Low Temperature Drop"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "环境应力"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "重复跌落试验",
+    "name": "重复跌落试验",
+    "category": "TestCase",
+    "definition": "开机待机电量90%以上，10cm高度28次/min钢板接触面。正1800次→反1800次→四侧面各300次→正3200次→反3200次。中间检查外观结构功能，试验后吸盘拉拔检查脱胶。不能自动关机掉电掉网掉卡",
+    "description": "开机待机电量90%以上，10cm高度28次/min钢板接触面。正1800次→反1800次→四侧面各300次→正3200次→反3200次。中间检查外观结构功能，试验后吸盘拉拔检查脱胶。不能自动关机掉电掉网掉卡",
+    "aliases": [
+      "微跌落疲劳",
+      "Repetitive Drop Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "轻摔试验",
+    "name": "轻摔试验",
+    "category": "TestCase",
+    "definition": "开机通话状态电量50%以上插满卡，10cm高度到厚度>15mm铁板。智能机每轮每面1次共20轮（itel 10轮），功能机每面20次。电池盖不能脱落，不能掉电，卡托前5次不能弹出，外观不允许变形掉漆掉镀",
+    "description": "开机通话状态电量50%以上插满卡，10cm高度到厚度>15mm铁板。智能机每轮每面1次共20轮（itel 10轮），功能机每面20次。电池盖不能脱落，不能掉电，卡托前5次不能弹出，外观不允许变形掉漆掉镀",
+    "aliases": [
+      "轻微跌落",
+      "Light Drop Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "50cm滚筒跌落试验",
+    "name": "50cm滚筒跌落试验",
+    "category": "TestCase",
+    "definition": "开机插满卡，12次/min（6r/min）速度500次，每100次检查外观结构功能和TP脱胶。每100次更换摆放位置，使用吸尘器清理筒内异物。S/A档标准不变，B档300次内不允许屏白斑，300次后不判定",
+    "description": "开机插满卡，12次/min（6r/min）速度500次，每100次检查外观结构功能和TP脱胶。每100次更换摆放位置，使用吸尘器清理筒内异物。S/A档标准不变，B档300次内不允许屏白斑，300次后不判定",
+    "aliases": [
+      "中等滚筒测试",
+      "50cm Tumble Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "随机应力"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "1m滚筒跌落试验",
+    "name": "1m滚筒跌落试验",
+    "category": "TestCase",
+    "definition": "开机插满卡电量30%以上，12次/min速度100次，每50次检查。验证PCBA主板级可靠性，允许外观结构件CTP/LCD破损。infinix/tecno智能机新品阶段测试，B档不测试",
+    "description": "开机插满卡电量30%以上，12次/min速度100次，每50次检查。验证PCBA主板级可靠性，允许外观结构件CTP/LCD破损。infinix/tecno智能机新品阶段测试，B档不测试",
+    "aliases": [
+      "高强度滚筒测试",
+      "1m Tumble Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "极限验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "砂纸跌落1试验",
+    "name": "砂纸跌落1试验",
+    "category": "TestCase",
+    "definition": "开机状态电量50%以上插满卡，30cm高度到180目砂纸（二强盖板60cm），1轮：左上角-右上角-右下角-左下角-正面。背面50cm高度80目砂纸跌落2次检查后摄镜片。30cm允许3破1，60cm不允许破裂，50cm允许3破1",
+    "description": "开机状态电量50%以上插满卡，30cm高度到180目砂纸（二强盖板60cm），1轮：左上角-右上角-右下角-左下角-正面。背面50cm高度80目砂纸跌落2次检查后摄镜片。30cm允许3破1，60cm不允许破裂，50cm允许3破1",
+    "aliases": [
+      "粗糙面跌落1",
+      "Sandpaper Drop Test 1"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "表面处理"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "砂纸跌落2试验",
+    "name": "砂纸跌落2试验",
+    "category": "TestCase",
+    "definition": "开机状态电量50%以上插满卡，戴保护套贴膜，100cm高度到80目砂纸，2轮：正面-左棱边-右棱边-上棱边-下棱边-背面（棱倾斜15°），每跌一次检查。合格后做极限测试120cm不判定只记录。100cm允许3破1",
+    "description": "开机状态电量50%以上插满卡，戴保护套贴膜，100cm高度到80目砂纸，2轮：正面-左棱边-右棱边-上棱边-下棱边-背面（棱倾斜15°），每跌一次检查。合格后做极限测试120cm不判定只记录。100cm允许3破1",
+    "aliases": [
+      "粗糙面跌落2",
+      "Sandpaper Drop Test 2"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "配件保护"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "带配件跌落试验",
+    "name": "带配件跌落试验",
+    "category": "TestCase",
+    "definition": "开机状态，0.8m高度数据线/耳机垂直向下方向跌落10次。每次检查USB充电/耳机功能，每5次检查USB数据传输。USB接口耳机座无功能故障，跌落次数≤5出现不充电必须改善",
+    "description": "开机状态，0.8m高度数据线/耳机垂直向下方向跌落10次。每次检查USB充电/耳机功能，每5次检查USB数据传输。USB接口耳机座无功能故障，跌落次数≤5出现不充电必须改善",
+    "aliases": [
+      "配件连接跌落",
+      "Drop Test with Accessories"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "接口设计",
+      "配件兼容"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:27",
+    "updated_at": "2025-09-28T14:54:27"
+  },
+  {
+    "term": "三轴弯曲试验",
+    "name": "三轴弯曲试验",
+    "category": "TestCase",
+    "definition": "插满卡待机亮屏状态，支撑杆轴心距边缘5mm压杆对准中心线，S/A档250N B档200N，5mm/min速度保持5s。支撑杆压杆直径6mm钢质。塑料机身变形≤1mm金属机身≤0.5mm，外观正常结构无断裂功能正常",
+    "description": "插满卡待机亮屏状态，支撑杆轴心距边缘5mm压杆对准中心线，S/A档250N B档200N，5mm/min速度保持5s。支撑杆压杆直径6mm钢质。塑料机身变形≤1mm金属机身≤0.5mm，外观正常结构无断裂功能正常",
+    "aliases": [
+      "三点弯曲强度",
+      "Three-Point Bending Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "结构设计"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "软压试验",
+    "name": "软压试验",
+    "category": "TestCase",
+    "definition": "25±0.5kgf压力按压中部，样机1正面交叉样机2反面交叉，500次。每100次检查外观变形功能。100次后变形≤0.8mm，500次后≤1mm，允许轻微掉漆，结构无断裂，功耗对比待机≤2mA通话≤10%",
+    "description": "25±0.5kgf压力按压中部，样机1正面交叉样机2反面交叉，500次。每100次检查外观变形功能。100次后变形≤0.8mm，500次后≤1mm，允许轻微掉漆，结构无断裂，功耗对比待机≤2mA通话≤10%",
+    "aliases": [
+      "坐压耐久",
+      "Soft Pressure Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "扭曲试验",
+    "name": "扭曲试验",
+    "category": "TestCase",
+    "definition": "插满卡装电池待机状态，两端夹持15mm固定设备。智能机1.9±0.1N.m，功能机厚度×0.12N.m力矩，20次/min速度1000次。每200次检查，测试后吸盘检查TP脱胶。塑料机身≤1mm金属阳极氧化≤0.5mm变形",
+    "description": "插满卡装电池待机状态，两端夹持15mm固定设备。智能机1.9±0.1N.m，功能机厚度×0.12N.m力矩，20次/min速度1000次。每200次检查，测试后吸盘检查TP脱胶。塑料机身≤1mm金属阳极氧化≤0.5mm变形",
+    "aliases": [
+      "抗扭强度",
+      "Twist Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "结构设计"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "单点硬压试验",
+    "name": "单点硬压试验",
+    "category": "TestCase",
+    "definition": "插满卡待机状态，8mm直径铁杆12.5N/s速度，各位置5次每次保持2s。智能机CTP5点屏下指纹前摄喇叭电池≥120N，侧键CAM镜片指纹键≥50N；功能机LCD IC 80N；CPU FLASH从200N开始50N递增测试到450N极限",
+    "description": "插满卡待机状态，8mm直径铁杆12.5N/s速度，各位置5次每次保持2s。智能机CTP5点屏下指纹前摄喇叭电池≥120N，侧键CAM镜片指纹键≥50N；功能机LCD IC 80N；CPU FLASH从200N开始50N递增测试到450N极限",
+    "aliases": [
+      "局部压力测试",
+      "Single Point Pressure Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "设计验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "按键力测试",
+    "name": "按键力测试",
+    "category": "TestCase",
+    "definition": "荷重曲线测试仪，带电池不开机，功能机测试\"5\"键\"OK\"键\"导航下键\"\"左软键\"，智能机测试音量键和电源键。5次取平均值。智能机Cf/Crl 30%以下不合格30-40%合格>40%优秀；功能机15%以下不合格15-30%合格>30%优秀",
+    "description": "荷重曲线测试仪，带电池不开机，功能机测试\"5\"键\"OK\"键\"导航下键\"\"左软键\"，智能机测试音量键和电源键。5次取平均值。智能机Cf/Crl 30%以下不合格30-40%合格>40%优秀；功能机15%以下不合格15-30%合格>30%优秀",
+    "aliases": [
+      "按键手感测试",
+      "Key Force Test"
+    ],
+    "tags": [
+      "人机交互",
+      "测试验证",
+      "用户体验",
+      "机械强度"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "整机球击试验",
+    "name": "整机球击试验",
+    "category": "TestCase",
+    "definition": "S/A档20cm B档15cm高度，CTP盖板4角中心前摄屏下指纹用130g钢球；玻璃电池盖4角中心用130g钢球，厚度<0.6mm高度15cm≥0.6mm高度20cm；CAM护镜中心7g钢球30cm高度冲击10次。允许磕痕不允许裂纹碎裂",
+    "description": "S/A档20cm B档15cm高度，CTP盖板4角中心前摄屏下指纹用130g钢球；玻璃电池盖4角中心用130g钢球，厚度<0.6mm高度15cm≥0.6mm高度20cm；CAM护镜中心7g钢球30cm高度冲击10次。允许磕痕不允许裂纹碎裂",
+    "aliases": [
+      "钢球冲击测试",
+      "Ball Impact Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "安全性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "三合一滚筒试验",
+    "name": "三合一滚筒试验",
+    "category": "TestCase",
+    "definition": "首次使用添加150块牛仔布3把钥匙50颗钢珠50g粉尘，带电池关机状态可拆卸电池盖用橡皮筋固定。正转反转1min，7转/min，换料2小时。30min检查无粉尘问题，2h外观无掉漆磨损印刷字体完全辨识，重点检查光距感功能",
+    "description": "首次使用添加150块牛仔布3把钥匙50颗钢珠50g粉尘，带电池关机状态可拆卸电池盖用橡皮筋固定。正转反转1min，7转/min，换料2小时。30min检查无粉尘问题，2h外观无掉漆磨损印刷字体完全辨识，重点检查光距感功能",
+    "aliases": [
+      "综合耐磨测试",
+      "3-in-1 Tumble Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "密封性",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "长时间静压试验",
+    "name": "长时间静压试验",
+    "category": "TestCase",
+    "definition": "待机灭屏状态，按LCD尺寸选用对应压头，60kg压力压在LCD显示区域中间位置不允许压到面壳。S/A档保持48h，B档保持4h。试验结束静置2h后检查外观结构功能正常LCD显示CTP功能正常，灰色界面下蓝斑问题不判定",
+    "description": "待机灭屏状态，按LCD尺寸选用对应压头，60kg压力压在LCD显示区域中间位置不允许压到面壳。S/A档保持48h，B档保持4h。试验结束静置2h后检查外观结构功能正常LCD显示CTP功能正常，灰色界面下蓝斑问题不判定",
+    "aliases": [
+      "持续重压测试",
+      "Long-term Static Pressure Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "机械强度",
+      "材料特性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "USB插拔力测试",
+    "name": "USB插拔力测试",
+    "category": "TestCase",
+    "definition": "整机不开机，标配数据线插入USB接口固定到试验机夹具，25.4mm/min速率往复3次。分别测试插拔寿命前后的插拔力。Micro-USB寿命前插入0.5-1.5kgf拔出1.0-2.5kgf，寿命后插入0.5-1.8kgf拔出0.8-2.5kgf；Type-C寿命前插入0.5-2kgf拔出0.8-2.5kgf，寿命后插入0.5-2kgf拔出0.6-2.5kgf",
+    "description": "整机不开机，标配数据线插入USB接口固定到试验机夹具，25.4mm/min速率往复3次。分别测试插拔寿命前后的插拔力。Micro-USB寿命前插入0.5-1.5kgf拔出1.0-2.5kgf，寿命后插入0.5-1.8kgf拔出0.8-2.5kgf；Type-C寿命前插入0.5-2kgf拔出0.8-2.5kgf，寿命后插入0.5-2kgf拔出0.6-2.5kgf",
+    "aliases": [
+      "USB接口插拔力",
+      "USB Insertion/Extraction Force"
+    ],
+    "tags": [
+      "人机交互",
+      "测试验证",
+      "接口设计",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "耳机插拔力测试",
+    "name": "耳机插拔力测试",
+    "category": "TestCase",
+    "definition": "整机不开机，全新标配耳机插头插入耳机接口，25.4mm/min速率。耳机插头外径分0°120°240°共3个刻度每个刻度测试3次共9次。插拔寿命前0.8-2.0kgf，设备插拔后0.6-2.0kgf，人工插拔后0.3-2.0kgf",
+    "description": "整机不开机，全新标配耳机插头插入耳机接口，25.4mm/min速率。耳机插头外径分0°120°240°共3个刻度每个刻度测试3次共9次。插拔寿命前0.8-2.0kgf，设备插拔后0.6-2.0kgf，人工插拔后0.3-2.0kgf",
+    "aliases": [
+      "耳机接口插拔力",
+      "Headphone Jack Force"
+    ],
+    "tags": [
+      "人机交互",
+      "测试验证",
+      "接口设计",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "USB推力测试",
+    "name": "USB推力测试",
+    "category": "TestCase",
+    "definition": "插头完全插入连接器，按各方向测试。智能机F1/F2(±Y)40N（金属中框100N），F3/F4(±X)40N，F5(+Z)150N；功能机F1/F2(±Y)25N，F3/F4(±X)50N，F5(+Z)80N。每方向测试2次无保持时间，12.5N/s速度，每测一次检查USB充电传输功能",
+    "description": "插头完全插入连接器，按各方向测试。智能机F1/F2(±Y)40N（金属中框100N），F3/F4(±X)40N，F5(+Z)150N；功能机F1/F2(±Y)25N，F3/F4(±X)50N，F5(+Z)80N。每方向测试2次无保持时间，12.5N/s速度，每测一次检查USB充电传输功能",
+    "aliases": [
+      "USB接口强度",
+      "USB Push Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "接口设计",
+      "机械强度"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "电池盖开盖力测试",
+    "name": "电池盖开盖力测试",
+    "category": "TestCase",
+    "definition": "整机带电池不开机，固定到试验台夹住面壳或底壳，测试电池盖开盖力3次取平均值。适用于抠开式电池盖，平均开盖力0.8-2.0kgf",
+    "description": "整机带电池不开机，固定到试验台夹住面壳或底壳，测试电池盖开盖力3次取平均值。适用于抠开式电池盖，平均开盖力0.8-2.0kgf",
+    "aliases": [
+      "电池盖开启力",
+      "Battery Cover Opening Force"
+    ],
+    "tags": [
+      "人机交互",
+      "测试验证",
+      "结构设计",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "BTB拉拔力测试",
+    "name": "BTB拉拔力测试",
+    "category": "TestCase",
+    "definition": "确认主板BTB位置显微镜计数pin角并记录，BTB扣位剪下用502胶水与小铁块固定，10.5mm/min速度每个BTB测试3次取平均值。电池扣位≥5N；其他扣位pin脚<24pin时Min 0.2N×pin数，≥24pin时Min 0.15N×pin数，保持力衰减10%内允收",
+    "description": "确认主板BTB位置显微镜计数pin角并记录，BTB扣位剪下用502胶水与小铁块固定，10.5mm/min速度每个BTB测试3次取平均值。电池扣位≥5N；其他扣位pin脚<24pin时Min 0.2N×pin数，≥24pin时Min 0.15N×pin数，保持力衰减10%内允收",
+    "aliases": [
+      "板对板连接器保持力",
+      "BTB Retention Force"
+    ],
+    "tags": [
+      "制造工艺",
+      "测试验证",
+      "连接器",
+      "接触可靠性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "卡托顶出力测试",
+    "name": "卡托顶出力测试",
+    "category": "TestCase",
+    "definition": "整机不开机，装满SIM卡SD卡的卡托插入卡槽固定底座，卡针放入卡针孔固定夹具，压缩定速度12.5mm/min切换条件位移≥1.5mm力量≥25N，往复3次。8≤卡托顶出力≤16N，10cm轻摔卡托不弹出，结合标配卡针顶出实际手感",
+    "description": "整机不开机，装满SIM卡SD卡的卡托插入卡槽固定底座，卡针放入卡针孔固定夹具，压缩定速度12.5mm/min切换条件位移≥1.5mm力量≥25N，往复3次。8≤卡托顶出力≤16N，10cm轻摔卡托不弹出，结合标配卡针顶出实际手感",
+    "aliases": [
+      "SIM卡托弹出力",
+      "Card Tray Ejection Force"
+    ],
+    "tags": [
+      "人机交互",
+      "测试验证",
+      "接口设计",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "卡托拔出力测试",
+    "name": "卡托拔出力测试",
+    "category": "TestCase",
+    "definition": "整机不开机，不装卡卡托先顶出后固定底座，夹具夹住卡托露出部分，50mm/min速度往复3次。2N≤卡托拔出力≤6N，结合实际手感",
+    "description": "整机不开机，不装卡卡托先顶出后固定底座，夹具夹住卡托露出部分，50mm/min速度往复3次。2N≤卡托拔出力≤6N，结合实际手感",
+    "aliases": [
+      "SIM卡托拔出力",
+      "Card Tray Extraction Force"
+    ],
+    "tags": [
+      "人机交互",
+      "测试验证",
+      "接口设计",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "USB接口击打测试",
+    "name": "USB接口击打测试",
+    "category": "TestCase",
+    "definition": "开机待机电量50%以上，全新标配数据线，击打力10±0.5N。S档前后左右各1000次，A档各600次，B档前后各600次。击打头伸缩0.5s/次单次4s完成。拆机检查USB功能pin固定pin焊接无锡裂，连接充电器电脑功能正常",
+    "description": "开机待机电量50%以上，全新标配数据线，击打力10±0.5N。S档前后左右各1000次，A档各600次，B档前后各600次。击打头伸缩0.5s/次单次4s完成。拆机检查USB功能pin固定pin焊接无锡裂，连接充电器电脑功能正常",
+    "aliases": [
+      "USB接口冲击",
+      "USB Interface Impact Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "接口设计",
+      "机械强度"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "电池盖虚位检测",
+    "name": "电池盖虚位检测",
+    "category": "TestCase",
+    "definition": "整机正面朝下置于治具，击打头直径8±1mm击打电池盖中线位置，1kgf砝码5±1cm高度10次每2次检查。中高端机缝隙≤0.2mm，低端机≤0.35mm，电池盖与底壳配合紧密扣位无松脱",
+    "description": "整机正面朝下置于治具，击打头直径8±1mm击打电池盖中线位置，1kgf砝码5±1cm高度10次每2次检查。中高端机缝隙≤0.2mm，低端机≤0.35mm，电池盖与底壳配合紧密扣位无松脱",
+    "aliases": [
+      "电池盖间隙测试",
+      "Battery Cover Gap Detection"
+    ],
+    "tags": [
+      "结构设计",
+      "测试验证",
+      "装配精度",
+      "外观质量"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "随机振动试验",
+    "name": "随机振动试验",
+    "category": "TestCase",
+    "definition": "20-25℃环境振动仪压力0.3±0.1MPa，样机不包装开机待机插满卡。频率5-20Hz功率频谱密度0.04g²/Hz，20-500Hz斜率-3dB/℃t，每轴向1h共XYZ三轴3h。Z轴固定屏面接触平台避免摄像头干涉，测试后吸盘检查TP脱胶",
+    "description": "20-25℃环境振动仪压力0.3±0.1MPa，样机不包装开机待机插满卡。频率5-20Hz功率频谱密度0.04g²/Hz，20-500Hz斜率-3dB/℃t，每轴向1h共XYZ三轴3h。Z轴固定屏面接触平台避免摄像头干涉，测试后吸盘检查TP脱胶",
+    "aliases": [
+      "运输振动模拟",
+      "Random Vibration Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "运输应力",
+      "包装设计"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "粘胶式部件牢固度测试",
+    "name": "粘胶式部件牢固度测试",
+    "category": "TestCase",
+    "definition": "CAM单摄镜片设备压头按压10N保持10s，双摄三摄镜片铁块辅助外部拉起10N保持10s，装饰件热熔胶或吸盘粘住表面标准力垂直保持10s。CAM镜片≥10N，非金属电池盖≥40N，装饰件按面积分级20N/30N/40N保持10s不脱落",
+    "description": "CAM单摄镜片设备压头按压10N保持10s，双摄三摄镜片铁块辅助外部拉起10N保持10s，装饰件热熔胶或吸盘粘住表面标准力垂直保持10s。CAM镜片≥10N，非金属电池盖≥40N，装饰件按面积分级20N/30N/40N保持10s不脱落",
+    "aliases": [
+      "胶粘强度测试",
+      "Adhesive Component Strength"
+    ],
+    "tags": [
+      "制造工艺",
+      "测试验证",
+      "粘接工艺",
+      "机械强度"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "振动耐磨试验",
+    "name": "振动耐磨试验",
+    "category": "TestCase",
+    "definition": "准备RKF 10K黄色圆锥体和RKK15P绿色棱锥体共15L，加FC120 20ml配水至1000ml，50Hz频率振幅1.8±0.1mm。样品安装整机放入测试仪，前30min检查一次。壳体转角面连续线状掉漆宽度UV/PU/镀膜1mm橡胶漆2mm，其他位置按规定宽度，平面区域点状掉漆有面积限制",
+    "description": "准备RKF 10K黄色圆锥体和RKK15P绿色棱锥体共15L，加FC120 20ml配水至1000ml，50Hz频率振幅1.8±0.1mm。样品安装整机放入测试仪，前30min检查一次。壳体转角面连续线状掉漆宽度UV/PU/镀膜1mm橡胶漆2mm，其他位置按规定宽度，平面区域点状掉漆有面积限制",
+    "aliases": [
+      "振动磨损测试",
+      "Vibration Wear Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "表面处理",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "器件推力测试",
+    "name": "器件推力测试",
+    "category": "TestCase",
+    "definition": "电子万能试验机和推力治具，垂直方向对器件长边10mm/min速度测试至脱落损坏记录最大推力值。闪光灯推前闪1个，光距感MIC同规格推1个，同轴座选最小规格推1个，弹片同规格各推2个，BTB推屏电池前摄主板小板各1个",
+    "description": "电子万能试验机和推力治具，垂直方向对器件长边10mm/min速度测试至脱落损坏记录最大推力值。闪光灯推前闪1个，光距感MIC同规格推1个，同轴座选最小规格推1个，弹片同规格各推2个，BTB推屏电池前摄主板小板各1个",
+    "aliases": [
+      "元器件焊接强度",
+      "Component Push Test"
+    ],
+    "tags": [
+      "制造工艺",
+      "测试验证",
+      "SMT",
+      "焊接质量"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "切片分析",
+    "name": "切片分析",
+    "category": "TestCase",
+    "definition": "CPU/EMMC/DDR焊点位图长边作观察面，350r/min切割速度，预留2.54mm余量防止应力损伤。环氧树脂:固化剂3:1调胶无气泡，砂纸240目→800目→1200目→3000目，研磨600r/min抛光350r/min，显微镜50X/100X/200X观察。不允许板材焊点破裂，插孔焊接垂直填充≥75%",
+    "description": "CPU/EMMC/DDR焊点位图长边作观察面，350r/min切割速度，预留2.54mm余量防止应力损伤。环氧树脂:固化剂3:1调胶无气泡，砂纸240目→800目→1200目→3000目，研磨600r/min抛光350r/min，显微镜50X/100X/200X观察。不允许板材焊点破裂，插孔焊接垂直填充≥75%",
+    "aliases": [
+      "金相切片分析",
+      "Cross-section Analysis"
+    ],
+    "tags": [
+      "制造工艺",
+      "测试验证",
+      "SMT",
+      "失效分析"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "CTP/LCD护镜拉力测试",
+    "name": "CTP/LCD护镜拉力测试",
+    "category": "TestCase",
+    "definition": "测试治具配合3M双面胶粘住CTP四角两边中心点LCD护镜中心点，5N/s速度20mm/min预警速度保持10s。俄罗斯等低温市场需-20℃放置2h后立即测试。CTP四角≥50N（点胶）/40N（背胶），左右边中心≥30N；LCD护镜中心≥50N",
+    "description": "测试治具配合3M双面胶粘住CTP四角两边中心点LCD护镜中心点，5N/s速度20mm/min预警速度保持10s。俄罗斯等低温市场需-20℃放置2h后立即测试。CTP四角≥50N（点胶）/40N（背胶），左右边中心≥30N；LCD护镜中心≥50N",
+    "aliases": [
+      "触摸屏拉拔强度",
+      "Touch Panel Pull Test"
+    ],
+    "tags": [
+      "显示相关",
+      "测试验证",
+      "粘接工艺",
+      "机械强度"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "CTP水波纹测试",
+    "name": "CTP水波纹测试",
+    "category": "TestCase",
+    "definition": "开机亮屏灰色背景，击打AA区九宫格中心点屏盲孔位置，每点5次1次/s，1.5±0.2N击打力Φ0.8cm铜柱头，击打头与CTP间距0.8cm。检查击打点外区域无水波纹",
+    "description": "开机亮屏灰色背景，击打AA区九宫格中心点屏盲孔位置，每点5次1次/s，1.5±0.2N击打力Φ0.8cm铜柱头，击打头与CTP间距0.8cm。检查击打点外区域无水波纹",
+    "aliases": [
+      "触摸屏水波纹",
+      "Touch Panel Water Ripple"
+    ],
+    "tags": [
+      "显示相关",
+      "测试验证",
+      "用户体验",
+      "质量控制"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "牛顿环测试",
+    "name": "牛顿环测试",
+    "category": "TestCase",
+    "definition": "5kg砝码，70±2℃高温箱，4×4cm防静电胶皮，48h测试时长。测试对象平板/智能机框贴，智能机全贴合/功能机不测试。试验结束静置2h恢复常温后检查屏不能有水印现象",
+    "description": "5kg砝码，70±2℃高温箱，4×4cm防静电胶皮，48h测试时长。测试对象平板/智能机框贴，智能机全贴合/功能机不测试。试验结束静置2h恢复常温后检查屏不能有水印现象",
+    "aliases": [
+      "水印现象检测",
+      "Newton Ring Test"
+    ],
+    "tags": [
+      "显示相关",
+      "测试验证",
+      "外观质量",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "CTP点击测试",
+    "name": "CTP点击测试",
+    "category": "TestCase",
+    "definition": "开机待机亮屏最大音量，击打菜单键数字5键，50万次2次/s，1.5±0.2N击打力Φ0.8cm电容笔头。CTP功能正常无跳点错乱现象",
+    "description": "开机待机亮屏最大音量，击打菜单键数字5键，50万次2次/s，1.5±0.2N击打力Φ0.8cm电容笔头。CTP功能正常无跳点错乱现象",
+    "aliases": [
+      "触摸屏点击寿命",
+      "Touch Panel Click Test"
+    ],
+    "tags": [
+      "显示相关",
+      "测试验证",
+      "人机交互",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "CTP划线测试",
+    "name": "CTP划线测试",
+    "category": "TestCase",
+    "definition": "开机待机亮屏固定划线设备，自带手写笔或测试电容笔，250g±10%压力60mm/s速度。沿CTP对角线划线不小于对角线2/3，10万次（一个来回1次），每2h检查功能清洁表面。CTP功能正常LCD显示正常无损伤明显划痕，原装手写笔头部无变形损伤",
+    "description": "开机待机亮屏固定划线设备，自带手写笔或测试电容笔，250g±10%压力60mm/s速度。沿CTP对角线划线不小于对角线2/3，10万次（一个来回1次），每2h检查功能清洁表面。CTP功能正常LCD显示正常无损伤明显划痕，原装手写笔头部无变形损伤",
+    "aliases": [
+      "触摸屏划线寿命",
+      "Touch Panel Line Drawing"
+    ],
+    "tags": [
+      "显示相关",
+      "测试验证",
+      "人机交互",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "CTP画图形测试",
+    "name": "CTP画图形测试",
+    "category": "TestCase",
+    "definition": "样机开机插入所有可能适配充电器（itel:标配+IML05+TMU24，Tecno:标配+IML05+IMU05），用手在CTP表面画三角五角星圆正方形，每个图形10次。画图正常无跳点划线漂移反应慢图形不规则现象",
+    "description": "样机开机插入所有可能适配充电器（itel:标配+IML05+TMU24，Tecno:标配+IML05+IMU05），用手在CTP表面画三角五角星圆正方形，每个图形10次。画图正常无跳点划线漂移反应慢图形不规则现象",
+    "aliases": [
+      "触摸屏绘图测试",
+      "Touch Panel Drawing Test"
+    ],
+    "tags": [
+      "显示相关",
+      "测试验证",
+      "人机交互",
+      "电磁兼容"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "CTP贴膜灵敏度测试",
+    "name": "CTP贴膜灵敏度测试",
+    "category": "TestCase",
+    "definition": "整机不充电电量满足需求和整机充电（标配充电器）电量60%以下两种状态。样机表面清洁贴标配保护膜（无则用0.65-0.71mm玻璃膜），按检验CTP功能方法操作。无画线错乱飘移跳点失灵现象",
+    "description": "整机不充电电量满足需求和整机充电（标配充电器）电量60%以下两种状态。样机表面清洁贴标配保护膜（无则用0.65-0.71mm玻璃膜），按检验CTP功能方法操作。无画线错乱飘移跳点失灵现象",
+    "aliases": [
+      "贴膜触摸灵敏度",
+      "Screen Protector Sensitivity"
+    ],
+    "tags": [
+      "显示相关",
+      "测试验证",
+      "人机交互",
+      "配件兼容"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "屏下指纹击打测试",
+    "name": "屏下指纹击打测试",
+    "category": "TestCase",
+    "definition": "常温状态开机，亮度自动调节设置指纹，击打头完全点亮指纹处停留1s间隔10s，20万次。13万次不能出现肉眼可见烧屏残影，20万次允许轻微烧屏（以X23为标杆）",
+    "description": "常温状态开机，亮度自动调节设置指纹，击打头完全点亮指纹处停留1s间隔10s，20万次。13万次不能出现肉眼可见烧屏残影，20万次允许轻微烧屏（以X23为标杆）",
+    "aliases": [
+      "屏下指纹耐久性",
+      "Under-display Fingerprint Impact"
+    ],
+    "tags": [
+      "显示相关",
+      "测试验证",
+      "人机交互",
+      "可靠性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "AMOLED烧屏测试",
+    "name": "AMOLED烧屏测试",
+    "category": "TestCase",
+    "definition": "常温状态最大亮度显示烧屏测试图片2共240h，试验前后测量烧屏测试图片1①②处亮度。(点1@240h亮度)/(点1@0h亮度)×100%>95%为必过项；该值+(1-(点2@240h亮度)/(点2@0h亮度))×100%>93%为参考项",
+    "description": "常温状态最大亮度显示烧屏测试图片2共240h，试验前后测量烧屏测试图片1①②处亮度。(点1@240h亮度)/(点1@0h亮度)×100%>95%为必过项；该值+(1-(点2@240h亮度)/(点2@0h亮度))×100%>93%为参考项",
+    "aliases": [
+      "AMOLED屏幕烧屏",
+      "AMOLED Burn-in Test"
+    ],
+    "tags": [
+      "显示相关",
+      "测试验证",
+      "可靠性",
+      "材料特性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:35",
+    "updated_at": "2025-09-28T14:54:35"
+  },
+  {
+    "term": "内部接口寿命测试",
+    "name": "内部接口寿命测试",
+    "category": "TestCase",
+    "definition": "同轴线前后两端FPC接口各装卸30次。功能对比结构对比，重点手机能识别到各FPC同轴线对应功能",
+    "description": "同轴线前后两端FPC接口各装卸30次。功能对比结构对比，重点手机能识别到各FPC同轴线对应功能",
+    "aliases": [
+      "内部连接器寿命",
+      "Internal Connector Life"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "接口设计",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:44",
+    "updated_at": "2025-09-28T14:54:44"
+  },
+  {
+    "term": "耳机插拔寿命测试",
+    "name": "耳机插拔寿命测试",
+    "category": "TestCase",
+    "definition": "耳机插拔3000次，开机状态20-30次/min频率，原配全新耳机。用户模式检测耳机功能（图标检测MP3播放），工程模式检测（线上接听键MIC功能）。I/O接口无损坏异常手感，试验后插拔力符合标准，允许外观磨损掉漆不允许表层成片脱落",
+    "description": "耳机插拔3000次，开机状态20-30次/min频率，原配全新耳机。用户模式检测耳机功能（图标检测MP3播放），工程模式检测（线上接听键MIC功能）。I/O接口无损坏异常手感，试验后插拔力符合标准，允许外观磨损掉漆不允许表层成片脱落",
+    "aliases": [
+      "耳机接口寿命",
+      "Headphone Jack Life Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "接口设计",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:44",
+    "updated_at": "2025-09-28T14:54:44"
+  },
+  {
+    "term": "USB插拔寿命测试",
+    "name": "USB插拔寿命测试",
+    "category": "TestCase",
+    "definition": "开机状态，Micro 5000次，Type-C 1万次（正反各2500次为1轮共2轮），原配全新数据线。手机识别充电器I/O接口无损坏异常手感插拔力正常。充电普通≥4.8V快充≥快充电压-0.5V，允许外观磨损掉漆不允许表层成片脱落",
+    "description": "开机状态，Micro 5000次，Type-C 1万次（正反各2500次为1轮共2轮），原配全新数据线。手机识别充电器I/O接口无损坏异常手感插拔力正常。充电普通≥4.8V快充≥快充电压-0.5V，允许外观磨损掉漆不允许表层成片脱落",
+    "aliases": [
+      "USB接口寿命",
+      "USB Durability Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "接口设计",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:44",
+    "updated_at": "2025-09-28T14:54:44"
+  },
+  {
+    "term": "SIM卡/T卡装卸测试",
+    "name": "SIM卡/T卡装卸测试",
+    "category": "TestCase",
+    "definition": "SIM卡T卡各装卸500次，一体机同时装卸，开关机状态各一台，每100次中途检查。500次后增加轻摔试验每面5次观察掉卡无信号不识卡。多用途卡托须各类型卡测试，三合一/四合一卡座SIM卡槽用去掉NANO卡的卡套倾斜30±5°插拔200次",
+    "description": "SIM卡T卡各装卸500次，一体机同时装卸，开关机状态各一台，每100次中途检查。500次后增加轻摔试验每面5次观察掉卡无信号不识卡。多用途卡托须各类型卡测试，三合一/四合一卡座SIM卡槽用去掉NANO卡的卡套倾斜30±5°插拔200次",
+    "aliases": [
+      "卡座装卸寿命",
+      "Card Socket Life Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "接口设计",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:44",
+    "updated_at": "2025-09-28T14:54:44"
+  },
+  {
+    "term": "电池/电池盖装卸测试",
+    "name": "电池/电池盖装卸测试",
+    "category": "TestCase",
+    "definition": "单机头电池电池盖分离状态开始，装卸电池再装卸电池盖。智能机电池盖1000次（可拆卸电池盖不可拆卸电池）2000次（都可拆卸），功能机1000次，电池1000次。每100次中间检查，试验后轻摔四侧面各5次重点观察电池盖掉电",
+    "description": "单机头电池电池盖分离状态开始，装卸电池再装卸电池盖。智能机电池盖1000次（可拆卸电池盖不可拆卸电池）2000次（都可拆卸），功能机1000次，电池1000次。每100次中间检查，试验后轻摔四侧面各5次重点观察电池盖掉电",
+    "aliases": [
+      "电池盖装卸寿命",
+      "Battery Cover Life Test"
+    ],
+    "tags": [
+      "可靠性",
+      "测试验证",
+      "结构设计",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:44",
+    "updated_at": "2025-09-28T14:54:44"
+  },
+  {
+    "term": "螺钉孔寿命测试",
+    "name": "螺钉孔寿命测试",
+    "category": "TestCase",
+    "definition": "外部螺钉（外观面能看到的、打开电池盖看到的）用量产力矩反复打10次（自攻螺钉5次），内部螺钉反复打5次。量产力矩智能机/功能机铜螺母0.065-0.075N.m，功能机塑胶壳0.08±0.005N.m锌合金壳0.09±0.005N.m。无滑丝螺钉无断裂壳料外观螺母螺钉柱无破裂",
+    "description": "外部螺钉（外观面能看到的、打开电池盖看到的）用量产力矩反复打10次（自攻螺钉5次），内部螺钉反复打5次。量产力矩智能机/功能机铜螺母0.065-0.075N.m，功能机塑胶壳0.08±0.005N.m锌合金壳0.09±0.005N.m。无滑丝螺钉无断裂壳料外观螺母螺钉柱无破裂",
+    "aliases": [
+      "螺钉锁附寿命",
+      "Screw Hole Life Test"
+    ],
+    "tags": [
+      "制造工艺",
+      "测试验证",
+      "装配工艺",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:44",
+    "updated_at": "2025-09-28T14:54:44"
+  },
+  {
+    "term": "外放喇叭寿命测试",
+    "name": "外放喇叭寿命测试",
+    "category": "TestCase",
+    "definition": "开机充电状态最大音量，安装LabTestTool，功能机装T卡循环播放。智能机96h（印度俄罗斯168h），功能机96h（印度PR1阶段168h）。每12h检查音量大小需在相对安静地方。喇叭声音正常无杂音无声音小，试验前Leq.T≥72dB MP3播放1kHz（30cm），前后对比≤3dB",
+    "description": "开机充电状态最大音量，安装LabTestTool，功能机装T卡循环播放。智能机96h（印度俄罗斯168h），功能机96h（印度PR1阶段168h）。每12h检查音量大小需在相对安静地方。喇叭声音正常无杂音无声音小，试验前Leq.T≥72dB MP3播放1kHz（30cm），前后对比≤3dB",
+    "aliases": [
+      "扬声器寿命",
+      "Speaker Life Test"
+    ],
+    "tags": [
+      "声学",
+      "测试验证",
+      "可靠性",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:44",
+    "updated_at": "2025-09-28T14:54:44"
+  },
+  {
+    "term": "听筒寿命测试",
+    "name": "听筒寿命测试",
+    "category": "TestCase",
+    "definition": "连接充电器充电最大音量，智能机安装LabTestTool功能机准备两张通话卡，96h时长。听筒声音正常无杂音无声音小，听筒2mm距离试验前Leq.T≥80dB，前后对比≤3dB，样机功能正常",
+    "description": "连接充电器充电最大音量，智能机安装LabTestTool功能机准备两张通话卡，96h时长。听筒声音正常无杂音无声音小，听筒2mm距离试验前Leq.T≥80dB，前后对比≤3dB，样机功能正常",
+    "aliases": [
+      "听筒耐久性",
+      "Receiver Life Test"
+    ],
+    "tags": [
+      "声学",
+      "测试验证",
+      "可靠性",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:44",
+    "updated_at": "2025-09-28T14:54:44"
+  },
+  {
+    "term": "马达寿命测试",
+    "name": "马达寿命测试",
+    "category": "TestCase",
+    "definition": "连接充电器充电，1s on/1s off规律振动，智能机96h功能机72h，每12h检查。振动正常（振1s停1s）无停振时振时不振振弱振杂异常",
+    "description": "连接充电器充电，1s on/1s off规律振动，智能机96h功能机72h，每12h检查。振动正常（振1s停1s）无停振时振时不振振弱振杂异常",
+    "aliases": [
+      "振动马达寿命",
+      "Motor Life Test"
+    ],
+    "tags": [
+      "声学",
+      "测试验证",
+      "可靠性",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:44",
+    "updated_at": "2025-09-28T14:54:44"
+  },
+  {
+    "term": "闪光灯寿命测试",
+    "name": "闪光灯寿命测试",
+    "category": "TestCase",
+    "definition": "连接充电器充电，闪光灯频率20-30次/min功能机24h智能机48h，手电灯持续点亮96h，酷炫LED灯效持续120h。闪光灯酷炫LED功能正常无发光不均偏暗，拍照无变色，对比参考样机亮度",
+    "description": "连接充电器充电，闪光灯频率20-30次/min功能机24h智能机48h，手电灯持续点亮96h，酷炫LED灯效持续120h。闪光灯酷炫LED功能正常无发光不均偏暗，拍照无变色，对比参考样机亮度",
+    "aliases": [
+      "LED闪光灯寿命",
+      "Flash LED Life Test"
+    ],
+    "tags": [
+      "影像相关",
+      "测试验证",
+      "可靠性",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:44",
+    "updated_at": "2025-09-28T14:54:44"
+  },
+  {
+    "term": "CAM对焦马达寿命测试",
+    "name": "CAM对焦马达寿命测试",
+    "category": "TestCase",
+    "definition": "安装labtesttool.APK，固定于点击试验台连接充电器，两点切换对焦距离10cm和35cm，1万次。对焦马达工作正常样机功能正常",
+    "description": "安装labtesttool.APK，固定于点击试验台连接充电器，两点切换对焦距离10cm和35cm，1万次。对焦马达工作正常样机功能正常",
+    "aliases": [
+      "摄像头对焦马达寿命",
+      "Camera Focus Motor Life"
+    ],
+    "tags": [
+      "影像相关",
+      "测试验证",
+      "可靠性",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:44",
+    "updated_at": "2025-09-28T14:54:44"
+  },
+  {
+    "term": "充电曲线测试",
+    "name": "充电曲线测试",
+    "category": "TestCase",
+    "definition": "恢复出厂设置安装testtool，拨号*#9646633#打开LOG，放电至自动关机静置30min。开关机各一台标配充电器数据线连续充电至截止，关机用power-z导出数据，开机用apk记录。25℃和35℃环境测试，35℃只测开机状态关注充电时长",
+    "description": "恢复出厂设置安装testtool，拨号*#9646633#打开LOG，放电至自动关机静置30min。开关机各一台标配充电器数据线连续充电至截止，关机用power-z导出数据，开机用apk记录。25℃和35℃环境测试，35℃只测开机状态关注充电时长",
+    "aliases": [
+      "充电性能测试",
+      "Charging Curve Test"
+    ],
+    "tags": [
+      "性能测试",
+      "电气性能",
+      "用户体验",
+      "功能验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "放电曲线测试",
+    "name": "放电曲线测试",
+    "category": "TestCase",
+    "definition": "室温25±10℃湿度25-75%，开启飞行模式关闭自动调节亮度调到最大关闭省电模式，安装labtesttool。曲线不能间断，截止电量不超过1%，放电曲线任一段不得超出参考线2的±10%范围",
+    "description": "室温25±10℃湿度25-75%，开启飞行模式关闭自动调节亮度调到最大关闭省电模式，安装labtesttool。曲线不能间断，截止电量不超过1%，放电曲线任一段不得超出参考线2的±10%范围",
+    "aliases": [
+      "电池续航测试",
+      "Discharge Curve Test"
+    ],
+    "tags": [
+      "性能测试",
+      "电气性能",
+      "用户体验",
+      "功能验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "低温放电曲线测试",
+    "name": "低温放电曲线测试",
+    "category": "TestCase",
+    "definition": "-10±1℃环境，开启飞行模式亮度调到最低关闭省电模式，安装运行跑机APK和电池Logger。曲线不能间断，截止电量不超过1%，放电曲线任一段不得超出直线±10%范围",
+    "description": "-10±1℃环境，开启飞行模式亮度调到最低关闭省电模式，安装运行跑机APK和电池Logger。曲线不能间断，截止电量不超过1%，放电曲线任一段不得超出直线±10%范围",
+    "aliases": [
+      "低温续航测试",
+      "Low Temperature Discharge"
+    ],
+    "tags": [
+      "性能测试",
+      "电气性能",
+      "环境应力",
+      "功能验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "电量精确度测试",
+    "name": "电量精确度测试",
+    "category": "TestCase",
+    "definition": "功能正常，1台样机电量90±2%另1台10±2%，记录试验前电量后开关机3次每次间隔1min。每次开关机前后电量差异不超2%",
+    "description": "功能正常，1台样机电量90±2%另1台10±2%，记录试验前电量后开关机3次每次间隔1min。每次开关机前后电量差异不超2%",
+    "aliases": [
+      "电量显示精度",
+      "Battery Level Accuracy"
+    ],
+    "tags": [
+      "性能测试",
+      "用户体验",
+      "软件相关",
+      "电气性能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "OTG输出确认测试",
+    "name": "OTG输出确认测试",
+    "category": "TestCase",
+    "definition": "程控电源设置测试样机电池电压4.2-3.7V，通过电流表确认输出到被充电样机的电压电流值。输出样机电池电压≥3.7V时，OTG充电电流300-500mA、电压≥4.75V",
+    "description": "程控电源设置测试样机电池电压4.2-3.7V，通过电流表确认输出到被充电样机的电压电流值。输出样机电池电压≥3.7V时，OTG充电电流300-500mA、电压≥4.75V",
+    "aliases": [
+      "OTG充电性能",
+      "OTG Output Test"
+    ],
+    "tags": [
+      "性能测试",
+      "电气性能",
+      "功能验证",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "OTG反向充电测试",
+    "name": "OTG反向充电测试",
+    "category": "TestCase",
+    "definition": "OTG样机电量30±5%（反向快充10W样机60%），被充电样机电量0开始连接充至OTG样机电流为0。OTG反向充电电流300-500mA电压≥4.75V，停止时OTG样机电量5±1%。充电宝手机最大输出5V/1A电流900-1100mA，反向快充10W样机60%→40%过程输出功率≥8W",
+    "description": "OTG样机电量30±5%（反向快充10W样机60%），被充电样机电量0开始连接充至OTG样机电流为0。OTG反向充电电流300-500mA电压≥4.75V，停止时OTG样机电量5±1%。充电宝手机最大输出5V/1A电流900-1100mA，反向快充10W样机60%→40%过程输出功率≥8W",
+    "aliases": [
+      "OTG逆向充电",
+      "OTG Reverse Charging"
+    ],
+    "tags": [
+      "性能测试",
+      "电气性能",
+      "功能验证",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "OTG反向充电CTC测试",
+    "name": "OTG反向充电CTC测试",
+    "category": "TestCase",
+    "definition": "CTC样机电量45±5%，被充电样机电量0开始连接充至CTC电流为0。输出样机电量≥30%且打开大电流开关，输入样机支持快充电流≥1A(5W)或1.8A(10W)不支持快充≤500mA。电量<30%或电池温度≥45℃时大电流自动关闭≤500mA，停止时CTC样机电量0±1%",
+    "description": "CTC样机电量45±5%，被充电样机电量0开始连接充至CTC电流为0。输出样机电量≥30%且打开大电流开关，输入样机支持快充电流≥1A(5W)或1.8A(10W)不支持快充≤500mA。电量<30%或电池温度≥45℃时大电流自动关闭≤500mA，停止时CTC样机电量0±1%",
+    "aliases": [
+      "CTC充电性能",
+      "CTC Reverse Charging"
+    ],
+    "tags": [
+      "性能测试",
+      "电气性能",
+      "功能验证",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "NTC功能检测",
+    "name": "NTC功能检测",
+    "category": "TestCase",
+    "definition": "样机在低温关机温度点（-20℃）起始电量90%以上，其他温度点50±2%。环境箱按要求设置温度，根据不同温度区间预警提示设置相应温度点。低温测试需区分普通电池、-10℃充电、-20℃充电",
+    "description": "样机在低温关机温度点（-20℃）起始电量90%以上，其他温度点50±2%。环境箱按要求设置温度，根据不同温度区间预警提示设置相应温度点。低温测试需区分普通电池、-10℃充电、-20℃充电",
+    "aliases": [
+      "温度保护测试",
+      "NTC Protection Test"
+    ],
+    "tags": [
+      "安全性",
+      "热管理",
+      "保护功能",
+      "可靠性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "连续通话测试",
+    "name": "连续通话测试",
+    "category": "TestCase",
+    "definition": "准备2台样机安装LabTestTool，插入开通短号的通话SIM卡，拨通后连接充电器充电96h。每天上午下午晚上巡查确认通话状况，每24h检查电声器件功能。连续通话≥1h（1小时内不能断线），送受话回音功能无异常",
+    "description": "准备2台样机安装LabTestTool，插入开通短号的通话SIM卡，拨通后连接充电器充电96h。每天上午下午晚上巡查确认通话状况，每24h检查电声器件功能。连续通话≥1h（1小时内不能断线），送受话回音功能无异常",
+    "aliases": [
+      "通话稳定性",
+      "Continuous Call Test"
+    ],
+    "tags": [
+      "性能测试",
+      "通信功能",
+      "可靠性",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "功耗测试",
+    "name": "功耗测试",
+    "category": "TestCase",
+    "definition": "假电池连接程控电源测试各场景电流值。通话1张耦合卡，其余状态插满SIM白卡T卡。智能机测试WCDMA、4G最大功率通话灭屏。依实验室整机功耗标准判定，试验前后对比待机≤2mA GSM900耦合通话PCL5≤10%",
+    "description": "假电池连接程控电源测试各场景电流值。通话1张耦合卡，其余状态插满SIM白卡T卡。智能机测试WCDMA、4G最大功率通话灭屏。依实验室整机功耗标准判定，试验前后对比待机≤2mA GSM900耦合通话PCL5≤10%",
+    "aliases": [
+      "电流消耗测试",
+      "Power Consumption Test"
+    ],
+    "tags": [
+      "性能测试",
+      "电气性能",
+      "用户体验",
+      "节能设计"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "OTA暗室天线测试",
+    "name": "OTA暗室天线测试",
+    "category": "TestCase",
+    "definition": "功能正常装入耦合卡，暗室每周金机校准，测量GSM900 CH62、GSM1800 CH698、WCDMA2100_B1 CH9750、FDD_B7 CH3100、FDD_B20 CH6300、TDD_B40 CH39150信道TRP TIS。智能机试验前后TRP TIS差值<3dBm",
+    "description": "功能正常装入耦合卡，暗室每周金机校准，测量GSM900 CH62、GSM1800 CH698、WCDMA2100_B1 CH9750、FDD_B7 CH3100、FDD_B20 CH6300、TDD_B40 CH39150信道TRP TIS。智能机试验前后TRP TIS差值<3dBm",
+    "aliases": [
+      "天线性能测试",
+      "OTA Antenna Test"
+    ],
+    "tags": [
+      "射频相关",
+      "性能测试",
+      "通信功能",
+      "信号质量"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "FM对比测试",
+    "name": "FM对比测试",
+    "category": "TestCase",
+    "definition": "开机状态分插耳机和不插耳机，和标准机同地点时间对比收台多少和清晰度。有效台数不少于对比机3个",
+    "description": "开机状态分插耳机和不插耳机，和标准机同地点时间对比收台多少和清晰度。有效台数不少于对比机3个",
+    "aliases": [
+      "FM收音性能",
+      "FM Radio Test"
+    ],
+    "tags": [
+      "射频相关",
+      "性能测试",
+      "用户体验",
+      "通信功能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "蓝牙试验",
+    "name": "蓝牙试验",
+    "category": "TestCase",
+    "definition": "蓝牙耳机连接样机放置桌面手不握住，两台同型号手机连接，用蓝牙耳机收听音乐通话，同型号手机不隔墙8m互传5MB图片。大于8m连接，收听音乐通话无断续，传输5MB图片≤60s",
+    "description": "蓝牙耳机连接样机放置桌面手不握住，两台同型号手机连接，用蓝牙耳机收听音乐通话，同型号手机不隔墙8m互传5MB图片。大于8m连接，收听音乐通话无断续，传输5MB图片≤60s",
+    "aliases": [
+      "蓝牙性能测试",
+      "Bluetooth Test"
+    ],
+    "tags": [
+      "性能测试",
+      "通信功能",
+      "用户体验",
+      "无线连接"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T14:54:52",
+    "updated_at": "2025-09-28T14:54:52"
+  },
+  {
+    "term": "WIFI试验",
+    "name": "WIFI试验",
+    "category": "TestCase",
+    "definition": "根据样机平台选择对应对比机，10m无障碍空间及有隔墙空间查看可搜索WiFi热点数，使用测试网速APK测试网速，面向路由器中间无其他障碍物。WiFi正常连接，热点数≥对比机80%，网速≥对比机80%",
+    "description": "根据样机平台选择对应对比机，10m无障碍空间及有隔墙空间查看可搜索WiFi热点数，使用测试网速APK测试网速，面向路由器中间无其他障碍物。WiFi正常连接，热点数≥对比机80%，网速≥对比机80%",
+    "aliases": [
+      "无线网络测试",
+      "WiFi Test"
+    ],
+    "tags": [
+      "性能测试",
+      "通信功能",
+      "用户体验",
+      "无线连接"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "音频电压测试",
+    "name": "音频电压测试",
+    "category": "TestCase",
+    "definition": "喇叭听筒功能正常天线信号正常FM搜台正常，示波器测试各测试模式下喇叭听筒工作电压，保持电池电量90%以上。根据音频电压参考标准判定，电压要小于喇叭听筒额定功率下电压值（智能功放不做此测试）",
+    "description": "喇叭听筒功能正常天线信号正常FM搜台正常，示波器测试各测试模式下喇叭听筒工作电压，保持电池电量90%以上。根据音频电压参考标准判定，电压要小于喇叭听筒额定功率下电压值（智能功放不做此测试）",
+    "aliases": [
+      "音频功率测试",
+      "Audio Voltage Test"
+    ],
+    "tags": [
+      "声学",
+      "性能测试",
+      "电气性能",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "GPS试验",
+    "name": "GPS试验",
+    "category": "TestCase",
+    "definition": "使用对比机，电量90%以上，安装高德地图APK。MTK平台输入*#9646633#打开YGPS，展讯平台输入*##2266##*进入SGPS。户外空旷环境运行5-10min测试静态搜星个数和SNR载噪比，数据网络环境用高德地图导航包括各种路况。MTK平台6颗卫星SNR38dB以上，展讯平台搜星数≥对比机80%，动态飘移距离≤60m",
+    "description": "使用对比机，电量90%以上，安装高德地图APK。MTK平台输入*#9646633#打开YGPS，展讯平台输入*##2266##*进入SGPS。户外空旷环境运行5-10min测试静态搜星个数和SNR载噪比，数据网络环境用高德地图导航包括各种路况。MTK平台6颗卫星SNR38dB以上，展讯平台搜星数≥对比机80%，动态飘移距离≤60m",
+    "aliases": [
+      "定位性能测试",
+      "GPS Test"
+    ],
+    "tags": [
+      "性能测试",
+      "通信功能",
+      "用户体验",
+      "功能验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "漏电试验",
+    "name": "漏电试验",
+    "category": "TestCase",
+    "definition": "开机充电状态，万用表调至μA档AC交流电模式，负极接大地正极依次接触手机外壳金属部位。听筒金属网和金属装饰件位置、正面金属边框漏电≤AC10μA，其余金属部位≤AC100μA",
+    "description": "开机充电状态，万用表调至μA档AC交流电模式，负极接大地正极依次接触手机外壳金属部位。听筒金属网和金属装饰件位置、正面金属边框漏电≤AC10μA，其余金属部位≤AC100μA",
+    "aliases": [
+      "安全漏电测试",
+      "Leakage Current Test"
+    ],
+    "tags": [
+      "安全性",
+      "电气性能",
+      "用户安全",
+      "质量控制"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "0V充电内置电池测试",
+    "name": "0V充电内置电池测试",
+    "category": "TestCase",
+    "definition": "在Vbat GND测试点引线，程控电源连接设置2V放电至电流≤3mA。过放后连接标配充电器数据线，支持Power path显示第一生命≤5s不支持只记录时间，充电至可开机≤10min",
+    "description": "在Vbat GND测试点引线，程控电源连接设置2V放电至电流≤3mA。过放后连接标配充电器数据线，支持Power path显示第一生命≤5s不支持只记录时间，充电至可开机≤10min",
+    "aliases": [
+      "过放恢复测试",
+      "Zero Voltage Charging Internal"
+    ],
+    "tags": [
+      "性能测试",
+      "电气性能",
+      "保护功能",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "0V充电外置电池测试",
+    "name": "0V充电外置电池测试",
+    "category": "TestCase",
+    "definition": "选取标配新电池，连接水泥电阻2.5Ω放电12h，连接标配充电器正常充电。过放后充电显示第一生命支持Power path≤5s不支持记录时间，充电至可开机≤10min",
+    "description": "选取标配新电池，连接水泥电阻2.5Ω放电12h，连接标配充电器正常充电。过放后充电显示第一生命支持Power path≤5s不支持记录时间，充电至可开机≤10min",
+    "aliases": [
+      "过放恢复测试",
+      "Zero Voltage Charging External"
+    ],
+    "tags": [
+      "性能测试",
+      "电气性能",
+      "保护功能",
+      "用户体验"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "OVP试验普充",
+    "name": "OVP试验普充",
+    "category": "TestCase",
+    "definition": "开机状态程控电源充电，按标准电压开始每增加0.5V为一个测试级，检查停止充电时电压值。5W-10W充电项目6.5V±0.2V时停止充电，试验后重新开机过程正常",
+    "description": "开机状态程控电源充电，按标准电压开始每增加0.5V为一个测试级，检查停止充电时电压值。5W-10W充电项目6.5V±0.2V时停止充电，试验后重新开机过程正常",
+    "aliases": [
+      "过压保护测试",
+      "OVP Test Normal Charging"
+    ],
+    "tags": [
+      "安全性",
+      "电气性能",
+      "保护功能",
+      "可靠性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "OVP试验快充",
+    "name": "OVP试验快充",
+    "category": "TestCase",
+    "definition": "开机状态程控电源充电，按标准电压开始每增加0.5V测试级检查停止充电电压。18W项目10.5V±0.5V停止，25W-68W项目11±0.5V停止，120W-180W项目20.8V±0.5V停止，试验后重新开机正常",
+    "description": "开机状态程控电源充电，按标准电压开始每增加0.5V测试级检查停止充电电压。18W项目10.5V±0.5V停止，25W-68W项目11±0.5V停止，120W-180W项目20.8V±0.5V停止，试验后重新开机正常",
+    "aliases": [
+      "过压保护测试",
+      "OVP Test Fast Charging"
+    ],
+    "tags": [
+      "安全性",
+      "电气性能",
+      "保护功能",
+      "可靠性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "直流耐压测试",
+    "name": "直流耐压测试",
+    "category": "TestCase",
+    "definition": "程控电源电压12V（印度市场/快充方案24V），数据线连接程控电源给样机充电30min。试验过程程控电源输出电流变化量不大于10mA，试验前后关机漏电流≤1mA重新开机正常能正常充电",
+    "description": "程控电源电压12V（印度市场/快充方案24V），数据线连接程控电源给样机充电30min。试验过程程控电源输出电流变化量不大于10mA，试验前后关机漏电流≤1mA重新开机正常能正常充电",
+    "aliases": [
+      "绝缘耐压测试",
+      "DC Withstand Voltage"
+    ],
+    "tags": [
+      "安全性",
+      "电气性能",
+      "绝缘性能",
+      "可靠性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "常温温升测试",
+    "name": "常温温升测试",
+    "category": "TestCase",
+    "definition": "室温25±1℃，样机初始温度25±1℃无对流风悬空5cm以上。依各测试场景温升标准判定，按产品分类和对应市场标准判定。差异化标准：J代项目快充充电灭屏场景普通充电模式，带三档充电功能B标项目按A标准判定",
+    "description": "室温25±1℃，样机初始温度25±1℃无对流风悬空5cm以上。依各测试场景温升标准判定，按产品分类和对应市场标准判定。差异化标准：J代项目快充充电灭屏场景普通充电模式，带三档充电功能B标项目按A标准判定",
+    "aliases": [
+      "发热测试",
+      "Temperature Rise Test"
+    ],
+    "tags": [
+      "性能测试",
+      "用户体验",
+      "安全性",
+      "热管理"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "高温温升35℃测试",
+    "name": "高温温升35℃测试",
+    "category": "TestCase",
+    "definition": "不充电场景电池起始电量>60%，恒温箱35±1℃，样机初始温度35±1℃，试验前样机在恒温箱夹具或三脚架静置15-30min保证达到起测温度。依各测试场景温升标准判定，差异化标准同常温温升",
+    "description": "不充电场景电池起始电量>60%，恒温箱35±1℃，样机初始温度35±1℃，试验前样机在恒温箱夹具或三脚架静置15-30min保证达到起测温度。依各测试场景温升标准判定，差异化标准同常温温升",
+    "aliases": [
+      "高温发热测试",
+      "High Temperature Rise 35°C"
+    ],
+    "tags": [
+      "性能测试",
+      "用户体验",
+      "安全性",
+      "热管理"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "高温温升40℃测试",
+    "name": "高温温升40℃测试",
+    "category": "TestCase",
+    "definition": "不充电场景电池起始电量>60%，恒温箱40±1℃，样机初始温度40±1℃，试验前样机静置15-30min保证达到起测温度。依各测试场景温升标准判定，差异化标准同常温温升",
+    "description": "不充电场景电池起始电量>60%，恒温箱40±1℃，样机初始温度40±1℃，试验前样机静置15-30min保证达到起测温度。依各测试场景温升标准判定，差异化标准同常温温升",
+    "aliases": [
+      "高温发热测试",
+      "High Temperature Rise 40°C"
+    ],
+    "tags": [
+      "性能测试",
+      "用户体验",
+      "安全性",
+      "热管理"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "LCD性能测试",
+    "name": "LCD性能测试",
+    "category": "TestCase",
+    "definition": "CA-410测试仪测量LCD性能指标，测试9次。测试数据包括亮度、亮度均匀性、色坐标、色域覆盖率、flicker、对比度、白色最小亮度，参考标准对照表判定",
+    "description": "CA-410测试仪测量LCD性能指标，测试9次。测试数据包括亮度、亮度均匀性、色坐标、色域覆盖率、flicker、对比度、白色最小亮度，参考标准对照表判定",
+    "aliases": [
+      "屏幕性能测试",
+      "LCD Performance Test"
+    ],
+    "tags": [
+      "显示相关",
+      "性能测试",
+      "用户体验",
+      "光学性能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "灯箱拍照测试",
+    "name": "灯箱拍照测试",
+    "category": "TestCase",
+    "definition": "摄像头测试灯箱中切换不同背景灯，每个灯光环境拍照，与灯光距离50cm，分前后摄打开关闭闪光灯4种状态各拍3张。成像效果正常无严重发白偏色现象",
+    "description": "摄像头测试灯箱中切换不同背景灯，每个灯光环境拍照，与灯光距离50cm，分前后摄打开关闭闪光灯4种状态各拍3张。成像效果正常无严重发白偏色现象",
+    "aliases": [
+      "摄像头性能测试",
+      "Light Box Camera Test"
+    ],
+    "tags": [
+      "影像相关",
+      "性能测试",
+      "用户体验",
+      "光学性能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "射频干扰测试",
+    "name": "射频干扰测试",
+    "category": "TestCase",
+    "definition": "样机与综测仪建立通话，检测拍照来电干扰、mic-听筒回路、耳机回路、铁棒干扰、按键/触摸屏干扰、内部电子料干扰下样机状态。按键/触摸屏干扰测试10遍其余测试1遍。不能出现关机LCD显示条纹无声/杂音/断续音按键失灵触摸异常/跳点，内部电子料干扰耦合功率差前后对比≤3dBm",
+    "description": "样机与综测仪建立通话，检测拍照来电干扰、mic-听筒回路、耳机回路、铁棒干扰、按键/触摸屏干扰、内部电子料干扰下样机状态。按键/触摸屏干扰测试10遍其余测试1遍。不能出现关机LCD显示条纹无声/杂音/断续音按键失灵触摸异常/跳点，内部电子料干扰耦合功率差前后对比≤3dBm",
+    "aliases": [
+      "RF干扰测试",
+      "RF Interference Test"
+    ],
+    "tags": [
+      "射频相关",
+      "可靠性",
+      "通信功能",
+      "电磁兼容"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "响应时间测试",
+    "name": "响应时间测试",
+    "category": "TestCase",
+    "definition": "恢复出厂时间从点击按钮到主界面亮起，重启亮屏时间从点击重启到第一响应特征，开机时间从按电源键第一响应特征到语言选择界面，关机时间从确认关机到振动完成。恢复出厂≤240s，重启亮屏S/A标≤40s B标≤55s，开机S/A标≤30s B标≤45s，关机≤5s",
+    "description": "恢复出厂时间从点击按钮到主界面亮起，重启亮屏时间从点击重启到第一响应特征，开机时间从按电源键第一响应特征到语言选择界面，关机时间从确认关机到振动完成。恢复出厂≤240s，重启亮屏S/A标≤40s B标≤55s，开机S/A标≤30s B标≤45s，关机≤5s",
+    "aliases": [
+      "系统响应测试",
+      "Response Time Test"
+    ],
+    "tags": [
+      "性能测试",
+      "用户体验",
+      "系统稳定性",
+      "软件相关"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "重复开关机测试",
+    "name": "重复开关机测试",
+    "category": "TestCase",
+    "definition": "开机状态电量100%亮度音量最大，50±2℃/80%RH环境放置2h。功能机和外置电池智能机：方式一按电源键开机到桌面识别SIM卡后拔电池关机50次，方式二按电源键开机出现logo时拔电池关机50次。开关机过程正常存储信息无丢失无其他功能异常",
+    "description": "开机状态电量100%亮度音量最大，50±2℃/80%RH环境放置2h。功能机和外置电池智能机：方式一按电源键开机到桌面识别SIM卡后拔电池关机50次，方式二按电源键开机出现logo时拔电池关机50次。开关机过程正常存储信息无丢失无其他功能异常",
+    "aliases": [
+      "开关机稳定性",
+      "Power Cycle Test"
+    ],
+    "tags": [
+      "可靠性",
+      "系统稳定性",
+      "软件相关",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "充电器适配测试",
+    "name": "充电器适配测试",
+    "category": "TestCase",
+    "definition": "充电器与数据线对标配手机（电量20%以下）开机充电/关机充电，观察充电电压波形和充电情况1分钟。充电电压正常波形平稳，手机充电图标显示正常无断充闪烁异常",
+    "description": "充电器与数据线对标配手机（电量20%以下）开机充电/关机充电，观察充电电压波形和充电情况1分钟。充电电压正常波形平稳，手机充电图标显示正常无断充闪烁异常",
+    "aliases": [
+      "充电兼容性测试",
+      "Charger Compatibility"
+    ],
+    "tags": [
+      "性能测试",
+      "电气性能",
+      "安全性",
+      "兼容性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "传感器试验",
+    "name": "传感器试验",
+    "category": "TestCase",
+    "definition": "确认样机是否有光照距离传感功能，传感器位置涂抹汗液pH 4.0，用手遮挡传感器反复操作50次，涂汗液和遮挡过程记1次，速度4-5秒/次。不能出现传感器失灵光距感值不为0无法点亮屏幕或不灭屏界面卡顿闪烁",
+    "description": "确认样机是否有光照距离传感功能，传感器位置涂抹汗液pH 4.0，用手遮挡传感器反复操作50次，涂汗液和遮挡过程记1次，速度4-5秒/次。不能出现传感器失灵光距感值不为0无法点亮屏幕或不灭屏界面卡顿闪烁",
+    "aliases": [
+      "传感器功能测试",
+      "Sensor Test"
+    ],
+    "tags": [
+      "功能验证",
+      "人机交互",
+      "用户体验",
+      "智能化"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "按键卡死测试",
+    "name": "按键卡死测试",
+    "category": "TestCase",
+    "definition": "样机关机状态，用力压住按键向四周推尽量使按键卡死在周边，每个按键测试2次。按键不会卡死无失灵轻失或手感差等不良现象",
+    "description": "样机关机状态，用力压住按键向四周推尽量使按键卡死在周边，每个按键测试2次。按键不会卡死无失灵轻失或手感差等不良现象",
+    "aliases": [
+      "按键卡滞测试",
+      "Key Stuck Test"
+    ],
+    "tags": [
+      "用户体验",
+      "人机交互",
+      "可靠性",
+      "设计验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "logo防护测试",
+    "name": "logo防护测试",
+    "category": "TestCase",
+    "definition": "去除logo保护膜，logo面置于400目砂纸上，样机上放置500g砝码（itel A系列400g），手推动样机水平直线运动行程5cm往返10次。logo任何部位不允许磨损（logo指所有字体和图案）",
+    "description": "去除logo保护膜，logo面置于400目砂纸上，样机上放置500g砝码（itel A系列400g），手推动样机水平直线运动行程5cm往返10次。logo任何部位不允许磨损（logo指所有字体和图案）",
+    "aliases": [
+      "标识耐磨测试",
+      "Logo Protection Test"
+    ],
+    "tags": [
+      "外观质量",
+      "表面处理",
+      "用户体验",
+      "耐久性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "接口误插测试",
+    "name": "接口误插测试",
+    "category": "TestCase",
+    "definition": "整机开机状态，模拟各种接口误插情况，用样机每个插头依次测试每个接口。不能导致接口功能失灵",
+    "description": "整机开机状态，模拟各种接口误插情况，用样机每个插头依次测试每个接口。不能导致接口功能失灵",
+    "aliases": [
+      "接口容错测试",
+      "Interface Misuse Test"
+    ],
+    "tags": [
+      "用户体验",
+      "人机交互",
+      "可靠性",
+      "设计验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "粗心取卡测试",
+    "name": "粗心取卡测试",
+    "category": "TestCase",
+    "definition": "选取长度>1cm卡针，从卡托小孔上/下MIC孔用力插入不同方向直至无法再插入，插入一个角度检查功能正常再其他角度继续，5次。无功能异常结构器件无破损，观察MIC孔内部对应屏位置是否有损伤，检查上下MIC功能异常",
+    "description": "选取长度>1cm卡针，从卡托小孔上/下MIC孔用力插入不同方向直至无法再插入，插入一个角度检查功能正常再其他角度继续，5次。无功能异常结构器件无破损，观察MIC孔内部对应屏位置是否有损伤，检查上下MIC功能异常",
+    "aliases": [
+      "误操作取卡测试",
+      "Careless Card Removal"
+    ],
+    "tags": [
+      "用户体验",
+      "人机交互",
+      "可靠性",
+      "设计验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "电池盖误操作测试",
+    "name": "电池盖误操作测试",
+    "category": "TestCase",
+    "definition": "针对外置电池盖机型，模拟错误装取电池盖方式：1）反装，2）硬插，装取10次。外置电池盖反装不得完全装入，结构件不能损坏",
+    "description": "针对外置电池盖机型，模拟错误装取电池盖方式：1）反装，2）硬插，装取10次。外置电池盖反装不得完全装入，结构件不能损坏",
+    "aliases": [
+      "电池盖错误安装",
+      "Battery Cover Misuse"
+    ],
+    "tags": [
+      "用户体验",
+      "人机交互",
+      "可靠性",
+      "设计验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "SIM卡槽易用性测试",
+    "name": "SIM卡槽易用性测试",
+    "category": "TestCase",
+    "definition": "确认所有SIM卡槽插入舒适性，SIM卡卡托反向（换向换面）从不同角度插入5次，空卡托插拔10次，变形卡托（变形量≤0.3mm装卡不装卡）各插拔10次，叠层卡托从不同角度插入5次。SIM卡卡托组合插入拔出方便无摇晃异响无不识卡功能问题卡托弹出正常，拆机检查无反插斜插导致损坏无弹片断裂损坏",
+    "description": "确认所有SIM卡槽插入舒适性，SIM卡卡托反向（换向换面）从不同角度插入5次，空卡托插拔10次，变形卡托（变形量≤0.3mm装卡不装卡）各插拔10次，叠层卡托从不同角度插入5次。SIM卡卡托组合插入拔出方便无摇晃异响无不识卡功能问题卡托弹出正常，拆机检查无反插斜插导致损坏无弹片断裂损坏",
+    "aliases": [
+      "SIM卡座用户友好性",
+      "SIM Card Slot Usability"
+    ],
+    "tags": [
+      "用户体验",
+      "人机交互",
+      "接口设计",
+      "设计验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "电池专项测试",
+    "name": "电池专项测试",
+    "category": "TestCase",
+    "definition": "只针对内置电池项目，开机状态样机电量100%。自由跌落1m 6面+4角为1轮共5轮到2cm厚花岗岩，滚筒跌落50cm 500次+100cm 200次测试速度12次/min，恒温恒湿50℃/95%RH 120h。不能出现电池漏液鼓包破损移位等其他功能性不良",
+    "description": "只针对内置电池项目，开机状态样机电量100%。自由跌落1m 6面+4角为1轮共5轮到2cm厚花岗岩，滚筒跌落50cm 500次+100cm 200次测试速度12次/min，恒温恒湿50℃/95%RH 120h。不能出现电池漏液鼓包破损移位等其他功能性不良",
+    "aliases": [
+      "电池极限测试",
+      "Battery Extreme Test"
+    ],
+    "tags": [
+      "安全性",
+      "可靠性",
+      "电气性能",
+      "极限验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "FPC专项测试",
+    "name": "FPC专项测试",
+    "category": "TestCase",
+    "definition": "重复跌落2.5万次+CAF老化120h。极限试验正/反面各25000次测试顺序正-反，FPC专项试验反面25000次然后接着做CAF老化120h。极限标准只记录A类功能不良不做判定，FPC专项只针对FPC接触类问题判定其他问题供参考（电池只分析起火爆炸其他不分析）",
+    "description": "重复跌落2.5万次+CAF老化120h。极限试验正/反面各25000次测试顺序正-反，FPC专项试验反面25000次然后接着做CAF老化120h。极限标准只记录A类功能不良不做判定，FPC专项只针对FPC接触类问题判定其他问题供参考（电池只分析起火爆炸其他不分析）",
+    "aliases": [
+      "FPC连接可靠性",
+      "FPC Reliability Test"
+    ],
+    "tags": [
+      "可靠性",
+      "制造工艺",
+      "连接器",
+      "极限验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "USB插拔腐蚀测试",
+    "name": "USB插拔腐蚀测试",
+    "category": "TestCase",
+    "definition": "标配数据线带电插拔200次，滴汗液pH 6.6±0.2填满USB口朝上垂直放置10min后朝下自然流出30s轻甩，环境箱45°/90%RH放置20h保持充电状态，放电至30%再重复，共三轮。USB座子功能正常小板器件不能腐蚀",
+    "description": "标配数据线带电插拔200次，滴汗液pH 6.6±0.2填满USB口朝上垂直放置10min后朝下自然流出30s轻甩，环境箱45°/90%RH放置20h保持充电状态，放电至30%再重复，共三轮。USB座子功能正常小板器件不能腐蚀",
+    "aliases": [
+      "USB耐腐蚀性",
+      "USB Corrosion Test"
+    ],
+    "tags": [
+      "可靠性",
+      "接口设计",
+      "防护性能",
+      "极限验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "单点硬压CPU/Flash测试",
+    "name": "单点硬压CPU/Flash测试",
+    "category": "TestCase",
+    "definition": "插满卡待机状态，8mm直径铁杆12.5N/s速度。CPU FLASH（DDR/EMMC）不管芯片在正面反面都在对应位置电池盖压，从200N开始50N递增每个力值测试1次保持2s，测试到极限最大值450N，每测1次检查1次功能（参考项）",
+    "description": "插满卡待机状态，8mm直径铁杆12.5N/s速度。CPU FLASH（DDR/EMMC）不管芯片在正面反面都在对应位置电池盖压，从200N开始50N递增每个力值测试1次保持2s，测试到极限最大值450N，每测1次检查1次功能（参考项）",
+    "aliases": [
+      "芯片极限压力",
+      "Extreme CPU Flash Pressure"
+    ],
+    "tags": [
+      "可靠性",
+      "制造工艺",
+      "机械强度",
+      "极限验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "75°雨淋测试",
+    "name": "75°雨淋测试",
+    "category": "TestCase",
+    "definition": "非东南亚市场为极限测试，偏心距10cm水箱距离20cm高度，水流量3-3.5mm/min水温25±10℃，转盘1r/min，测试前电量≥90%。手机功能正常LCD/CAM视窗无进水主板电子器件弹片馈点无腐蚀发霉。摆放角度75°试验为参考项（东南亚市场必过项）",
+    "description": "非东南亚市场为极限测试，偏心距10cm水箱距离20cm高度，水流量3-3.5mm/min水温25±10℃，转盘1r/min，测试前电量≥90%。手机功能正常LCD/CAM视窗无进水主板电子器件弹片馈点无腐蚀发霉。摆放角度75°试验为参考项（东南亚市场必过项）",
+    "aliases": [
+      "极限防水测试",
+      "75° Rain Test"
+    ],
+    "tags": [
+      "可靠性",
+      "防护性能",
+      "极限验证",
+      "东南亚专项"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:25",
+    "updated_at": "2025-09-28T15:00:25"
+  },
+  {
+    "term": "LIMS系统",
+    "name": "LIMS系统",
+    "category": "Tool",
+    "definition": "可靠性测试流程管理系统，用于测试申请、样机管理、结果录入、报告输出等全流程管理。委托部门登录系统提交测试申请单，实验室录入测试结果，系统定期推送问题点直至闭环",
+    "description": "可靠性测试流程管理系统，用于测试申请、样机管理、结果录入、报告输出等全流程管理。委托部门登录系统提交测试申请单，实验室录入测试结果，系统定期推送问题点直至闭环",
+    "aliases": [
+      "实验室信息管理系统",
+      "Laboratory Information Management System"
+    ],
+    "tags": [
+      "质量体系",
+      "测试验证",
+      "信息管理",
+      "工具"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "PR0阶段",
+    "name": "PR0阶段",
+    "category": "Process",
+    "definition": "新品开发第一个测试阶段，需要58台样机进行全面可靠性测试，是产品设计验证的关键节点",
+    "description": "新品开发第一个测试阶段，需要58台样机进行全面可靠性测试，是产品设计验证的关键节点",
+    "aliases": [
+      "项目研发阶段0",
+      "Project Research Phase 0"
+    ],
+    "tags": [
+      "项目相关",
+      "设计",
+      "硬件相关",
+      "测试验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "PR1阶段",
+    "name": "PR1阶段",
+    "category": "Process",
+    "definition": "新品开发第二个测试阶段，需要96台样机，在PR0基础上进行设计优化后的验证测试",
+    "description": "新品开发第二个测试阶段，需要96台样机，在PR0基础上进行设计优化后的验证测试",
+    "aliases": [
+      "项目研发阶段1",
+      "Project Research Phase 1"
+    ],
+    "tags": [
+      "项目相关",
+      "设计",
+      "硬件相关",
+      "测试验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "PR2阶段",
+    "name": "PR2阶段",
+    "category": "Process",
+    "definition": "新品开发第三个测试阶段，需要40台样机，具体数量需结合PR1测试情况及项目状态调整",
+    "description": "新品开发第三个测试阶段，需要40台样机，具体数量需结合PR1测试情况及项目状态调整",
+    "aliases": [
+      "项目研发阶段2",
+      "Project Research Phase 2"
+    ],
+    "tags": [
+      "项目相关",
+      "设计",
+      "硬件相关",
+      "测试验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "PIR阶段",
+    "name": "PIR阶段",
+    "category": "Process",
+    "definition": "量产前最后验证阶段，需要51台样机，还需增加前阶段测试Fail且PIR方案未包含的测试项",
+    "description": "量产前最后验证阶段，需要51台样机，还需增加前阶段测试Fail且PIR方案未包含的测试项",
+    "aliases": [
+      "量产前验证阶段",
+      "Pre-Industrial Release"
+    ],
+    "tags": [
+      "项目相关",
+      "制造工艺",
+      "质量体系",
+      "测试验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "ECN测试",
+    "name": "ECN测试",
+    "category": "Process",
+    "definition": "针对产品工程变更进行的专项测试，如更换CTP、LCD、CAM、平台、电池等关键器件的验证测试",
+    "description": "针对产品工程变更进行的专项测试，如更换CTP、LCD、CAM、平台、电池等关键器件的验证测试",
+    "aliases": [
+      "工程变更测试",
+      "Engineering Change Notice Test"
+    ],
+    "tags": [
+      "项目相关",
+      "设计",
+      "变更管理",
+      "测试验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "二供测试",
+    "name": "二供测试",
+    "category": "Process",
+    "definition": "为降低供应风险引入第二供应商时进行的产品验证测试，确保不同供应商产品质量一致性",
+    "description": "为降低供应风险引入第二供应商时进行的产品验证测试，确保不同供应商产品质量一致性",
+    "aliases": [
+      "第二供应商验证",
+      "Second Supplier Test"
+    ],
+    "tags": [
+      "供应链",
+      "质量体系",
+      "风险管理",
+      "测试验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "转厂测试",
+    "name": "转厂测试",
+    "category": "Process",
+    "definition": "产品生产从一个工厂转移到另一个工厂时进行的验证测试，包括组装转厂、SMT转厂、三合一转厂等",
+    "description": "产品生产从一个工厂转移到另一个工厂时进行的验证测试，包括组装转厂、SMT转厂、三合一转厂等",
+    "aliases": [
+      "生产转移验证",
+      "Factory Transfer Test"
+    ],
+    "tags": [
+      "制造工艺",
+      "质量体系",
+      "生产管理",
+      "测试验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "复制模测试",
+    "name": "复制模测试",
+    "category": "Process",
+    "definition": "验证不同配置或批次产品的互换性，一种互配需要4台样机，样机数量以此类推",
+    "description": "验证不同配置或批次产品的互换性，一种互配需要4台样机，样机数量以此类推",
+    "aliases": [
+      "互配验证测试",
+      "Interchangeability Test"
+    ],
+    "tags": [
+      "设计",
+      "质量体系",
+      "兼容性",
+      "测试验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "量产例行测试",
+    "name": "量产例行测试",
+    "category": "Process",
+    "definition": "产品进入量产阶段后的定期抽样检验，智能机1次/30K，功能机1次/100K，确保量产质量稳定性",
+    "description": "产品进入量产阶段后的定期抽样检验，智能机1次/30K，功能机1次/100K，确保量产质量稳定性",
+    "aliases": [
+      "批量生产例行检验",
+      "Mass Production Routine Test"
+    ],
+    "tags": [
+      "制造工艺",
+      "质量体系",
+      "生产管理",
+      "测试验证"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "低温市场专项",
+    "name": "低温市场专项",
+    "category": "TestCase",
+    "definition": "针对俄罗斯、白俄罗斯、乌克兰、哈萨克斯坦等低温市场的专项测试，包括-15℃/-20℃环境下的各种可靠性验证",
+    "description": "针对俄罗斯、白俄罗斯、乌克兰、哈萨克斯坦等低温市场的专项测试，包括-15℃/-20℃环境下的各种可靠性验证",
+    "aliases": [
+      "寒带地区专项测试",
+      "Cold Climate Market Test"
+    ],
+    "tags": [
+      "可靠性",
+      "环境应力",
+      "市场适应性",
+      "特殊要求"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "东南亚市场专项",
+    "name": "东南亚市场专项",
+    "category": "TestCase",
+    "definition": "针对东南亚热带湿润气候的专项测试，75°雨淋为必过项，加强防水防潮性能验证",
+    "description": "针对东南亚热带湿润气候的专项测试，75°雨淋为必过项，加强防水防潮性能验证",
+    "aliases": [
+      "热带湿润地区专项",
+      "Southeast Asia Market Test"
+    ],
+    "tags": [
+      "可靠性",
+      "环境应力",
+      "市场适应性",
+      "防护性能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "印度市场专项",
+    "name": "印度市场专项",
+    "category": "TestCase",
+    "definition": "针对印度市场的专项测试要求，包括更严格的浪涌标准（D浪涌正压≥25V）和更长的寿命测试时间",
+    "description": "针对印度市场的专项测试要求，包括更严格的浪涌标准（D浪涌正压≥25V）和更长的寿命测试时间",
+    "aliases": [
+      "印度地区专项测试",
+      "India Market Test"
+    ],
+    "tags": [
+      "可靠性",
+      "环境应力",
+      "市场适应性",
+      "特殊要求"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:34",
+    "updated_at": "2025-09-28T15:00:34"
+  },
+  {
+    "term": "A类故障",
+    "name": "A类故障",
+    "category": "Symptom",
+    "definition": "影响产品基本功能的严重故障，如无法开机、通话中断、充电失效等，属于不可接受的质量问题",
+    "description": "影响产品基本功能的严重故障，如无法开机、通话中断、充电失效等，属于不可接受的质量问题",
+    "aliases": [
+      "严重功能故障",
+      "Class A Failure"
+    ],
+    "tags": [
+      "质量体系",
+      "失效分析",
+      "风险管理",
+      "可靠性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:42",
+    "updated_at": "2025-09-28T15:00:42"
+  },
+  {
+    "term": "功耗对比",
+    "name": "功耗对比",
+    "category": "Metric",
+    "definition": "测试前后功耗变化的对比指标，待机电流对比≤2mA，通话电流对比≤10%，用于评估测试对产品性能的影响",
+    "description": "测试前后功耗变化的对比指标，待机电流对比≤2mA，通话电流对比≤10%，用于评估测试对产品性能的影响",
+    "aliases": [
+      "电流消耗对比",
+      "Power Consumption Comparison"
+    ],
+    "tags": [
+      "性能指标",
+      "电气性能",
+      "用户体验",
+      "节能设计"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:42",
+    "updated_at": "2025-09-28T15:00:42"
+  },
+  {
+    "term": "TRP指标",
+    "name": "TRP指标",
+    "category": "Metric",
+    "definition": "天线在所有方向上辐射的总功率，是衡量天线发射性能的重要指标，智能机测试前后差值应小于3dBm",
+    "description": "天线在所有方向上辐射的总功率，是衡量天线发射性能的重要指标，智能机测试前后差值应小于3dBm",
+    "aliases": [
+      "总辐射功率",
+      "Total Radiated Power"
+    ],
+    "tags": [
+      "射频相关",
+      "性能指标",
+      "通信功能",
+      "天线性能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:42",
+    "updated_at": "2025-09-28T15:00:42"
+  },
+  {
+    "term": "TIS指标",
+    "name": "TIS指标",
+    "category": "Metric",
+    "definition": "天线在所有方向上的接收灵敏度，是衡量天线接收性能的重要指标，与TRP配合评估天线整体性能",
+    "description": "天线在所有方向上的接收灵敏度，是衡量天线接收性能的重要指标，与TRP配合评估天线整体性能",
+    "aliases": [
+      "总全向灵敏度",
+      "Total Isotropic Sensitivity"
+    ],
+    "tags": [
+      "射频相关",
+      "性能指标",
+      "通信功能",
+      "天线性能"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:42",
+    "updated_at": "2025-09-28T15:00:42"
+  },
+  {
+    "term": "CAF失效",
+    "name": "CAF失效",
+    "category": "Symptom",
+    "definition": "PCB在高温高湿环境下产生的导电丝状物导致的电路短路失效，是电子产品常见的可靠性失效模式",
+    "description": "PCB在高温高湿环境下产生的导电丝状物导致的电路短路失效，是电子产品常见的可靠性失效模式",
+    "aliases": [
+      "导电阳极丝状物失效",
+      "Conductive Anodic Filament"
+    ],
+    "tags": [
+      "可靠性",
+      "失效分析",
+      "电气性能",
+      "长期稳定性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:42",
+    "updated_at": "2025-09-28T15:00:42"
+  },
+  {
+    "term": "脱焊",
+    "name": "脱焊",
+    "category": "Symptom",
+    "definition": "焊点完全脱离焊盘的失效现象，通常由热应力、机械应力或焊接工艺不当引起",
+    "description": "焊点完全脱离焊盘的失效现象，通常由热应力、机械应力或焊接工艺不当引起",
+    "aliases": [
+      "焊点脱离",
+      "Solder Joint Separation"
+    ],
+    "tags": [
+      "制造工艺",
+      "SMT",
+      "焊接质量",
+      "可靠性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:42",
+    "updated_at": "2025-09-28T15:00:42"
+  },
+  {
+    "term": "烧屏",
+    "name": "烧屏",
+    "category": "Symptom",
+    "definition": "AMOLED屏幕长时间显示固定画面后产生的永久性残影现象，影响显示效果和用户体验",
+    "description": "AMOLED屏幕长时间显示固定画面后产生的永久性残影现象，影响显示效果和用户体验",
+    "aliases": [
+      "屏幕残影",
+      "Screen Burn-in"
+    ],
+    "tags": [
+      "显示相关",
+      "可靠性",
+      "用户体验",
+      "材料特性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:42",
+    "updated_at": "2025-09-28T15:00:42"
+  },
+  {
+    "term": "水波纹",
+    "name": "水波纹",
+    "category": "Symptom",
+    "definition": "触摸屏受到冲击时产生的波纹状视觉干扰，影响显示效果，通常与贴合工艺相关",
+    "description": "触摸屏受到冲击时产生的波纹状视觉干扰，影响显示效果，通常与贴合工艺相关",
+    "aliases": [
+      "触摸屏波纹",
+      "Touch Panel Ripple"
+    ],
+    "tags": [
+      "显示相关",
+      "用户体验",
+      "质量控制",
+      "制造工艺"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:42",
+    "updated_at": "2025-09-28T15:00:42"
+  },
+  {
+    "term": "牛顿环",
+    "name": "牛顿环",
+    "category": "Symptom",
+    "definition": "屏幕贴合不良导致的彩色环状干涉条纹，影响显示效果，多发生在框贴工艺中",
+    "description": "屏幕贴合不良导致的彩色环状干涉条纹，影响显示效果，多发生在框贴工艺中",
+    "aliases": [
+      "水印现象",
+      "Newton Ring"
+    ],
+    "tags": [
+      "显示相关",
+      "外观质量",
+      "制造工艺",
+      "材料特性"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:42",
+    "updated_at": "2025-09-28T15:00:42"
+  },
+  {
+    "term": "重影现象",
+    "name": "重影现象",
+    "category": "Symptom",
+    "definition": "高温环境下LCD屏幕出现的图像重叠现象，通常在恒温恒湿测试中观察，影响显示清晰度",
+    "description": "高温环境下LCD屏幕出现的图像重叠现象，通常在恒温恒湿测试中观察，影响显示清晰度",
+    "aliases": [
+      "屏幕重影",
+      "Ghost Image"
+    ],
+    "tags": [
+      "显示相关",
+      "可靠性",
+      "用户体验",
+      "环境应力"
+    ],
+    "source": "dictionary",
+    "status": "active",
+    "created_at": "2025-09-28T15:00:42",
+    "updated_at": "2025-09-28T15:00:42"
+  },
+  {
+    "term": "白平衡偏移",
+    "aliases": [
+      "WB偏移",
+      "White Balance Shift"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "影像相关",
+      "测试验证"
+    ],
+    "description": "拍摄画面整体偏黄/偏蓝，与光源色温或传感器校准有关。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "颜色失真",
+    "aliases": [
+      "色偏",
+      "Color Cast"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "显示相关",
+      "影像相关"
+    ],
+    "description": "显示/成像颜色与标准不一致，影响用户体验。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "触控漂移",
+    "aliases": [
+      "Touch Drift"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "显示相关",
+      "人机交互"
+    ],
+    "description": "触点坐标漂移，误触加剧，影响操作精度。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "触控断点",
+    "aliases": [
+      "Touch Break"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "显示相关",
+      "人机交互"
+    ],
+    "description": "滑动轨迹出现中断，影响手势操作流畅性。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "屏闪严重",
+    "aliases": [
+      "重度频闪",
+      "Severe Flicker"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "显示相关",
+      "性能指标"
+    ],
+    "description": "低亮度下可见闪烁，PWM调光频率过低导致。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "摄像头黑屏",
+    "aliases": [
+      "Camera Black Screen"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "影像相关",
+      "软件相关"
+    ],
+    "description": "打开相机应用无画面输出，可能是驱动或硬件故障。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "对焦缓慢",
+    "aliases": [
+      "慢对焦",
+      "Slow AF"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "影像相关",
+      "性能指标"
+    ],
+    "description": "对焦时间超出规格，影响抓拍体验。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "OIS异响",
+    "aliases": [
+      "OIS Noise"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "影像相关",
+      "可靠性"
+    ],
+    "description": "防抖组件工作时出现杂音，可能是马达或悬架异常。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "通话回声",
+    "aliases": [
+      "Echo"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "声学",
+      "用户体验"
+    ],
+    "description": "对端或本端听到回声，影响通话质量。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "麦克风底噪高",
+    "aliases": [
+      "高噪底",
+      "High Mic Noise Floor"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "声学",
+      "性能指标"
+    ],
+    "description": "静音环境仍有明显噪声，影响录音质量。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "天线脱网",
+    "aliases": [
+      "无服务间歇",
+      "Intermittent No Service"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "射频相关",
+      "通信相关"
+    ],
+    "description": "场景性/区域性无信号，可能是天线或射频链路问题。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "Wi-Fi速率低",
+    "aliases": [
+      "速率不达标",
+      "Low Throughput"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "射频相关",
+      "性能指标"
+    ],
+    "description": "连接正常但吞吐偏低，影响数据传输。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "蓝牙断连",
+    "aliases": [
+      "BLE断开",
+      "BT Drop"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "射频相关",
+      "通信相关"
+    ],
+    "description": "外设连接频繁掉线，影响使用体验。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "GPS飘移",
+    "aliases": [
+      "定位飘",
+      "GPS Drift"
+    ],
+    "category": "Symptom",
+    "tags": [
+      "异常现象",
+      "射频相关",
+      "传感器"
+    ],
+    "description": "静止场景定位点跳动，影响导航精度。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Symptom"
+  },
+  {
+    "term": "CMOS图像传感器",
+    "aliases": [
+      "Image Sensor"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "硬件相关",
+      "影像相关"
+    ],
+    "description": "摄像头成像核心器件，将光信号转换为电信号。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "VCM对焦马达",
+    "aliases": [
+      "对焦马达",
+      "VCM"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "硬件相关",
+      "摄像头模组"
+    ],
+    "description": "驱动镜组移动实现AF，常见问题包括卡死、异响。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "OIS模组",
+    "aliases": [
+      "光学防抖模组"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "硬件相关",
+      "摄像头模组"
+    ],
+    "description": "通过位移/倾角补偿抖动，提升成像稳定性。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "IR滤光片",
+    "aliases": [
+      "红外截止片",
+      "IR-cut"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "硬件相关",
+      "影像相关"
+    ],
+    "description": "抑制红外干扰提升色彩还原，白天/夜间切换。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "镜头组",
+    "aliases": [
+      "Lens Group"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "硬件相关",
+      "摄像头模组"
+    ],
+    "description": "多片镜片组合的光学系统，决定成像质量。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "ToF模组",
+    "aliases": [
+      "飞行时间传感器"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "传感器",
+      "影像相关"
+    ],
+    "description": "深度感知与对焦辅助，用于人像虚化和3D建模。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "ALS传感器",
+    "aliases": [
+      "光感",
+      "Ambient Light Sensor"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "传感器",
+      "显示相关"
+    ],
+    "description": "自适应亮度调节输入，感知环境光强度。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "指纹模组",
+    "aliases": [
+      "Fingerprint Module"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "传感器",
+      "人机交互"
+    ],
+    "description": "屏下/侧边指纹识别，生物认证核心组件。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "NFC线圈",
+    "aliases": [
+      "NFC Coil"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "射频相关"
+    ],
+    "description": "近场通信耦合线圈，用于移动支付和数据传输。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "PA功放",
+    "aliases": [
+      "Power Amplifier"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "硬件相关",
+      "射频相关",
+      "电气性能"
+    ],
+    "description": "蜂窝发射功率放大，提升信号覆盖。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "LNA低噪放",
+    "aliases": [
+      "Low Noise Amp"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "硬件相关",
+      "射频相关",
+      "电气性能"
+    ],
+    "description": "接收链路前端放大，提升灵敏度。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "Wi-Fi/BT模组",
+    "aliases": [
+      "WLAN/BT Module"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "硬件相关",
+      "射频相关",
+      "通信相关"
+    ],
+    "description": "Wi-Fi/蓝牙射频与基带集成模组。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "触控控制器",
+    "aliases": [
+      "Touch Controller"
+    ],
+    "category": "Component",
+    "tags": [
+      "部件",
+      "硬件相关",
+      "显示相关"
+    ],
+    "description": "触控采样与解算IC，处理触摸信号。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Component"
+  },
+  {
+    "term": "光学暗箱",
+    "aliases": [
+      "Dark Box"
+    ],
+    "category": "Tool",
+    "tags": [
+      "工具",
+      "测试验证",
+      "影像相关"
+    ],
+    "description": "相机测试恒定光环境，隔绝外界光干扰。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Tool"
+  },
+  {
+    "term": "分辨率测试卡",
+    "aliases": [
+      "ISO12233卡",
+      "Resolution Chart"
+    ],
+    "category": "Tool",
+    "tags": [
+      "工具",
+      "测试验证",
+      "影像相关"
+    ],
+    "description": "成像清晰度评估标板，测试MTF和分辨率。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Tool"
+  },
+  {
+    "term": "SNR测试卡",
+    "aliases": [
+      "信噪比卡"
+    ],
+    "category": "Tool",
+    "tags": [
+      "工具",
+      "测试验证",
+      "影像相关"
+    ],
+    "description": "噪声/动态范围测评，评估图像质量。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Tool"
+  },
+  {
+    "term": "SAR测试系统",
+    "aliases": [
+      "SAR System"
+    ],
+    "category": "Tool",
+    "tags": [
+      "工具",
+      "测试验证",
+      "安全相关"
+    ],
+    "description": "人体吸收率评估，确保电磁辐射安全。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Tool"
+  },
+  {
+    "term": "恒温恒湿箱",
+    "aliases": [
+      "TH Chamber"
+    ],
+    "category": "Tool",
+    "tags": [
+      "工具",
+      "测试验证",
+      "可靠性"
+    ],
+    "description": "高低温/湿热循环试验，验证环境适应性。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Tool"
+  },
+  {
+    "term": "跌落试验机",
+    "aliases": [
+      "Drop Tester"
+    ],
+    "category": "Tool",
+    "tags": [
+      "工具",
+      "测试验证",
+      "可靠性"
+    ],
+    "description": "自由跌落与角边面冲击，验证结构强度。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Tool"
+  },
+  {
+    "term": "AA主动对准",
+    "aliases": [
+      "Active Alignment"
+    ],
+    "category": "Process",
+    "tags": [
+      "制造工艺",
+      "摄像头模组"
+    ],
+    "description": "传感器与镜组六轴主动对准，确保成像质量。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Process"
+  },
+  {
+    "term": "OCR全贴合",
+    "aliases": [
+      "液态光学贴合"
+    ],
+    "category": "Process",
+    "tags": [
+      "制造工艺",
+      "显示相关"
+    ],
+    "description": "液态胶灌注式屏幕贴合，减少反射提升显示效果。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Process"
+  },
+  {
+    "term": "OCA层压",
+    "aliases": [
+      "OCA贴合"
+    ],
+    "category": "Process",
+    "tags": [
+      "制造工艺",
+      "显示相关"
+    ],
+    "description": "预涂光学胶片层压工艺，提升透光率和触控性能。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Process"
+  },
+  {
+    "term": "点胶固化",
+    "aliases": [
+      "Dispense&Cure"
+    ],
+    "category": "Process",
+    "tags": [
+      "制造工艺",
+      "胶粘剂"
+    ],
+    "description": "胶体定量涂布与固化，用于密封和粘接。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Process"
+  },
+  {
+    "term": "老化应力",
+    "aliases": [
+      "Burn-in"
+    ],
+    "category": "Process",
+    "tags": [
+      "可靠性",
+      "测试验证"
+    ],
+    "description": "高负载运行激发早期失效，筛选不良品。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Process"
+  },
+  {
+    "term": "防水组装",
+    "aliases": [
+      "防水堆栈",
+      "Waterproof Stack"
+    ],
+    "category": "Process",
+    "tags": [
+      "制造工艺",
+      "结构相关"
+    ],
+    "description": "密封圈/胶路/透气膜组合装配，实现防水功能。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Process"
+  },
+  {
+    "term": "EMC整改流程",
+    "aliases": [
+      "EMI整改流程"
+    ],
+    "category": "Process",
+    "tags": [
+      "流程相关",
+      "EMC"
+    ],
+    "description": "发现→定位→方案→验证闭环，解决电磁兼容问题。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Process"
+  },
+  {
+    "term": "AF成功率测试",
+    "aliases": [
+      "AF Success Rate"
+    ],
+    "category": "TestCase",
+    "tags": [
+      "测试验证",
+      "影像相关"
+    ],
+    "description": "多光照/景深下对焦成功占比，评估对焦性能。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "TestCase"
+  },
+  {
+    "term": "OIS抗抖测试",
+    "aliases": [
+      "OIS Stability"
+    ],
+    "category": "TestCase",
+    "tags": [
+      "测试验证",
+      "影像相关"
+    ],
+    "description": "振台位移谱下的成像清晰度，验证防抖效果。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "TestCase"
+  },
+  {
+    "term": "低亮度屏闪测试",
+    "aliases": [
+      "PWM可视化"
+    ],
+    "category": "TestCase",
+    "tags": [
+      "测试验证",
+      "显示相关"
+    ],
+    "description": "低亮/高频场景频闪判定，评估视觉舒适度。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "TestCase"
+  },
+  {
+    "term": "触控线性测试",
+    "aliases": [
+      "Touch Linearity"
+    ],
+    "category": "TestCase",
+    "tags": [
+      "测试验证",
+      "显示相关"
+    ],
+    "description": "坐标采样线性偏差评估，验证触控精度。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "TestCase"
+  },
+  {
+    "term": "TRP辐射功率测试",
+    "aliases": [
+      "TRP"
+    ],
+    "category": "TestCase",
+    "tags": [
+      "测试验证",
+      "射频相关"
+    ],
+    "description": "全向辐射功率指标，评估发射性能。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "TestCase"
+  },
+  {
+    "term": "TIS灵敏度测试",
+    "aliases": [
+      "TIS"
+    ],
+    "category": "TestCase",
+    "tags": [
+      "测试验证",
+      "射频相关"
+    ],
+    "description": "终端接收灵敏度，评估接收性能。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "TestCase"
+  },
+  {
+    "term": "GPS冷启动测试",
+    "aliases": [
+      "GNSS Cold Start"
+    ],
+    "category": "TestCase",
+    "tags": [
+      "测试验证",
+      "射频相关"
+    ],
+    "description": "首次定位时间与成功率，评估定位性能。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "TestCase"
+  },
+  {
+    "term": "SNR",
+    "aliases": [
+      "信噪比"
+    ],
+    "category": "Metric",
+    "tags": [
+      "性能指标",
+      "影像相关"
+    ],
+    "description": "图像/音频/射频信号质量度量，评估信号纯净度。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Metric"
+  },
+  {
+    "term": "ΔE",
+    "aliases": [
+      "色差ΔE",
+      "Color Accuracy"
+    ],
+    "category": "Metric",
+    "tags": [
+      "性能指标",
+      "显示相关"
+    ],
+    "description": "与参考色的偏差值，评估色彩准确性。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Metric"
+  },
+  {
+    "term": "JNCD",
+    "aliases": [
+      "最小可觉差"
+    ],
+    "category": "Metric",
+    "tags": [
+      "性能指标",
+      "显示相关"
+    ],
+    "description": "屏幕可感知色准门槛，评估色彩精度。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Metric"
+  },
+  {
+    "term": "TRP",
+    "aliases": [
+      "总辐射功率"
+    ],
+    "category": "Metric",
+    "tags": [
+      "性能指标",
+      "射频相关"
+    ],
+    "description": "终端发射综合能力指标，评估天线性能。",
+    "sub_category": "",
+    "source": "manual_supplement_2025",
+    "status": "",
+    "original_category": "Metric"
   }
 ]

@@ -257,26 +257,59 @@ export default {
       try {
         versions.value = [
           {
+            id: 'v1.3.0',
+            name: 'v1.3.0 - Schema管理与系统优化',
+            type: 'feature',
+            description: '新增词典Schema和图谱Schema展示功能，完成系统性能优化（API响应时间提升90%+），添加Neo4j索引，启用Redis缓存',
+            author: 'System',
+            file_count: 25,
+            size: '3.8MB',
+            is_current: true,
+            created_at: '2025-10-09 11:00:00'
+          },
+          {
+            id: 'v1.2.1',
+            name: 'v1.2.1 - 图谱超时问题修复',
+            type: 'fix',
+            description: '修复图谱可视化超时问题，前端超时从10秒增加到60秒，后端缓存逻辑修复',
+            author: 'System',
+            file_count: 3,
+            size: '0.5MB',
+            is_current: false,
+            created_at: '2025-10-09 09:30:00'
+          },
+          {
             id: 'v1.2.0',
             name: 'v1.2.0 - 系统管理功能',
             type: 'feature',
-            description: '新增系统管理页面，包含规则管理、Prompt管理等功能模块',
+            description: '新增系统管理页面，包含规则管理、Prompt管理、场景管理、版本管理等功能模块',
             author: 'System',
             file_count: 15,
             size: '2.3MB',
-            is_current: true,
-            created_at: '2024-01-20 15:30:00'
+            is_current: false,
+            created_at: '2025-10-04 15:30:00'
           },
           {
             id: 'v1.1.0',
             name: 'v1.1.0 - 图谱可视化优化',
             type: 'enhancement',
-            description: '优化图谱可视化性能，新增节点过滤功能',
+            description: '优化图谱可视化性能，新增节点过滤功能，改进交互体验',
             author: 'System',
             file_count: 8,
             size: '1.8MB',
             is_current: false,
-            created_at: '2024-01-18 10:20:00'
+            created_at: '2025-10-02 10:20:00'
+          },
+          {
+            id: 'v1.0.0',
+            name: 'v1.0.0 - 初始版本',
+            type: 'release',
+            description: '知识图谱系统初始版本，包含基础的图谱管理、词典管理、文档解析功能',
+            author: 'System',
+            file_count: 50,
+            size: '5.2MB',
+            is_current: false,
+            created_at: '2025-09-28 14:00:00'
           }
         ]
       } finally {

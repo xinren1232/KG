@@ -16,6 +16,11 @@ import uuid
 from datetime import datetime
 from contextlib import asynccontextmanager
 
+# 导入新的模型和服务
+from models.relation_models import RelationInput, RelationBatch
+from services.kg_relation_service import KGRelationService
+from services.kg_query_service import KGQueryService
+
 # 导入缓存和监控模块
 from cache.redis_manager import redis_manager, QueryCache, FileCache, cache_result
 from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
@@ -2574,3 +2579,202 @@ async def component_top_anomalies(
     except Exception as e:
         logger.error(f"获取组件异常排行失败: {e}")
         raise HTTPException(status_code=500, detail=f"获取组件异常排行失败: {str(e)}")
+
+
+# ============================================================================
+# 新增：关系管理和查询API
+# ============================================================================
+
+@app.post("/kg/relations/validate")
+async def validate_relation(relation: RelationInput):
+    """验证关系数据"""
+    try:
+        # Pydantic会自动验证
+        return {
+            "ok": True,
+            "success": True,
+            "data": {
+                "valid": True,
+                "relation_type": relation.relation_type,
+                "source": relation.source.dict(),
+                "target": relation.target.dict()
+            },
+            "message": "关系数据验证通过"
+        }
+    except Exception as e:
+        logger.error(f"关系验证失败: {e}")
+        raise HTTPException(status_code=400, detail=f"关系验证失败: {str(e)}")
+
+
+@app.post("/kg/relations/import")
+async def import_relations(batch: RelationBatch):
+    """批量导入关系"""
+    try:
+        if not driver:
+            raise HTTPException(status_code=503, detail="Neo4j连接不可用")
+
+        # 创建服务实例
+        service = KGRelationService(NEO4J_URI, NEO4J_USER, NEO4J_PASS)
+
+        try:
+            # 批量导入
+            result = service.batch_upsert_relations([r.dict() for r in batch.relations])
+
+            return {
+                "ok": True,
+                "success": True,
+                "data": {
+                    "success_count": result['success'],
+                    "failed_count": result['failed'],
+                    "errors": result['errors'][:10],  # 只返回前10个错误
+                    "created_ids": result['created_ids']
+                },
+                "message": f"成功导入 {result['success']} 个关系，失败 {result['failed']} 个"
+            }
+        finally:
+            service.close()
+
+    except Exception as e:
+        logger.error(f"批量导入关系失败: {e}")
+        raise HTTPException(status_code=500, detail=f"批量导入关系失败: {str(e)}")
+
+
+@app.get("/kg/relations/stats")
+async def get_relation_stats():
+    """获取关系统计"""
+    try:
+        if not driver:
+            raise HTTPException(status_code=503, detail="Neo4j连接不可用")
+
+        service = KGRelationService(NEO4J_URI, NEO4J_USER, NEO4J_PASS)
+
+        try:
+            stats = service.get_relation_stats()
+            return {
+                "ok": True,
+                "success": True,
+                "data": stats,
+                "message": "获取关系统计成功"
+            }
+        finally:
+            service.close()
+
+    except Exception as e:
+        logger.error(f"获取关系统计失败: {e}")
+        raise HTTPException(status_code=500, detail=f"获取关系统计失败: {str(e)}")
+
+
+@app.get("/kg/diagnose")
+async def diagnose_symptom(
+    symptom: str,
+    max_depth: int = 3,
+    min_confidence: float = 0.6
+):
+    """故障诊断：查找症状的根因和解决方案"""
+    try:
+        if not driver:
+            raise HTTPException(status_code=503, detail="Neo4j连接不可用")
+
+        service = KGQueryService(NEO4J_URI, NEO4J_USER, NEO4J_PASS)
+
+        try:
+            result = service.diagnose(symptom, max_depth, min_confidence)
+            return {
+                "ok": True,
+                "success": True,
+                "data": result,
+                "message": "诊断完成"
+            }
+        finally:
+            service.close()
+
+    except Exception as e:
+        logger.error(f"故障诊断失败: {e}")
+        raise HTTPException(status_code=500, detail=f"故障诊断失败: {str(e)}")
+
+
+@app.get("/kg/prevent")
+async def get_prevention(
+    symptom: str,
+    min_confidence: float = 0.6
+):
+    """获取预防措施"""
+    try:
+        if not driver:
+            raise HTTPException(status_code=503, detail="Neo4j连接不可用")
+
+        service = KGQueryService(NEO4J_URI, NEO4J_USER, NEO4J_PASS)
+
+        try:
+            result = service.get_prevention_measures(symptom, min_confidence)
+            return {
+                "ok": True,
+                "success": True,
+                "data": result,
+                "message": "获取预防措施成功"
+            }
+        finally:
+            service.close()
+
+    except Exception as e:
+        logger.error(f"获取预防措施失败: {e}")
+        raise HTTPException(status_code=500, detail=f"获取预防措施失败: {str(e)}")
+
+
+@app.get("/kg/test-path")
+async def get_test_path(
+    target: str,
+    target_category: str,
+    min_confidence: float = 0.6
+):
+    """获取测试路径"""
+    try:
+        if not driver:
+            raise HTTPException(status_code=503, detail="Neo4j连接不可用")
+
+        service = KGQueryService(NEO4J_URI, NEO4J_USER, NEO4J_PASS)
+
+        try:
+            result = service.get_test_path(target, target_category, min_confidence)
+            return {
+                "ok": True,
+                "success": True,
+                "data": result,
+                "message": "获取测试路径成功"
+            }
+        finally:
+            service.close()
+
+    except Exception as e:
+        logger.error(f"获取测试路径失败: {e}")
+        raise HTTPException(status_code=500, detail=f"获取测试路径失败: {str(e)}")
+
+
+@app.get("/kg/dependencies")
+async def get_dependencies(
+    component: str,
+    direction: str = 'both',
+    max_depth: int = 2,
+    min_confidence: float = 0.6
+):
+    """获取组件依赖关系"""
+    try:
+        if not driver:
+            raise HTTPException(status_code=503, detail="Neo4j连接不可用")
+
+        service = KGQueryService(NEO4J_URI, NEO4J_USER, NEO4J_PASS)
+
+        try:
+            result = service.get_dependencies(component, direction, max_depth, min_confidence)
+            return {
+                "ok": True,
+                "success": True,
+                "data": result,
+                "message": "获取依赖关系成功"
+            }
+        finally:
+            service.close()
+
+    except Exception as e:
+        logger.error(f"获取依赖关系失败: {e}")
+        raise HTTPException(status_code=500, detail=f"获取依赖关系失败: {str(e)}")

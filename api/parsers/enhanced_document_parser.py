@@ -311,7 +311,12 @@ class EnhancedDocumentParser:
                     if pd.isna(value):
                         record[col_name] = None
                     else:
-                        record[col_name] = str(value).strip()
+                        # 特殊处理时间戳对象
+                        if hasattr(value, 'isoformat'):
+                            # 如果是时间戳对象，转换为ISO格式字符串
+                            record[col_name] = value.isoformat()
+                        else:
+                            record[col_name] = str(value).strip()
                 
                 raw_data.append(record)
             

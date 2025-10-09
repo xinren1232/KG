@@ -407,7 +407,7 @@ export default {
     const loadDictionary = async () => {
       loading.value = true
       try {
-        const response = await fetch('http://127.0.0.1:8000/kg/dictionary/entries?size=10000')
+        const response = await fetch('http://127.0.0.1:8000/kg/dictionary/entries?page_size=1275')
         const result = await response.json()
 
         if (result.success) {

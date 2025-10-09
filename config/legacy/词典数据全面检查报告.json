@@ -1,0 +1,642 @@
+{
+  "timestamp": "2025-09-28",
+  "target_count": 1124,
+  "file_details": {
+    "api/data/dictionary.json": {
+      "count": 0,
+      "exists": false,
+      "description": "API主词典文件"
+    },
+    "data/unified_dictionary/components.csv": {
+      "count": 399,
+      "exists": true,
+      "path": "..\\data\\unified_dictionary\\components.csv",
+      "description": "统一词典-组件"
+    },
+    "data/unified_dictionary/symptoms.csv": {
+      "count": 274,
+      "exists": true,
+      "path": "..\\data\\unified_dictionary\\symptoms.csv",
+      "description": "统一词典-症状"
+    },
+    "data/unified_dictionary/causes.csv": {
+      "count": 0,
+      "exists": true,
+      "path": "..\\data\\unified_dictionary\\causes.csv",
+      "description": "统一词典-原因"
+    },
+    "data/unified_dictionary/countermeasures.csv": {
+      "count": 519,
+      "exists": true,
+      "path": "..\\data\\unified_dictionary\\countermeasures.csv",
+      "description": "统一词典-对策"
+    },
+    "ontology/dictionaries/components.csv": {
+      "count": 18,
+      "exists": true,
+      "path": "..\\ontology\\dictionaries\\components.csv",
+      "description": "本体词典-组件"
+    },
+    "ontology/dictionaries/symptoms.csv": {
+      "count": 9,
+      "exists": true,
+      "path": "..\\ontology\\dictionaries\\symptoms.csv",
+      "description": "本体词典-症状"
+    },
+    "ontology/dictionaries/causes.csv": {
+      "count": 7,
+      "exists": true,
+      "path": "..\\ontology\\dictionaries\\causes.csv",
+      "description": "本体词典-原因"
+    },
+    "ontology/dictionaries/countermeasures.csv": {
+      "count": 16,
+      "exists": true,
+      "path": "..\\ontology\\dictionaries\\countermeasures.csv",
+      "description": "本体词典-对策"
+    },
+    "ontology/dictionaries/enhanced_components.csv": {
+      "count": 25,
+      "exists": true,
+      "path": "..\\ontology\\dictionaries\\enhanced_components.csv",
+      "description": "增强组件词典"
+    },
+    "ontology/dictionaries/enhanced_symptoms.csv": {
+      "count": 30,
+      "exists": true,
+      "path": "..\\ontology\\dictionaries\\enhanced_symptoms.csv",
+      "description": "增强症状词典"
+    },
+    "ontology/dictionaries/enhanced_tools_processes.csv": {
+      "count": 25,
+      "exists": true,
+      "path": "..\\ontology\\dictionaries\\enhanced_tools_processes.csv",
+      "description": "增强工具流程词典"
+    }
+  },
+  "neo4j_data": {
+    "Dictionary": {
+      "count": 0,
+      "samples": []
+    },
+    "Component": {
+      "count": 136,
+      "samples": [
+        {
+          "component_type": "电池",
+          "aliases": [
+            "比吸收率",
+            "Specific Absorption Rate"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "name": "SAR",
+          "definition": "**定义**: 人体吸收电磁能量的速率。 **判定口径**: <2.0 W/kg。 **常见场景**: 手机靠近头部。 **排查路径**: 测试实验室验证。 **对策**: 优化射频发射功率，改善天线布局。",
+          "source": "标准化词典",
+          "status": "active",
+          "tags": [
+            "通信相关",
+            "结构相关",
+            "安全相关"
+          ]
+        },
+        {
+          "component_type": "电池",
+          "aliases": [
+            "背光模组",
+            "Backlight"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "name": "背光",
+          "definition": "为LCD屏幕提供光源的组件，常见不良有亮度不均、漏光、mura（斑驳）。",
+          "source": "标准化词典",
+          "status": "active",
+          "tags": [
+            "结构相关",
+            "显示相关",
+            "部件"
+          ]
+        },
+        {
+          "component_type": "电池",
+          "aliases": [
+            "磁性屏蔽片",
+            "Magnetic Shielding Sheet"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "name": "隔磁片",
+          "definition": "贴在器件上防止磁场干扰的薄片，粘贴不良或破损会影响无线充电或传感器性能。",
+          "source": "标准化词典",
+          "status": "active",
+          "tags": [
+            "结构相关",
+            "EMC",
+            "部件"
+          ]
+        }
+      ]
+    },
+    "Symptom": {
+      "count": 180,
+      "samples": [
+        {
+          "aliases": [
+            "信号差",
+            "Low Signal"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "name": "信号弱",
+          "definition": "**定义**: 手机在正常网络环境下信号强度不足。 **判定口径**: RSRP < -110dBm。 **常见场景**: 地铁、地下室。 **排查路径**: 检查天线设计→射频通道。 **对策**: 优化天线布局，增加功放。",
+          "source": "标准化词典",
+          "category": "功能",
+          "status": "active",
+          "tags": [
+            "通信相关",
+            "硬件相关",
+            "显示相关",
+            "用户体验"
+          ]
+        },
+        {
+          "aliases": [
+            "意外重启",
+            "Auto Reboot"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "name": "自动重启",
+          "definition": "**定义**: 手机非人为操作重启。 **判定口径**: 重启频率 >1 次/天。 **常见场景**: 系统升级、APP异常。 **排查路径**: 分析log→排查内存/电源。 **对策**: 优化系统稳定性，修复Bug。",
+          "source": "标准化词典",
+          "category": "功能",
+          "status": "active",
+          "tags": [
+            "系统稳定性",
+            "硬件相关",
+            "软件相关",
+            "显示相关"
+          ]
+        },
+        {
+          "aliases": [
+            "慢充",
+            "Slow Charging"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "name": "充电慢",
+          "definition": "**定义**: 充电速率低于设计值。 **判定口径**: 充电电流 < 额定值 70%。 **常见场景**: 使用非原装充电器。 **排查路径**: 检查充电IC→协议识别。 **对策**: 增加兼容性测试，优化协议栈。",
+          "source": "标准化词典",
+          "category": "功能",
+          "status": "active",
+          "tags": [
+            "电池",
+            "硬件相关",
+            "显示相关"
+          ]
+        }
+      ]
+    },
+    "Tool": {
+      "count": 206,
+      "samples": [
+        {
+          "aliases": [
+            "Poor Battery Life",
+            "续航差"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "tool_type": "检测",
+          "name": "电池续航不足",
+          "definition": "**定义**: 单次充电使用时长不足。 **判定口径**: 使用时长低于标称值 20%。 **常见场景**: 高功耗应用。 **排查路径**: 功耗分析→检查电芯容量。 **对策**: 优化系统调度，提升电池能量密度。",
+          "source": "标准化词典",
+          "status": "active",
+          "tags": [
+            "电池",
+            "硬件相关",
+            "工具"
+          ]
+        },
+        {
+          "aliases": [
+            "频率偏移",
+            "Frequency Offset"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "tool_type": "检测",
+          "name": "频偏",
+          "definition": "**定义**: 无线发射频率偏离标准值。 **判定口径**: 偏移 >±50ppm。 **常见场景**: OTA测试、极端温度。 **排查路径**: 检查晶振→校准电路。 **对策**: 增加温补电路，改善器件精度。",
+          "source": "标准化词典",
+          "status": "active",
+          "tags": [
+            "通信相关",
+            "射频相关",
+            "工具"
+          ]
+        },
+        {
+          "aliases": [
+            "测试遗漏",
+            "Missed Test"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "tool_type": "检测",
+          "name": "漏测",
+          "definition": "**定义**: 应检项目未执行。 **判定口径**: 测试覆盖率 <100%。 **常见场景**: 产线OBA/功能测试。 **排查路径**: 审核工艺卡→检查治具。 **对策**: 加强自动化测试和流程审核。",
+          "source": "标准化词典",
+          "status": "active",
+          "tags": [
+            "测试验证",
+            "质量体系",
+            "工具"
+          ]
+        }
+      ]
+    },
+    "Process": {
+      "count": 2,
+      "samples": [
+        {
+          "aliases": [
+            "Laser Welding"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "name": "激光焊",
+          "definition": "利用高能量激光束作为热源进行熔焊的方法，精度高，热影响区小。",
+          "process_type": "SMT",
+          "source": "manual_append_remaining",
+          "status": "active",
+          "tags": [
+            "工艺参数",
+            "可靠性",
+            "结构相关",
+            "制造工艺"
+          ]
+        },
+        {
+          "aliases": [
+            "Underfill"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "name": "底部填充",
+          "definition": "同邦定胶。",
+          "process_type": "SMT",
+          "source": "manual_append_remaining",
+          "status": "active",
+          "tags": [
+            "SMT",
+            "工艺参数",
+            "可靠性",
+            "制造工艺"
+          ]
+        }
+      ]
+    },
+    "TestCase": {
+      "count": 1,
+      "samples": [
+        {
+          "aliases": [
+            "老化测试",
+            "Aging"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "name": "老化",
+          "definition": "使产品在模拟的或强化的使用条件下运行一段时间，以稳定其性能或筛选缺陷。",
+          "source": "manual_append_remaining",
+          "test_type": "可靠性",
+          "status": "active",
+          "tags": [
+            "测试验证",
+            "可靠性"
+          ]
+        }
+      ]
+    },
+    "Metric": {
+      "count": 1,
+      "samples": [
+        {
+          "aliases": [
+            "焊盘沾锡",
+            "Pad Wetting"
+          ],
+          "updated_at": "2025-09-26 03:16:50",
+          "name": "沾锡",
+          "definition": "熔化的焊锡在焊盘上铺展的能力，是形成良好焊点的基础。",
+          "source": "manual_append_final",
+          "status": "active",
+          "tags": [
+            "SMT",
+            "制造工艺"
+          ]
+        }
+      ]
+    },
+    "Material": {
+      "count": 0,
+      "samples": []
+    },
+    "Role": {
+      "count": 0,
+      "samples": []
+    }
+  },
+  "api_results": {
+    "/kg/dictionary": {
+      "status": "success",
+      "count": 4,
+      "message": "词典数据获取成功",
+      "data_type": "dict"
+    },
+    "/api/dictionary": {
+      "status": "success",
+      "count": 1124,
+      "message": "从文件加载 1124 条词典数据",
+      "data_type": "list"
+    },
+    "/kg/dictionary/entries": {
+      "status": "success",
+      "count": 50
+    },
+    "/kg/dictionary/categories": {
+      "status": "success",
+      "data": {
+        "success": true,
+        "data": {
+          "categories": [
+            "处理器",
+            "存储",
+            "显示",
+            "网络",
+            "电源",
+            "其他"
+          ]
+        }
+      }
+    },
+    "/kg/dictionary/statistics": {
+      "status": "success",
+      "data": {
+        "success": true,
+        "data": {
+          "total_entries": 25,
+          "categories": 6,
+          "aliases": 45,
+          "last_update": "2024-09-24"
+        }
+      }
+    },
+    "/api/dictionary/labels": {
+      "status": "success",
+      "data": {
+        "success": true,
+        "data": {
+          "labels": [
+            {
+              "label": "Tool",
+              "count": 206
+            },
+            {
+              "label": "Symptom",
+              "count": 180
+            },
+            {
+              "label": "Component",
+              "count": 136
+            },
+            {
+              "label": "Process",
+              "count": 2
+            },
+            {
+              "label": "Metric",
+              "count": 1
+            },
+            {
+              "label": "TestCase",
+              "count": 1
+            }
+          ],
+          "total": 526
+        }
+      }
+    },
+    "/api/dictionary/tags": {
+      "status": "success",
+      "data": {
+        "success": true,
+        "data": {
+          "tags": [
+            {
+              "tag": "硬件相关",
+              "count": 240
+            },
+            {
+              "tag": "工具",
+              "count": 207
+            },
+            {
+              "tag": "显示相关",
+              "count": 186
+            },
+            {
+              "tag": "结构相关",
+              "count": 181
+            },
+            {
+              "tag": "可靠性",
+              "count": 140
+            },
+            {
+              "tag": "制造工艺",
+              "count": 113
+            },
+            {
+              "tag": "SMT",
+              "count": 60
+            },
+            {
+              "tag": "物料",
+              "count": 56
+            },
+            {
+              "tag": "工艺参数",
+              "count": 56
+            },
+            {
+              "tag": "外观",
+              "count": 51
+            },
+            {
+              "tag": "部件",
+              "count": 44
+            },
+            {
+              "tag": "测试验证",
+              "count": 44
+            },
+            {
+              "tag": "设计",
+              "count": 39
+            },
+            {
+              "tag": "PCB",
+              "count": 35
+            },
+            {
+              "tag": "软件相关",
+              "count": 30
+            },
+            {
+              "tag": "注塑",
+              "count": 26
+            },
+            {
+              "tag": "通信相关",
+              "count": 22
+            },
+            {
+              "tag": "点胶",
+              "count": 18
+            },
+            {
+              "tag": "影像相关",
+              "count": 17
+            },
+            {
+              "tag": "CMF",
+              "count": 17
+            },
+            {
+              "tag": "电池",
+              "count": 16
+            },
+            {
+              "tag": "半导体",
+              "count": 14
+            },
+            {
+              "tag": "质量体系",
+              "count": 14
+            },
+            {
+              "tag": "EMC",
+              "count": 14
+            },
+            {
+              "tag": "封装",
+              "count": 14
+            },
+            {
+              "tag": "安全相关",
+              "count": 13
+            },
+            {
+              "tag": "项目相关",
+              "count": 12
+            },
+            {
+              "tag": "电气连接",
+              "count": 11
+            },
+            {
+              "tag": "电气性能",
+              "count": 11
+            },
+            {
+              "tag": "功能",
+              "count": 11
+            },
+            {
+              "tag": "声学",
+              "count": 10
+            },
+            {
+              "tag": "人机交互",
+              "count": 10
+            },
+            {
+              "tag": "热管理",
+              "count": 8
+            },
+            {
+              "tag": "操作",
+              "count": 8
+            },
+            {
+              "tag": "传感器",
+              "count": 7
+            },
+            {
+              "tag": "性能指标",
+              "count": 7
+            },
+            {
+              "tag": "摄像头模组",
+              "count": 7
+            },
+            {
+              "tag": "流程相关",
+              "count": 6
+            },
+            {
+              "tag": "失效分析",
+              "count": 5
+            },
+            {
+              "tag": "射频相关",
+              "count": 4
+            },
+            {
+              "tag": "充电",
+              "count": 4
+            },
+            {
+              "tag": "维修",
+              "count": 4
+            },
+            {
+              "tag": "用户体验",
+              "count": 4
+            },
+            {
+              "tag": "包装",
+              "count": 3
+            },
+            {
+              "tag": "供应链",
+              "count": 2
+            },
+            {
+              "tag": "ESD",
+              "count": 2
+            },
+            {
+              "tag": "系统升级",
+              "count": 1
+            },
+            {
+              "tag": "ICT",
+              "count": 1
+            },
+            {
+              "tag": "组织职责",
+              "count": 1
+            },
+            {
+              "tag": "系统稳定性",
+              "count": 1
+            }
+          ],
+          "total": 50
+        }
+      }
+    }
+  },
+  "summary": {
+    "main_file_count": 0,
+    "neo4j_total": 526,
+    "api_old_count": 4,
+    "api_new_count": 1124,
+    "api_entries_count": 50
+  },
+  "total_file_records": 1322,
+  "total_neo4j_records": 524
+}

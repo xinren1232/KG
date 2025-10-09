@@ -194,7 +194,12 @@ class EnhancedExcelParser:
                 if pd.isna(value):
                     record[col_name] = None
                 else:
-                    record[col_name] = str(value).strip()
+                    # 特殊处理时间戳对象
+                    if hasattr(value, 'isoformat'):
+                        # 如果是时间戳对象，转换为ISO格式字符串
+                        record[col_name] = value.isoformat()
+                    else:
+                        record[col_name] = str(value).strip()
 
             # 只添加必要的系统字段，不重复业务数据
             # 确保有问题编号字段（如果原始数据中没有合适的标识）

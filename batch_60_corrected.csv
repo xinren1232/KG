@@ -1,0 +1,52 @@
+术语,别名,类别,多标签,备注
+白平衡偏移,WB偏移;White Balance Shift,Symptom,异常现象;影像相关;测试验证,拍摄画面整体偏黄/偏蓝，与光源色温或传感器校准有关。
+颜色失真,色偏;Color Cast,Symptom,异常现象;显示相关;影像相关,显示/成像颜色与标准不一致，影响用户体验。
+触控漂移,Touch Drift,Symptom,异常现象;显示相关;人机交互,触点坐标漂移，误触加剧，影响操作精度。
+触控断点,Touch Break,Symptom,异常现象;显示相关;人机交互,滑动轨迹出现中断，影响手势操作流畅性。
+屏闪严重,重度频闪;Severe Flicker,Symptom,异常现象;显示相关;性能指标,低亮度下可见闪烁，PWM调光频率过低导致。
+摄像头黑屏,Camera Black Screen,Symptom,异常现象;影像相关;软件相关,打开相机应用无画面输出，可能是驱动或硬件故障。
+对焦缓慢,慢对焦;Slow AF,Symptom,异常现象;影像相关;性能指标,对焦时间超出规格，影响抓拍体验。
+OIS异响,OIS Noise,Symptom,异常现象;影像相关;可靠性,防抖组件工作时出现杂音，可能是马达或悬架异常。
+通话回声,Echo,Symptom,异常现象;声学;用户体验,对端或本端听到回声，影响通话质量。
+麦克风底噪高,高噪底;High Mic Noise Floor,Symptom,异常现象;声学;性能指标,静音环境仍有明显噪声，影响录音质量。
+天线脱网,无服务间歇;Intermittent No Service,Symptom,异常现象;射频相关;通信相关,场景性/区域性无信号，可能是天线或射频链路问题。
+Wi-Fi速率低,速率不达标;Low Throughput,Symptom,异常现象;射频相关;性能指标,连接正常但吞吐偏低，影响数据传输。
+蓝牙断连,BLE断开;BT Drop,Symptom,异常现象;射频相关;通信相关,外设连接频繁掉线，影响使用体验。
+GPS飘移,定位飘;GPS Drift,Symptom,异常现象;射频相关;传感器,静止场景定位点跳动，影响导航精度。
+CMOS图像传感器,Image Sensor,Component,部件;硬件相关;影像相关,摄像头成像核心器件，将光信号转换为电信号。
+VCM对焦马达,对焦马达;VCM,Component,部件;硬件相关;摄像头模组,驱动镜组移动实现AF，常见问题包括卡死、异响。
+OIS模组,光学防抖模组,Component,部件;硬件相关;摄像头模组,通过位移/倾角补偿抖动，提升成像稳定性。
+IR滤光片,红外截止片;IR-cut,Component,部件;硬件相关;影像相关,抑制红外干扰提升色彩还原，白天/夜间切换。
+镜头组,Lens Group,Component,部件;硬件相关;摄像头模组,多片镜片组合的光学系统，决定成像质量。
+ToF模组,飞行时间传感器,Component,部件;传感器;影像相关,深度感知与对焦辅助，用于人像虚化和3D建模。
+ALS传感器,光感;Ambient Light Sensor,Component,部件;传感器;显示相关,自适应亮度调节输入，感知环境光强度。
+指纹模组,Fingerprint Module,Component,部件;传感器;人机交互,屏下/侧边指纹识别，生物认证核心组件。
+NFC线圈,NFC Coil,Component,部件;射频相关,近场通信耦合线圈，用于移动支付和数据传输。
+PA功放,Power Amplifier,Component,部件;硬件相关;射频相关;电气性能,蜂窝发射功率放大，提升信号覆盖。
+LNA低噪放,Low Noise Amp,Component,部件;硬件相关;射频相关;电气性能,接收链路前端放大，提升灵敏度。
+Wi-Fi/BT模组,WLAN/BT Module,Component,部件;硬件相关;射频相关;通信相关,Wi-Fi/蓝牙射频与基带集成模组。
+触控控制器,Touch Controller,Component,部件;硬件相关;显示相关,触控采样与解算IC，处理触摸信号。
+光学暗箱,Dark Box,Tool,工具;测试验证;影像相关,相机测试恒定光环境，隔绝外界光干扰。
+分辨率测试卡,ISO12233卡;Resolution Chart,Tool,工具;测试验证;影像相关,成像清晰度评估标板，测试MTF和分辨率。
+SNR测试卡,信噪比卡,Tool,工具;测试验证;影像相关,噪声/动态范围测评，评估图像质量。
+SAR测试系统,SAR System,Tool,工具;测试验证;安全相关,人体吸收率评估，确保电磁辐射安全。
+恒温恒湿箱,TH Chamber,Tool,工具;测试验证;可靠性,高低温/湿热循环试验，验证环境适应性。
+跌落试验机,Drop Tester,Tool,工具;测试验证;可靠性,自由跌落与角边面冲击，验证结构强度。
+AA主动对准,Active Alignment,Process,制造工艺;摄像头模组,传感器与镜组六轴主动对准，确保成像质量。
+OCR全贴合,液态光学贴合,Process,制造工艺;显示相关,液态胶灌注式屏幕贴合，减少反射提升显示效果。
+OCA层压,OCA贴合,Process,制造工艺;显示相关,预涂光学胶片层压工艺，提升透光率和触控性能。
+点胶固化,Dispense&Cure,Process,制造工艺;胶粘剂,胶体定量涂布与固化，用于密封和粘接。
+老化应力,Burn-in,Process,可靠性;测试验证,高负载运行激发早期失效，筛选不良品。
+防水组装,防水堆栈;Waterproof Stack,Process,制造工艺;结构相关,密封圈/胶路/透气膜组合装配，实现防水功能。
+EMC整改流程,EMI整改流程,Process,流程相关;EMC,发现→定位→方案→验证闭环，解决电磁兼容问题。
+AF成功率测试,AF Success Rate,TestCase,测试验证;影像相关,多光照/景深下对焦成功占比，评估对焦性能。
+OIS抗抖测试,OIS Stability,TestCase,测试验证;影像相关,振台位移谱下的成像清晰度，验证防抖效果。
+低亮度屏闪测试,PWM可视化,TestCase,测试验证;显示相关,低亮/高频场景频闪判定，评估视觉舒适度。
+触控线性测试,Touch Linearity,TestCase,测试验证;显示相关,坐标采样线性偏差评估，验证触控精度。
+TRP辐射功率测试,TRP,TestCase,测试验证;射频相关,全向辐射功率指标，评估发射性能。
+TIS灵敏度测试,TIS,TestCase,测试验证;射频相关,终端接收灵敏度，评估接收性能。
+GPS冷启动测试,GNSS Cold Start,TestCase,测试验证;射频相关,首次定位时间与成功率，评估定位性能。
+SNR,信噪比,Metric,性能指标;影像相关,图像/音频/射频信号质量度量，评估信号纯净度。
+ΔE,色差ΔE;Color Accuracy,Metric,性能指标;显示相关,与参考色的偏差值，评估色彩准确性。
+JNCD,最小可觉差,Metric,性能指标;显示相关,屏幕可感知色准门槛，评估色彩精度。
+TRP,总辐射功率,Metric,性能指标;射频相关,终端发射综合能力指标，评估天线性能。

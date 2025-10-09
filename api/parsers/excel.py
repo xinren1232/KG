@@ -90,7 +90,12 @@ def parse_excel(file_path: Path, mapping_yaml: Path = None) -> List[Dict[str, An
                     if pd.isna(value):
                         record[key] = None
                     else:
-                        record[key] = str(value).strip()
+                        # 特殊处理时间戳对象
+                        if hasattr(value, 'isoformat'):
+                            # 如果是时间戳对象，转换为ISO格式字符串
+                            record[key] = value.isoformat()
+                        else:
+                            record[key] = str(value).strip()
                 else:
                     record[key] = None
             

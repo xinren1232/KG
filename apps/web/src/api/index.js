@@ -6,8 +6,8 @@ const USE_MOCK = false
 
 // 创建axios实例
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
-  timeout: 10000,
+  baseURL: import.meta.env.VITE_API_URL || '/api',
+  timeout: 60000,  // 增加到60秒，因为图谱查询可能需要更长时间
   headers: {
     'Content-Type': 'application/json'
   }
@@ -29,7 +29,9 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   response => {
     console.log('API Response:', response.status, response.data)
-    return response.data
+    // 返回完整的响应对象，而不是只返回 data
+    // 这样组件可以访问 response.data.ok, response.data.data 等
+    return response
   },
   error => {
     console.error('Response Error:', error)
@@ -39,7 +41,8 @@ api.interceptors.response.use(
 )
 
 // API方法
-export const kgApi = {
+// 创建 kgApi 对象，包含所有业务方法
+const kgApi = {
   // 健康检查
   healthCheck() {
     if (USE_MOCK) {
@@ -101,7 +104,8 @@ export const kgApi = {
     }
     const params = {
       show_all: showAll,
-      limit: showAll ? 1000 : 100
+      limit: showAll ? 15000 : 100,  // 大幅增加限制以显示所有节点
+      min_confidence: 0.1  // 降低置信度阈值以包含更多关系
     }
     console.log('API params:', params)
     return api.get('/kg/graph', { params })
@@ -266,4 +270,11 @@ export const kgApi = {
   }
 }
 
+// 导出 kgApi 作为默认导出，这样组件可以直接使用 api.getRules() 等方法
 export default kgApi
+
+// 同时导出命名导出，以便其他地方可以使用
+export { kgApi }
+
+// 同时导出 axios 实例，以便需要直接使用 HTTP 方法的地方可以导入
+export { api as httpClient }

@@ -1,0 +1,18 @@
+{
+  "/kg/dictionary": {
+    "status": "success",
+    "total": 1124,
+    "message": "词典数据获取成功 - 1124条数据",
+    "target_match": true
+  },
+  "/api/dictionary": {
+    "status": "success",
+    "total": 1124,
+    "message": "从文件加载 1124 条词典数据",
+    "target_match": true
+  },
+  "/kg/dictionary/entries": {
+    "status": "success",
+    "total": 50
+  }
+}

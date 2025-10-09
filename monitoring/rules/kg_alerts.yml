@@ -1,0 +1,105 @@
+# 知识图谱系统告警规则
+groups:
+  - name: kg_api_alerts
+    rules:
+      # API 服务不可用
+      - alert: KG_API_Down
+        expr: up{job="kg-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "知识图谱API服务不可用"
+          description: "API服务已经停止响应超过1分钟"
+
+      # API 响应时间过长
+      - alert: KG_API_HighLatency
+        expr: histogram_quantile(0.95, rate(kg_api_request_duration_seconds_bucket[5m])) > 2
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "API响应时间过长"
+          description: "95%的请求响应时间超过2秒，当前值: {{ $value }}秒"
+
+      # API 错误率过高
+      - alert: KG_API_HighErrorRate
+        expr: rate(kg_api_requests_total{status=~"5.."}[5m]) / rate(kg_api_requests_total[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "API错误率过高"
+          description: "5分钟内错误率超过10%，当前值: {{ $value | humanizePercentage }}"
+
+      # 缓存命中率过低
+      - alert: KG_Cache_LowHitRate
+        expr: rate(kg_cache_hits_total[5m]) / (rate(kg_cache_hits_total[5m]) + rate(kg_cache_misses_total[5m])) < 0.5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "缓存命中率过低"
+          description: "缓存命中率低于50%，当前值: {{ $value | humanizePercentage }}"
+
+  - name: infrastructure_alerts
+    rules:
+      # Redis 服务不可用
+      - alert: Redis_Down
+        expr: up{job="redis"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Redis服务不可用"
+          description: "Redis服务已经停止响应超过1分钟"
+
+      # Redis 内存使用率过高
+      - alert: Redis_HighMemoryUsage
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Redis内存使用率过高"
+          description: "Redis内存使用率超过90%，当前值: {{ $value | humanizePercentage }}"
+
+      # Neo4j 服务不可用
+      - alert: Neo4j_Down
+        expr: up{job="neo4j"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Neo4j服务不可用"
+          description: "Neo4j服务已经停止响应超过1分钟"
+
+      # 系统CPU使用率过高
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "系统CPU使用率过高"
+          description: "CPU使用率超过80%，当前值: {{ $value }}%"
+
+      # 系统内存使用率过高
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "系统内存使用率过高"
+          description: "内存使用率超过85%，当前值: {{ $value }}%"
+
+      # 磁盘空间不足
+      - alert: LowDiskSpace
+        expr: (1 - (node_filesystem_avail_bytes / node_filesystem_size_bytes)) * 100 > 85
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "磁盘空间不足"
+          description: "磁盘使用率超过85%，当前值: {{ $value }}%"
