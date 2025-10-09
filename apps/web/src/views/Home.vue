@@ -135,29 +135,28 @@ export default {
 
         // 调用后端API获取实时统计
         const response = await http.get('/kg/real-stats')
-        console.log('📡 API响应:', response)
+        console.log('📡 完整API响应:', response)
+        console.log('📡 响应数据 response.data:', response.data)
 
-        if (response && response.data) {
-          const data = response.data
+        // axios拦截器返回完整的response对象，需要访问response.data
+        if (response && response.data && response.data.data) {
+          const apiData = response.data.data  // 第一个data是axios的，第二个data是API返回的
+          console.log('📊 API数据:', apiData)
 
           // 处理响应数据结构
-          if (data.stats) {
+          if (apiData.stats) {
             // 如果有stats字段
-            stats.value.dictEntries = data.stats.dictEntries || data.stats.totalTerms || 0
-            stats.value.relations = data.stats.totalRelations || 0
-            stats.value.categories = data.stats.totalCategories || 0
-            stats.value.tags = data.stats.totalTags || 0
-          } else {
-            // 直接使用data字段
-            stats.value.dictEntries = data.dictEntries || data.totalTerms || 0
-            stats.value.relations = data.totalRelations || 0
-            stats.value.categories = data.totalCategories || 0
-            stats.value.tags = data.totalTags || 0
-          }
+            stats.value.dictEntries = apiData.stats.dictEntries || apiData.stats.totalTerms || 0
+            stats.value.relations = apiData.stats.totalRelations || 0
+            stats.value.categories = apiData.stats.totalCategories || 0
+            stats.value.tags = apiData.stats.totalTags || 0
 
-          console.log('✅ 成功获取实时统计数据:', stats.value)
+            console.log('✅ 成功获取实时统计数据:', stats.value)
+          } else {
+            console.warn('⚠️ API响应中没有stats字段')
+          }
         } else {
-          console.warn('⚠️ API响应数据格式异常')
+          console.warn('⚠️ API响应数据格式异常:', response)
         }
 
       } catch (error) {
