@@ -4,7 +4,7 @@
     <el-card class="welcome-card">
       <div class="welcome-content">
         <h2>📱 知识图谱构建助手</h2>
-        <p class="subtitle">文档解析 · 知识抽取 · 图谱构建 · 数据治理</p>
+        <p class="subtitle">文档解析 · 知识抽取 · 图谱构建 · 系统管理</p>
         <p class="description">
           基于先进的NLP技术和知识图谱技术，提供智能化的文档解析、知识抽取和图谱构建服务，
           帮助企业从非结构化数据中提取结构化知识，构建领域知识图谱。
@@ -29,7 +29,7 @@
           <div class="feature-content">
             <el-icon class="feature-icon" color="#67C23A"><Share /></el-icon>
             <h3>图谱可视化</h3>
-            <p>交互式图谱展示，探索1124个硬件质量术语的关联关系</p>
+            <p>交互式图谱展示，探索硬件质量术语的关联关系</p>
           </div>
         </el-card>
       </el-col>
@@ -45,10 +45,10 @@
       </el-col>
 
       <el-col :xs="24" :sm="12" :md="8" :lg="6">
-        <el-card shadow="hover" class="feature-card" @click="$router.push('/governance')">
+        <el-card shadow="hover" class="feature-card" @click="$router.push('/system-management')">
           <div class="feature-content">
             <el-icon class="feature-icon" color="#F56C6C"><Setting /></el-icon>
-            <h3>数据治理</h3>
+            <h3>系统管理</h3>
             <p>数据质量监控、标准化管理和持续优化</p>
           </div>
         </el-card>
@@ -119,10 +119,10 @@ export default {
   },
   setup() {
     const stats = ref({
-      dictEntries: 1124,
-      relations: 7581,
-      categories: 8,
-      tags: 79
+      dictEntries: 0,
+      relations: 0,
+      categories: 0,
+      tags: 0
     })
 
     const loading = ref(false)
@@ -131,46 +131,52 @@ export default {
     const fetchStats = async () => {
       try {
         loading.value = true
+        console.log('🔄 开始获取系统统计数据...')
 
-        // 尝试获取真实图谱统计
-        try {
-          const response = await http.get('/kg/real-stats')
-          if (response.ok && response.data && response.data.stats) {
-            const data = response.data.stats
-            stats.value.dictEntries = data.totalNodes || 1124
-            stats.value.relations = data.totalRelations || 7581
-            stats.value.categories = data.totalCategories || 8
-            stats.value.tags = data.totalTags || 79
-            console.log('✅ 获取真实图谱统计成功:', stats.value)
+        // 调用后端API获取实时统计
+        const response = await http.get('/kg/real-stats')
+        console.log('📡 API响应:', response)
+
+        if (response && response.data) {
+          const data = response.data
+
+          // 处理响应数据结构
+          if (data.stats) {
+            // 如果有stats字段
+            stats.value.dictEntries = data.stats.dictEntries || data.stats.totalTerms || 0
+            stats.value.relations = data.stats.totalRelations || 0
+            stats.value.categories = data.stats.totalCategories || 0
+            stats.value.tags = data.stats.totalTags || 0
+          } else {
+            // 直接使用data字段
+            stats.value.dictEntries = data.dictEntries || data.totalTerms || 0
+            stats.value.relations = data.totalRelations || 0
+            stats.value.categories = data.totalCategories || 0
+            stats.value.tags = data.totalTags || 0
           }
-        } catch (error) {
-          console.warn('⚠️ 真实统计API不可用，使用默认数据:', error.message)
-          // 使用默认的真实数据
-          stats.value = {
-            dictEntries: 1124,
-            relations: 7581,
-            categories: 8,
-            tags: 79
-          }
+
+          console.log('✅ 成功获取实时统计数据:', stats.value)
+        } else {
+          console.warn('⚠️ API响应数据格式异常')
         }
 
-        console.log('📊 最终统计数据:', stats.value)
-
       } catch (error) {
-        console.error('获取统计数据失败:', error)
+        console.error('❌ 获取统计数据失败:', error)
+        ElMessage.error('获取统计数据失败，请刷新页面重试')
       } finally {
         loading.value = false
       }
     }
 
     onMounted(() => {
-      console.log('Home page loaded successfully')
+      console.log('🏠 首页加载完成')
       fetchStats()
     })
 
     return {
       stats,
-      loading
+      loading,
+      fetchStats
     }
   }
 }
