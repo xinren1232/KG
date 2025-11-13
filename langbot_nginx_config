@@ -1,0 +1,67 @@
+upstream langbot_backend {
+    server localhost:8080;
+    keepalive 32;
+}
+
+server {
+    listen 80;
+    server_name 47.108.152.16;
+
+    # LangBot API 路由
+    location /langbot/ {
+        proxy_pass http://langbot_backend/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 60s;
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+    }
+
+    # 飞书 Webhook 路由
+    location /webhook/feishu {
+        proxy_pass http://langbot_backend/webhook/feishu;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 30s;
+        proxy_connect_timeout 30s;
+    }
+
+    # LangBot 健康检查
+    location /langbot/health {
+        proxy_pass http://langbot_backend/health;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        access_log off;
+    }
+
+    # 其他路由保持不变（知识图谱系统）
+    location / {
+        proxy_pass http://localhost:5173;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # API 路由保持不变
+    location /api/ {
+        proxy_pass http://localhost:8000/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+

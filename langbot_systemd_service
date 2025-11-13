@@ -1,0 +1,38 @@
+[Unit]
+Description=LangBot IM Integration Service
+After=network.target docker.service
+Wants=docker.service
+Documentation=https://docs.dify.ai/zh-hans/learn-more/use-cases/connect-dify-to-various-im-platforms-by-using-langbot
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/langbot
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+EnvironmentFile=/opt/langbot/.env
+
+# Docker Compose 启动命令
+ExecStart=/usr/bin/docker-compose up
+
+# Docker Compose 停止命令
+ExecStop=/usr/bin/docker-compose down
+
+# 重启策略
+Restart=always
+RestartSec=10
+
+# 日志输出
+StandardOutput=append:/var/log/langbot/systemd.log
+StandardError=append:/var/log/langbot/systemd-error.log
+
+# 资源限制
+LimitNOFILE=65536
+LimitNPROC=65536
+
+# 超时设置
+TimeoutStartSec=300
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target
+

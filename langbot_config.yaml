@@ -1,0 +1,58 @@
+server:
+  host: 0.0.0.0
+  port: 8080
+  debug: false
+  workers: 4
+
+dify:
+  api_url: https://qmsai.transsion.com
+  api_key: ${DIFY_API_KEY}
+  app_type: chatbot
+  timeout: 30
+  max_retries: 3
+  retry_delay: 1
+
+feishu:
+  app_id: ${FEISHU_APP_ID}
+  app_secret: ${FEISHU_APP_SECRET}
+  webhook_token: ${WEBHOOK_TOKEN}
+  api_url: https://open.feishu.cn
+  timeout: 10
+
+logging:
+  level: INFO
+  format: json
+  file: /var/log/langbot/langbot.log
+  max_size: 100MB
+  backup_count: 5
+  console: true
+
+database:
+  type: sqlite
+  path: /opt/langbot/data/langbot.db
+  pool_size: 5
+  timeout: 30
+
+cache:
+  type: memory
+  ttl: 3600
+
+security:
+  enable_https: false
+  verify_ssl: true
+  allowed_origins:
+    - http://47.108.152.16
+    - https://qmsai.transsion.com
+
+features:
+  enable_message_history: true
+  enable_user_context: true
+  enable_rate_limiting: true
+  rate_limit_requests: 100
+  rate_limit_window: 60
+
+monitoring:
+  enable_metrics: true
+  metrics_port: 9090
+  health_check_interval: 30
+

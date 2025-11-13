@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  langbot:
+    image: langbot:latest
+    container_name: langbot
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config:/app/config
+      - ./data:/data
+      - /var/log/langbot:/var/log/langbot
+    environment:
+      - DIFY_API_KEY=${DIFY_API_KEY}
+      - DIFY_API_URL=${DIFY_API_URL}
+      - FEISHU_APP_ID=${FEISHU_APP_ID}
+      - FEISHU_APP_SECRET=${FEISHU_APP_SECRET}
+      - WEBHOOK_TOKEN=${WEBHOOK_TOKEN}
+      - LANGBOT_PORT=8080
+      - LANGBOT_HOST=0.0.0.0
+      - LANGBOT_DEBUG=false
+      - LOG_LEVEL=INFO
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - langbot-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+networks:
+  langbot-network:
+    driver: bridge
+

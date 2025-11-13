@@ -1,0 +1,111 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# 安装系统依赖
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# 安装Python依赖
+RUN pip install --no-cache-dir \
+    flask==3.0.0 \
+    requests==2.31.0 \
+    python-dotenv==1.0.0 \
+    pyyaml==6.0 \
+    gunicorn==21.2.0
+
+# 创建应用目录
+RUN mkdir -p /app/config /data /var/log/langbot
+
+# 复制配置文件
+COPY config/config.yaml /app/config/
+
+# 创建简单的Flask应用
+RUN cat > /app/main.py << 'EOF'
+from flask import Flask, jsonify, request
+import os
+import logging
+from datetime import datetime
+
+app = Flask(__name__)
+
+# 配置日志
+logging.basicConfig(
+    level=os.getenv('LOG_LEVEL', 'INFO'),
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+@app.route('/health', methods=['GET'])
+def health():
+    """健康检查端点"""
+    return jsonify({
+        'status': 'healthy',
+        'timestamp': datetime.now().isoformat(),
+        'service': 'langbot'
+    }), 200
+
+@app.route('/webhook/feishu', methods=['POST'])
+def feishu_webhook():
+    """飞书Webhook端点"""
+    try:
+        data = request.get_json()
+        logger.info(f"Received Feishu message: {data}")
+        
+        # 这里添加处理飞书消息的逻辑
+        return jsonify({
+            'code': 0,
+            'msg': 'success'
+        }), 200
+    except Exception as e:
+        logger.error(f"Error processing Feishu message: {e}")
+        return jsonify({
+            'code': -1,
+            'msg': str(e)
+        }), 500
+
+@app.route('/api/status', methods=['GET'])
+def status():
+    """获取服务状态"""
+    return jsonify({
+        'service': 'langbot',
+        'version': '1.0.0',
+        'status': 'running',
+        'dify_url': os.getenv('DIFY_API_URL'),
+        'feishu_app_id': os.getenv('FEISHU_APP_ID', 'not_set')
+    }), 200
+
+@app.route('/', methods=['GET'])
+def index():
+    """首页"""
+    return jsonify({
+        'message': 'LangBot Service',
+        'version': '1.0.0',
+        'endpoints': {
+            'health': '/health',
+            'status': '/api/status',
+            'feishu_webhook': '/webhook/feishu'
+        }
+    }), 200
+
+if __name__ == '__main__':
+    port = int(os.getenv('LANGBOT_PORT', 8080))
+    host = os.getenv('LANGBOT_HOST', '0.0.0.0')
+    debug = os.getenv('LANGBOT_DEBUG', 'false').lower() == 'true'
+    
+    logger.info(f"Starting LangBot on {host}:{port}")
+    app.run(host=host, port=port, debug=debug)
+EOF
+
+# 暴露端口
+EXPOSE 8080
+
+# 健康检查
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:8080/health || exit 1
+
+# 启动应用
+CMD ["python", "/app/main.py"]
+
